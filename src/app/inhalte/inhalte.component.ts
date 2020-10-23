@@ -1,0 +1,29 @@
+import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Title} from '@angular/platform-browser';
+
+@Component({
+  selector: 'app-inhalte',
+  templateUrl: './inhalte.component.html',
+  styleUrls: ['./inhalte.component.css']
+})
+export class InhalteComponent implements OnInit {
+
+
+  title: string;
+  originalTitle: string;
+
+  constructor(r: ActivatedRoute, private router: Router, private titleService: Title) {
+  }
+
+
+  ngOnInit() {
+    this.originalTitle = this.titleService.getTitle();
+    if (this.title) {
+      this.titleService.setTitle(this.title);
+    }
+  }
+
+
+
+}
