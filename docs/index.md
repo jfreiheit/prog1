@@ -13,11 +13,35 @@ Viel Erfolg! Und viel Spaß!
 
 ## Organisatorisches
 
-Zur erfolgreichen Durchführung der Veranstaltung müssen die Übungen lösen und zu den jeweiligen Fristen auf Moodle hochladen. Am Ende des Semesters schreiben wir eine Klausur (am Rechner). Diese Aufgabe wird bewertet und entspricht der Note für "Programmieren 1". 
+Zur erfolgreichen Durchführung der Veranstaltung müssen die Aufgaben lösen und zu den jeweiligen Fristen auf Moodle hochladen. Am Ende des Semesters schreiben wir eine Klausur (am Rechner). Diese Klausur wird bewertet und entspricht der Note für "Programmieren 1". 
 
-Hier (siehe weiter unten) sind die Übungen beschrieben, die Sie in jeder Woche ausführen sollen. Damit Sie dies erfolgreich erledigen können, ist jeweils angegeben, welche Themen Sie dafür durcharbeiten müssen. Das Durcharbeiten der jeweiligen Themen entspricht jeweils einer Vorlesung. Diese wird also selbständig durchgeführt. 
+Unter [**Aufgaben**](./aufgaben/#aufgaben) sind die Übungen beschrieben, die Sie in jeder Woche ausführen sollen. Damit Sie dies erfolgreich erledigen können, ist jeweils angegeben, welche Themen Sie dafür durcharbeiten müssen. Das Durcharbeiten der jeweiligen Themen entspricht jeweils einer Vorlesung. Diese wird also selbständig durchgeführt. 
+
+Daneben gibt es jede Woche (zu jedem Thema) Übungen, die wir in den Übungen besprechen. Diese dienen der Anwendung und der Festigung der erlangten Kenntnisse. Die Übungen sind kleine Aufgaben, an denen Sie das neue Wissen anwenden sollen. Die Übungen dienen der Befähigung, die (größeren) Aufgaben lösen zu können.  
 
 Für die Kommunikation untereinander verwenden wir [**Slack**](https://slack.com/intl/de-de/). Dort können Sie alle inhaltlichen und organisatorischen Fragen stellen. Ich fände es gut, wenn ich dort möglichst wenig Fragen - zumindest die inhaltlichen - beantworten müsste, sondern eine Art internes Diskussionsforum entsteht. Es ist sehr gewünscht, dort Fragen zu stellen und noch mehr gewünscht, diese von Ihnen dort beantwortet zu sehen. Damit wäre allen geholfen und ich kann besser erkennen, wo noch Nachhol- bzw. Erläuterungsbedarf bei den meisten besteht.  
+
+## Planung (vorläufig - kann sich noch ändern)
+
+
+Nachfolgend der vorläufige Wochenplan (wird eventuell angepasst). Die Vorlesungsvideos finden Sie darunter für die einzelnen Wochen (unter [**Themen**](http://freiheit.f4.htw-berlin.de/prog1/#themen)).
+
+| | Woche | Themen (Vorlesung) | Aufgabe | Abgabe Aufgabe bis | 
+|-|-------|--------------------|-------|-----------------|
+| 1. | 02.-06.11.2020 | Einführung und Organisatorisches, erstes Programm | -  | - | 
+| 2. | 09.-13.11.2020 | Datentypen und Variablen, logische Ausdrücke | Aufgabe 1  | 22.11.2020 | 
+| 3. | 16.-20.11.2020 | Sequenzen, Iterationen und Selektion | Aufgabe 2  | 29.11.2020 | 
+| 4. | 23.-27.11.2020 | Methoden und Parameter, return | Aufgabe 3 | 06.12.2020 | 
+| 5. | 30.-04.12.2020 | Klassen und Objekte | Aufgabe 4 | 13.12.2020 | 
+| 6. | 07.-11.12.2020 | getter, Setter, Konstruktoren, this, private | Aufgabe 5  | 20.12.2020 | 
+| 7. | 14.-18.12.2020 | Klassen- und Objekt-Variablen und -Methoden | Aufgabe 6  | 10.01.2021 | 
+| 8. | 21.-25.12.2020 | Arrays, Algorithmen über Arrays | Aufgabe 7  | 17.01.2021 |
+| | | | | | | |
+| 9. | 04.-08.01.2021 | Vererbung | Aufgabe 8  | 24.01.2021 |
+| 10. | 11.-15.01.2021 | Polymorphie | Aufgabe 9 | 31.01.2021 |
+| 11. | 18.-22.01.2021 | Object | -  | - |
+| 12. | 25.-29.01.2021 | Sichtbarkeitsmodifizierer | Fragen  | - |
+| 13. | 01.-05.02.2021 | Wiederholung, Klausurvorbereitung |   | - |
 
 ## Themen
 

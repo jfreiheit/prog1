@@ -1,6 +1,11 @@
 # Übungen
 
-## Ausdrücke
+## Übungsblätter (wochenweise)
+
+
+## Weitere Übungsaufgaben (selbständiges Üben)
+
+### Ausdrücke
 
 ??? note "gleich 12"
 	Welche der folgenden Ausdrücke haben den Wert 12?
@@ -23,7 +28,7 @@
 	Begründen Sie die richtige Antwort! Was passiert durch die Anweisungen?
 
 
-## Schleifen
+### Schleifen
 
 ??? note "Laufvariablen"
 	Welche der Schleifen gibt alle Elemente des Arrays `nums` aus? Das Array enthält genau 4 Zahlen.
@@ -35,7 +40,7 @@
 	e) for (int i = nums.length - 1; i >= 0; i--) { System.out.println(nums[i]); }
 	```
 
-## Wrapper-Klassen
+### Wrapper-Klassen
 
 ??? note "Initialisierung einer Long-Variablen"
 	Welche Anweisungen initialisieren eine Long-Variable korrekt?
@@ -46,7 +51,7 @@
 	d) Long val = Long.parseLong("4321");
 	```
 
-## Vererbung
+### Vererbung
 
 ??? note "Sichtbarkeitsmodifizierer"
 	Gegeben sind die beiden Klassen - beide sind in verschiedenen Paketen:
@@ -56,7 +61,7 @@
 	}
 	```
 	und
-		```java linenums="1"
+	```java linenums="1"
 	public class DerivedClass extends BaseClass {
     	private int b;
 

@@ -2,6 +2,15 @@
 
 ## Literaturempfehlungen
 
+- Joachim Goll, Cornelia Heinisch: *"Java als erste Programmiersprache. Ein professioneller Einstieg in die Objektorientierung mit Java"*,  Springer Vieweg
+- Sebastian Dörn: *"Java lernen in abgeschlossenen Lerneinheiten"*, Springer Vieweg
+- Dietmar Ratz, Jens Scheffler, Detlef Seese, Jan Wiesenberger: *"Grundkurs Programmieren in Java x", Hanser Verlag
+- Kathy Sierra, Bert Bates: *"Java von Kopf bis Fuß"*, O'Reilly Verlag
+- Joshua Bloch: *"Effective Java. Best practices for the Java platform"*, Pearson Education Inc.
+- Robin C. Martin: *"Clean Code: A Handbook of Agile Software Craftmanship"*, Prentice Hall
+- und alle Bücher für Einsteigerinnen, die Sie ansprechen...
+
+
 ## Java
 
 Wir verwenden die Programmiersprache *Java*, um die Programmierkonzepte, die wir lernen und anwenden wollen, zu implementieren. 
