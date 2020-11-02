@@ -196,7 +196,7 @@ Reservierte Schlüsselwörter sind Begriffe aus dem Java-Sprachumfang (alle klei
 	- `2und2macht4`
 	- `class`
 	- `Hose gewaschen`
-	- `Hurtig`
+	- `Hurtig!`
 	- `null`
 
 ##### Konventionen
@@ -256,7 +256,7 @@ char character = 'a';
 !!! info "Beachte"
 	Wie bereits erwähnt, kann eine Variable genau ein Mal deklariert, ihr aber beliebig oft ein neuer Wert zugewiesen werden. Angenommen, Sie wollen der Variablen `ganzeZahl` einen neuen Wert zuweisen, dann schreiben Sie die Anweisung `ganzeZahl = 6;`. Sie dürfen auf keinen Fall `int ganzeZahl = 6;` schreiben, denn dann würden Sie ja versuchen, die Variable `ganzeZahl` erneut zu deklarieren. Diese existiert aber bereits. Sie bekommen einen Compilerfehler und können ihr Programm gar nicht erst übersetzen. 	
 
-## Details zu Datentypen
+## Details zu primitiven Datentypen (Wertetypen)
 
 Wie wir bereits bei der Vorstellung der primitiven Datentypen erwähnt haben, ist für jeden Datentyp eine gewisse Speichergröße reserviert. Hier noch einmal die Größe der primitiven Datentypen:
 
@@ -298,7 +298,6 @@ Da die Werte alle einen begrenzten Wertebereich haben, kann es zu einem *Wertebe
 Beachten Sie, dass ein solcher Überlauf unbemerkt passiert. Das bedeutet, dass Sie weder einen Fehler noch eine Warnung erhalten. Sie müssen sich also immer gut überlegen, ob ein solcher Überlauf bei Ihren Werten passieren kann. Wenn ja, dann sollten Sie zum nächstgrößeren Datentypen wechseln, also z.B. von `int` nach `long`. 
 
 ??? note "Übung Zweierkomplement"
-
 	- Warum ist `1111 1111` als Zweierkomplement im Datentyp `byte` die Dezimalzahl `-1`?
 	- Wie ist die Repräsentation der Zahlen `-99` und `99` als Zweierkomplement im Datentyp `byte`?
 	- Was ist das Ergebnis der Rechnung `2.147.483.647 + 1` im Datentyp `int` und warum?
@@ -432,7 +431,7 @@ Im obigen Beispiel wird mithilfe von `float` der Bruch `1/3` ausgerechnet. Zwei 
 	System.out.println(doubleNumber);	// 0.3333333333333333
 	```
 
-Erstens hat der `double`-Wert deutlich mehr Nachkommastellen (16 statt 8 bei `float`) und zweitens ist der Wert korrekter. 
+Erstens hat der `double`-Wert deutlich mehr Nachkommastellen (16 statt 8 bei `float`) und zweitens ist der Wert somit korrekter. 
 
 Wir merken uns:
 
@@ -441,5 +440,84 @@ Wir merken uns:
 - `double` ist der Standardtyp für Gleikommazahlen und wenn eine Gleitkommazahl im Programmcode vorkommt, dann handelt es sich um eine Zahl vom Typ `double`. 
 
 
+## Der Datentyp `String` 
+
+Der Datentyp `String` ist kein primitiver Datentyp (kein Wertetyp), sondern ein sogenannter *komplexer Datentyp* (oder, wie wir sagen *Referenztyp*). Wir erkennen das bereits daran, dass der Datentyp mit einem Großbuchstaben beginnt. Der Unterschied zwischen Variablen von einem Wertetypen und Variablen von Referenztypen ist der, dass die ersten "nur" Werte speichern (`3`, `5`, `'a'`, `123.45`, `true`, ...) und die anderen speichern *Objekte* (oder richtiger: Referenzen auf Objekte) - darum kümmern wir uns später sehr ausführlich. 
+
+Wir können uns merken (ist aber derzeit noch nicht wichtig), dass ein String ein Objekt und kein einfacher Wert ist, aber derzeit betrachten wir den Datentyp `String` wie die primitiven Wertetypen auch. 
+
+Ein `String`-Literal erkennt man an den doppelten Anführungsstrichen. Darin kann ein beliebiger Text (bestehend aus allen möglichen Zeichen, Buchstaben, Sonderzeichen, Umlauten etc.) stehen, z.B. `"Hallo FIW!"`, `"2und2gleich4 und $ % & 0? | \ !"`, `" ä ü ö ß`.
+
+Die Deklaration und Initialisierung einer `String`-Variablen sieht also so aus:
+```java
+String s1 = "Informatik";
+``` 
+
+Auch für den Datentyp `String` gibt es einen Operator, der zwei Strings miteinander verbindet. Er wird *Konkatenation* (*String-Konkatenation* oder *Zeichenkettenverbindungsoperator* genannt). Das Operatorsymbol der Konkatenation ist in Java `+`. 
+
+```java
+String s1 = "Informatik" + " und" + " Wirtschaft";
+System.out.println(s1);
+``` 
+
+Die folgenden drei Ausgaben sind alle gleich:
+```java
+String s1 = "Informatik" + " und" + " Wirtschaft";
+System.out.println(s1); 			// Informatik und Wirtschaft
+
+String s2 = "Informatik";
+String s3 = " und";
+String s4 = " Wirtschaft";
+System.out.println(s2 + s3 + s4);	// Informatik und Wirtschaft
+
+String s5 = "Informatik";
+String s6 = s5 + " und";
+String s7 = s6 + " Wirtschaft";
+System.out.println(s7);				//Informatik und Wirtschaft
+```
+
+### Doppelte Bedeutung des Operatorzeichens `+`
+
+Das `+` wird sowohl als arithmetischer Operator für numerische Datentypen als auch als Konkatenation für Strings verwendet. In den obigen Beispielen kommen wir damit nicht durcheinander, da völlig klar ist, dass es sich dabei um die Konkatenation handelt. Es gibt aber Beispiele, bei denen in einem Ausdruck beide Bedeutungen vorkommen. Diese diskutieren wir jetzt. Zunächst schauen wir uns noch eine Typische Verendung der Konkatenation an:
+
+=== "typisches Beispiel für die Konkatenation"
+	```java linenums="1"
+	int summand1 = 3;
+	int summand2 = 4;
+	int summe = summand1 + summand2;
+	System.out.println(summand1 + " + " + summand2 + " = " + summe);	// 3 + 4 = 7
+	```
+Die Ausgabe bei dem obigen Beispiel ist `3 + 4 = 7`. Schauen wir uns das Beispiel genauer an:
+
+- In Zeile `3` wird das `+` eindeutig als arithmetischer Operator verwendet, denn es steht zwischen zwei numerischen Werten (`summand1` und `summand2` sind jeweils vom Typ `int`)
+- In Zeile `4` kommt `+` mehrmals vor. Der Ausdruck in den runden Klammern von `println()` wird von links nach rechts aufgelöst:
+	- Das Literal `" + "` ist ein String. Hier ist `+` gar kein Operator, sondern nur ein Zeichen.
+	- Das `+` in `summand1 + " + "` ist die Konkatenation. Das liegt daran, dass einer der beiden Operanden, die das `+` verbindet, vom Typ `String` ist. Intern wird der Wert von `summand1` ( die `3`) zu einem String und dieser wird mit `" + "` verbunden. Es entsteht ein String `"3 + "`.  
+	- Das bedeutet, dass das nächste `+` in dem Ausdruck `"3 + " + summand2` enthalten ist und auch hier die Bedeutung der Konkatenation hat, denn einer der beiden Operanden (der erste) ist vom Typ `String`. Intern wird der Wert von `summand2` ( die `4`) zu einem String und dieser wird mit `"3 + "` verbunden. Es entsteht ein String `"3 + 4"`. 
+	- Das bedeutet, dass das nächste `+` in dem Ausdruck `"3 + 4" + " = "` enthalten ist und auch hier die Bedeutung der Konkatenation hat, denn beide Operanden (der erste und der zweite) sind vom Typ `String`. Es entsteht der String `"3 + 4 = "`.   
+	- Das letzte `+` steht also in dem Ausdruck `"3 + 4 = " + summe`. Auch hier handelt es sich wieder um die Konkatenation, da einer der beiden Operanden (der erste) vom Typ `String` ist. Intern wird der Wert von `summe` ( die `7`) zu einem String und dieser wird mit `"3 + 4 = "` verbunden. Es entsteht ein String `"3 + 4 = 7"`. Dieser String wird ausgegegeben. 
+
+
+??? note "1. Übung Doppelte Bedeutung von `+`"
+	Angenommen, in dem obigen Beispiel wollen Sie die Summe der beiden Summanden nicht erst in einer Variablen zwischenspeichern, sondern gleich ausgeben. Sie schreiben deshalb folgendes Programm:
+	```java
+	int summand1 = 3;
+	int summand2 = 4;
+	System.out.println(summand1 + " + " + summand2 + " = " + summand1 + summand2);	
+	```
+	Sie erhalten jedoch nicht die gewünschte Ausgabe. Warum nicht? Wie können Sie doch die Summe ausgeben, ohne diese zwischenspeichern zu müssen?
+
+??? note "2. Übung Doppelte Bedeutung von `+`"
+	Wie sind jeweils die Ausgaben und warum?
+	```java
+	System.out.println("3" + 5 + "3 + 5");	
+	System.out.println(3 + 5 + "3 + 5");	
+	System.out.println(3 + "5" + "3 + 5");	
+	System.out.println("3 " + 5 + 3 + 5);	
+	System.out.println(3 + 5 + 3 + 5);	
+	System.out.println(3 + 5 + 3 + "5");	
+	```
+
 !!! success
     Wir können nun Variablen deklarieren und initialisieren. Wir kennen alle acht primitiven Datentypen. Wir nennen diese Datentypen *Wertetypen*. Wir wissen, dass eine ganze Zahl im Java-Programm vom Typ `int` ist und eine Gleikommazahl vom Typ `double`. Wir kennen die interne Darstellung von ganzen Zahlen und wir wissen über die Kodierung von Zeichen Bescheid. Der datentyp `char` ist ein ganzzahliger Typ, obwohl er für das Speichern von Zeichen zuständig ist. Dies liegt an der Kodierung der Zeichen als ganze Zahlen. Der Wertzuweisungsoperator ist `=`. Wenn einer Variablen ein Wert zugewiesen werden soll, dann muss die Variablen links stehen, der Wertuweisungsoperator in der Mitte und rechts der Wert. 
+

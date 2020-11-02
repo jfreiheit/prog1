@@ -179,6 +179,10 @@
       
         
       
+        
+      
+        
+      
     </ul>
   </div>
 </nav>
@@ -285,6 +289,13 @@
         <li class="md-nav__item">
   <a href="#syntaxfehler" class="md-nav__link">
     Syntaxfehler
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kommentare" class="md-nav__link">
+    Kommentare
   </a>
   
 </li>
@@ -428,6 +439,30 @@
 
 
   <li class="md-nav__item">
+    <a href="../methoden/" title="Methoden" class="md-nav__link">
+      Methoden
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../selektion/" title="Selektion" class="md-nav__link">
+      Selektion
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
     <a href="../uebungen/" title="Übungen" class="md-nav__link">
       Übungen
     </a>
@@ -512,6 +547,13 @@
         <li class="md-nav__item">
   <a href="#syntaxfehler" class="md-nav__link">
     Syntaxfehler
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kommentare" class="md-nav__link">
+    Kommentare
   </a>
   
 </li>
@@ -778,11 +820,15 @@ Hello FIW!
 
 </div>
 </div>
-<p>Wir führen das Programm erneut aus (grüner Pfeil) und erhalten auf der Konsole die Ausgabe:</p>
+<p>Wir führen das Programm erneut aus (grüner Pfeil <img alt="run" src="../files/16_run.png" />) und erhalten auf der Konsole die Ausgabe:</p>
 <div class="highlight"><pre><span></span><code>Hello FIW!Hello FIW!Hello FIW!
 </code></pre></div>
 
-<p>Die <code>print()</code>-Methode gibt also nur die Zeichenkette aus, führt aber danach keinen Zeilenumbruch durch. Der Ausgabecursor bleibt hinter dem lketztebn ausgegebenen Zeichen stehen. Unsere drei Zeichenketten werden in der Konsole deshalb hintereinander ausgegeben.</p>
+<p>Die <code>print()</code>-Methode gibt also nur die Zeichenkette aus, führt aber danach keinen Zeilenumbruch durch. Der Ausgabecursor bleibt hinter dem letzten ausgegebenen Zeichen stehen. Unsere drei Zeichenketten werden in der Konsole deshalb hintereinander ausgegeben.</p>
+<div class="admonition question">
+<p class="admonition-title">Übung</p>
+<p>Was müssen Sie im Programm ändern, damit zwischen <code>!</code> und <code>H</code> jeweils ein Leerzeichen ist, also anstelle von <code>Hello FIW!Hello FIW!Hello FIW!</code> besser <code>Hello FIW! Hello FIW! Hello FIW!</code> ausgegeben wird? </p>
+</div>
 <p>Wir ändern nun unser Programm erneut und fügen folgende Anweisungen hinzu: <code>System.out.println()</code>. Wir rufen also die <code>println()</code>-Methode auf, ohne eine Zeichenkette zu übergeben, die ausgegeben werden soll. Diese Anweisung sorgt einfach dafür, dass ein Zeilenumbruch erfolgt. Es wird also nichts ausgegeben, aber der Ausgabecursor an den Beginn der nächsten Zeile gesetzt.</p>
 <div class="tabbed-set" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><label for="__tabbed_4_1">main()-Methode mit print() und println()</label><div class="tabbed-content">
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
@@ -821,7 +867,7 @@ Hello FIW!
 
 </div>
 </div>
-<p>Wir führen das Programm erneut aus (grüner Pfeil) und erhalten auf der Konsole die Ausgabe:</p>
+<p>Wir führen das Programm erneut aus (grüner Pfeil <img alt="run" src="../files/16_run.png" />) und erhalten auf der Konsole die Ausgabe:</p>
 <div class="highlight"><pre><span></span><code>Hello FIW!
 Hello FIW!
 Hello FIW!
@@ -882,6 +928,25 @@ Hello FIW!
 <p class="admonition-title">Success</p>
 <p>Wir haben unser erstes Java-Programm geschrieben und ausgeführt! Wir haben gelernt, wie wir mithilfe der Methoden <code>println()</code> und <code>print()</code> Zeichenketten auf die Konsole ausgeben können und wir haben uns angeschaut, wie wir Fehlerausschriften lesen. Nun schauen wir uns einmal an, was im Hintergrund passiert, wenn wir das Programm ausführen.</p>
 </div>
+<h2 id="kommentare">Kommentare<a class="headerlink" href="#kommentare" title="Permanent link">&para;</a></h2>
+<p>In Ihren Quellcode (Ihr Programm) können Sie an allen beliebigen Stellen <em>Kommentare</em> schreiben. Kommentare werden vom Compiler ignoriert, d.h. Sie können dort hineinschreiben, was und wie Sie möchten. Es gibt drei Arten von Kommentaren in Java:</p>
+<ul>
+<li><em>Zeilenkommentare</em>: Diese beginnen mit <code>//</code> und danach kommt der Kommentar bis zum Zeilenende. Die neue Zeile ist dann wieder "normaler" Quellcode
+    <div class="highlight"><pre><span></span><code><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Ausgabe1&quot;</span><span class="p">);</span>     <span class="c1">// hier ist ein Zeilenkommentar bis zum Ende der Zeile</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Ausgabe2&quot;</span><span class="p">);</span>     <span class="c1">// hier ist noch ein Zeilenkommentar</span>
+</code></pre></div></li>
+<li><em>Blockkommentare</em>: Diese beginnen mit <code>/*</code> und danach kommt der Kommentar. Er kann sich über mehrere Zeilen erstrecken. Ein Blockkommentar endet mit <code>*/</code>. Nach diesem Ende ist sofort wieder "normaler" Quellcode.
+    <div class="highlight"><pre><span></span><code><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Ausgabe1&quot;</span><span class="p">);</span>
+<span class="cm">/*</span>
+<span class="cm">    hier ist ein Blockkommentar</span>
+<span class="cm">    er kann über beliebig viele </span>
+<span class="cm">    Zeilen gehen</span>
+<span class="cm">    Er endet erst mit</span>
+<span class="cm">*/</span>  
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Ausgabe2&quot;</span><span class="p">);</span>     
+</code></pre></div></li>
+<li><em>Java-Doc-Kommentare</em>: <code>javadoc</code> ist ein Programm aus dem <em>Java Development Kit (JDK)</em>. Es wird eingesetzt, um den Code zu dokumentieren. Wir werden <code>javadoc</code> noch ausführlich behandeln. Mit <code>javadoc</code> kommentierte Klassen finden Sie <a href="https://docs.oracle.com/en/java/javase/14/docs/api/index.html"><strong>hier</strong></a>.</li>
+</ul>
 <h2 id="compilieren-und-ausfuhren">Compilieren und Ausführen<a class="headerlink" href="#compilieren-und-ausfuhren" title="Permanent link">&para;</a></h2>
 <p>Wir haben nun unser erstes einfaches Programm geschrieben - in der Programmiersprache <em>Java</em>. Wie wir in <a href="./tools/#java"><strong>Werkzeuge -&gt; Java</strong></a> bereits bei der Installation von Java erläutert haben, ist Java nicht nur eine Programmiersprache, sondern auch ein Programm, in dem wir Java-Programme ausführen können - die <em>Laufzeitumgebung</em> von Java. Wir werden zunächst erläutern, was im Hintergrund passiert, wenn wir ein selbstgeschriebenes Java-Programm ausführen. </p>
 <p>Zum besseren Verständnis erzeugen wir uns zunächst ein Verzeichnis <code>test</code> irgendwo auf unserem Rechner:</p>

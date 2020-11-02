@@ -22,7 +22,7 @@ Java besteht aus 2 Teilen:
 
 Die Java-Laufzeitumgebung ist üblicherweise bereits auf allen Rechnern installiert. Sie ist selbst ein Programm. Innerhalb dieses Programms werden Java-Programme ausgeführt. 
 
-Das JDK müssen Sie installieren. Verwenden Sie dazu [diesen Link](https://www.oracle.com/java/technologies/javase-downloads.html) und gehen wie für Ihr Betriebssystem angegeben vor. 
+Das JDK müssen Sie installieren. Verwenden Sie dazu [diesen Link](https://www.oracle.com/java/technologies/javase-downloads.html) und gehen wie für Ihr Betriebssystem angegeben vor (prüfen Sie aber zunächst, ob Sie nicht eventuell bereits Beides haben - `java -version` und `javac -version` - siehe folgend). 
 
 Testen Sie am besten auf Ihrer Konsole (Terminal), ob Ihr Java korrekt funktioniert. Zum Testen Ihrer Laufzeitumgebung geben Sie dazu
 
@@ -98,6 +98,8 @@ Wer gerne mit Microsoft-Produkten arbeitet, kann auch gerne [**Visual Studio Cod
 ## Weitere nützliche Werkzeuge
 
 ### Windows: gitBash
+
+Das Terminal (`cmd`) in Windows ist nicht so gut. Installieren Sie sich lieber die [**GitBash für Windows**](https://gitforwindows.org/). Unter Downloads öffnet sich das GitHub-Repository für Git. Aktuell wählen Sie dort [**Git-2.29.2-64-bit.exe**](https://github.com/git-for-windows/git/releases/download/v2.29.2.windows.1/Git-2.29.2-64-bit.exe) und folgen dann den Installationsanweisungen. 
 
 ## Online-Kurse
 

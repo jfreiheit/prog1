@@ -112,13 +112,16 @@ Wir wollen nun unser Programm ändern und verwenden nicht mehr die `println()`- 
 	}
 	```
 
-Wir führen das Programm erneut aus (grüner Pfeil) und erhalten auf der Konsole die Ausgabe:
+Wir führen das Programm erneut aus (grüner Pfeil ![run](./files/16_run.png)) und erhalten auf der Konsole die Ausgabe:
 
 ``` bash
 Hello FIW!Hello FIW!Hello FIW!
 ```
 
-Die `print()`-Methode gibt also nur die Zeichenkette aus, führt aber danach keinen Zeilenumbruch durch. Der Ausgabecursor bleibt hinter dem lketztebn ausgegebenen Zeichen stehen. Unsere drei Zeichenketten werden in der Konsole deshalb hintereinander ausgegeben.
+Die `print()`-Methode gibt also nur die Zeichenkette aus, führt aber danach keinen Zeilenumbruch durch. Der Ausgabecursor bleibt hinter dem letzten ausgegebenen Zeichen stehen. Unsere drei Zeichenketten werden in der Konsole deshalb hintereinander ausgegeben.
+
+!!! question "Übung"
+	Was müssen Sie im Programm ändern, damit zwischen `!` und `H` jeweils ein Leerzeichen ist, also anstelle von `Hello FIW!Hello FIW!Hello FIW!` besser `Hello FIW! Hello FIW! Hello FIW!` ausgegeben wird? 
 
 Wir ändern nun unser Programm erneut und fügen folgende Anweisungen hinzu: `System.out.println()`. Wir rufen also die `println()`-Methode auf, ohne eine Zeichenkette zu übergeben, die ausgegeben werden soll. Diese Anweisung sorgt einfach dafür, dass ein Zeilenumbruch erfolgt. Es wird also nichts ausgegeben, aber der Ausgabecursor an den Beginn der nächsten Zeile gesetzt.
 
@@ -142,7 +145,7 @@ Wir ändern nun unser Programm erneut und fügen folgende Anweisungen hinzu: `Sy
 	}
 	```
 
-Wir führen das Programm erneut aus (grüner Pfeil) und erhalten auf der Konsole die Ausgabe:
+Wir führen das Programm erneut aus (grüner Pfeil ![run](./files/16_run.png)) und erhalten auf der Konsole die Ausgabe:
 
 ``` bash
 Hello FIW!
@@ -195,6 +198,28 @@ In vielen Fällen bietet Eclipse einen sogenannten Quickfix an. Meistens können
 
 !!! success
     Wir haben unser erstes Java-Programm geschrieben und ausgeführt! Wir haben gelernt, wie wir mithilfe der Methoden `println()` und `print()` Zeichenketten auf die Konsole ausgeben können und wir haben uns angeschaut, wie wir Fehlerausschriften lesen. Nun schauen wir uns einmal an, was im Hintergrund passiert, wenn wir das Programm ausführen.
+
+## Kommentare
+
+In Ihren Quellcode (Ihr Programm) können Sie an allen beliebigen Stellen *Kommentare* schreiben. Kommentare werden vom Compiler ignoriert, d.h. Sie können dort hineinschreiben, was und wie Sie möchten. Es gibt drei Arten von Kommentaren in Java:
+
+- *Zeilenkommentare*: Diese beginnen mit `//` und danach kommt der Kommentar bis zum Zeilenende. Die neue Zeile ist dann wieder "normaler" Quellcode
+	```java
+	System.out.println("Ausgabe1"); 	// hier ist ein Zeilenkommentar bis zum Ende der Zeile
+	System.out.println("Ausgabe2"); 	// hier ist noch ein Zeilenkommentar
+	```
+- *Blockkommentare*: Diese beginnen mit `/*` und danach kommt der Kommentar. Er kann sich über mehrere Zeilen erstrecken. Ein Blockkommentar endet mit `*/`. Nach diesem Ende ist sofort wieder "normaler" Quellcode.
+	```java
+	System.out.println("Ausgabe1");
+	/*
+		hier ist ein Blockkommentar
+		er kann über beliebig viele 
+		Zeilen gehen
+		Er endet erst mit
+	*/ 	
+	System.out.println("Ausgabe2"); 	
+	```
+- *Java-Doc-Kommentare*: `javadoc` ist ein Programm aus dem *Java Development Kit (JDK)*. Es wird eingesetzt, um den Code zu dokumentieren. Wir werden `javadoc` noch ausführlich behandeln. Mit `javadoc` kommentierte Klassen finden Sie [**hier**](https://docs.oracle.com/en/java/javase/14/docs/api/index.html).
 
 ## Compilieren und Ausführen
 

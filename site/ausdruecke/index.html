@@ -179,6 +179,10 @@
       
         
       
+        
+      
+        
+      
     </ul>
   </div>
 </nav>
@@ -368,6 +372,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#ausdrucke-mit-operatoren" class="md-nav__link">
+    Ausdrücke mit Operatoren
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -377,6 +388,30 @@
   
 </nav>
     
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../methoden/" title="Methoden" class="md-nav__link">
+      Methoden
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../selektion/" title="Selektion" class="md-nav__link">
+      Selektion
+    </a>
   </li>
 
     
@@ -529,6 +564,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#ausdrucke-mit-operatoren" class="md-nav__link">
+    Ausdrücke mit Operatoren
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -558,7 +600,7 @@
 <p>Im vorherigen Abschnitt haben wir <em>Variablen</em> und <em>Datentypen</em> kennengelernt. Wir können Variablen deklarieren und initialisieren und ihnen neue Werte zuweisen. Nun führen wir Operationen ein, die wir in den jeweiligen Datentypen verwenden können, um neue Werte zu erzeugen. Wir beginnen bei den arithmetischen Operatoren, d.h. mit den Operatoren, die wir für die ganzzahligen Datentypen und die Gleitkomma-Datentypen verwenden können. </p>
 <h2 id="arithmetische-operatoren">Arithmetische Operatoren<a class="headerlink" href="#arithmetische-operatoren" title="Permanent link">&para;</a></h2>
 <p>Arithmetische Operationen kennen wir natürlich schon. Die einfachsten arithmetischen Operatoren sind die <em>unären</em> Operatoren, auch Vorzeichenoperatoren genannt. Ansonsten gibt es die Addition <code>+</code>, die Subtraktion <code>-</code>, die Multiplikation <code>*</code> und die Division <code>/</code>. Außerdem gibt es auch einen Restwertoperator (auch <em>modulo</em> genannt), der bei der ganzzahligen Division den verbleibenden Rest als Ergebnis ermittelt (<code>%</code>). </p>
-<p>Ganz <strong>wichtig</strong> ist, dass das Divionssymbol <code>/</code> eine unterschiedliche Bedeutung hat, je nachdem, ob wir ganze Zahlen dividieren oder Gleitkommazahlen. Bei der Division von ganzen Zahlen ist das Ergebnis der Divsion der ganzzahlige Wert (also z.B. <code>5 / 4</code> ergibt <code>1</code>), aber bei der Divsion von Gleitkommazahlen ein Gleitkommawert (also z.B. <code>5.0 / 4.0</code> ergibt <code>1.25</code>). </p>
+<p>Ganz <strong>wichtig</strong> ist, dass das Divisionssymbol <code>/</code> eine unterschiedliche Bedeutung hat, je nachdem, ob wir ganze Zahlen dividieren oder Gleitkommazahlen. Bei der Division von ganzen Zahlen ist das Ergebnis der Division der ganzzahlige Wert (also z.B. <code>5 / 4</code> ergibt <code>1</code>), aber bei der Division von Gleitkommazahlen ein Gleitkommawert (also z.B. <code>5.0 / 4.0</code> ergibt <code>1.25</code>). </p>
 <p>Der Restwertoperator wird wirklich sinnvoll eigentlich nur für ganze Zahlen verwendet (also z.B. <code>7 % 4</code> ergibt <code>3</code> - der verbleibende Rest der ganzzahligen Divsion ist <code>3</code>). Trotzdem kann der Restwertoperator auch auf Gleitkommazahlen angewendet werden (obwohl dort ja eigentlich kein Rest bleibt). So ergibt <code>7.0 % 4.0</code> auch <code>3.0</code> und/aber <code>7.5 % 4.0</code>  ergibt <code>3.5</code>.  </p>
 <table>
     <thead>
@@ -739,6 +781,10 @@
 
 <h2 id="wertzuweisungsoperator">Wertzuweisungsoperator<a class="headerlink" href="#wertzuweisungsoperator" title="Permanent link">&para;</a></h2>
 <p>Einen weiteren Operator kennen wir bereits, den Wertzuweisungsoperator <code>=</code>. Auf der linken Seite der Zuweisung steht immer eine Variable und auf der rechten Seite ein Wert, der sich auch aus einem Ausdruck ergeben kann, z.B. <code>int x = 5 + 6;</code>. Dann wird <code>x</code>der Wert <code>11</code>zugeweisen. </p>
+<div class="admonition info">
+<p class="admonition-title">Beachte</p>
+<p>Der Zuweisungsoperator ist zunächst gewöhnungsbedürftig, denn eine Zuweisung der Form <code>x = x+1;</code> sieht ja aus mathematischer Sicht komisch aus, da in der Mathematik das Symbol <code>=</code> für die Gleichheit verwendet wird. In der (Java-)Programmierung hat dieses Symbol aber eine andere Bedeutung, nämlich die Zuweisung des Wertes auf der rechten Seite zur Variablen auf der linken Seite. In der Zuweisung <code>x = x+1;</code> wird also erst der Wert <code>x+1</code> berechnet und dieser Wert dann der Variablen <code>x</code> zugeordnet (die dann einen um <code>1</code> höheren Wert hat als zuvor). Der Operator für die Gleichheit ist übrigens <code>==</code>, wie wir gleich sehen werden.</p>
+</div>
 <h2 id="logische-operatoren">Logische Operatoren<a class="headerlink" href="#logische-operatoren" title="Permanent link">&para;</a></h2>
 <p>Die arithmetischen Operatoren werden auf Operanden angewendet, die von einem ganzzahligen Datentyp oder von einem Gleitkomma-Datentyp sind. Jetzt lernen wir Operatoren kennen, die auf Operanden vom Typ <code>boolean</code> angewendet werden.</p>
 <p>Nehmen wir in der folgenden Tabelle an, dass die Variablen <code>a</code> und <code>b</code> jeweils vom Typ <code>boolean</code> sind. Sie wurden also wie folgt deklariert: <code>boolean a;</code> und <code>boolean b;</code>.</p>
@@ -844,9 +890,11 @@
 <li>Wahrheitswerte (<code>true</code> oder <code>false</code>),</li>
 <li>ein Character (z.B. <code>'a'</code> oder <code>'A'</code>)</li>
 </ul>
-<p>Wir werden später noch andere Literale kennenlernen:
-- Zeichenketten (Datentyp <code>String</code>), z.B. <code>"Hallo FIW!"</code>
-- die leere Referenz <code>null</code></p>
+<p>Wir werden später noch andere Literale kennenlernen:</p>
+<ul>
+<li>Zeichenketten (Datentyp <code>String</code>), z.B. <code>"Hallo FIW!"</code></li>
+<li>die leere Referenz <code>null</code></li>
+</ul>
 <p>Jedes Literal ist ein Ausdruck. Der Rückgabewert des Literals ist der Wert des Literals. Jedes Literal ist von einem konkreten Datentyp. Die folgenden Anweisungen werden auch <em>Ausdrucksanweisung</em> genannt, da in der Anweisung ein Ausdruck verwendet wird und der Wert dieses Ausdrucks als <em>Nebeneffekt</em> zum Tragen kommt (nur die ersten beiden sind Ausdrucksanweisungen - die folgenden drei sind <strong>Fehler</strong>):</p>
 <div class="highlight"><pre><span></span><code><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">123</span><span class="p">;</span>    <span class="c1">// auf der rechten Seite des Zuweisungsoperators steht ein Ausdruck; </span>
                 <span class="c1">// der Wert des Ausdrucks wird der Wert der Variablen x</span>
@@ -867,6 +915,21 @@
 <li>Literale, die mit (passenden) Operatoren verknüpft sind</li>
 <li>Ausdrücke, die mit passenden Operatoren verknüpft sind</li>
 </ul>
+<h3 id="ausdrucke-mit-operatoren">Ausdrücke mit Operatoren<a class="headerlink" href="#ausdrucke-mit-operatoren" title="Permanent link">&para;</a></h3>
+<p>Verbinden wir Literale mit Operatoren, entstehen dadurch Ausdrücke. Ausdrücke können wiederum mithilfe von Operatoren mit weiteren Literalen oder auch mit weiteren Ausdrücken verbunden werden. Beachten Sie, dass Ausdrücke</p>
+<ul>
+<li>immer einen Wert haben,</li>
+<li>der Wert ermittelt wird, indem der Ausdruck <em>aufgelöst</em> wird, d.h. die Operatoren angewendet werden. Dies erfolgt in folgender Reihenfolge:<ul>
+<li>wenn runde Klammern um einen Ausdruck gesetzt sind, wird zunächst der geklammerte Ausdruck aufgerufen, </li>
+<li>unäre (also einelementige) Operatoren binden stärker als binäre (also zweielementige) Operatoren, d.h. es werden zunächst die einelementigen Operatoren angewendet,</li>
+<li>bei arithmetischen Operatoren gilt "Punkt vor Strich-Rechnung",</li>
+<li>bei logischen Operatoren gilt folgende Reihenfolge (stärkere Bindung von links nach rechts) <code>==</code>, <code>!=</code> -&gt; <code>&amp;</code> &rarr; <code>^</code> &rarr; <code>|</code> &rarr; <code>&amp;&amp;</code> &rarr; <code>||</code> (lernen Sie das aber keinesfalls auswendig und verlassen sich dann auf Ihr Gedächtnis, sondern verwenden Sie Klammern!)</li>
+<li>der Zuweisungsoperator (<code>=</code>) sowie <code>+=</code>, <code>-=</code>, <code>/=</code>, <code>*=</code>, <code>%=</code> binden am schwächsten</li>
+<li>dann erfolgt die Auflösung von links nach rechts</li>
+</ul>
+</li>
+</ul>
+<p>Achten Sie darauf, dass Ausdrücke einen anderen Typ haben können als die Literale (bzw. Ausdrücke), die man im Ausdruck mithilfe von Operatoren miteinander verbindet, z.B. <code>3 == 4</code> ist vom Typ <code>boolean</code>, aber <code>3</code> und <code>4</code> sind jeweils vom Typ <code>int</code>.</p>
 <p>Beispiele für Ausdrücke sind:</p>
 <div class="highlight"><pre><span></span><code><span class="mi">5</span> <span class="o">+</span> <span class="mi">6</span> <span class="o">-</span> <span class="mi">8</span>           <span class="c1">// Ergebnis (Wert) ist ein int</span>
 <span class="kc">true</span> <span class="o">&amp;&amp;</span> <span class="kc">false</span>       <span class="c1">// Ergebnis (Wert) ist ein boolean</span>
@@ -881,6 +944,13 @@
 
 <details class="note"><summary>Übung Ausdruck</summary><p>Angenommen, <code>a</code>, <code>b</code> und <code>c</code> seien vom Typ <code>int</code>. Was ist an diesem Ausdruck falsch: <code>a &lt; b &lt; c</code>? Wie wäre es richtig?</p>
 </details>
+<details class="note"><summary>Übung Durchschnitt berechnen</summary><p>Angenommen, Sie sollen die Durchschnittsnote von folgenden Noten berechnen: <code>1</code>, <code>1</code>, <code>1</code>, <code>1</code>, <code>2</code>, <code>2</code>, <code>3</code>, <code>4</code>. Sie überlegen sich folgendes Programm dafür:
+<div class="highlight"><pre><span></span><code><span class="kt">int</span> <span class="n">summe</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">4</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">anzahl</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">summe</span><span class="o">/</span><span class="n">anzahl</span><span class="p">);</span>
+</code></pre></div>
+Vom Ergebnis sind Sie aber enttäuscht. Welches Ergebnis wird ausgegeben? Welches wäre richtig gewesen? Was ist an Ihrem Programm falsch? Wie geht es besser?</p>
+</details>
 <p>Bei der Verwendung des Zuweisungsoperators gibt es auf der linken Seite immer eine Variable und auf der rechten Seite immer einen Ausdruck. Bevor die Zuweisung erfolgt, wird der Wert des Ausdrucks auf der rechten Seite ausgewertet. Beispiele:</p>
 <div class="highlight"><pre><span></span><code><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>              <span class="c1">// Wert von x ist 0</span>
 <span class="n">x</span> <span class="o">=</span> <span class="mi">7</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>          <span class="c1">// Wert von x ist 9</span>
@@ -893,6 +963,22 @@
 <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">||</span> <span class="kc">true</span><span class="p">);</span>        <span class="c1">// Wert von a ist true</span>
 <span class="n">a</span> <span class="o">=</span> <span class="o">!!</span><span class="n">a</span> <span class="o">&amp;&amp;</span> <span class="kc">true</span><span class="p">;</span>        <span class="c1">// Wert von a ist true</span>
 </code></pre></div>
+
+<div class="admonition info">
+<p class="admonition-title">Beachte</p>
+<p>Generell gilt bei der Zuweisung <strong>immer</strong>, dass der Ausdruck auf der rechten Seite erst vollständig ausgerechnet wird und der berechnete Wert dann der Variablen auf der linken Seite zugewiesen wird. "Leider" macht der Postfix-Operator dabei eine <strong>Ausnahme</strong>. Bei diesem Operator erfolgt erst die Zuweisung und dann die Berechnung:
+<div class="highlight"><pre><span></span><code><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>      <span class="c1">// x hat den Wert 3</span>
+<span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">++</span><span class="p">;</span>    <span class="c1">// y hat den Wert 3 und x den Wert 4</span>
+<span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>      <span class="c1">// a hat den Wert 3</span>
+<span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="o">--</span><span class="p">;</span>    <span class="c1">// b hat den Wert 3 und a den Wert 2</span>
+</code></pre></div>
+Das gilt nicht für den Präfix-Operator:
+<div class="highlight"><pre><span></span><code><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>      <span class="c1">// x hat den Wert 3</span>
+<span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="o">++</span><span class="n">x</span><span class="p">;</span>    <span class="c1">// y hat den Wert 4 und x den Wert 4</span>
+<span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>      <span class="c1">// a hat den Wert 3</span>
+<span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="o">--</span><span class="n">a</span><span class="p">;</span>    <span class="c1">// b hat den Wert 2 und a den Wert 2</span>
+</code></pre></div></p>
+</div>
                 
               
               
@@ -926,13 +1012,13 @@
           </a>
         
         
-          <a href="../uebungen/" title="Übungen" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../methoden/" title="Methoden" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Weiter
                 </span>
-                Übungen
+                Methoden
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">

@@ -6,7 +6,7 @@ Im vorherigen Abschnitt haben wir *Variablen* und *Datentypen* kennengelernt. Wi
 
 Arithmetische Operationen kennen wir natürlich schon. Die einfachsten arithmetischen Operatoren sind die *unären* Operatoren, auch Vorzeichenoperatoren genannt. Ansonsten gibt es die Addition `+`, die Subtraktion `-`, die Multiplikation `*` und die Division `/`. Außerdem gibt es auch einen Restwertoperator (auch *modulo* genannt), der bei der ganzzahligen Division den verbleibenden Rest als Ergebnis ermittelt (`%`). 
 
-Ganz **wichtig** ist, dass das Divionssymbol `/` eine unterschiedliche Bedeutung hat, je nachdem, ob wir ganze Zahlen dividieren oder Gleitkommazahlen. Bei der Division von ganzen Zahlen ist das Ergebnis der Divsion der ganzzahlige Wert (also z.B. `5 / 4` ergibt `1`), aber bei der Divsion von Gleitkommazahlen ein Gleitkommawert (also z.B. `5.0 / 4.0` ergibt `1.25`). 
+Ganz **wichtig** ist, dass das Divisionssymbol `/` eine unterschiedliche Bedeutung hat, je nachdem, ob wir ganze Zahlen dividieren oder Gleitkommazahlen. Bei der Division von ganzen Zahlen ist das Ergebnis der Division der ganzzahlige Wert (also z.B. `5 / 4` ergibt `1`), aber bei der Division von Gleitkommazahlen ein Gleitkommawert (also z.B. `5.0 / 4.0` ergibt `1.25`). 
 
 Der Restwertoperator wird wirklich sinnvoll eigentlich nur für ganze Zahlen verwendet (also z.B. `7 % 4` ergibt `3` - der verbleibende Rest der ganzzahligen Divsion ist `3`). Trotzdem kann der Restwertoperator auch auf Gleitkommazahlen angewendet werden (obwohl dort ja eigentlich kein Rest bleibt). So ergibt `7.0 % 4.0` auch `3.0` und/aber `7.5 % 4.0`  ergibt `3.5`.  
 
@@ -196,6 +196,9 @@ Werden die oben genannten Operatoren auf arithmetische Datentypen angewendet, so
 
 Einen weiteren Operator kennen wir bereits, den Wertzuweisungsoperator `=`. Auf der linken Seite der Zuweisung steht immer eine Variable und auf der rechten Seite ein Wert, der sich auch aus einem Ausdruck ergeben kann, z.B. `int x = 5 + 6;`. Dann wird `x`der Wert `11`zugeweisen. 
 
+!!! info "Beachte"
+	Der Zuweisungsoperator ist zunächst gewöhnungsbedürftig, denn eine Zuweisung der Form `x = x+1;` sieht ja aus mathematischer Sicht komisch aus, da in der Mathematik das Symbol `=` für die Gleichheit verwendet wird. In der (Java-)Programmierung hat dieses Symbol aber eine andere Bedeutung, nämlich die Zuweisung des Wertes auf der rechten Seite zur Variablen auf der linken Seite. In der Zuweisung `x = x+1;` wird also erst der Wert `x+1` berechnet und dieser Wert dann der Variablen `x` zugeordnet (die dann einen um `1` höheren Wert hat als zuvor). Der Operator für die Gleichheit ist übrigens `==`, wie wir gleich sehen werden.
+
 ## Logische Operatoren
 
 Die arithmetischen Operatoren werden auf Operanden angewendet, die von einem ganzzahligen Datentyp oder von einem Gleitkomma-Datentyp sind. Jetzt lernen wir Operatoren kennen, die auf Operanden vom Typ `boolean` angewendet werden.
@@ -315,6 +318,7 @@ Ein *Literal* ist ein konstanter Wert im Java-Quellcode. Literale sind z.B.
 - ein Character (z.B. `'a'` oder `'A'`)
 
 Wir werden später noch andere Literale kennenlernen:
+
 - Zeichenketten (Datentyp `String`), z.B. `"Hallo FIW!"`
 - die leere Referenz `null`
 
@@ -340,6 +344,21 @@ Ausdrücke sind
 - Literale, die mit (passenden) Operatoren verknüpft sind
 - Ausdrücke, die mit passenden Operatoren verknüpft sind
 
+### Ausdrücke mit Operatoren
+
+Verbinden wir Literale mit Operatoren, entstehen dadurch Ausdrücke. Ausdrücke können wiederum mithilfe von Operatoren mit weiteren Literalen oder auch mit weiteren Ausdrücken verbunden werden. Beachten Sie, dass Ausdrücke
+
+- immer einen Wert haben,
+- der Wert ermittelt wird, indem der Ausdruck *aufgelöst* wird, d.h. die Operatoren angewendet werden. Dies erfolgt in folgender Reihenfolge:
+	- wenn runde Klammern um einen Ausdruck gesetzt sind, wird zunächst der geklammerte Ausdruck aufgerufen, 
+	- unäre (also einelementige) Operatoren binden stärker als binäre (also zweielementige) Operatoren, d.h. es werden zunächst die einelementigen Operatoren angewendet,
+	- bei arithmetischen Operatoren gilt "Punkt vor Strich-Rechnung",
+	- bei logischen Operatoren gilt folgende Reihenfolge (stärkere Bindung von links nach rechts) `==`, `!=` -> `&` --> `^` --> `|` --> `&&` --> `||` (lernen Sie das aber keinesfalls auswendig und verlassen sich dann auf Ihr Gedächtnis, sondern verwenden Sie Klammern!)
+	- der Zuweisungsoperator (`=`) sowie `+=`, `-=`, `/=`, `*=`, `%=` binden am schwächsten
+	- dann erfolgt die Auflösung von links nach rechts
+
+Achten Sie darauf, dass Ausdrücke einen anderen Typ haben können als die Literale (bzw. Ausdrücke), die man im Ausdruck mithilfe von Operatoren miteinander verbindet, z.B. `3 == 4` ist vom Typ `boolean`, aber `3` und `4` sind jeweils vom Typ `int`.
+
 Beispiele für Ausdrücke sind:
 
 ```java
@@ -357,6 +376,15 @@ true && false 		// Ergebnis (Wert) ist ein boolean
 ??? note "Übung Ausdruck"
 	Angenommen, `a`, `b` und `c` seien vom Typ `int`. Was ist an diesem Ausdruck falsch: `a < b < c`? Wie wäre es richtig?
 
+??? note "Übung Durchschnitt berechnen"
+	Angenommen, Sie sollen die Durchschnittsnote von folgenden Noten berechnen: `1`, `1`, `1`, `1`, `2`, `2`, `3`, `4`. Sie überlegen sich folgendes Programm dafür:
+	```java
+	int summe = 1 + 1 + 1 + 1 + 2 + 2 + 3 + 4;
+	int anzahl = 8;
+	System.out.println(summe/anzahl);
+	```
+	Vom Ergebnis sind Sie aber enttäuscht. Welches Ergebnis wird ausgegeben? Welches wäre richtig gewesen? Was ist an Ihrem Programm falsch? Wie geht es besser?
+
 Bei der Verwendung des Zuweisungsoperators gibt es auf der linken Seite immer eine Variable und auf der rechten Seite immer einen Ausdruck. Bevor die Zuweisung erfolgt, wird der Wert des Ausdrucks auf der rechten Seite ausgewertet. Beispiele:
 
 ```java 
@@ -371,5 +399,21 @@ a = !a;					// Wert von a ist false
 a = (a || true);		// Wert von a ist true
 a = !!a && true;		// Wert von a ist true
 ```
+
+!!! info "Beachte"
+	Generell gilt bei der Zuweisung **immer**, dass der Ausdruck auf der rechten Seite erst vollständig ausgerechnet wird und der berechnete Wert dann der Variablen auf der linken Seite zugewiesen wird. "Leider" macht der Postfix-Operator dabei eine **Ausnahme**. Bei diesem Operator erfolgt erst die Zuweisung und dann die Berechnung:
+	```java
+	int x = 3;		// x hat den Wert 3
+	int y = x++;	// y hat den Wert 3 und x den Wert 4
+	int a = 3;		// a hat den Wert 3
+	int b = a--;	// b hat den Wert 3 und a den Wert 2
+	```
+	Das gilt nicht für den Präfix-Operator:
+	```java
+	int x = 3;		// x hat den Wert 3
+	int y = ++x;	// y hat den Wert 4 und x den Wert 4
+	int a = 3;		// a hat den Wert 3
+	int b = --a;	// b hat den Wert 2 und a den Wert 2
+	```
 
 

@@ -179,6 +179,10 @@
       
         
       
+        
+      
+        
+      
     </ul>
   </div>
 </nav>
@@ -348,11 +352,11 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#details-zu-datentypen" class="md-nav__link">
-    Details zu Datentypen
+  <a href="#details-zu-primitiven-datentypen-wertetypen" class="md-nav__link">
+    Details zu primitiven Datentypen (Wertetypen)
   </a>
   
-    <nav class="md-nav" aria-label="Details zu Datentypen">
+    <nav class="md-nav" aria-label="Details zu primitiven Datentypen (Wertetypen)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -394,6 +398,26 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#der-datentyp-string" class="md-nav__link">
+    Der Datentyp String
+  </a>
+  
+    <nav class="md-nav" aria-label="Der Datentyp String">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#doppelte-bedeutung-des-operatorzeichens" class="md-nav__link">
+    Doppelte Bedeutung des Operatorzeichens +
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -409,6 +433,30 @@
   <li class="md-nav__item">
     <a href="../ausdruecke/" title="Ausdrücke" class="md-nav__link">
       Ausdrücke
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../methoden/" title="Methoden" class="md-nav__link">
+      Methoden
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../selektion/" title="Selektion" class="md-nav__link">
+      Selektion
     </a>
   </li>
 
@@ -554,11 +602,11 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#details-zu-datentypen" class="md-nav__link">
-    Details zu Datentypen
+  <a href="#details-zu-primitiven-datentypen-wertetypen" class="md-nav__link">
+    Details zu primitiven Datentypen (Wertetypen)
   </a>
   
-    <nav class="md-nav" aria-label="Details zu Datentypen">
+    <nav class="md-nav" aria-label="Details zu primitiven Datentypen (Wertetypen)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -591,6 +639,26 @@
           <li class="md-nav__item">
   <a href="#gleitkomma-datentypen-double-float" class="md-nav__link">
     Gleitkomma-Datentypen double, float
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#der-datentyp-string" class="md-nav__link">
+    Der Datentyp String
+  </a>
+  
+    <nav class="md-nav" aria-label="Der Datentyp String">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#doppelte-bedeutung-des-operatorzeichens" class="md-nav__link">
+    Doppelte Bedeutung des Operatorzeichens +
   </a>
   
 </li>
@@ -796,7 +864,7 @@
 <li><code>2und2macht4</code></li>
 <li><code>class</code></li>
 <li><code>Hose gewaschen</code></li>
-<li><code>Hurtig</code></li>
+<li><code>Hurtig!</code></li>
 <li><code>null</code></li>
 </ul>
 </details>
@@ -843,7 +911,7 @@ Wir zeigen die Anwendung der kombinierten Deklaration und Initialisierung anhand
 <p class="admonition-title">Beachte</p>
 <p>Wie bereits erwähnt, kann eine Variable genau ein Mal deklariert, ihr aber beliebig oft ein neuer Wert zugewiesen werden. Angenommen, Sie wollen der Variablen <code>ganzeZahl</code> einen neuen Wert zuweisen, dann schreiben Sie die Anweisung <code>ganzeZahl = 6;</code>. Sie dürfen auf keinen Fall <code>int ganzeZahl = 6;</code> schreiben, denn dann würden Sie ja versuchen, die Variable <code>ganzeZahl</code> erneut zu deklarieren. Diese existiert aber bereits. Sie bekommen einen Compilerfehler und können ihr Programm gar nicht erst übersetzen.   </p>
 </div>
-<h2 id="details-zu-datentypen">Details zu Datentypen<a class="headerlink" href="#details-zu-datentypen" title="Permanent link">&para;</a></h2>
+<h2 id="details-zu-primitiven-datentypen-wertetypen">Details zu primitiven Datentypen (Wertetypen)<a class="headerlink" href="#details-zu-primitiven-datentypen-wertetypen" title="Permanent link">&para;</a></h2>
 <p>Wie wir bereits bei der Vorstellung der primitiven Datentypen erwähnt haben, ist für jeden Datentyp eine gewisse Speichergröße reserviert. Hier noch einmal die Größe der primitiven Datentypen:</p>
 <table>
 <thead>
@@ -1286,13 +1354,82 @@ Wir zeigen die Anwendung der kombinierten Deklaration und Initialisierung anhand
 
 </div>
 </div>
-<p>Erstens hat der <code>double</code>-Wert deutlich mehr Nachkommastellen (16 statt 8 bei <code>float</code>) und zweitens ist der Wert korrekter. </p>
+<p>Erstens hat der <code>double</code>-Wert deutlich mehr Nachkommastellen (16 statt 8 bei <code>float</code>) und zweitens ist der Wert somit korrekter. </p>
 <p>Wir merken uns:</p>
 <ul>
 <li>wir sollten <code>float</code> eher nicht verwenden, wenn wir Wert auf Genauigkeit legen,</li>
 <li>wenn wir <code>float</code> verwenden, dann müssen wir beim Initialisieren und bei allen Wertezuweisungen darauf achten, dass wir an die Gleikommazahl ein <code>f</code> anhängen, da es sich ansonsten um eine Gleitkommazahl vom Typ <code>double</code> handelt,</li>
 <li><code>double</code> ist der Standardtyp für Gleikommazahlen und wenn eine Gleitkommazahl im Programmcode vorkommt, dann handelt es sich um eine Zahl vom Typ <code>double</code>. </li>
 </ul>
+<h2 id="der-datentyp-string">Der Datentyp <code>String</code><a class="headerlink" href="#der-datentyp-string" title="Permanent link">&para;</a></h2>
+<p>Der Datentyp <code>String</code> ist kein primitiver Datentyp (kein Wertetyp), sondern ein sogenannter <em>komplexer Datentyp</em> (oder, wie wir sagen <em>Referenztyp</em>). Wir erkennen das bereits daran, dass der Datentyp mit einem Großbuchstaben beginnt. Der Unterschied zwischen Variablen von einem Wertetypen und Variablen von Referenztypen ist der, dass die ersten "nur" Werte speichern (<code>3</code>, <code>5</code>, <code>'a'</code>, <code>123.45</code>, <code>true</code>, ...) und die anderen speichern <em>Objekte</em> (oder richtiger: Referenzen auf Objekte) - darum kümmern wir uns später sehr ausführlich. </p>
+<p>Wir können uns merken (ist aber derzeit noch nicht wichtig), dass ein String ein Objekt und kein einfacher Wert ist, aber derzeit betrachten wir den Datentyp <code>String</code> wie die primitiven Wertetypen auch. </p>
+<p>Ein <code>String</code>-Literal erkennt man an den doppelten Anführungsstrichen. Darin kann ein beliebiger Text (bestehend aus allen möglichen Zeichen, Buchstaben, Sonderzeichen, Umlauten etc.) stehen, z.B. <code>"Hallo FIW!"</code>, <code>"2und2gleich4 und $ % &amp; 0? | \ !"</code>, <code>" ä ü ö ß</code>.</p>
+<p>Die Deklaration und Initialisierung einer <code>String</code>-Variablen sieht also so aus:
+<div class="highlight"><pre><span></span><code><span class="n">String</span> <span class="n">s1</span> <span class="o">=</span> <span class="s">&quot;Informatik&quot;</span><span class="p">;</span>
+</code></pre></div></p>
+<p>Auch für den Datentyp <code>String</code> gibt es einen Operator, der zwei Strings miteinander verbindet. Er wird <em>Konkatenation</em> (<em>String-Konkatenation</em> oder <em>Zeichenkettenverbindungsoperator</em> genannt). Das Operatorsymbol der Konkatenation ist in Java <code>+</code>. </p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span> <span class="n">s1</span> <span class="o">=</span> <span class="s">&quot;Informatik&quot;</span> <span class="o">+</span> <span class="s">&quot; und&quot;</span> <span class="o">+</span> <span class="s">&quot; Wirtschaft&quot;</span><span class="p">;</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">s1</span><span class="p">);</span>
+</code></pre></div>
+
+<p>Die folgenden drei Ausgaben sind alle gleich:
+<div class="highlight"><pre><span></span><code><span class="n">String</span> <span class="n">s1</span> <span class="o">=</span> <span class="s">&quot;Informatik&quot;</span> <span class="o">+</span> <span class="s">&quot; und&quot;</span> <span class="o">+</span> <span class="s">&quot; Wirtschaft&quot;</span><span class="p">;</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">s1</span><span class="p">);</span>             <span class="c1">// Informatik und Wirtschaft</span>
+
+<span class="n">String</span> <span class="n">s2</span> <span class="o">=</span> <span class="s">&quot;Informatik&quot;</span><span class="p">;</span>
+<span class="n">String</span> <span class="n">s3</span> <span class="o">=</span> <span class="s">&quot; und&quot;</span><span class="p">;</span>
+<span class="n">String</span> <span class="n">s4</span> <span class="o">=</span> <span class="s">&quot; Wirtschaft&quot;</span><span class="p">;</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">s2</span> <span class="o">+</span> <span class="n">s3</span> <span class="o">+</span> <span class="n">s4</span><span class="p">);</span>   <span class="c1">// Informatik und Wirtschaft</span>
+
+<span class="n">String</span> <span class="n">s5</span> <span class="o">=</span> <span class="s">&quot;Informatik&quot;</span><span class="p">;</span>
+<span class="n">String</span> <span class="n">s6</span> <span class="o">=</span> <span class="n">s5</span> <span class="o">+</span> <span class="s">&quot; und&quot;</span><span class="p">;</span>
+<span class="n">String</span> <span class="n">s7</span> <span class="o">=</span> <span class="n">s6</span> <span class="o">+</span> <span class="s">&quot; Wirtschaft&quot;</span><span class="p">;</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">s7</span><span class="p">);</span>             <span class="c1">//Informatik und Wirtschaft</span>
+</code></pre></div></p>
+<h3 id="doppelte-bedeutung-des-operatorzeichens">Doppelte Bedeutung des Operatorzeichens <code>+</code><a class="headerlink" href="#doppelte-bedeutung-des-operatorzeichens" title="Permanent link">&para;</a></h3>
+<p>Das <code>+</code> wird sowohl als arithmetischer Operator für numerische Datentypen als auch als Konkatenation für Strings verwendet. In den obigen Beispielen kommen wir damit nicht durcheinander, da völlig klar ist, dass es sich dabei um die Konkatenation handelt. Es gibt aber Beispiele, bei denen in einem Ausdruck beide Bedeutungen vorkommen. Diese diskutieren wir jetzt. Zunächst schauen wir uns noch eine Typische Verendung der Konkatenation an:</p>
+<div class="tabbed-set" data-tabs="5:1"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><label for="__tabbed_5_1">typisches Beispiel für die Konkatenation</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kt">int</span> <span class="n">summand1</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">summand2</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">summe</span> <span class="o">=</span> <span class="n">summand1</span> <span class="o">+</span> <span class="n">summand2</span><span class="p">;</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">summand1</span> <span class="o">+</span> <span class="s">&quot; + &quot;</span> <span class="o">+</span> <span class="n">summand2</span> <span class="o">+</span> <span class="s">&quot; = &quot;</span> <span class="o">+</span> <span class="n">summe</span><span class="p">);</span>    <span class="c1">// 3 + 4 = 7</span>
+</code></pre></div>
+</td></tr></table>
+
+</div>
+</div>
+<p>Die Ausgabe bei dem obigen Beispiel ist <code>3 + 4 = 7</code>. Schauen wir uns das Beispiel genauer an:</p>
+<ul>
+<li>In Zeile <code>3</code> wird das <code>+</code> eindeutig als arithmetischer Operator verwendet, denn es steht zwischen zwei numerischen Werten (<code>summand1</code> und <code>summand2</code> sind jeweils vom Typ <code>int</code>)</li>
+<li>In Zeile <code>4</code> kommt <code>+</code> mehrmals vor. Der Ausdruck in den runden Klammern von <code>println()</code> wird von links nach rechts aufgelöst:<ul>
+<li>Das Literal <code>" + "</code> ist ein String. Hier ist <code>+</code> gar kein Operator, sondern nur ein Zeichen.</li>
+<li>Das <code>+</code> in <code>summand1 + " + "</code> ist die Konkatenation. Das liegt daran, dass einer der beiden Operanden, die das <code>+</code> verbindet, vom Typ <code>String</code> ist. Intern wird der Wert von <code>summand1</code> ( die <code>3</code>) zu einem String und dieser wird mit <code>" + "</code> verbunden. Es entsteht ein String <code>"3 + "</code>.  </li>
+<li>Das bedeutet, dass das nächste <code>+</code> in dem Ausdruck <code>"3 + " + summand2</code> enthalten ist und auch hier die Bedeutung der Konkatenation hat, denn einer der beiden Operanden (der erste) ist vom Typ <code>String</code>. Intern wird der Wert von <code>summand2</code> ( die <code>4</code>) zu einem String und dieser wird mit <code>"3 + "</code> verbunden. Es entsteht ein String <code>"3 + 4"</code>. </li>
+<li>Das bedeutet, dass das nächste <code>+</code> in dem Ausdruck <code>"3 + 4" + " = "</code> enthalten ist und auch hier die Bedeutung der Konkatenation hat, denn beide Operanden (der erste und der zweite) sind vom Typ <code>String</code>. Es entsteht der String <code>"3 + 4 = "</code>.   </li>
+<li>Das letzte <code>+</code> steht also in dem Ausdruck <code>"3 + 4 = " + summe</code>. Auch hier handelt es sich wieder um die Konkatenation, da einer der beiden Operanden (der erste) vom Typ <code>String</code> ist. Intern wird der Wert von <code>summe</code> ( die <code>7</code>) zu einem String und dieser wird mit <code>"3 + 4 = "</code> verbunden. Es entsteht ein String <code>"3 + 4 = 7"</code>. Dieser String wird ausgegegeben. </li>
+</ul>
+</li>
+</ul>
+<details class="note"><summary>1. Übung Doppelte Bedeutung von <code>+</code></summary><p>Angenommen, in dem obigen Beispiel wollen Sie die Summe der beiden Summanden nicht erst in einer Variablen zwischenspeichern, sondern gleich ausgeben. Sie schreiben deshalb folgendes Programm:
+<div class="highlight"><pre><span></span><code><span class="kt">int</span> <span class="n">summand1</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">summand2</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">summand1</span> <span class="o">+</span> <span class="s">&quot; + &quot;</span> <span class="o">+</span> <span class="n">summand2</span> <span class="o">+</span> <span class="s">&quot; = &quot;</span> <span class="o">+</span> <span class="n">summand1</span> <span class="o">+</span> <span class="n">summand2</span><span class="p">);</span>  
+</code></pre></div>
+Sie erhalten jedoch nicht die gewünschte Ausgabe. Warum nicht? Wie können Sie doch die Summe ausgeben, ohne diese zwischenspeichern zu müssen?</p>
+</details>
+<details class="note"><summary>2. Übung Doppelte Bedeutung von <code>+</code></summary><p>Wie sind jeweils die Ausgaben und warum?
+<div class="highlight"><pre><span></span><code><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;3&quot;</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">+</span> <span class="s">&quot;3 + 5&quot;</span><span class="p">);</span>  
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">+</span> <span class="s">&quot;3 + 5&quot;</span><span class="p">);</span>    
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="mi">3</span> <span class="o">+</span> <span class="s">&quot;5&quot;</span> <span class="o">+</span> <span class="s">&quot;3 + 5&quot;</span><span class="p">);</span>  
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;3 &quot;</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">5</span><span class="p">);</span>   
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">5</span><span class="p">);</span>  
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">+</span> <span class="s">&quot;5&quot;</span><span class="p">);</span>    
+</code></pre></div></p>
+</details>
 <div class="admonition success">
 <p class="admonition-title">Success</p>
 <p>Wir können nun Variablen deklarieren und initialisieren. Wir kennen alle acht primitiven Datentypen. Wir nennen diese Datentypen <em>Wertetypen</em>. Wir wissen, dass eine ganze Zahl im Java-Programm vom Typ <code>int</code> ist und eine Gleikommazahl vom Typ <code>double</code>. Wir kennen die interne Darstellung von ganzen Zahlen und wir wissen über die Kodierung von Zeichen Bescheid. Der datentyp <code>char</code> ist ein ganzzahliger Typ, obwohl er für das Speichern von Zeichen zuständig ist. Dies liegt an der Kodierung der Zeichen als ganze Zahlen. Der Wertzuweisungsoperator ist <code>=</code>. Wenn einer Variablen ein Wert zugewiesen werden soll, dann muss die Variablen links stehen, der Wertuweisungsoperator in der Mitte und rechts der Wert. </p>
