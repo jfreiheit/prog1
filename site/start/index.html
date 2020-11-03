@@ -945,7 +945,21 @@ Hello FIW!
 <span class="cm">*/</span>  
 <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Ausgabe2&quot;</span><span class="p">);</span>     
 </code></pre></div></li>
-<li><em>Java-Doc-Kommentare</em>: <code>javadoc</code> ist ein Programm aus dem <em>Java Development Kit (JDK)</em>. Es wird eingesetzt, um den Code zu dokumentieren. Wir werden <code>javadoc</code> noch ausführlich behandeln. Mit <code>javadoc</code> kommentierte Klassen finden Sie <a href="https://docs.oracle.com/en/java/javase/14/docs/api/index.html"><strong>hier</strong></a>.</li>
+<li><em>Java-Doc-Kommentare</em>: <code>javadoc</code> ist ein Programm aus dem <em>Java Development Kit (JDK)</em>. Es wird eingesetzt, um den Code zu dokumentieren. Wir werden <code>javadoc</code> noch ausführlich behandeln. Mit <code>javadoc</code> kommentierte Klassen finden Sie <a href="https://docs.oracle.com/en/java/javase/14/docs/api/index.html"><strong>hier</strong></a>. Java-Doc-Kommentare beginnen mit <code>/**</code> und enden mit <code>*/</code>. Java-Doc-Kommentare verhalten sich wie Blockkommentare. Sie erstrecken sich über mehrere Zeilen und nach dem <code>*/</code> ist, wie bei Blockkommentaren, wieder "normaler" Quellcode. 
+    <div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">uebungen.uebung0</span><span class="p">;</span>
+<span class="cm">/**</span>
+<span class="cm"> * </span>
+<span class="cm"> * @author jornfreiheit</span>
+<span class="cm"> * </span>
+<span class="cm"> * Das ist die erste Klasse, die wir geschrieben haben.</span>
+<span class="cm"> * Sie erzeugt einfache Ausgaben von Zeichenketten auf</span>
+<span class="cm"> * die Konsole.</span>
+<span class="cm"> *</span>
+<span class="cm"> */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyFirstClass</span> <span class="p">{</span> 
+    <span class="c1">// Hier die Implementierung unserer Klasse - nicht gezeigt</span>
+<span class="p">}</span>
+</code></pre></div></li>
 </ul>
 <h2 id="compilieren-und-ausfuhren">Compilieren und Ausführen<a class="headerlink" href="#compilieren-und-ausfuhren" title="Permanent link">&para;</a></h2>
 <p>Wir haben nun unser erstes einfaches Programm geschrieben - in der Programmiersprache <em>Java</em>. Wie wir in <a href="./tools/#java"><strong>Werkzeuge -&gt; Java</strong></a> bereits bei der Installation von Java erläutert haben, ist Java nicht nur eine Programmiersprache, sondern auch ein Programm, in dem wir Java-Programme ausführen können - die <em>Laufzeitumgebung</em> von Java. Wir werden zunächst erläutern, was im Hintergrund passiert, wenn wir ein selbstgeschriebenes Java-Programm ausführen. </p>

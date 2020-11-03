@@ -219,7 +219,22 @@ In Ihren Quellcode (Ihr Programm) können Sie an allen beliebigen Stellen *Komme
 	*/ 	
 	System.out.println("Ausgabe2"); 	
 	```
-- *Java-Doc-Kommentare*: `javadoc` ist ein Programm aus dem *Java Development Kit (JDK)*. Es wird eingesetzt, um den Code zu dokumentieren. Wir werden `javadoc` noch ausführlich behandeln. Mit `javadoc` kommentierte Klassen finden Sie [**hier**](https://docs.oracle.com/en/java/javase/14/docs/api/index.html).
+- *Java-Doc-Kommentare*: `javadoc` ist ein Programm aus dem *Java Development Kit (JDK)*. Es wird eingesetzt, um den Code zu dokumentieren. Wir werden `javadoc` noch ausführlich behandeln. Mit `javadoc` kommentierte Klassen finden Sie [**hier**](https://docs.oracle.com/en/java/javase/14/docs/api/index.html). Java-Doc-Kommentare beginnen mit `/**` und enden mit `*/`. Java-Doc-Kommentare verhalten sich wie Blockkommentare. Sie erstrecken sich über mehrere Zeilen und nach dem `*/` ist, wie bei Blockkommentaren, wieder "normaler" Quellcode. 
+	```java
+	package uebungen.uebung0;
+	/**
+	 * 
+	 * @author jornfreiheit
+	 * 
+	 * Das ist die erste Klasse, die wir geschrieben haben.
+	 * Sie erzeugt einfache Ausgaben von Zeichenketten auf
+	 * die Konsole.
+	 *
+	 */
+	public class MyFirstClass { 
+		// Hier die Implementierung unserer Klasse - nicht gezeigt
+	}
+	```
 
 ## Compilieren und Ausführen
 
