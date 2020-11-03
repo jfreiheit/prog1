@@ -13,6 +13,16 @@ Viel Erfolg! Und viel Spaß!
 
 ## Organisatorisches
 
+Der (Corona-)Plan zur Durchführung der Veranstaltung ist derzeit wie folgt:
+
+- Themen werden ausführlich in diesem Skript beschrieben und anhand von Videos verdeutlicht
+- das Skript und die Videos werden (spätestens) freitags hochgeladen (gilt dann für die gesamte Woche - also Freitag + Dienstag)
+- das heißt, "Vorlesungen" finden asynchron statt (im Selbststudium)
+- zusammen mit dem Skript und den Videos werden sowohl die Übung als auch die Aufgabe hochgeladen
+- die Übung (und die vergangene Aufgabe) werden dienstags (12.15 Uhr) und mittwochs (9:45 Uhr) besprochen (Sie können frei wählen, welche der beiden Übungen Sie wählen)
+- bei Bedarf können wir auch gerne eine Synchron-Video-Vorlesung einschieben, um Fragen zu erklären 
+- sollten Sie Wünsche haben, diesen Plan zu ändern, kommen Sie gerne auf mich zu
+
 Zur erfolgreichen Durchführung der Veranstaltung müssen die **Aufgaben** lösen und zu den jeweiligen Fristen auf Moodle hochladen. Wenn Sie alle Aufgaben fristgerecht hochgeladen haben, dürfen Sie an der Klausur teilnehmen. Es werden insgesamt wahrscheinlich 9 Aufgaben sein, die Sie selbständig lösen und hochladen müssen. Sie können die Aufgaben auch zu zweit lösen. Laden Sie dann aber bitte beide jeweils die Lösung hoch. Am Ende des Semesters schreiben wir eine **Klausur** (am Rechner). Diese Klausur wird bewertet und entspricht der Note für "Programmieren 1". 
 
 Unter [**Aufgaben**](./aufgaben/#aufgaben) sind die Aufgaben beschrieben, die Sie in jeder Woche ausführen sollen. Damit Sie dies erfolgreich erledigen können, ist jeweils angegeben, welche Themen Sie dafür durcharbeiten müssen. Das Durcharbeiten der jeweiligen Themen entspricht jeweils einer Vorlesung. Diese wird also selbständig durchgeführt. 
