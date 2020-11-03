@@ -59,5 +59,31 @@ Hier sind die Themen in chronologischer Folge aufgeführt, wie wir sie auch in d
 
 ??? question "Woche 1 - Einführung und Organisatorisches"
 	- siehe [**Übung 0**](./uebungen/#ubungsblatter-wochenweise)
-	- Zoom-Meeting
+	- Zoom-Meeting (sorry, leider zu spät auf Aufnahme gedrückt - vergessen, aber es steht alles hier oben)
+	<iframe src="https://mediathek.htw-berlin.de/media/embed?key=827545f0878825447e5c57c4631704fd&width=720&height=425&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="425" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>
+	- ??? "MyFirstClass.java"
+		  ```java
+			package uebungen.uebung0;
+			/**
+			 * 
+			 * @author jornfreiheit
+			 *
+			 */
+			public class MyFirstClass {
+
+				public static void main(String[] args) {
+					System.out.println("Hallo FIW!");
+					System.out.println();	// das ist eine Leerzeile
+					System.out.println("Wir programmieren!!!");
+					System.out.println("Hurra!!!");
+					/*
+					 * 
+					 * das ist ein Block-Kommentar
+					 * kann über mehrere Zeilen gehen
+					 */
+				}
+			}
+
+		  ```
+
 

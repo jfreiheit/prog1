@@ -3,8 +3,8 @@
 ## Übungsblätter (wochenweise)
 
 ??? note "Übung 0"
-	1. Installieren Sie sich - falls noch nicht geschehen - eine Java-Entwicklungsumgebung (siehe [**Java**](./tools/#java)).
-	2. Installieren Sie sich die IDE Ihrer Wahl (siehe [**IDE**](./tools/#ide)). In den Vorlesungen und Übungen (Videos) verwende ich [**Eclipse**](./tools/#eclipse) und beschreibe die Schritte auch für Eclipse.
+	1. Installieren Sie sich - falls noch nicht geschehen - eine Java-Entwicklungsumgebung (siehe [**Java**](../tools/#java)).
+	2. Installieren Sie sich die IDE Ihrer Wahl (siehe [**IDE**](../tools/#ide)). In den Vorlesungen und Übungen (Videos) verwende ich [**Eclipse**](../tools/#eclipse) und beschreibe die Schritte auch für Eclipse.
 	3. Starten Sie Eclipse durch Doppelklick auf das Programmsymbol.
 	4. Erstellen Sie einen *Workspace* (Arbeitsbereich) in einem gewünschten Ordner (z. B.
 	Programmieren) im Dateisystem. Achten Sie darauf, dass Sie Schreibrechte in diesem Ordner besitzen.

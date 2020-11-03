@@ -1,10 +1,10 @@
 # Selektion
 
-In [**Programmablaufstrukturen**](./start/#programmablaufstrukturen) haben wir uns die drei Kontrollstrukturen angeschaut, die in Programmen vorkommen können:
+In [**Programmablaufstrukturen**](../start/#programmablaufstrukturen) haben wir uns die drei Kontrollstrukturen angeschaut, die in Programmen vorkommen können:
 
-- die [**Sequenz**](./start/#die-sequenz),
-- die [**Iteration**](./start/#die-iteration) und
-- die [**Selektion**](./start/#die-selektion). 
+- die [**Sequenz**](../start/#die-sequenz),
+- die [**Iteration**](../start/#die-iteration) und
+- die [**Selektion**](../start/#die-selektion). 
 
 Wir betrachten nun die Selektion genauer und schauen uns an, wie wir sie in Java umsetzen. 
 
@@ -34,7 +34,7 @@ else
 
 Das heißt, es wird zunächst eine Bedingung (ein Ausdruck vom Typ `boolean`) geprüft. Ist der Wert dieser Bedingung `true`, dann wird der erste Anweisungsblock ausgeführt. Ist der Wert der Bedingung jedoch `false`, dann wird der zweite Anweisungsblock (der nach dem `else`) ausgeführt. Es wird also genau einer der beiden Anweisungsblöcke ausgeführt - entweder der eine oder der andere (je nach Wert der Bedingung). 
 
-Noch ein Beispiel aus dem [**euklidischen Algorithmus**](./start/#beispiel-euklidischer-algorithmus):
+Noch ein Beispiel aus dem [**euklidischen Algorithmus**](../start/#beispiel-euklidischer-algorithmus):
 
 ```java
 if(a > b)
