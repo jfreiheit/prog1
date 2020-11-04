@@ -507,7 +507,7 @@ Auch für dieses Beispiel war erneut stets eindeutig, welche Anweisung als näch
 Interessanterweise gibt es nur *drei* verschiedene Ablaufstrukturen in Programmen bzw. Algorithmen. Alle drei haben wir bereits verwendet. Mit Ablaufstrukturen meinen wir die Abarbeitungsreihenfolge von Anweisungen. Man sagt auch *Kontrollfluss* dazu. Die drei Ablaufstrukturen, die es gibt, sind:
 
 - die *Sequenz*: die Anweisungen werden in sequenzieller Abfolge, d.h. hintereinander ausgeführt
-- die *Iteration*: die Ablaäufe werden wiederholt ausgeführt, also in einer Schleife
+- die *Iteration*: die Abläufe werden wiederholt ausgeführt, also in einer Schleife
 - die *Selektion*: die Abläufe werden *selektiv*, d.h. unter einer bestimmten Bedingung ausgeführt. Man nennt diese Struktur auch *Verzweigung*  oder *bedingte Alternative*
 
 Wir schauen uns alle drei Kontrollstrukturen einmal genauer an.

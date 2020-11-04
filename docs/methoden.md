@@ -7,7 +7,7 @@ Bis jetzt haben wir unseren Programmcode stets in die `main()`-Methode geschrieb
 
 Die ursprüngliche Formulierung des SRP stammt von [**Robert C. Martin**](http://blog.cleancoder.com/), der es als ein Prinzip der Objektorientierung einführte und es ein wenig anders meinte, als wir es hier verwenden. Dazu kommen wir, wenn wir uns mit Objektorientierung beschäftigen. Wir können uns aber als wesentliche Prinzipien schonmal merken, dass
 
-- eine Variable genau eine Bedeutung haben soll und niemals für verschiedene Bedeutungen benutzt werden sollte zwei Bedeutungen `==` zwei Variablen) und
+- eine Variable genau eine Bedeutung haben soll und niemals für verschiedene Bedeutungen benutzt werden sollte (zwei Bedeutungen `==` zwei Variablen) und
 - eine *Methode* genau eine Sache erledigen sollte.
 
 Zunächst schauen wir uns an, was eine *Methode* überhaupt ist und wie wir sie definieren und verwenden. Angenommen, wir haben ein Programm in der folgenden Form:
@@ -79,7 +79,7 @@ In der `main()`-Methode wird unsere Methode nun aufgerufen. Wichtig ist es zu be
 Hier nochmal die gesamte Klasse `Methods` mit den Aufrufen der `add()`-Methode in `main()`:
 
 ```java linenums="1"
-public class Uebung0
+public class Methods
 {
 	public static void add(int summand1, int summand2)
 	{
@@ -179,11 +179,35 @@ public static boolean areEqual(int nr1, int nr2)
 	return (nr1 == nr2);
 }
 
-public static boolean isDevider(int nr1, int nr2)
+public static boolean isDivider(int nr1, int nr2)
 {
 	return (nr1%nr2 == 0);
 }
 ```
+
+Sie können auch Methoden in Methoden aufrufen. Nehmen wir die beiden Methoden `areEqual(int, int)` und `isDivider(int, int)` und angenommen, wir wollen für 2 `int`-Zahlen prüfen, ob die eine Teiler der anderen ist, aber beide sollen nicht gleich sein, dann können wir folgende Methode schreiben:
+
+```java
+public static boolean isDividerButNotEqual(int nr1, int nr2)
+{
+	return (isDivider(nr1, nr2) && !areEqual(nr1, nr2));
+}
+``` 
+
+Das schauen wir uns einmal genauer an:
+
+- wir definieren wieder eine Methode wie gehabt: 
+	- wir vergeben einen Namen (`isDividerButNotEqual`) und 
+	- wir legen fest, dass bei Aufruf der Methode zwei `int`-Werte übergeben werden müssen (`(int nr1, int nr2)`).
+	- als Rückgabetyp definieren wir `boolean`, denn wir wollen ja prüfen, ob sich die beiden ganzzahlig teilen, aber nicht gleich sind
+- innerhalb der Methode rufen wir die Methode `isDivider(nr1, nr2)` auf und übergeben dabei unsere Werte für `nr1` und `nr2`. Der Aufruf dieser Methode entspricht einem boole`schen Ausdruck, da diese Methode ein `boolean` zurückgibt (`true`, wenn `nr2` Teiler von `nr1` ist und `false` sonst - also, wenn nicht)
+- außerdem rufen wir die Methode `areEqual(nr1, nr2)` auf und übergeben dabei ebenfalls unsere Werte für `nr1` und `nr2`. Der Aufruf dieser Methode entspricht ebenfalls einem boole`schen Ausdruck, da diese Methode ein `boolean` zurückgibt (`true`, wenn `nr1` und `nr2` gleich sind und `false` sonst - also, wenn nicht)
+- wir wollen aber prüfen, ob sie **nicht** gleich sind, also schreiben wir `!areEqual(nr1, nr2)` - also die Negation dieses Ausdrucks
+- wir wollen prüfen, 
+	- ob `isDivider(nr1, nr2)` **UND NICHT** `areEqual(nr1, nr2)`, 
+	- also `isDivider(nr1, nr2)` **UND** `!areEqual(nr1, nr2)`,
+	- also `isDivider(nr1, nr2) && !areEqual(nr1, nr2)`
+- diesen Wert geben wir zurück
 
 ??? note "1. Übung Methoden mit Rückgabe"
 	Schreiben Sie eine Methode `isEven(int number)`, die ein `true` zurückgibt, wenn `number` gerade ist und sonst `false`.

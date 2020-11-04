@@ -45,7 +45,57 @@
 	!!! success
 		Fertig! Ihre Entwicklungsumgebung ist bereit! Wir können loslegen. :thumbsup:
 
-
+??? note "Übung 1"
+	1. Erstellen Sie ein package `uebungen.uebung1`. 
+	2. Erstellen Sie in diesem package eine Klasse `Uebung1` mit `main()`-Methode.
+	3. Deklarieren und initialisieren Sie in der `main()`-Methode jeweils eine Variable mit dem Datentyp `int`, `long`, `char`, `byte`, `short`, `float`, `double`, `boolean` und `String`. Geben Sie alle Werte einzeln durch Aufruf der `println()`-Methode aus. Erzeugen Sie dabei folgende Ausgabe (Werte nur Beispiele):
+	```bash
+	Wert vom Typ int 		: 	123
+	Wert vom Typ long 		: 	456789
+	Wert vom Typ char 		: 	a
+	Wert vom Typ byte 		: 	127
+	Wert vom Typ short 		: 	32767
+	Wert vom Typ float 		: 	4.23
+	Wert vom Typ double		: 	6.98
+	Wert vom Typ boolean	: 	true
+	Wert vom Typ String		: 	Hallo!
+	```
+	4. Setzen Sie den Wert Ihrer `int`-Variablen auf `2147483647`. Geben Sie den Wert auf der Konsole aus, z.B.:	
+	```bash
+	Wert von i 	: 	2147483647
+	```
+	Erhöhen Sie nun den Wert der Variablen um `1` und geben Sie den Wert erneut aus. Was passiert? Warum?
+	5. Wiederholen Sie das gleiche mit einer `long-Variablen.
+	6. Weisen Sie Ihrer `char`-Variablen den Wert `65` zu. Geben Sie den Wert Ihrer `char`-Variablen aus. Was passiert? Warum?
+	7. Schreiben Sie eine Methode 
+	```java
+	public static void printIntDivision(int nr1, int nr2) 
+	{
+	}
+	``` 
+	Diese Methode soll folgende Ausgabe auf die Konsole erzeugen,
+	z.B. für `printIntDivision(7, 4);` die Ausgabe 
+	```bash
+	7 geteilt durch 4 ergibt 1. Es bleibt ein Rest von 3
+	```
+	z.B. für `printIntDivision(17, 4);` die Ausgabe
+	```bash 
+	17 geteilt durch 4 ergibt 4. Es bleibt ein Rest von 1
+	```
+	Schreiben/ändern Sie die Methode so, dass bei einer ganzzahligen Division ohne Rest die Ausgabe in der Form ist (Aufruf z.B. `printIntDivision(16, 4);`): 
+	```bash
+	16 geteilt durch 4 ergibt 4 ohne Rest.
+	```
+	8. Schreiben Sie zwei Methoden 
+	```java
+	public static int getQuotient(int nr1, int nr2) {} // und 
+	public static int getRemainder(int nr1, int nr2) {}
+	``` 
+	Deklarieren Sie in der main()-Methode zwei int-Variablen und weisen Sie diesen Werte zu (z.B. `17` und `4`). Wenden Sie die beiden Methoden so an, dass mit Hilfe der `println()`-Methode folgende Ausgaben erscheinen: 
+	```bash 
+	17/4 = 4
+	17 mod 4 = 1
+	```
 
 ## Weitere Übungsaufgaben (selbständiges Üben)
 

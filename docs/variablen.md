@@ -1,6 +1,6 @@
 # Variablen und Datentypen
 
-Sowohl in dem euklidischen Algorithmus als auch bei der (3n+1)-Vermutung haben wir mit Zahlen gerechnet. Diese haben wir in *Variablen* gespeichert. Wir kennen Variablen bereits aus der Mathematik. Dort "speichern" wir Werte in diesen Variablen. Das gleiche passiert auch beim Programmieren. 
+Sowohl in dem [**euklidischen Algorithmus**](../start/#beispiel-euklidischer-algorithmus) als auch bei der [**(3n+1)-Vermutung**](../start/#beispiel-3n1-vermutung-collatz-problem) haben wir mit Zahlen gerechnet. Diese haben wir in *Variablen* gespeichert. Wir kennen Variablen bereits aus der Mathematik. Dort "speichern" wir Werte in diesen Variablen. Das gleiche passiert auch beim Programmieren. 
 
 Eine Variable kann man sich wie eine Kiste vorstellen, in die genau ein *Wert* passt. Diese Kiste hat einen Namen (den Namen der Variable) und in der Programmierung wird auch noch gesagt, welche Art von Wert dort hineinpasst. Man spricht auch vom *Typ* der Variablen oder noch besser vom *Datentyp*. 
 

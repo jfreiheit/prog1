@@ -510,7 +510,7 @@
 </ul>
 <p>Die ursprüngliche Formulierung des SRP stammt von <a href="http://blog.cleancoder.com/"><strong>Robert C. Martin</strong></a>, der es als ein Prinzip der Objektorientierung einführte und es ein wenig anders meinte, als wir es hier verwenden. Dazu kommen wir, wenn wir uns mit Objektorientierung beschäftigen. Wir können uns aber als wesentliche Prinzipien schonmal merken, dass</p>
 <ul>
-<li>eine Variable genau eine Bedeutung haben soll und niemals für verschiedene Bedeutungen benutzt werden sollte zwei Bedeutungen <code>==</code> zwei Variablen) und</li>
+<li>eine Variable genau eine Bedeutung haben soll und niemals für verschiedene Bedeutungen benutzt werden sollte (zwei Bedeutungen <code>==</code> zwei Variablen) und</li>
 <li>eine <em>Methode</em> genau eine Sache erledigen sollte.</li>
 </ul>
 <p>Zunächst schauen wir uns an, was eine <em>Methode</em> überhaupt ist und wie wir sie definieren und verwenden. Angenommen, wir haben ein Programm in der folgenden Form:</p>
@@ -598,7 +598,7 @@
 12
 13
 14
-15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Uebung0</span>
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Methods</span>
 <span class="p">{</span>
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">summand1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">summand2</span><span class="p">)</span>
     <span class="p">{</span>
@@ -689,12 +689,38 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">nr1</span> <span class="o">==</span> <span class="n">nr2</span><span class="p">);</span>
 <span class="p">}</span>
 
-<span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">isDevider</span><span class="p">(</span><span class="kt">int</span> <span class="n">nr1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">nr2</span><span class="p">)</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">isDivider</span><span class="p">(</span><span class="kt">int</span> <span class="n">nr1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">nr2</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">nr1</span><span class="o">%</span><span class="n">nr2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>
 
+<p>Sie können auch Methoden in Methoden aufrufen. Nehmen wir die beiden Methoden <code>areEqual(int, int)</code> und <code>isDivider(int, int)</code> und angenommen, wir wollen für 2 <code>int</code>-Zahlen prüfen, ob die eine Teiler der anderen ist, aber beide sollen nicht gleich sein, dann können wir folgende Methode schreiben:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">isDividerButNotEqual</span><span class="p">(</span><span class="kt">int</span> <span class="n">nr1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">nr2</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">isDivider</span><span class="p">(</span><span class="n">nr1</span><span class="p">,</span> <span class="n">nr2</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">areEqual</span><span class="p">(</span><span class="n">nr1</span><span class="p">,</span> <span class="n">nr2</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Das schauen wir uns einmal genauer an:</p>
+<ul>
+<li>wir definieren wieder eine Methode wie gehabt: <ul>
+<li>wir vergeben einen Namen (<code>isDividerButNotEqual</code>) und </li>
+<li>wir legen fest, dass bei Aufruf der Methode zwei <code>int</code>-Werte übergeben werden müssen (<code>(int nr1, int nr2)</code>).</li>
+<li>als Rückgabetyp definieren wir <code>boolean</code>, denn wir wollen ja prüfen, ob sich die beiden ganzzahlig teilen, aber nicht gleich sind</li>
+</ul>
+</li>
+<li>innerhalb der Methode rufen wir die Methode <code>isDivider(nr1, nr2)</code> auf und übergeben dabei unsere Werte für <code>nr1</code> und <code>nr2</code>. Der Aufruf dieser Methode entspricht einem boole<code>schen Ausdruck, da diese Methode ein</code>boolean<code>zurückgibt (</code>true<code>, wenn</code>nr2<code>Teiler von</code>nr1<code>ist und</code>false` sonst - also, wenn nicht)</li>
+<li>außerdem rufen wir die Methode <code>areEqual(nr1, nr2)</code> auf und übergeben dabei ebenfalls unsere Werte für <code>nr1</code> und <code>nr2</code>. Der Aufruf dieser Methode entspricht ebenfalls einem boole<code>schen Ausdruck, da diese Methode ein</code>boolean<code>zurückgibt (</code>true<code>, wenn</code>nr1<code>und</code>nr2<code>gleich sind und</code>false` sonst - also, wenn nicht)</li>
+<li>wir wollen aber prüfen, ob sie <strong>nicht</strong> gleich sind, also schreiben wir <code>!areEqual(nr1, nr2)</code> - also die Negation dieses Ausdrucks</li>
+<li>wir wollen prüfen, <ul>
+<li>ob <code>isDivider(nr1, nr2)</code> <strong>UND NICHT</strong> <code>areEqual(nr1, nr2)</code>, </li>
+<li>also <code>isDivider(nr1, nr2)</code> <strong>UND</strong> <code>!areEqual(nr1, nr2)</code>,</li>
+<li>also <code>isDivider(nr1, nr2) &amp;&amp; !areEqual(nr1, nr2)</code></li>
+</ul>
+</li>
+<li>diesen Wert geben wir zurück</li>
+</ul>
 <details class="note"><summary>1. Übung Methoden mit Rückgabe</summary><p>Schreiben Sie eine Methode <code>isEven(int number)</code>, die ein <code>true</code> zurückgibt, wenn <code>number</code> gerade ist und sonst <code>false</code>.</p>
 </details>
 <details class="note"><summary>1. Übung Methoden mit Rückgabe</summary><p>Schreiben Sie eine Methode <code>isOdd(int number)</code>, die ein <code>true</code> zurückgibt, wenn <code>number</code> ungerade ist und sonst <code>false</code>. Dieses Mal verwenden Sie aber die Methode <code>isEven()</code>, um den richtigen Wert zu ermitteln. </p>

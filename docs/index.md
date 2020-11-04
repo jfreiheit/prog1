@@ -57,7 +57,7 @@ Nachfolgend der vorläufige Wochenplan (wird eventuell angepasst). Die Vorlesung
 
 Hier sind die Themen in chronologischer Folge aufgeführt, wie wir sie auch in den Vorlesungen behandeln. Durch interne Links werden Bezüge innerhalb der Themen hergestellt. Sie können die Themen in dieser Folge abarbeiten, können aber auch beliebig hin- und herspringen. Zu jeden Themen gibt es Übungsaufgaben. Diese sind ebenfalls verlinkt. Sollten Sie zu einzelnen Themen das Gefühl haben, dass diese nicht ausführlich genug beschrieben sind, geben Sie mir bitte Bescheid. Ziel ist, dass dieses "Skript" Ihnen die Einführung in das Programmieren vollständig ermöglicht. Das heißt nicht, dass Sie nicht weitere Literatur verwenden sollen. Einen Überblick über geeignete Literatur finden Sie [hier](./tools/#literaturempfehlungen).
 
-??? question "Woche 1 - Einführung und Organisatorisches"
+??? question "03.11.2020 - Einführung und Organisatorisches"
 	- siehe [**Übung 0**](./uebungen/#ubungsblatter-wochenweise)
 	- Zoom-Meeting (sorry, leider zu spät auf Aufnahme gedrückt - vergessen, aber es steht alles hier oben)
 	<iframe src="https://mediathek.htw-berlin.de/media/embed?key=827545f0878825447e5c57c4631704fd&width=720&height=425&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="425" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>
@@ -86,4 +86,313 @@ Hier sind die Themen in chronologischer Folge aufgeführt, wie wir sie auch in d
 
 		  ```
 
+??? question "06.11. + 10.11.2020 - Variablen, Datentypen, Methoden, Selektion"
+	- siehe [**Übung 1**](./uebungen/#ubungsblatter-wochenweise)
+	- Variablen (siehe [**Skript Variablen**](./variablen/#variablen-und-datentypen))
+	<iframe src="https://mediathek.htw-berlin.de/media/embed?key=b3870001ae182f91756188a54e70481b&width=720&height=437&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="437" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>
+	- ??? "Variablen.java"
+		  ```java
+		  	package themen.variablen;
+
+			public class Variablen 
+			{
+
+				public static void main(String[] args) 
+				{
+					System.out.println("Thema heute: Variablen");
+					System.out.println("Im Skript unter http://freiheit.f4.htw-berlin.de/prog1/variablen/");
+					System.out.println();
+					/*
+					 * Erzeugen einer Variable: "Deklarieren der Variable"
+					 * datentyp variablenName;
+					 * 
+					 * Datentypen???
+					 * 
+					 * ganzzahlige Datentypen: int, long, short, byte
+					 */
+					int ganzeZahl;	// Variable ganzeZahl erzeugt (1x)!
+					int nochEineGanzeZahl = 0;	// Deklaration und Wertzuweisung (Initialisierung)
+					
+					long grosseGanzeZahl = 123456789L; 	// int 32 bit , aber long 64 bit
+					short kleinereGanzeZahl = 123; 		// 16 bit
+					byte ganzKleineGanzeZahl = 127;		// 8 bit
+
+					/*
+					 * Datentypen, um Gleitkommazahlen zu speichern
+					 * double, float
+					 */
+					double number1 = 6.789;			// 64 bit
+					float number2 = 5.0f;			// 32 bit
+					
+					/*
+					 * Datentyp, um ein Zeichen (character) zu speichern
+					 * char
+					 */
+					char zeichen = 'a';
+					char zeichen1 = 97;
+					char zeichen2 = '\u00a9'; 
+					
+					/*
+					 * Datentyp, um Wahrheitswerte zu speichern
+					 * boolean
+					 */
+					boolean condition = true;
+					boolean condition1 = false;
+					
+					/*
+					 * Wertzuweisung
+					 * Wertzuweisungsoperator =
+					 * variablenName = wert;
+					 */
+					ganzeZahl = 7;	// Wertzuweisung beliebig oft
+					System.out.println(ganzeZahl);
+					ganzeZahl = -123;
+					System.out.println(ganzeZahl);
+					System.out.println(grosseGanzeZahl);
+					System.out.println(ganzKleineGanzeZahl);
+					System.out.println(number1);
+					System.out.println(number2);
+					System.out.println(zeichen);
+					System.out.println(zeichen1);
+					System.out.println(zeichen2);
+					System.out.println(condition);
+					System.out.println(condition1);	
+					
+					/*
+					 * bis hier her Wertetypen
+					 * jetzt noch ein Datentyp
+					 * String
+					 * (Referenztyp)
+					 * 
+					 */
+					String zeichenkette = "Hallo";
+					System.out.println(zeichenkette);
+					
+
+				}
+
+			}
+		  ```
+	- Ausdrücke und Operatoren (siehe [**Skript Ausdrücke und Operatoren**](./ausdruecke/#operatoren-und-ausdrucke))
+	<iframe src="https://mediathek.htw-berlin.de/media/embed?key=466167de96743471b14a5bebf627f0a4&width=720&height=438&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="438" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>
+	- ??? "Ausdruecke.java"
+		  ```java
+		  	package themen.ausdruecke;
+
+			public class Ausdruecke
+			{
+
+				public static void main(String[] args)
+				{
+					System.out.println("Thema heute: Ausdruecke");
+					System.out.println("Im Skript unter http://freiheit.f4.htw-berlin.de/prog1/ausdruecke/#operatoren-und-ausdrucke");
+					System.out.println();
+
+					int a = 8;
+					int b = 2;
+					int c = 0;
+					c = a + b;
+					System.out.println(c);
+					
+					a = a + b;
+					System.out.println(a);
+					a = a * b;
+					System.out.println(a);
+					a = a / b;
+					System.out.println(a);
+					a = a - b;
+					System.out.println(a);
+					a = 7;
+					a = a / b;				// 7 / 2 --> ganzzahlige Division!
+					System.out.println(a);	// a ist 3
+					a = 7;
+					a = a % b;				// Restwertoperator (modulo)
+					System.out.println(a);
+					
+					double x = 8.2;
+					double y = 2.3;
+					
+					x = x + y;
+					System.out.println(x);
+					x = x * y;
+					System.out.println(x);
+					x = x - y;
+					System.out.println(x);
+					x = 7.0;
+					y = 2.0;
+					x = x / y;				// 7.0 / 2.0 --> Gleitkomma-Division!
+					System.out.println(x);	// a ist 3.5
+					x = 7.0;
+					x = x % y;
+					System.out.println(x);
+					
+					a++;		// a = a + 1;
+					System.out.println(a);
+					++a;		// a = a + 1;
+					System.out.println(a);
+					b = 0;
+					a = 2;
+					b = ++a;
+					System.out.println(b);
+					System.out.println(a);
+					b = a++;
+					System.out.println(b);
+					System.out.println(a);
+					
+					a--;		// a = a - 1;
+					--a;		// a = a - 1;
+					
+					a = 5;
+					a += 4;		// a = a + 4;
+					a *= 3;		// a = a * 3;
+					a /= 4;		// a = a / 4;
+					a -= 3;		// a = a - 3;
+					a %= 2;		// a = a % 2;
+					
+					double d = 5.0;
+					int e = 2;
+					System.out.println(d / e);  	// Gleitkommadivision
+					System.out.println(e / d);  	// Gleitkommadivision
+					
+					System.out.println(7 == 2); 	// Gleichheit  --> Ergebnis ist boolean
+					System.out.println(7 == 7); 	// Gleichheit  --> Ergebnis ist boolean
+					
+					System.out.println(7 != 2); 	// Ungleichheit  --> Ergebnis ist boolean
+					System.out.println(7 != 7); 	// Ungleichheit  --> Ergebnis ist boolean
+					
+					System.out.println(7 > 2); 	// groesser als  --> Ergebnis ist boolean
+					System.out.println(7 > 7); 	// groesser als  --> Ergebnis ist boolean
+					
+					System.out.println(7 < 2); 	// kleiner als  --> Ergebnis ist boolean
+					System.out.println(7 < 7); 	// kleiner als  --> Ergebnis ist boolean
+					
+					System.out.println(7 <= 2); 	// kleiner gleich  --> Ergebnis ist boolean
+					System.out.println(7 <= 7); 	// kleiner gleich  --> Ergebnis ist boolean
+					
+					System.out.println(7 >= 2); 	// groesser gleich  --> Ergebnis ist boolean
+					System.out.println(7 >= 7); 	// groesser gleich  --> Ergebnis ist boolean
+					
+					boolean check = 7 != 2;
+					System.out.println(check);
+					
+					boolean b1 = true;
+					boolean b2 = false;
+					
+					System.out.println(" -------- Negation ---------- ");
+					System.out.println(b1);
+					b1 = !b1;		// Negation
+					b2 = !b2;		// Negation
+					System.out.println(b1);
+					System.out.println(b2);
+					
+					System.out.println(" -------- logisches UND ---------- ");
+					System.out.println(false && true);		// false UND true --> false
+					System.out.println(true && true);		// true UND true --> true
+					System.out.println(true && false);		// true UND false --> false
+					System.out.println(false && false);		// false UND false --> false
+					
+					System.out.println(" -------- logisches ODER ---------- ");
+					System.out.println(false || true);		// false ODER true --> true
+					System.out.println(true || true);		// true ODER true --> true
+					System.out.println(true || false);		// true ODER false --> true
+					System.out.println(false || false);		// false ODER false --> false
+					
+					System.out.println(" -------- logisches EXCLUSIVES ODER ---------- ");
+					System.out.println(false ^ true);		// false EXCL. ODER true --> true
+					System.out.println(true ^ true);		// true EXCL. ODER true --> false
+					System.out.println(true ^ false);		// true EXCL. ODER false --> true
+					System.out.println(false ^ false);		// false EXCL. ODER false --> false
+				
+					System.out.println(" -------- String-Verkettung ---------- ");
+					String s1 = "Hallo ";
+					String s2 = "FIW!";
+					System.out.println(s1 + s2);  	// Verkettung von Strings (Konkatenation) 
+					s1 = s1 + s2;					// "Hallo FIW!"
+					System.out.println(s1);
+					
+					int z1 = 22;
+					int z2 = 11;
+					int result = z1/z2;
+					System.out.println("das Resultat ist : " + result);  // Konkatenation
+					System.out.println(z1 + " / " + z2 + " = " + result);
+					
+					System.out.println(3 + " + " + 4 + " = " + 3 + 4);		// warum?
+					System.out.println(3 + " + " + 4 + " = " + (3 + 4));	// warum?
+				}
+			}
+		  ```
+	- Methoden (siehe [**Skript Methoden**](./methoden/#methoden))
+	<iframe src="https://mediathek.htw-berlin.de/media/embed?key=3b1ddec6d615d0da59747069bde358c2&width=720&height=438&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="438" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>
+	- ??? "Methoden.java"
+		  ```java
+		  	package themen.methoden;
+
+			public class Methoden
+			{
+				
+				public static void add(int summand1, int summand2)
+				{
+					int summe = summand1 + summand2;
+					System.out.println(summand1 + " + " + summand2 + " = " + summe);
+				}
+				
+				public static void divide(int divident, int divisor)
+				{
+					int quotient = divident / divisor;
+					int rest = divident % divisor;
+					System.out.println(divident + " / " + divisor + " = " 
+					+ quotient + " mit dem Rest "  + rest);
+				}
+				
+				public static int computeSum(int summand1, int summand2)
+				{
+					int summe = summand1 + summand2;
+					return summe;
+				}
+				
+				public static boolean greaterThanZero(int number)
+				{
+					return (number > 0);
+				}
+
+				public static void main(String[] args)
+				{
+					System.out.println("Thema heute: Methoden");
+					System.out.println("Im Skript unter http://freiheit.f4.htw-berlin.de/prog1/methoden/#methoden");
+					System.out.println();
+
+					/*
+					int summand1 = 3;
+					int summand2 = 4;
+					int summe = summand1 + summand2;
+					System.out.println(summand1 + " + " + summand2 + " = " + summe);
+					
+					summand1 = 5;
+					summand2 = 9;
+					summe = summand1 + summand2;
+					System.out.println(summand1 + " + " + summand2 + " = " + summe);
+					
+					summand1 = -115;
+					summand2 = 999;
+					summe = summand1 + summand2;
+					System.out.println(summand1 + " + " + summand2 + " = " + summe);	
+					*/
+					
+					add(3, 4);
+					add(5, 9);
+					add(-115, 999);
+					
+					divide(17, 12);
+					divide(12, 4);
+					
+					int sum = computeSum(3, 4);
+					System.out.println(sum);
+					System.out.println(computeSum(5,9));
+					
+					System.out.println(greaterThanZero(-7));
+				}
+
+			}
+		  ```
+	- Selektion (siehe [**Skript Selektion**](./selektion/#selektion))
 
