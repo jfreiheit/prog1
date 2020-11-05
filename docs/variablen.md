@@ -297,6 +297,13 @@ Da die Werte alle einen begrenzten Wertebereich haben, kann es zu einem *Wertebe
 
 Beachten Sie, dass ein solcher Überlauf unbemerkt passiert. Das bedeutet, dass Sie weder einen Fehler noch eine Warnung erhalten. Sie müssen sich also immer gut überlegen, ob ein solcher Überlauf bei Ihren Werten passieren kann. Wenn ja, dann sollten Sie zum nächstgrößeren Datentypen wechseln, also z.B. von `int` nach `long`. 
 
+| Datentyp  |größter Wert |kleinster Wert |
+|-----------|-------------:|---------------:|
+| `byte` | `127` |  `-128` |
+| `short` | `32.767` |  `-32.768` |
+| `int`   | `2.147.483.647` | `-2.147.483.648`| 
+| `long`  | `9.223.372.036.854.775.807` | `-9.223.372.036.854.775.808` | 
+
 ??? note "Übung Zweierkomplement"
 	- Warum ist `1111 1111` als Zweierkomplement im Datentyp `byte` die Dezimalzahl `-1`?
 	- Wie ist die Repräsentation der Zahlen `-99` und `99` als Zweierkomplement im Datentyp `byte`?
@@ -431,13 +438,18 @@ Im obigen Beispiel wird mithilfe von `float` der Bruch `1/3` ausgerechnet. Zwei 
 	System.out.println(doubleNumber);	// 0.3333333333333333
 	```
 
-Erstens hat der `double`-Wert deutlich mehr Nachkommastellen (16 statt 8 bei `float`) und zweitens ist der Wert somit korrekter. 
+Erstens hat der `double`-Wert deutlich mehr Nachkommastellen (16 statt 8 bei `float`) und zweitens ist der Wert somit korrekter. Die Speicherung von Gleikommazahlen erfolgt nach [**IEEE 754 - Standard**](https://standards.ieee.org/standard/754-2019.html). 
 
 Wir merken uns:
 
 - wir sollten `float` eher nicht verwenden, wenn wir Wert auf Genauigkeit legen,
 - wenn wir `float` verwenden, dann müssen wir beim Initialisieren und bei allen Wertezuweisungen darauf achten, dass wir an die Gleikommazahl ein `f` anhängen, da es sich ansonsten um eine Gleitkommazahl vom Typ `double` handelt,
 - `double` ist der Standardtyp für Gleikommazahlen und wenn eine Gleitkommazahl im Programmcode vorkommt, dann handelt es sich um eine Zahl vom Typ `double`. 
+
+| Datentyp  |größter positiver Wert |kleinster positiver Wert |
+|-----------|-------------:|---------------:|
+| `float`   | `~3.4028234663852886E+038` | `~1.4012984643248171E-045`| 
+| `double`  | `~1.7976931348623157E+308` | `~4.9406564584124654E-324` | 
 
 
 ## Der Datentyp `String` 

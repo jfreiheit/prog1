@@ -979,6 +979,37 @@ Wir zeigen die Anwendung der kombinierten Deklaration und Initialisierung anhand
 <p>Da die Werte alle einen begrenzten Wertebereich haben, kann es zu einem <em>Wertebereichsüberlauf</em> kommen. Ein solcher Überlauf ist in der folgenden Abbildung dargestellt. Im Datentyp <code>byte</code> ist <code>127</code> die größte positive Zahl. Die Abbildung verdeutlicht, was passiert, wenn zu dieser größten Zahl eine <code>1</code> hinzuaddiert wird. </p>
 <p><img alt="zweierkomplement" src="../files/15_ueberlauf.png" /></p>
 <p>Beachten Sie, dass ein solcher Überlauf unbemerkt passiert. Das bedeutet, dass Sie weder einen Fehler noch eine Warnung erhalten. Sie müssen sich also immer gut überlegen, ob ein solcher Überlauf bei Ihren Werten passieren kann. Wenn ja, dann sollten Sie zum nächstgrößeren Datentypen wechseln, also z.B. von <code>int</code> nach <code>long</code>. </p>
+<table>
+<thead>
+<tr>
+<th>Datentyp</th>
+<th align="right">größter Wert</th>
+<th align="right">kleinster Wert</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> <code>byte</code></td>
+<td align="right"><code>127</code></td>
+<td align="right">  <code>-128</code></td>
+</tr>
+<tr>
+<td><code>short</code></td>
+<td align="right"><code>32.767</code></td>
+<td align="right">  <code>-32.768</code></td>
+</tr>
+<tr>
+<td> <code>int</code></td>
+<td align="right"> <code>2.147.483.647</code></td>
+<td align="right"> <code>-2.147.483.648</code></td>
+</tr>
+<tr>
+<td> <code>long</code></td>
+<td align="right"> <code>9.223.372.036.854.775.807</code></td>
+<td align="right"> <code>-9.223.372.036.854.775.808</code></td>
+</tr>
+</tbody>
+</table>
 <details class="note"><summary>Übung Zweierkomplement</summary><ul>
 <li>Warum ist <code>1111 1111</code> als Zweierkomplement im Datentyp <code>byte</code> die Dezimalzahl <code>-1</code>?</li>
 <li>Wie ist die Repräsentation der Zahlen <code>-99</code> und <code>99</code> als Zweierkomplement im Datentyp <code>byte</code>?</li>
@@ -1354,13 +1385,34 @@ Wir zeigen die Anwendung der kombinierten Deklaration und Initialisierung anhand
 
 </div>
 </div>
-<p>Erstens hat der <code>double</code>-Wert deutlich mehr Nachkommastellen (16 statt 8 bei <code>float</code>) und zweitens ist der Wert somit korrekter. </p>
+<p>Erstens hat der <code>double</code>-Wert deutlich mehr Nachkommastellen (16 statt 8 bei <code>float</code>) und zweitens ist der Wert somit korrekter. Die Speicherung von Gleikommazahlen erfolgt nach <a href="https://standards.ieee.org/standard/754-2019.html"><strong>IEEE 754 - Standard</strong></a>. </p>
 <p>Wir merken uns:</p>
 <ul>
 <li>wir sollten <code>float</code> eher nicht verwenden, wenn wir Wert auf Genauigkeit legen,</li>
 <li>wenn wir <code>float</code> verwenden, dann müssen wir beim Initialisieren und bei allen Wertezuweisungen darauf achten, dass wir an die Gleikommazahl ein <code>f</code> anhängen, da es sich ansonsten um eine Gleitkommazahl vom Typ <code>double</code> handelt,</li>
 <li><code>double</code> ist der Standardtyp für Gleikommazahlen und wenn eine Gleitkommazahl im Programmcode vorkommt, dann handelt es sich um eine Zahl vom Typ <code>double</code>. </li>
 </ul>
+<table>
+<thead>
+<tr>
+<th>Datentyp</th>
+<th align="right">größter positiver Wert</th>
+<th align="right">kleinster positiver Wert</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> <code>float</code></td>
+<td align="right"> <code>~3.4028234663852886E+038</code></td>
+<td align="right"> <code>~1.4012984643248171E-045</code></td>
+</tr>
+<tr>
+<td> <code>double</code></td>
+<td align="right"> <code>~1.7976931348623157E+308</code></td>
+<td align="right"> <code>~4.9406564584124654E-324</code></td>
+</tr>
+</tbody>
+</table>
 <h2 id="der-datentyp-string">Der Datentyp <code>String</code><a class="headerlink" href="#der-datentyp-string" title="Permanent link">&para;</a></h2>
 <p>Der Datentyp <code>String</code> ist kein primitiver Datentyp (kein Wertetyp), sondern ein sogenannter <em>komplexer Datentyp</em> (oder, wie wir sagen <em>Referenztyp</em>). Wir erkennen das bereits daran, dass der Datentyp mit einem Großbuchstaben beginnt. Der Unterschied zwischen Variablen von einem Wertetypen und Variablen von Referenztypen ist der, dass die ersten "nur" Werte speichern (<code>3</code>, <code>5</code>, <code>'a'</code>, <code>123.45</code>, <code>true</code>, ...) und die anderen speichern <em>Objekte</em> (oder richtiger: Referenzen auf Objekte) - darum kümmern wir uns später sehr ausführlich. </p>
 <p>Wir können uns merken (ist aber derzeit noch nicht wichtig), dass ein String ein Objekt und kein einfacher Wert ist, aber derzeit betrachten wir den Datentyp <code>String</code> wie die primitiven Wertetypen auch. </p>
