@@ -519,17 +519,6 @@ Die Ausgabe bei dem obigen Beispiel ist `3 + 4 = 7`. Schauen wir uns das Beispie
 	```
 	Sie erhalten jedoch nicht die gewünschte Ausgabe. Warum nicht? Wie können Sie doch die Summe ausgeben, ohne diese zwischenspeichern zu müssen?
 
-??? note "2. Übung Doppelte Bedeutung von `+`"
-	Wie sind jeweils die Ausgaben und warum?
-	```java
-	System.out.println("3" + 5 + "3 + 5");	
-	System.out.println(3 + 5 + "3 + 5");	
-	System.out.println(3 + "5" + "3 + 5");	
-	System.out.println("3 " + 5 + 3 + 5);	
-	System.out.println(3 + 5 + 3 + 5);	
-	System.out.println(3 + 5 + 3 + "5");	
-	```
-
 !!! success
     Wir können nun Variablen deklarieren und initialisieren. Wir kennen alle acht primitiven Datentypen. Wir nennen diese Datentypen *Wertetypen*. Wir wissen, dass eine ganze Zahl im Java-Programm vom Typ `int` ist und eine Gleikommazahl vom Typ `double`. Wir kennen die interne Darstellung von ganzen Zahlen und wir wissen über die Kodierung von Zeichen Bescheid. Der datentyp `char` ist ein ganzzahliger Typ, obwohl er für das Speichern von Zeichen zuständig ist. Dies liegt an der Kodierung der Zeichen als ganze Zahlen. Der Wertzuweisungsoperator ist `=`. Wenn einer Variablen ein Wert zugewiesen werden soll, dann muss die Variablen links stehen, der Wertuweisungsoperator in der Mitte und rechts der Wert. 
 

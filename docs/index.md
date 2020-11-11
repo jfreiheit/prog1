@@ -396,3 +396,167 @@ Hier sind die Themen in chronologischer Folge aufgeführt, wie wir sie auch in d
 		  ```
 	- Selektion (siehe [**Skript Selektion**](./selektion/#selektion))
 
+
+??? question "13.11. + 17.11.2020 - Iteration (Schleifen), Methodenstack, Sichtbarkeit und Lebensdauer von Variablen"
+	- siehe [**Aufgabe 1**](./aufgaben/#aufgaben_1)
+	- siehe [**Übung 2**](./uebungen/#ubungsblatter-wochenweise)
+	- Iteration (siehe Skript [**Iteration**](./iteration/#iteration))
+		<iframe src="https://mediathek.htw-berlin.de/media/embed?key=ac565c0434e3af1699736ec9a632f42c&width=720&height=450&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="450" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>
+	- ??? "Schleifen.java aus dem Video"
+		```java linenums="1"
+		package themen.iteration;
+
+		public class Schleifen
+		{
+			/*
+			 * verschachtelte Schleife
+			 * innere Schleife wird immer vollstaendig ausgefuehrt (j von 0 bis 6)
+			 * erst dann wieder i erhoehen --> dann wieder innere Schleife vollstaendig ausfuehren
+			 */
+			public static void printSchleifeInSchleife()
+			{
+				for(int i=0; i<8; i++)
+				{
+					System.out.println("i : " + i + " ----------");
+					for(int j=0; j<7; j++)
+					{
+						System.out.println("j : " + j);
+					}
+				}
+			}
+
+			/* 
+			 * width gibt Anzahl der Sterne an, die wir in einer Zeile ausgeben
+			 * height gibt an, wieviele Zeilen wir ausgeben
+			 */
+			public static void printRectangle(int width, int height)
+			{
+				for(int row=0; row<height; row++)
+				{
+					for(int stars=0; stars < width; stars++)
+					{
+						System.out.print("*");
+					}
+					System.out.println();
+				}
+			}
+			
+			/*
+			 * es wird eine Folge von Zahlen berechnet
+			 * die Folge stoppt, wenn die Zahl den Wert 1 hat
+			 * ist die Zahl gerade, wird der Nachfolger berechnet, 
+			 * indem die Zahl durch 2 geteilt wird
+			 * ist die Zahl ungerade, wird der Nachfolger berechnet,
+			 * indem die Zahl mal 3 multipliziert und dann 1 addiert wird
+			 * Abbruch bei zahl==1, aber gar nicht sicher, ob das fuer
+			 * jeden Startwert erreicht wird
+			 */
+			public static void collatzFolge(int start)
+			{
+				int zahl = start;
+				
+				while(zahl!=1)
+				{
+					System.out.print(zahl + " ");
+					if(zahl%2==0)
+					{
+						zahl = zahl/2;
+					}
+					else
+					{
+						zahl = 3*zahl + 1;
+					}
+				}
+				System.out.println("Ende - Zahl ist " + zahl);
+			}
+
+			/*
+			 * Programmethode
+			 */
+			public static void main(String[] args)
+			{
+				System.out.println("Thema heute : Iterationen (Schleifen) ------------------------");
+				System.out.println("Skript      : http://freiheit.f4.htw-berlin.de/prog1/iteration");
+
+				/*
+				 * Sequenz
+				 */
+				System.out.println("Das");
+				System.out.println("ist ");
+				System.out.println("eine Sequenz ");
+
+				/*
+				 * Selektion
+				 */
+				int i = -1;
+				if(i==0)
+				{
+					System.out.println("Der Wert der Variable i ist 0");
+				}
+				else
+				{
+					System.out.println("Der Wert der Variable i ist ungleich 0");
+				}
+
+				/*
+				 * Iteration
+				 * 3 verschiedene Schleifen in Java:
+				 * - for-Schleife
+				 * - while-Schleife
+				 * - do-while-Schleife
+				 * 
+				 * zunaechst: for-Schleife
+				 */
+				for(int lauf = 10; lauf > 0; lauf-=2)	// lauf = lauf - 2;
+				{
+					System.out.println(lauf + ": Diese Anweisung soll wiederholt werden");
+					if(lauf%2==0)
+					{
+						System.out.println("Zahl ist gerade");
+					}
+				}
+				System.out.println("Schleife verlassen - Bedingung false");
+				
+				/*
+				 * verschachtelte Schleife in der Methode 
+				 * printSchleifeInSchleife()
+				 */
+				System.out.println();
+				System.out.println();
+				printSchleifeInSchleife();
+
+				/*
+				 * verschachtelte Schleife in der Methode
+				 * printRectangle(width, height)
+				 * siehe auch Skript
+				 */
+				System.out.println();
+				System.out.println();
+				printRectangle(70, 14);
+				
+				/*
+				 * while-Schleife in der Methode
+				 * collatzFolge(start)
+				 */
+				System.out.println();
+				System.out.println();
+				collatzFolge(111);
+				
+				/*
+				 * letzte Schleife, die es in Java gibt
+				 * do-while-Schleife
+				 * 
+				 */
+				System.out.println();
+				System.out.println();
+				int wert = 12;
+				do {
+					wert = wert/3;
+					System.out.println(wert);
+				}while(wert > 0);
+				System.out.println("Ende");	
+			}
+		}
+		```
+	- Methodenstack, Lebensdauer und Sichtbarkeit von Variablen (siehe Skript [**Methodenstack**](./methodenstack/#methodenstack))
+		<iframe src="https://mediathek.htw-berlin.de/media/embed?key=fe8752a5089a5ee1d45bca49b4e25c68&width=720&height=540&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="540" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>

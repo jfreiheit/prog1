@@ -27,6 +27,9 @@ theme:
   favicon: img/favicon.png
   logo: img/fiw.jpg
 
+extra_css:
+  - extra.css
+
 
 # Extensions
 markdown_extensions:
@@ -64,6 +67,8 @@ nav:
     - Ausdrücke: ausdruecke.md
     - Methoden: methoden.md
     - Selektion: selektion.md
+    - Iteration: iteration.md
+    - Methodenstack: methodenstack.md
     - Übungen: uebungen.md
     - Aufgaben: aufgaben.md
     - Werkzeuge: tools.md
