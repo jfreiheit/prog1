@@ -41,11 +41,11 @@ Nachfolgend der vorläufige Wochenplan (wird eventuell angepasst). Die Vorlesung
 | 1. | 02.-06.11.2020 | Einführung und Organisatorisches, erstes Programm | -  | - | 
 | 2. | 09.-13.11.2020 | Datentypen und Variablen, logische Ausdrücke | Aufgabe 1  | 22.11.2020 | 
 | 3. | 16.-20.11.2020 | Sequenzen, Iterationen und Selektion | Aufgabe 2  | 29.11.2020 | 
-| 4. | 23.-27.11.2020 | Methoden und Parameter, return | Aufgabe 3 | 06.12.2020 | 
-| 5. | 30.-04.12.2020 | Klassen und Objekte | Aufgabe 4 | 13.12.2020 | 
-| 6. | 07.-11.12.2020 | getter, Setter, Konstruktoren, this, private | Aufgabe 5  | 20.12.2020 | 
-| 7. | 14.-18.12.2020 | Klassen- und Objekt-Variablen und -Methoden | Aufgabe 6  | 10.01.2021 | 
-| 8. | 21.-25.12.2020 | Arrays, Algorithmen über Arrays | Aufgabe 7  | 17.01.2021 |
+| 4. | 23.-27.11.2020 | Nützliche Klassen, Einführung Arrays | Aufgabe 3 | 06.12.2020 | 
+| 5. | 30.-04.12.2020 | Arrays, Algorithmen über Arrays | Aufgabe 4 | 13.12.2020 | 
+| 6. | 07.-11.12.2020 | Klassen und Objekte | Aufgabe 5  | 20.12.2020 | 
+| 7. | 14.-18.12.2020 | Getter, Setter, Konstruktoren, this, private | Aufgabe 6  | 10.01.2021 | 
+| 8. | 21.-25.12.2020 | Klassen- und Objekt-Variablen und -Methoden  | Aufgabe 7  | 17.01.2021 |
 | | | | | | | |
 | 9. | 04.-08.01.2021 | Vererbung | Aufgabe 8  | 24.01.2021 |
 | 10. | 11.-15.01.2021 | Polymorphie | Aufgabe 9 | 31.01.2021 |
@@ -560,3 +560,15 @@ Hier sind die Themen in chronologischer Folge aufgeführt, wie wir sie auch in d
 		```
 	- Methodenstack, Lebensdauer und Sichtbarkeit von Variablen (siehe Skript [**Methodenstack**](./methodenstack/#methodenstack))
 		<iframe src="https://mediathek.htw-berlin.de/media/embed?key=fe8752a5089a5ee1d45bca49b4e25c68&width=720&height=540&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="540" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>
+
+
+??? question "20.11. + 24.11.2020 - Scanner, Math, Random, String, Einführung Arrays"
+	- siehe [**Aufgabe 2**](./aufgaben/#aufgaben_1)
+	- siehe [**Übung 3**](./uebungen/#ubungsblatter-wochenweise)
+	- siehe Skript [**Nützliche Klassen - Scanner, Math, Random, String**](./hilfsklassen/#nutzliche-klassen)
+	- Video zu [**Nützliche Klassen - Scanner, Math, Random, String**](./hilfsklassen/#nutzliche-klassen)
+
+	- siehe Skript [**Einführung Arrays**](./arrays/#arrays)
+	- Video zu [**Einführung Arrays**](./arrays/#arrays)
+
+

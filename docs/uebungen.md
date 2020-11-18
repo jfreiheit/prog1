@@ -373,6 +373,234 @@
 		Die Quersumme von 12345678 ist 36.
 		```
 
+??? question "Eine mögliche Lösung für Übung 2"
+	```java 
+	package uebungen.uebung2;
+
+	public class Uebung2
+	{
+
+		public static void printTimesTables(int nr1, int nr2)
+		{
+			for(int faktor1 = 1; faktor1<=nr1; faktor1++)
+			{
+				for(int faktor2 = 1; faktor2<=nr2; faktor2++)
+				{
+					int produkt = faktor1 * faktor2;
+					System.out.println(faktor1 + " * " + faktor2 + " = " + produkt);
+				}
+				System.out.println();
+			}
+		}
+		
+		public static void printTimesMatrix(int nr1, int nr2)
+		{
+			for(int faktor1 = 1; faktor1 <= nr1; faktor1++)
+			{
+				for(int faktor2 = 1; faktor2 <= nr2; faktor2++)
+				{
+					int produkt = faktor1 * faktor2;
+					System.out.print(produkt + " ");
+				}
+				System.out.println();
+			}
+		}
+		
+		public static void printTriangleUp(int height)
+		{
+			for(int row=0; row<height; row++)
+			{
+				//System.out.println("Zeile : " + row + " Sterne : " + (height-row));
+				for(int stars=row; stars < height; stars++)
+				{
+					System.out.print("*");
+				}
+				/*
+				System.out.print(" ");
+				for(int stars=0; stars<=row; stars++)
+				{
+					System.out.print("*");
+				}
+				System.out.print(" ");
+				for(int stars=0; stars<=row; stars++)
+				{
+					System.out.print("*");
+				}
+				*/
+				System.out.println();
+			}
+		}
+		
+		public static void printXYZ()
+		{
+			int product = 36;
+			for(int z = -product; z <= product; z++)
+			{
+				for(int y = -product; y <= z; y++)
+				{
+					for(int x = -product; x <= y; x++)
+					{
+						//if(x * y * z == product && (x <= y) && y <= z)
+						if(x * y * z == product)
+						{
+							System.out.println("z=" + z + " y=" + y + " x=" + x);
+						}
+					}
+				}
+			}
+		}
+		
+		public static void printSeconds(int seconds)
+		{
+			int minute = 60;
+			int hour = 60 * minute;		// 3600
+			int day = 24 * hour;		// 86400
+			
+			int days = seconds / day;
+			int restSeconds = seconds - (days * day);
+			int hours = restSeconds / hour;
+			restSeconds = restSeconds - (hours * hour);
+			int minutes = restSeconds / minute;
+			restSeconds = restSeconds - (minutes * minute);
+			
+			/*
+			System.out.println(seconds + " Sekunden sind " + days + " Tage, " 
+			+ hours + " Stunden, " + minutes + " Minuten, " + restSeconds + " Sekunden.");
+			 */
+			
+			String output = seconds + " Sekunden sind ";
+			if(days==1)
+			{
+				output = output + " 1 Tag, ";
+			}
+			else
+			{
+				if(days > 1)
+				{
+					output = output + days + " Tage, ";
+				}
+			}
+			if(hours==1)
+			{
+				output = output + " 1 Stunde, ";
+			}
+			else
+			{
+				if(hours > 1)
+				{
+					output = output + hours + " Stunden, ";
+				}
+			}
+			if(minutes==1)
+			{
+				output = output + " 1 Minute, ";
+			}
+			else
+			{
+				if(minutes > 1)
+				{
+					output = output + minutes + " Minuten, ";
+				}
+			}
+			if(restSeconds==1)
+			{
+				output = output + " 1 Sekunde.";
+			}
+			else
+			{
+				if(restSeconds > 1)
+				{
+					output = output + restSeconds + " Sekunden.";
+				}
+			}
+			System.out.println(output);
+		}
+		
+		public static int crossSum(int number)
+		{
+			int sum = 0;
+			
+			int rest = number % 10;		// letzte Ziffer
+			sum = sum + rest;
+			int result = number / 10;	// Zahl ohne letzte Ziffer
+			while(result > 0)
+			{
+				rest = result % 10;
+				sum = sum + rest;
+				result = result / 10;
+			}
+			
+			return sum;
+		}
+		
+		public static void main(String[] args)
+		{
+			System.out.println("----- Aufgabe 1 ------");
+			System.out.println();
+			printTimesTables(10, 10);
+			
+			System.out.println();
+			System.out.println("----- Aufgabe 2 ------");
+			System.out.println();
+			printTimesMatrix(10, 10);
+			
+			System.out.println();
+			System.out.println("----- Aufgabe 3 ------");
+			System.out.println();
+			printTriangleUp(7);
+				
+			System.out.println();
+			System.out.println("----- Aufgabe 4 ------");
+			System.out.println();
+			printXYZ();
+			
+			System.out.println();
+			System.out.println("----- Aufgabe 5 ------");
+			System.out.println();
+			printSeconds(3456789);
+			printSeconds(2345678);
+			printSeconds(123456);
+			printSeconds(12345);
+					
+			System.out.println();
+			System.out.println("----- Aufgabe 6 ------");
+			System.out.println();
+			int number = 123456789;
+			int crossSum = crossSum(number);
+			System.out.println("Die Quersumme von " + number + " ist " + crossSum + ".");
+		}
+
+	}
+	```
+
+??? question "Video zu Übung 2"
+	- <iframe src="https://mediathek.htw-berlin.de/media/embed?key=7525446f2c5f5712638e68e0805aa81a&width=720&height=383&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="383" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>
+	
+??? note "Übung 3"
+	
+	1. Erstellen Sie ein package `uebungen.uebung3`. 
+	2. Erstellen Sie in diesem package eine Klasse `Uebung3` mit `main()`-Methode.
+	3. Implementieren Sie folgende Methoden: 
+		- `public static int inputInt()` – in dieser Methode wird über die Konsole eine `int`-Zahl eingelesen. Diese Zahl wird von der Methode zurückgegeben.
+		- `public static boolean isPrime(int number)` – diese Methode prüft, ob die als Parameter übergebene `number` eine Primzahl ist. Die Methode gibt ein `true` zurück, wenn `number` eine Primzahl ist und `false` sonst.
+		- `public static void printPrimeNumbers(int maximum)` – diese Methode gibt alle Primzahlen von 1 bis einschließlich `maximum` wie folgt auf der Konsole aus (Bsp. für `maximum=61`):
+			```bash
+			Zahl : 61
+			.2 3 .5 .7 ...11 .13 ...17 .19 ...23 .....29 .31 .....37 ...41 .43 ...47 .....53 .....59 .61
+			```
+			d.h. es werden die Zahlen, die Primzahlen sind, ausgegeben und für die anderen Zahlen erscheint nur ein Punkt. Verwenden Sie in der Methode `printPrimenumbers(int)` die Methode `isPrime(int)`.
+		- `public static int getSmallestDivider(int number)` – diese Methode gibt den kleinsten Teiler zurück, der `number` ganzzahlig teilt. Ist `number` eine Primzahl, wird `number` zurückgegeben. Für den Fall, dass `number` kleiner als `2` ist, geben Sie ebenfalls `number` zurück.
+		- `public static String createStringOfPrimeFactorization(int number)` – diese Methode gibt einen String in folgender Form zurück (Bsp. für `number=632060`):
+			```bash
+			" 2 * 2 * 5 * 11 * 13 * 13 * 17 = 632060 "
+			```
+			d.h. alle kleinsten Teiler werden mit dem Multiplikationszeichen verbunden und am Ende erscheint `= Wert von number`. 
+		- Testen Sie alle Methoden. Rufen Sie insbesondere `inputInt()`, `printPrimenumbers(int)` und `createStringOfPrimeFactorization(int)` in der `main()`-Methode auf.
+	4. Tipp: Bei der Überprüfung, ob `number` eine Primzahl ist, genügt es, Teiler bis zur Wurzel von `number` zu suchen. Werden bis dahin keine Teiler gefunden, ist `number` eine Primzahl. Sie können sich dazu z.B. eine Variable der Form 
+	`int bound = (int) Math.sqrt(number);` erstellen und müssen dann den Teiler nur bis `bound` suchen (der Typkonvertierungsoperator `(int)` macht aus der `double`-Zahl einen `int` - schneidet die Nachkommastellen ab).
+
+
+
 
 
 
@@ -414,6 +642,22 @@ Hier werden lose und unregelmäßig Übungsaufgaben gesammelt. Am Ende des Semes
 	d) for (int i = 0; i <= 3; i++) { System.out.println(nums[0]); }
 	e) for (int i = nums.length - 1; i >= 0; i--) { System.out.println(nums[i]); }
 	```
+
+??? note "Quadratzahl"
+	Schreiben Sie eine Methode `istQuadratzahl(int zahl)`, die ein `true` zurückgibt, wenn `zahl` eine Quadratzahl ist und ein `false` sonst. Die `Math`-Klasse soll nicht verwendet werden.
+
+??? note "Primzahl"
+	Schreiben Sie eine Methode `printPrimzahlenBisN(int n)`, die alle Primzahlen bis `n` auf die Konsole ausgibt. Schreiben Sie sich dazu eine Hilfsmethode `istPrimzahl(int zahl)`, die ein `true` zurückgibt, wenn `zahl` eine Primzahl ist und ein `false`, wenn nicht.  
+
+??? note "int-Zahl umdrehen"
+	Schreiben Sie eine Methode `int reverseInt(int number)`, die die übergebene `number` umdreht und die umgedrehte `int`-Zahl zurückgibt, also z.B. aus `1234` wird `4321`. Weitere Beispiele: aus `-123` wird `-321` und aus `1200` wird `21`. 
+
+??? note "Zahlen raten"
+	Schreiben Sie folgendes Programm. Mithilfe von `Random` "denkt" sich das Programm eine Zahl zwischen `0` und `100` aus. Sie können über die Konsole dann eine Zahl eingeben. Das Programm sagt Ihnen, ob die "gedachte" Zahl größer oder kleiner als die von Ihnen eingegebene Zahl ist. Sie geben solange eine Zahl ein, bis Sie die "gedachte" Zahl erraten haben. 
+
+??? note "Binärzahl"
+	Schreiben Sie eine Methode, die eine `short`-Zahl in eine Binärzahl umwandelt. Diese Binärzahl speichern Sie als `long`. Z.B. ist `32` binär `100000`, `63` ist `111111`, `48` ist `110000` usw.
+
 
 ### Wrapper-Klassen
 

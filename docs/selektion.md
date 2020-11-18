@@ -357,7 +357,6 @@ switch(monat)
 			 break;
 	case 2:  anzahlTageImMonat = 28;
 }
-}
 ```
 
 Ab Java 12 wurde die `switch()`-Anweisung gründlich überarbeitet. Wir betrachten das so eben gezeigte Beispiel nun in der neuen Schreibweise:
