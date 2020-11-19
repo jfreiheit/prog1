@@ -402,6 +402,7 @@ Hier sind die Themen in chronologischer Folge aufgeführt, wie wir sie auch in d
 	- siehe [**Übung 2**](./uebungen/#ubungsblatter-wochenweise)
 	- Iteration (siehe Skript [**Iteration**](./iteration/#iteration))
 		<iframe src="https://mediathek.htw-berlin.de/media/embed?key=ac565c0434e3af1699736ec9a632f42c&width=720&height=450&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="450" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>
+
 	- ??? "Schleifen.java aus dem Video"
 		```java linenums="1"
 		package themen.iteration;
@@ -558,6 +559,7 @@ Hier sind die Themen in chronologischer Folge aufgeführt, wie wir sie auch in d
 			}
 		}
 		```
+
 	- Methodenstack, Lebensdauer und Sichtbarkeit von Variablen (siehe Skript [**Methodenstack**](./methodenstack/#methodenstack))
 		<iframe src="https://mediathek.htw-berlin.de/media/embed?key=fe8752a5089a5ee1d45bca49b4e25c68&width=720&height=540&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="540" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>
 
@@ -567,8 +569,150 @@ Hier sind die Themen in chronologischer Folge aufgeführt, wie wir sie auch in d
 	- siehe [**Übung 3**](./uebungen/#ubungsblatter-wochenweise)
 	- siehe Skript [**Nützliche Klassen - Scanner, Math, Random, String**](./hilfsklassen/#nutzliche-klassen)
 	- Video zu [**Nützliche Klassen - Scanner, Math, Random, String**](./hilfsklassen/#nutzliche-klassen)
+		<iframe src="https://mediathek.htw-berlin.de/media/embed?key=e3eb6c3150fb47c9503c96b87b5eeba1&width=720&height=450&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="450" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>
+
+	- ??? "Hilfsklassen.java aus dem Video"
+		```java linenums="1"
+		package themen.hilfsklassen;
+
+		import java.util.Random;
+		import java.util.Scanner;
+
+		/**
+		 * 
+		 * @author jornfreiheit
+		 * 
+		 * Wir erstellen eine Tabelle der Form:
+		 *  System.out.println("  a   |   b   |  a + b   |  a - b  |  a * b  |  a / b  |  a % b |  sqrt(a) |  sqrt(b) |                          2^a    |");
+		 *	System.out.println("-------------------------------------------------------------------------------------------------------------------------");
+		 *
+		 * und verwenden dazu einige nützliche Klassen:
+		 * 	Scanner zum Einlesen von Werten von der Konsole
+		 *  Random für das Erzeugen von Zufallszahlen
+		 *  Math für einige mathematische Funktionen 
+		 * 
+		 * und nützliche Methoden für das Formatieren von Ausgaben
+		 * 	String.format()
+		 *  System.out.printf()
+		 *  
+		 *  im Skript: http://freiheit.f4.htw-berlin.de/prog1/hilfsklassen/#nutzliche-klassen
+		 *  
+		 */
+		public class Hilfsklassen
+		{
+			public static int inputIntNumber()
+			{
+				Scanner sc = new Scanner(System.in);
+				System.out.print("Geben Sie eine Zahl ein : ");
+				int zahl = sc.nextInt();
+				return zahl;
+			}
+			
+			public static void createTable(int rows)
+			{
+				System.out.println("  a   |   b   |  a + b   |  a - b  |  a * b  |  a / b  |  a % b |  sqrt(a) |  sqrt(b) |                          2^a    |");
+				System.out.println("-------------------------------------------------------------------------------------------------------------------------");
+				for(int i=0; i<rows; i++)
+				{
+					Random r = new Random();
+					int number1 = r.nextInt(100)+1;
+					int number2 = r.nextInt(100)+1;
+					double sqrtNr1 = Math.sqrt(number1);
+					double sqrtNr2 = Math.sqrt(number2);
+					double pow2Nr1 = Math.pow(2, number1);
+					String output = String.format("%4d  | %4d  |  %5d   | %5d   | %7d |  %5d  | %6d | %8.5f | %8.5f | %31.0f | %n", number1, number2, 
+							(number1+number2), (number1-number2), (number1*number2), (number1/number2), (number1%number2), 
+							sqrtNr1, sqrtNr2, pow2Nr1 );
+					//System.out.printf("%4d  | %4d  | %n", number1, number2);
+					System.out.print(output);
+				}
+			}
+
+			public static void main(String[] args)
+			{
+				int rows = inputIntNumber();
+				System.out.println();
+				createTable(rows);
+
+			}
+
+		}
+
+		```
 
 	- siehe Skript [**Einführung Arrays**](./arrays/#arrays)
 	- Video zu [**Einführung Arrays**](./arrays/#arrays)
+		<iframe src="https://mediathek.htw-berlin.de/media/embed?key=aff03e3e5179437e043198cfa82f9710&width=720&height=450&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="450" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>
+
+	- ??? "MyArrays.java aus dem Video"
+		```java linenums="1"
+		package themen.arrays;
+
+		/**
+		 * 
+		 * @author jornfreiheit
+		 *
+		 * Kurze Einfuehrung in Arrays
+		 * 
+		 * Skript: http://freiheit.f4.htw-berlin.de/prog1/arrays/#arrays
+		 */
+		public class MyArrays
+		{
+
+			public static void main(String[] args)
+			{
+				int number1 = 0;
+				int number2 = 1;
+				int number3 = 4;
+				int number4 = 9;
+				int number5 = 16;
+				
+				int[] numbers = new int[5];		// Laenge 5 --> 5 Elemente
+				numbers[0] = 0;
+				numbers[1] = 1;
+				numbers[2] = 4;
+				numbers[3] = 9;
+				numbers[4] = 16;
+				
+				System.out.println(numbers[0]);
+				System.out.println(numbers[1]);
+				System.out.println(numbers[2]);
+				System.out.println(numbers[3]);
+				System.out.println(numbers[4]);
+				
+				System.out.println();
+				
+				for(int index=0; index<numbers.length; index++)
+				{
+					System.out.println(numbers[index]);
+				}
+				
+				int sum = 0;
+				for(int index=0; index<numbers.length; index++)
+				{
+					sum = sum + numbers[index];
+				}
+				System.out.println("Summe aller Werte im Array ist " + sum);
+				
+				String[] satz = new String[4];
+				satz[0] = "Das";
+				satz[1] = "ist";
+				satz[2] = "ein";
+				satz[3] = "Satz";
+				
+				for(int index=0; index<satz.length-1; index++)
+				{
+					System.out.print(satz[index]+" ");
+				}
+				System.out.print(satz[satz.length-1]+".");
+				
+				int[] numbers1 = {0, 1, 4, 9, 16};					// exakt wie Zeilen 22-27
+				String[] satz1 = {"Das", "ist", "ein", "Satz"};  	// exakt wie Zeilen 49-53
+			}
+
+		}
+		```
+
+
 
 

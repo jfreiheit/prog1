@@ -102,7 +102,7 @@ for(int index=0; index<numbers.length; index++)
 
 ### Ausgabe der Werte
 
-DEn jetzt bereits bekannten Zugriff auf die einzelnen Elemente können wir auch für das Auslesen der Werte eines Arrays verwenden:
+Den jetzt bereits bekannten Zugriff auf die einzelnen Elemente können wir auch für das Auslesen der Werte eines Arrays verwenden:
 
 ```java linenums="1"
 for(int index=0; index<numbers.length; index++)
@@ -111,3 +111,80 @@ for(int index=0; index<numbers.length; index++)
 }
 ```
 
+### Verwenden der Werte 
+
+Wir erläutern ein einfaches Beispiel zur Verwendung der Werte, wir bilden die Summe aller Werte über das Array (wir gehen davon aus, dass das `numbers`-Array so wie oben erzeugt un initialisiert wurde):
+
+```java
+int sum = 0;
+for(int index=0; index<numbers.length; index++)
+{
+	sum = sum + numbers[index];
+}
+System.out.println("Summe aller Elemente : " + sum);
+```
+
+### Mögliche andere Form der Erzeugung und Initialisierung
+
+Das Array kann auch in einer anderen Form erzeugt und initilisiert werden:
+
+```java
+int[] numbers = {0, 1, 4, 9, 16};
+```
+
+Diese Form erzeugt ein `int[]`-Array der Länge `5` mit den Werten 
+
+```java
+numbers[0] = 0;					// erstes Element Wert 0
+numbers[1] = 1;					// zweites Element Wert 1
+numbers[2] = 4;					// drittes Element Wert 4
+numbers[3] = 9;					// viertes Element Wert 9
+numbers[4] = 16;				// fuenftes Element Wert 16
+```
+
+Es handelt sich um eine einfache Form der Erzeugung und Initialisierung in einem Schritt. 
+
+### Weitere Beispiele von Arrays
+
+Wir zeigen einige Beispiele anderer Arrays:
+
+```java linenums="1"
+String[] satz = new String[4];
+satz[0] = "Das";
+satz[1] = "ist";
+satz[2] = "ein";
+satz[3] = "Satz";
+for(int index=0; index<satz.length-1; index++)
+{
+	System.out.print(satz[index] + " ");
+}
+System.out.println(satz[satz.length-1] + ".");
+```
+
+Das Beispiel zeigt die Erzeugung und Initialisierung eines Arrays, in dem alle Elemente vom Typ `String` sind. Nach der Erzeugung und Initialisierung in den Zeilen `1` bis `5` folgt die Ausgabe der Werte des Arrays. Es werden alle Werte ausgegeben und ein Leerzeichen angehängt. Das gilt aber nur für alle Elemente einschließlich des vorletzten (`index<satz.length-1`). Hinter das letzte Element (`satz[satz.length-1]`) folgt kein Leerzeichen, sondern ein Punkt.
+
+Wir hätten das Array auch so erzeugen und initialisieren können: `String[] satz = {"Das", "ist", "ein", "Satz"};`
+
+Ein weiteres Beispiel mit einem `char`-Array:
+
+```java linenums="1"
+char[] alphabet = new char[26];
+for(int index=0; index<26; index++)
+{
+	alphabet[index] = (char) (index+65);
+}
+for(int index=0; index<26; index++)
+{
+	System.out.print(alphabet[index]+" ");
+}
+```
+
+Es wird zunächst ein `char`-Array erzeugt (Zeile `1`) und initialisiert (Zeilen `2` bis `5`). Anschließend wird es ausgelesen Zeilen `6` bis `9`). Es entsteht folgende Ausgabe:
+
+```bash
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z 
+```
+
+!!! Success
+	Wir können uns Arrays erzeugen und initialisieren. Wir können Werte in diesen Arrays ändern und aus den Arrays auslesen. Wir kennen die `length`-Variable von Arrays und können den Index verwenden, um auf die einzelnen Elemente zuzugreifen. 
+	Nächste Woche geht es mit Arrays weiter!
