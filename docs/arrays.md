@@ -188,3 +188,63 @@ A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
 !!! Success
 	Wir können uns Arrays erzeugen und initialisieren. Wir können Werte in diesen Arrays ändern und aus den Arrays auslesen. Wir kennen die `length`-Variable von Arrays und können den Index verwenden, um auf die einzelnen Elemente zuzugreifen. 
 	Nächste Woche geht es mit Arrays weiter!
+
+## Algorithmen über Arrays
+
+Wir werden uns mit verschiedenen Algorithmen beschäftigen, die alle Arrays zur Grundlage haben. Wir beginnen zur Auffrischung mal mit einer kleinen Übung. Wir wollen ein Array erstellen, in dem die [**Fibonacci-Folge**](https://de.wikipedia.org/wiki/Fibonacci-Folge) enthalten ist. Diese geht so, dass das erste Element den Wert `0` hat und das zweite Element den Wert `1` und alle nachfolgenden Elemente als Wert die Summe der Werte ihrer beiden Vorgänger hat, also `0, 1, 1, 2, 3, 5, 8, 13, 21, 34, ...`. 
+
+Ausgangspunkt ist also etwas in der folgenden Art:
+
+```java
+public static void main(String[] args)
+{
+	int length = 20;
+	int[] fibonacci = new int[length];
+	fibonacci[0] = 0;
+	fibonacci[1] = 1;
+}
+```
+
+??? "Übung: befüllen Sie den Rest des fibonacci-Arrays!"
+	```java
+	public static void main(String[] args)
+	{
+		int length = 20;
+		int[] fibonacci = new int[length];
+		fibonacci[0] = 0;
+		fibonacci[1] = 1;
+		for(int index=2; index<fibonacci.length; index++)
+		{
+			fibonacci[index] = fibonacci[index-1] + fibonacci[index-2];
+		}
+	}
+	```
+
+Wir wollen dieses Array nun mehrfach verwenden, um anhand von Beispielen einige Algorithmen über Arrays kennenzulernen. Beachten Sie, dass wir für das `fibonacci`-Array die Länge auf `20` festgesetzt hatten. Dies können wir aber problemlos ändern und deutlich längere `fibonacci`-Arrays erstellen. Alles, was wir dazu tun müssen, ist den Wert von `length` zu ändern. Beachten Sie außerdem, dass `length` eine von uns erzeugte Variable ist, aber `fibonacci.length` eine Variable des Arrays (deren Wert wir nicht ändern, sondern nur auslesen könnnen). 
+
+### Methoden mit Arrays als Parameter
+
+Wir werden uns einige Methoden erstellen, um z.B. ein als Parameter übergebenes Array auszugeben oder einige Berechnungen über die Werte des Arrays durchzuführen. Wir beginnen damit, uns eine Methode zu schreiben, die ein als Parameter übergebenes Array auf die Konsole ausgibt.
+
+#### Ausgabe der Werte auf die Konsole
+
+Zunächst wollen wir alle Werte nur durch Leerzeichen getrennt auf die Konsole ausgeben. Die dazugehörige Methode sieht so aus:
+
+```java linenums="1"
+	public static void printArray(int[] a)
+	{
+		for(int index=0; index<a.length; index++)
+		{
+			System.out.print(a[index] + " ");
+		}
+		System.out.println();
+	}
+``` 
+
+Wir übergeben also ein `int[]`-Array als Parameter und durchlaufen es in einer Schleife vollständig von `index=0` bis `index=a.length-1` und geben alle Werte von `a[index]` auf die Konsole durch Leerzeichen getrennt aus. 
+
+Wenn wir nun in `main()` `printArray(fibonacci);` aufrufen, bekommen wir folgende Ausgabe:
+
+```bash
+0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987 1597 2584 4181 
+```

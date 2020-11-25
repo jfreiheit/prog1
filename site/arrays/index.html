@@ -426,6 +426,39 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#algorithmen-uber-arrays" class="md-nav__link">
+    Algorithmen über Arrays
+  </a>
+  
+    <nav class="md-nav" aria-label="Algorithmen über Arrays">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#methoden-mit-arrays-als-parameter" class="md-nav__link">
+    Methoden mit Arrays als Parameter
+  </a>
+  
+    <nav class="md-nav" aria-label="Methoden mit Arrays als Parameter">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ausgabe-der-werte-auf-die-konsole" class="md-nav__link">
+    Ausgabe der Werte auf die Konsole
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -546,6 +579,39 @@
   <a href="#weitere-beispiele-von-arrays" class="md-nav__link">
     Weitere Beispiele von Arrays
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#algorithmen-uber-arrays" class="md-nav__link">
+    Algorithmen über Arrays
+  </a>
+  
+    <nav class="md-nav" aria-label="Algorithmen über Arrays">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#methoden-mit-arrays-als-parameter" class="md-nav__link">
+    Methoden mit Arrays als Parameter
+  </a>
+  
+    <nav class="md-nav" aria-label="Methoden mit Arrays als Parameter">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ausgabe-der-werte-auf-die-konsole" class="md-nav__link">
+    Ausgabe der Werte auf die Konsole
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -762,6 +828,59 @@
 <p>Wir können uns Arrays erzeugen und initialisieren. Wir können Werte in diesen Arrays ändern und aus den Arrays auslesen. Wir kennen die <code>length</code>-Variable von Arrays und können den Index verwenden, um auf die einzelnen Elemente zuzugreifen. 
 Nächste Woche geht es mit Arrays weiter!</p>
 </div>
+<h2 id="algorithmen-uber-arrays">Algorithmen über Arrays<a class="headerlink" href="#algorithmen-uber-arrays" title="Permanent link">&para;</a></h2>
+<p>Wir werden uns mit verschiedenen Algorithmen beschäftigen, die alle Arrays zur Grundlage haben. Wir beginnen zur Auffrischung mal mit einer kleinen Übung. Wir wollen ein Array erstellen, in dem die <a href="https://de.wikipedia.org/wiki/Fibonacci-Folge"><strong>Fibonacci-Folge</strong></a> enthalten ist. Diese geht so, dass das erste Element den Wert <code>0</code> hat und das zweite Element den Wert <code>1</code> und alle nachfolgenden Elemente als Wert die Summe der Werte ihrer beiden Vorgänger hat, also <code>0, 1, 1, 2, 3, 5, 8, 13, 21, 34, ...</code>. </p>
+<p>Ausgangspunkt ist also etwas in der folgenden Art:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">length</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">fibonacci</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">length</span><span class="o">]</span><span class="p">;</span>
+    <span class="n">fibonacci</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">fibonacci</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<details><summary>Übung: befüllen Sie den Rest des fibonacci-Arrays!</summary><div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">length</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">fibonacci</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">length</span><span class="o">]</span><span class="p">;</span>
+    <span class="n">fibonacci</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">fibonacci</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span> <span class="n">index</span><span class="o">&lt;</span><span class="n">fibonacci</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">index</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">fibonacci</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">=</span> <span class="n">fibonacci</span><span class="o">[</span><span class="n">index</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">+</span> <span class="n">fibonacci</span><span class="o">[</span><span class="n">index</span><span class="o">-</span><span class="mi">2</span><span class="o">]</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+</details>
+<p>Wir wollen dieses Array nun mehrfach verwenden, um anhand von Beispielen einige Algorithmen über Arrays kennenzulernen. Beachten Sie, dass wir für das <code>fibonacci</code>-Array die Länge auf <code>20</code> festgesetzt hatten. Dies können wir aber problemlos ändern und deutlich längere <code>fibonacci</code>-Arrays erstellen. Alles, was wir dazu tun müssen, ist den Wert von <code>length</code> zu ändern. Beachten Sie außerdem, dass <code>length</code> eine von uns erzeugte Variable ist, aber <code>fibonacci.length</code> eine Variable des Arrays (deren Wert wir nicht ändern, sondern nur auslesen könnnen). </p>
+<h3 id="methoden-mit-arrays-als-parameter">Methoden mit Arrays als Parameter<a class="headerlink" href="#methoden-mit-arrays-als-parameter" title="Permanent link">&para;</a></h3>
+<p>Wir werden uns einige Methoden erstellen, um z.B. ein als Parameter übergebenes Array auszugeben oder einige Berechnungen über die Werte des Arrays durchzuführen. Wir beginnen damit, uns eine Methode zu schreiben, die ein als Parameter übergebenes Array auf die Konsole ausgibt.</p>
+<h4 id="ausgabe-der-werte-auf-die-konsole">Ausgabe der Werte auf die Konsole<a class="headerlink" href="#ausgabe-der-werte-auf-die-konsole" title="Permanent link">&para;</a></h4>
+<p>Zunächst wollen wir alle Werte nur durch Leerzeichen getrennt auf die Konsole ausgeben. Die dazugehörige Methode sieht so aus:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">printArray</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">a</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">index</span><span class="o">&lt;</span><span class="n">a</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">index</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="n">a</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">+</span> <span class="s">&quot; &quot;</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">();</span>
+    <span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+
+<p>Wir übergeben also ein <code>int[]</code>-Array als Parameter und durchlaufen es in einer Schleife vollständig von <code>index=0</code> bis <code>index=a.length-1</code> und geben alle Werte von <code>a[index]</code> auf die Konsole durch Leerzeichen getrennt aus. </p>
+<p>Wenn wir nun in <code>main()</code> <code>printArray(fibonacci);</code> aufrufen, bekommen wir folgende Ausgabe:</p>
+<div class="highlight"><pre><span></span><code><span class="m">0</span> <span class="m">1</span> <span class="m">1</span> <span class="m">2</span> <span class="m">3</span> <span class="m">5</span> <span class="m">8</span> <span class="m">13</span> <span class="m">21</span> <span class="m">34</span> <span class="m">55</span> <span class="m">89</span> <span class="m">144</span> <span class="m">233</span> <span class="m">377</span> <span class="m">610</span> <span class="m">987</span> <span class="m">1597</span> <span class="m">2584</span> <span class="m">4181</span> 
+</code></pre></div>
                 
               
               

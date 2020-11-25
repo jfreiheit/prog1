@@ -76,6 +76,129 @@ Die Aufgaben laden Sie in [Moodle](https://moodle.htw-berlin.de/course/view.php?
 	- Laden Sie Ihre Lösung bis Sonntag, den **22.11.2020 um 24.00 Uhr** in Moodle hoch
 	- Viel Spaß und viel Erfolg!
 
+
+
+??? question "Eine mögliche Lösung für Aufgabe 1"
+	```java
+	package aufgaben.aufgabe1;
+
+	public class Aufgabe1
+	{
+		public static void printRhombus(int upperHalf, boolean filled)
+		{
+			if(filled)
+			{
+				printRhombusFilled(upperHalf);
+			}
+			else
+			{
+				printRhombusUnfilled(upperHalf);
+			}
+		}
+		
+		/*
+		 * 0: upperHalf   LZ *
+		 * 1: upperHalf-1 LZ *
+		 * 2: upperHalf-2 LZ *
+		 * ...
+		 */
+		public static void printRhombusFilled(int upperHalf)
+		{
+			int height = 2 * upperHalf +1;
+			for(int row=0; row<height; row++)
+			{
+				/*
+				System.out.printf("row : %3d  (height-row) : %3d  (upperHalf - row) : %3d ",
+						row, (height-row), (upperHalf - row));
+						*/
+				if(row<=upperHalf)
+				{
+					for(int spaces=0; spaces<(upperHalf-row); spaces++)
+					{
+						System.out.print(" ");
+					}
+					for(int stars=0; stars<(row*2+1); stars++)
+					{
+						System.out.print("*");
+					}
+					System.out.println();
+				}
+				else // row > upperHalf
+				{
+					for(int spaces=0; spaces<(row-upperHalf); spaces++)
+					{
+						System.out.print(" ");
+					}
+					for(int stars=0; stars<(height-row)*2-1; stars++)
+					{
+						System.out.print("*");
+					}
+					System.out.println();
+				}
+			}
+		}
+		
+		public static void printRhombusUnfilled(int upperHalf)
+		{
+			int height = 2 * upperHalf +1;
+			for(int row=0; row<height; row++)
+			{
+				if(row<=upperHalf)
+				{
+					for(int spaces=0; spaces<(upperHalf-row); spaces++)
+					{
+						System.out.print(" ");
+					}
+					System.out.print("*");
+					for(int spaces=0; spaces<(row-1)*2+1; spaces++)
+					{
+						System.out.print(" ");
+					}
+					if(row==0) 
+					{
+						System.out.println();
+					}
+					else
+					{
+						System.out.println("*");
+					}
+				}
+				else // row > upperHalf
+				{
+					for(int spaces=0; spaces<(row-upperHalf); spaces++)
+					{
+						System.out.print(" ");
+					}
+					System.out.print("*");
+					for(int spaces=0; spaces<(height-row-1)*2-1; spaces++)
+					{
+						System.out.print(" ");
+					}
+					if(row==(height-1))
+					{
+						System.out.println();
+					}
+					else
+					{
+						System.out.println("*");
+					}
+				}
+			}
+		}
+
+		public static void main(String[] args)
+		{
+			printRhombus(6, true);
+			System.out.println();
+			printRhombus(1, false);
+		}
+
+	}
+	```
+
+??? question "Video zu Aufgabe 1 - sorry für die Lüftergeräusche!!! nervig!"
+	- <iframe src="https://mediathek.htw-berlin.de/media/embed?key=8948decb8b03e8fcd294db24b2db4dbd&width=720&height=450&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="450" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>
+
 ??? "Aufgabe 2 - π kodieren"
 	- Die Zahl π ist eine irrationale Zahl, d.h. sie kann nicht als Bruch dargestellt werden. Außerdem ist sie nicht periodisch, d.h. es gibt keine immer wiederkehrende Folge von Ziffern im Nachkommabereich. Die Zahl π hat unendlich viele Nachkommastellen und da sie nicht periodisch ist, kommen alle möglichen Ziffernfolge in π vor. Beispielsweise kommt die Ziffernfolge `123456` allein in den ersten 200 Millionen Nachkommastellen 208 Mal vor.
 
