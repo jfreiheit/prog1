@@ -428,6 +428,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#konstanten" class="md-nav__link">
+    Konstanten
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -723,6 +730,13 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#konstanten" class="md-nav__link">
+    Konstanten
+  </a>
   
 </li>
       
@@ -1535,6 +1549,42 @@ Sie erhalten jedoch nicht die gewünschte Ausgabe. Warum nicht? Wie können Sie 
 <p class="admonition-title">Success</p>
 <p>Wir können nun Variablen deklarieren und initialisieren. Wir kennen alle acht primitiven Datentypen. Wir nennen diese Datentypen <em>Wertetypen</em>. Wir wissen, dass eine ganze Zahl im Java-Programm vom Typ <code>int</code> ist und eine Gleikommazahl vom Typ <code>double</code>. Wir kennen die interne Darstellung von ganzen Zahlen und wir wissen über die Kodierung von Zeichen Bescheid. Der datentyp <code>char</code> ist ein ganzzahliger Typ, obwohl er für das Speichern von Zeichen zuständig ist. Dies liegt an der Kodierung der Zeichen als ganze Zahlen. Der Wertzuweisungsoperator ist <code>=</code>. Wenn einer Variablen ein Wert zugewiesen werden soll, dann muss die Variablen links stehen, der Wertuweisungsoperator in der Mitte und rechts der Wert. </p>
 </div>
+<h2 id="konstanten">Konstanten<a class="headerlink" href="#konstanten" title="Permanent link">&para;</a></h2>
+<p>Wir haben gesagt, dass Variablen beliebig oft einer neuer Wert zugewisen werden kann. Manchmal möchte man aber genau das nicht. Sogenannten <em>Konstanten</em> möchte man genau einmal einen Wert zuweisen und dann soll dieser Wert nicht mehr überschrieben werden können. In Java kann man solche Konstanten mithilfe des Schlüsselwortes <code>final</code> deklarieren:</p>
+<blockquote>
+<p><code>final datentyp KONSTANTE = Wert;</code></p>
+</blockquote>
+<p>Eine Konstante wird zunächst wie eine Variable deklariert, d.h. man vergibt einen Namen für die Variable und weist ihr einen Datentyp zu. Außerdem wird ihr mithilfe des Zuweisungsoperators ein Wert zugewiesen. Um zu verhindern, dass dieser Variablen erneut ein Wert zugewiesen kann, setzt man vor den Datentyp noch das Schlüsselwort <code>final</code>. Damit ist diese Variable schreibgeschützt und es kann ihr nie wieder ein neuer Wert zugewiesen werden. Schauen wir uns ein Beispiel an:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">final</span> <span class="kt">double</span> <span class="n">PI</span> <span class="o">=</span> <span class="mf">3.14159265359</span><span class="p">;</span>
+</code></pre></div>
+
+<p>Es wird eine Konstante <code>PI</code> deklariert und ihr der Wert <code>3.14159265359</code> zugewiesen. Damit wir Konstanten von "normalen" Variablen unterscheiden können, schreiben wir Konstenten immer <strong>groß</strong>. Wenn der Name einer Konstanten aus mehreren Wörtern besteht, verwendet man typischerweise den Unterstrich <code>_</code> zum Verbinden der beiden Wörter, z.B. </p>
+<div class="highlight"><pre><span></span><code><span class="kd">final</span> <span class="kt">int</span> <span class="n">NOT_FOUND</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="kd">final</span> <span class="kt">int</span> <span class="n">MIN_VALUE</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2147483648</span><span class="p">;</span> 
+<span class="kd">final</span> <span class="kt">int</span> <span class="n">MAX_VALUE</span> <span class="o">=</span> <span class="mi">2147483647</span><span class="p">;</span>
+<span class="kd">final</span> <span class="kt">char</span> <span class="n">DEGREE_SYMBOL</span> <span class="o">=</span> <span class="sc">&#39;\u00b0&#39;</span><span class="p">;</span>
+<span class="kd">final</span> <span class="kt">char</span> <span class="n">DEGREE_CELSIUS</span> <span class="o">=</span> <span class="sc">&#39;\u2103&#39;</span><span class="p">;</span>
+<span class="kd">final</span> <span class="kt">char</span> <span class="n">DEGREE_FAHRENHEIT</span> <span class="o">=</span> <span class="sc">&#39;\u2109&#39;</span><span class="p">;</span>
+</code></pre></div>
+
+<p>Ansonsten können Sie Konstanten ganz normal verwenden, aber immer nur lesend, also z.B. </p>
+<div class="highlight"><pre><span></span><code><span class="kt">double</span> <span class="n">area</span> <span class="o">=</span> <span class="n">PI</span> <span class="o">*</span> <span class="mf">25.0</span><span class="p">;</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">area</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">DEGREE_FAHRENHEIT</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">DEGREE_CELSIUS</span><span class="p">);</span>
+<span class="n">String</span> <span class="n">fahrenheit</span> <span class="o">=</span> <span class="s">&quot;F&quot;</span><span class="o">+</span><span class="n">DEGREE_SYMBOL</span><span class="p">;</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">fahrenheit</span><span class="p">);</span>
+</code></pre></div>
+
+<p>ergibt folgende Ausgabe:</p>
+<div class="highlight"><pre><span></span><code><span class="m">78</span>.53981633975
+℉
+℃
+F°
+</code></pre></div>
+
+<p>Wenn Sie in Ihrem Programm versuchen, einer Konstanten einen neuen Wert zuzuweisen, erhalten Sie einen Fehler (<code>The final variable cannot be assigned</code>) und Sie können das Programm gar nicht erst compilieren. </p>
+<p>Wann immer Sie in Ihrem Programm ein Literal verwenden, also einen Wert, sollten Sie überlegen, ob Sie diesem Wert nicht besser einen Namen geben können, nämlich dafür eine Konstante verwenden, und dann stets die Konstante anstelle des Wertes verwenden. Damit werden sogenannte <em>magic numbers</em> vermieden und das Programm ist lesbarer. </p>
 <div class="footnote">
 <hr />
 <ol>

@@ -1319,6 +1319,46 @@ Deklarieren Sie in der main()-Methode zwei int-Variablen und weisen Sie diesen W
 <li><iframe src="https://mediathek.htw-berlin.de/media/embed?key=87e2a2a2de3ff7660bad99deddb56109&width=720&height=383&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="383" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe></li>
 </ul>
 </details>
+<details class="note"><summary>Übung 4</summary><ol>
+<li>Erstellen Sie ein package <code>uebungen.uebung4</code>. </li>
+<li>Erstellen Sie in diesem package eine Klasse <code>Uebung4</code> mit <code>main()</code>-Methode.</li>
+<li>
+<p>Implementieren Sie folgende Methoden: </p>
+<ul>
+<li>
+<p>Implementieren Sie eine <code>public static void print(char[] ca)</code>-Methode, so dass das <code>char[] ca</code> auf die Konsole ausgegeben wird. Achten Sie darauf, dass hinter dem letzten Element kein Komma steht. Testen Sie Ihre Methode auch für ein leeres Array.<br/>
+Bsp:  <code>print(['a', 'b', 'c', 'a', 'c', 'a', 'b', 'c'])</code> <br/>
+Ausgabe auf Konsole: <code>[a, b, c, a, c, a, b, c]</code></p>
+</li>
+<li>
+<p>Kopieren Sie die <code>print</code>-Methode vollständig und ändern Sie den Typ des Parameters von <code>char[]</code> in <code>int[]</code>. (Die Methode ist jetzt <em>überladen</em> und <code>print()</code> kann jetzt entweder ein <code>char[]</code> oder ein <code>int[]</code> übergeben werden, welches auf die Konsole ausgegeben wird.)</p>
+</li>
+<li>
+<p>Implementieren Sie eine Methode <code>public static char[] stringToCharArray(String s)</code>. Diese Methode wandelt einen <code>String</code> in ein <code>char[]</code> um, so dass jedes Zeichen des Strings im <code>char[]</code> enthalten ist. Das <code>char[]</code> wird zurückgegeben. 
+Tipps: die Länge eines Strings wird mit der Objektmethode <code>length()</code> ermittelt. Die einzelnen Zeichen eines Strings können mithilfe der <code>charAt(index)</code>-Objektmethode von Strings ermittelt werden. Siehe <a href="../hilfsklassen/#die-klasse-string">String</a> <br/>
+Bsp.: <code>stringToCharArray("hallo!")</code> &rarr; <code>['h','a','l','l','o','!']</code> </p>
+</li>
+<li>
+<p>Implementieren Sie eine Methode <code>public static char[] filter(char[] carr, char filter)</code>, der als Parameter ein <code>char</code>-Array und ein <code>char</code> übergeben wird. Die Methode soll ein <code>char</code>-Array zurückgeben, das dem als Parameter übergeben Array entspricht, außer dass jedes Vorkommen des als Parameter übergeben <code>carr</code> entfernt wurde <br/>
+Bsp: <code>filter(['a', 'b', 'c', 'a', 'c', 'a', 'b', 'c'], 'c')</code> &rarr; <code>['a', 'b', 'a', 'a', 'b']</code></p>
+</li>
+<li>
+<p>Implementieren Sie eine Methode <code>public static int[] minAndMax(int[] iarr)</code>, der ein <code>int</code>-Array als Parameter übergeben wird und die ein zweielementiges Array zurückgibt. Das erste Element des zurückgegeben Arrays ist das Minimum des als Parameter übergebenen Arrays und das zweite Element ist das Maximum. <br/>
+Bsp.:   <code>minAndMax([4,2,8,1,6,2,4,1,8])</code> &rarr; <code>[1,8]</code> <br/>
+        <code>minAndMax([4])</code> &rarr; <code>[4,4]</code></p>
+</li>
+<li>
+<p>Implementieren Sie eine Methode <code>public static int[] reverse(int[] iarr)</code>, der ein <code>int</code>-Array übergeben wird und die die Reihenfolge der Elemente des Arrays umdreht (das letzte zuerst usw.) Das neuerstellte Array wird zurückgegeben. <br/>
+Bsp.: <code>reverse([4,2,8,1,6,2,4,1,8])</code> &rarr; <code>[8,1,4,2,6,1,8,2,4]</code>  <br/>
+      <code>reverse([4])</code> &rarr; <code>[4]</code></p>
+</li>
+<li>
+<p><strong>Zusatz:</strong> Implementieren Sie eine Methode <code>public static boolean containsDoublets(char[] ca)</code> die ein <code>true</code> zurückgibt, wenn <em>mindestens</em> ein Wert in <code>ca</code> <em>mindestens</em> zwei Mal vorkommt (wenn Sie schon dabei sind, können Sie sich auch überlegen, wenn <em>genau</em> ein Wert <em>genau</em> zwei Mal vorkommt - oder <em>mindestens</em> ein Wert <em>genau</em> zwei Mal - oder <em>genau</em> ein Wert <em>mindestens</em> zwei Mal) und <code>false</code> sonst.</p>
+</li>
+</ul>
+</li>
+</ol>
+</details>
 <h2 id="weitere-ubungsaufgaben-selbstandiges-uben">Weitere Übungsaufgaben (selbständiges Üben)<a class="headerlink" href="#weitere-ubungsaufgaben-selbstandiges-uben" title="Permanent link">&para;</a></h2>
 <p>Hier werden lose und unregelmäßig Übungsaufgaben gesammelt. Am Ende des Semesters soll dann hier eine große Sammlung von Übungsaufgaben entstanden sein, die der eigenen Kontrolle dienen sollen. Die Übungen sind thematisch sortiert, allerdings überschneiden sich manche Themen in einigen Übungen.  </p>
 <h3 id="ausdrucke">Ausdrücke<a class="headerlink" href="#ausdrucke" title="Permanent link">&para;</a></h3>

@@ -522,3 +522,51 @@ Die Ausgabe bei dem obigen Beispiel ist `3 + 4 = 7`. Schauen wir uns das Beispie
 !!! success
     Wir können nun Variablen deklarieren und initialisieren. Wir kennen alle acht primitiven Datentypen. Wir nennen diese Datentypen *Wertetypen*. Wir wissen, dass eine ganze Zahl im Java-Programm vom Typ `int` ist und eine Gleikommazahl vom Typ `double`. Wir kennen die interne Darstellung von ganzen Zahlen und wir wissen über die Kodierung von Zeichen Bescheid. Der datentyp `char` ist ein ganzzahliger Typ, obwohl er für das Speichern von Zeichen zuständig ist. Dies liegt an der Kodierung der Zeichen als ganze Zahlen. Der Wertzuweisungsoperator ist `=`. Wenn einer Variablen ein Wert zugewiesen werden soll, dann muss die Variablen links stehen, der Wertuweisungsoperator in der Mitte und rechts der Wert. 
 
+
+## Konstanten
+
+Wir haben gesagt, dass Variablen beliebig oft einer neuer Wert zugewisen werden kann. Manchmal möchte man aber genau das nicht. Sogenannten *Konstanten* möchte man genau einmal einen Wert zuweisen und dann soll dieser Wert nicht mehr überschrieben werden können. In Java kann man solche Konstanten mithilfe des Schlüsselwortes `final` deklarieren:
+
+> `final datentyp KONSTANTE = Wert;`
+
+Eine Konstante wird zunächst wie eine Variable deklariert, d.h. man vergibt einen Namen für die Variable und weist ihr einen Datentyp zu. Außerdem wird ihr mithilfe des Zuweisungsoperators ein Wert zugewiesen. Um zu verhindern, dass dieser Variablen erneut ein Wert zugewiesen kann, setzt man vor den Datentyp noch das Schlüsselwort `final`. Damit ist diese Variable schreibgeschützt und es kann ihr nie wieder ein neuer Wert zugewiesen werden. Schauen wir uns ein Beispiel an:
+
+```java
+final double PI = 3.14159265359;
+```
+
+Es wird eine Konstante `PI` deklariert und ihr der Wert `3.14159265359` zugewiesen. Damit wir Konstanten von "normalen" Variablen unterscheiden können, schreiben wir Konstenten immer **groß**. Wenn der Name einer Konstanten aus mehreren Wörtern besteht, verwendet man typischerweise den Unterstrich `_` zum Verbinden der beiden Wörter, z.B. 
+
+```java
+final int NOT_FOUND = -1;
+final int MIN_VALUE = -2147483648; 
+final int MAX_VALUE = 2147483647;
+final char DEGREE_SYMBOL = '\u00b0';
+final char DEGREE_CELSIUS = '\u2103';
+final char DEGREE_FAHRENHEIT = '\u2109';
+```
+
+Ansonsten können Sie Konstanten ganz normal verwenden, aber immer nur lesend, also z.B. 
+
+```java
+double area = PI * 25.0;
+System.out.println(area);
+System.out.println(DEGREE_FAHRENHEIT);
+System.out.println(DEGREE_CELSIUS);
+String fahrenheit = "F"+DEGREE_SYMBOL;
+System.out.println(fahrenheit);
+```
+
+ergibt folgende Ausgabe:
+
+```bash
+78.53981633975
+℉
+℃
+F°
+```
+
+Wenn Sie in Ihrem Programm versuchen, einer Konstanten einen neuen Wert zuzuweisen, erhalten Sie einen Fehler (`The final variable cannot be assigned`) und Sie können das Programm gar nicht erst compilieren. 
+
+Wann immer Sie in Ihrem Programm ein Literal verwenden, also einen Wert, sollten Sie überlegen, ob Sie diesem Wert nicht besser einen Namen geben können, nämlich dafür eine Konstante verwenden, und dann stets die Konstante anstelle des Wertes verwenden. Damit werden sogenannte *magic numbers* vermieden und das Programm ist lesbarer. 
+

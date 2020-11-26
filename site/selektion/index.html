@@ -827,7 +827,7 @@ sonst
 <p>Das Problem mit komplexen Bedingungen besteht darin, dass diese recht schwer zu verstehen sind. Für komplexe Bedingungen sollten wir stets eigene Methoden definieren (die ein <code>boolean</code>zurückgeben) und die mit ihrem Namen verraten, was die Bedingung prüft. Darauf kommen wir später nochmal zurück. </p>
 <h2 id="switch-anweisung"><code>switch</code>-Anweisung<a class="headerlink" href="#switch-anweisung" title="Permanent link">&para;</a></h2>
 <p>Die <code>switch</code>-Anweisung war in Java lange unglücklich gelöst. Die <code>switch</code>-Anweisung kann verwendet werden, wenn Sie viele Fallunterscheidungen haben. Wir geben zunächst ein Beispiel in der alten Form der <code>switch</code>-Anweisung, die immer noch funktioniert und die Sie so wahrscheinlich auch noch sehr häufig antreffen werden:</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// monatvom Typ `int`</span>
+<div class="highlight"><pre><span></span><code><span class="c1">// monat vom Typ `int`</span>
 <span class="k">switch</span><span class="p">(</span><span class="n">monat</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="k">case</span> <span class="mi">1</span><span class="p">:</span> <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Januar&quot;</span><span class="p">);</span>
@@ -866,7 +866,8 @@ sonst
 </ul>
 <p><code>break;</code> stoppt also die Abarbeitung. Würde in unserem Beispiel kein <code>break</code> enthalten sien und wäre <code>month</code>z.B. <code>6</code>, dann würden alle Monate ab und inkl. Juli ausgegeben werden. Der <code>default:</code>-Fall ist dafür, falls keine der <code>case</code> passt. Der <code>default:</code>-Fall ist optional. </p>
 <p>Dass die Anweisungen nach <code>case x:</code> nicht in Anweisungsblöcken stehen und dass die Verwendung von <code>break;</code> erforderlich ist, um die Ausführung von Anweisungen zu stoppen, macht diese alte Syntax der <code>switch()</code>-Anweisung unschön. Wir betrachten noch ein Beispiel in der alten Syntax, um den Unterschied zur neuen noch besser zu erläutern:</p>
-<div class="highlight"><pre><span></span><code><span class="kt">int</span> <span class="n">anzahlTageImMonat</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="c1">// monat vom Typ `int`</span>
+<span class="kt">int</span> <span class="n">anzahlTageImMonat</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 <span class="k">switch</span><span class="p">(</span><span class="n">monat</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="k">case</span> <span class="mi">1</span><span class="p">:</span> 

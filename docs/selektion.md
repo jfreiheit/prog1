@@ -296,7 +296,7 @@ Das Problem mit komplexen Bedingungen besteht darin, dass diese recht schwer zu 
 Die `switch`-Anweisung war in Java lange unglücklich gelöst. Die `switch`-Anweisung kann verwendet werden, wenn Sie viele Fallunterscheidungen haben. Wir geben zunächst ein Beispiel in der alten Form der `switch`-Anweisung, die immer noch funktioniert und die Sie so wahrscheinlich auch noch sehr häufig antreffen werden:
 
 ```java
-// monatvom Typ `int`
+// monat vom Typ `int`
 switch(monat)
 {
 	case 1: System.out.println("Januar");
@@ -339,6 +339,7 @@ Der Ablauf einer `switch()`-Anweisung ist nun so, dass für den entsprechenden W
 Dass die Anweisungen nach `case x:` nicht in Anweisungsblöcken stehen und dass die Verwendung von `break;` erforderlich ist, um die Ausführung von Anweisungen zu stoppen, macht diese alte Syntax der `switch()`-Anweisung unschön. Wir betrachten noch ein Beispiel in der alten Syntax, um den Unterschied zur neuen noch besser zu erläutern:
 
 ```java
+// monat vom Typ `int`
 int anzahlTageImMonat = 0;
 switch(monat)
 {
