@@ -713,6 +713,10 @@ Hier sind die Themen in chronologischer Folge aufgeführt, wie wir sie auch in d
 		}
 		```
 
-
+??? question "27.11. + 01.12.2020 - Algorithmen über Arrays"
+	- siehe [**Aufgabe 3**](./aufgaben/#aufgaben_1)
+	- siehe [**Übung 4**](./uebungen/#ubungsblatter-wochenweise)
+	- siehe [**Arrays**](./arrays/#arrays)
+	- diese Woche höchstwahrscheinlich kein Video - Skript ist eh informativer (meine Meinung)
 
 
