@@ -42,7 +42,7 @@ Nachfolgend der vorläufige Wochenplan (wird eventuell angepasst). Die Vorlesung
 | 2. | 09.-13.11.2020 | Datentypen und Variablen, logische Ausdrücke | Aufgabe 1  | 22.11.2020 | 
 | 3. | 16.-20.11.2020 | Sequenzen, Iterationen und Selektion | Aufgabe 2  | 29.11.2020 | 
 | 4. | 23.-27.11.2020 | Nützliche Klassen, Einführung Arrays | Aufgabe 3 | 06.12.2020 | 
-| 5. | 30.-04.12.2020 | Arrays, Algorithmen über Arrays | Aufgabe 4 | 13.12.2020 | 
+| 5. | 30.-04.12.2020 | Sortieren von Arrays | Aufgabe 4 | 13.12.2020 | 
 | 6. | 07.-11.12.2020 | Klassen und Objekte | Aufgabe 5  | 20.12.2020 | 
 | 7. | 14.-18.12.2020 | Getter, Setter, Konstruktoren, this, private | Aufgabe 6  | 10.01.2021 | 
 | 8. | 21.-25.12.2020 | Klassen- und Objekt-Variablen und -Methoden  | Aufgabe 7  | 17.01.2021 |
@@ -717,6 +717,6 @@ Hier sind die Themen in chronologischer Folge aufgeführt, wie wir sie auch in d
 	- siehe [**Aufgabe 3**](./aufgaben/#aufgaben_1)
 	- siehe [**Übung 4**](./uebungen/#ubungsblatter-wochenweise)
 	- siehe [**Arrays**](./arrays/#arrays)
-	- diese Woche höchstwahrscheinlich kein Video - Skript ist eh informativer (meine Meinung)
+	- diese Woche kein Video - Skript ist eh informativer (meine Meinung). Arbeiten Sie das Skript ([Arrays](./arrays/#arrays)) bitte eingehend durch! Sowohl in dem Abschnitt über [Arrays](./arrays/#arrays) als auch [hier](./uebungen/#arrays) gibt es Übungen zum Thema. 
 
 

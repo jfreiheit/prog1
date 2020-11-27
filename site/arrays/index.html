@@ -537,6 +537,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#einfugen-in-ein-sortiertes-array" class="md-nav__link">
+    Einfügen in ein sortiertes Array
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -782,6 +789,13 @@
           <li class="md-nav__item">
   <a href="#einfugen-in-ein-unsortiertes-array" class="md-nav__link">
     Einfügen in ein unsortiertes Array
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#einfugen-in-ein-sortiertes-array" class="md-nav__link">
+    Einfügen in ein sortiertes Array
   </a>
   
 </li>
@@ -2056,6 +2070,87 @@ index : <span class="m">1000575</span> duration : <span class="m">0</span>
 </ul>
 <p>Es geschieht also folgendes:</p>
 <p><img alt="unsortiert" src="../files/35_array.png" /></p>
+<p>Wir merken uns also: das Einfügen in ein unsortiertes Array ist in Wirklichkeit ein Anhängen des Elementes an ein unsortiertes Array. Dazu muss ein neues Array erzeugt werden, das um <code>1</code> länger ist als das Array, an das angehängt werden soll. </p>
+<h4 id="einfugen-in-ein-sortiertes-array">Einfügen in ein sortiertes Array<a class="headerlink" href="#einfugen-in-ein-sortiertes-array" title="Permanent link">&para;</a></h4>
+<p>Das Einfügen in ein sortiertes Array ist deutlich komplizierter, denn das einzufügende Element muss korrekt, d.h. an die richtige Stelle entsprechend der Sortierung, eingefügt werden. Angenommen, wir haben folgende Ausgangsposition:</p>
+<p><img alt="unsortiert" src="../files/36_array.png" /></p>
+<p>Das einzufügende Element mit dem Wert <code>13</code> muss zwischen die beiden Elemente mit den Werten <code>12</code> und <code>14</code> eingefügt werden. Wir gehen dabei wie folgt vor:</p>
+<ol>
+<li>wir erzeugen ein neues Array <code>b</code>, das um <code>1</code> länger ist als <code>a</code></li>
+<li>wir kopieren alle Werte aus <code>a</code> nach <code>b</code> <strong>solange</strong> die Werte kleiner sind als das einzufügende Element</li>
+<li><strong>wenn</strong> wir auf das erste Element in <code>a</code> stoßen, das größer ist als das einzufügende Element, fügen wir das Element ein</li>
+<li>danach kopieren wir die restlichen Werte aus <code>a</code> nach <code>b</code> </li>
+</ol>
+<p><img alt="unsortiert" src="../files/37_array.png" /></p>
+<p>Wir setzen obigen Algorithmus in folgender Methode um: </p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">insertIntoSortedArray</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">element</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">b</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">a</span><span class="p">.</span><span class="na">length</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">indexB</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">indexA</span> <span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">indexA</span><span class="o">&lt;</span><span class="n">a</span><span class="p">.</span><span class="na">length</span> <span class="o">&amp;&amp;</span> <span class="n">a</span><span class="o">[</span><span class="n">indexA</span><span class="o">]&lt;</span><span class="n">element</span><span class="p">)</span>  
+    <span class="p">{</span>
+        <span class="n">b</span><span class="o">[</span><span class="n">indexB</span><span class="o">++]=</span><span class="n">a</span><span class="o">[</span><span class="n">indexA</span><span class="o">++]</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">b</span><span class="o">[</span><span class="n">indexB</span><span class="o">++]</span> <span class="o">=</span> <span class="n">element</span><span class="p">;</span>  <span class="c1">// from now on indexB = indexA+1</span>
+
+    <span class="k">while</span><span class="p">(</span><span class="n">indexB</span><span class="o">&lt;</span><span class="n">b</span><span class="p">.</span><span class="na">length</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">b</span><span class="o">[</span><span class="n">indexB</span><span class="o">++]=</span><span class="n">a</span><span class="o">[</span><span class="n">indexA</span><span class="o">++]</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">b</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+
+<ul>
+<li>in Zeile <code>3</code> wird das Array <code>b</code> erzeugt, welches um <code>1</code> länger ist als <code>a</code></li>
+<li>in Zeilen <code>5-8</code> kopieren wir alle Werte aus <code>a</code> nach <code>b</code>, die kleiner sind als unser <code>element</code></li>
+<li>in Zeile <code>10</code> wird <code>element</code> in <code>b</code> eingefügt</li>
+<li>in Zeilen <code>12-15</code> kopieren wir die restlichen Werte aus <code>a</code> nach <code>b</code></li>
+</ul>
+<p>Beachten Sie:</p>
+<ul>
+<li>in der Anweisung <code>b[indexB++]=a[indexA++];</code> passieren mehrere Sachen auf einmal: <ul>
+<li>einerseits <code>b[indexB]=a[indexA];</code> und</li>
+<li>außerdem noch <code>indexB++;</code> </li>
+<li>und <code>indexA++</code>; </li>
+</ul>
+</li>
+<li>nach der Anweisung <code>b[indexB++] = element;</code> ist <code>indexB</code> um <code>1</code> größer als <code>indexA</code> (was ja auch gut ist, siehe im Bild das "rote" Kopieren)</li>
+</ul>
+<details class="question"><summary>Spielen Sie den Fall durch, dass eine <code>0</code> in das Beispiel-Array aus der Abbildung eingefügt werden soll!</summary><ul>
+<li>Dann wird die erste <code>while</code>-Schleife gar nicht betreten, da die (Teil-)Bedingung <code>a[indexA]&lt;element</code> gleich <code>false</code> ist</li>
+</ul>
+</details>
+<details class="question"><summary>Spielen Sie den Fall durch, dass eine <code>27</code> in das Beispiel-Array aus der Abbildung eingefügt werden soll!</summary><ul>
+<li>Dann wird die zweite <code>while</code>-Schleife gar nicht betreten, da die Bedingung <code>indexB&lt;b.length</code> gleich <code>false</code> ist</li>
+</ul>
+</details>
+<details class="question"><summary>Die Bedingung der ersten <code>while</code>-Schleife lautet <code>indexA&lt;a.length &amp;&amp; a[indexA]&lt;element</code>. Könnte man das auch umdrehen und <code>a[indexA]&lt;element &amp;&amp; indexA&lt;a.length</code> schreiben?</summary><ul>
+<li>Nein, das könnte zu einem Fehler führen. Der Operator <code>&amp;&amp;</code> hat (im Gegensatz zum Operator <code>&amp;</code>) die Eigenschaft, dass die zweite Teilbedingung (also <code>a[indexA]&lt;element</code>) gar nicht mehr geprüft wird, wenn die erste bereits <code>false</code> ist. Angenommen, die Teilbedingung <code>indexA&lt;a.length</code> ist <code>false</code>, dann ist <code>indexA==a.length</code>. Dann können wir aber nicht mehr mit <code>a[indexA]</code> auf ein Element in <code>a</code> zugreifen, da der Index <code>a.length</code> nicht existiert. Wir würden eine <code>ArrayIndexOutOfBoundsException</code> geworfen bekommen. Für den Fall also, dass das neu einzufügende Element ganz an das Ende des neuen Arrays <code>b</code> kommt, muss die Bedingung genau in dieser Reihenfolge formuliert werden. </li>
+</ul>
+</details>
+<div class="admonition success">
+<p class="admonition-title">Success</p>
+<p>Wir kennen jetzt Arrays. Wir können sie erzeugen, wir können sie miteinander verbinden. Wir können Elemente darin suchen, sowohl in sortierten als auch in unsortierten Arrays. Wir können Elemente einfügen. Bitte beachten Sie, dass die Elemente eines Arrays von jedem beliebigen Typ sein können, auch Referenztypen. Jetzt lernen wir noch, wie wir Arrays sortieren können und werden uns später nochmal mit Arrays beschäftigen, deren Elemente von Referenztypen sind und somit Objekte beinhalten. </p>
+</div>
 <div class="footnote">
 <hr />
 <ol>

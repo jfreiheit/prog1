@@ -1152,15 +1152,71 @@ Es geschieht also folgendes:
 
 ![unsortiert](./files/35_array.png)
 
+Wir merken uns also: das Einfügen in ein unsortiertes Array ist in Wirklichkeit ein Anhängen des Elementes an ein unsortiertes Array. Dazu muss ein neues Array erzeugt werden, das um `1` länger ist als das Array, an das angehängt werden soll. 
 
 
+#### Einfügen in ein sortiertes Array
+
+Das Einfügen in ein sortiertes Array ist deutlich komplizierter, denn das einzufügende Element muss korrekt, d.h. an die richtige Stelle entsprechend der Sortierung, eingefügt werden. Angenommen, wir haben folgende Ausgangsposition:
+
+![unsortiert](./files/36_array.png)
+
+Das einzufügende Element mit dem Wert `13` muss zwischen die beiden Elemente mit den Werten `12` und `14` eingefügt werden. Wir gehen dabei wie folgt vor:
+
+1. wir erzeugen ein neues Array `b`, das um `1` länger ist als `a`
+2. wir kopieren alle Werte aus `a` nach `b` **solange** die Werte kleiner sind als das einzufügende Element
+3. **wenn** wir auf das erste Element in `a` stoßen, das größer ist als das einzufügende Element, fügen wir das Element ein
+4. danach kopieren wir die restlichen Werte aus `a` nach `b` 
 
 
+![unsortiert](./files/37_array.png)
 
+Wir setzen obigen Algorithmus in folgender Methode um: 
 
+```java linenums="1"
+public static int[] insertIntoSortedArray(int[] a, int element)
+{
+	int[] b = new int[a.length+1];
+	int indexB=0, indexA =0;
+	while(indexA<a.length && a[indexA]<element)  
+	{
+		b[indexB++]=a[indexA++];
+	}
+	
+	b[indexB++] = element;	// from now on indexB = indexA+1
+	
+	while(indexB<b.length)
+	{
+		b[indexB++]=a[indexA++];
+	}
+	return b;
+}
+```
 
+- in Zeile `3` wird das Array `b` erzeugt, welches um `1` länger ist als `a`
+- in Zeilen `5-8` kopieren wir alle Werte aus `a` nach `b`, die kleiner sind als unser `element`
+- in Zeile `10` wird `element` in `b` eingefügt
+- in Zeilen `12-15` kopieren wir die restlichen Werte aus `a` nach `b`
 
+Beachten Sie:
 
+- in der Anweisung `b[indexB++]=a[indexA++];` passieren mehrere Sachen auf einmal: 
+	- einerseits `b[indexB]=a[indexA];` und
+	- außerdem noch `indexB++;` 
+	- und `indexA++`; 
+- nach der Anweisung `b[indexB++] = element;` ist `indexB` um `1` größer als `indexA` (was ja auch gut ist, siehe im Bild das "rote" Kopieren)
+
+??? question "Spielen Sie den Fall durch, dass eine `0` in das Beispiel-Array aus der Abbildung eingefügt werden soll!"
+	- Dann wird die erste `while`-Schleife gar nicht betreten, da die (Teil-)Bedingung `a[indexA]<element` gleich `false` ist
+
+??? question "Spielen Sie den Fall durch, dass eine `27` in das Beispiel-Array aus der Abbildung eingefügt werden soll!"
+	- Dann wird die zweite `while`-Schleife gar nicht betreten, da die Bedingung `indexB<b.length` gleich `false` ist
+
+??? question "Die Bedingung der ersten `while`-Schleife lautet `indexA<a.length && a[indexA]<element`. Könnte man das auch umdrehen und `a[indexA]<element && indexA<a.length` schreiben?"
+	- Nein, das könnte zu einem Fehler führen. Der Operator `&&` hat (im Gegensatz zum Operator `&`) die Eigenschaft, dass die zweite Teilbedingung (also `a[indexA]<element`) gar nicht mehr geprüft wird, wenn die erste bereits `false` ist. Angenommen, die Teilbedingung `indexA<a.length` ist `false`, dann ist `indexA==a.length`. Dann können wir aber nicht mehr mit `a[indexA]` auf ein Element in `a` zugreifen, da der Index `a.length` nicht existiert. Wir würden eine `ArrayIndexOutOfBoundsException` geworfen bekommen. Für den Fall also, dass das neu einzufügende Element ganz an das Ende des neuen Arrays `b` kommt, muss die Bedingung genau in dieser Reihenfolge formuliert werden. 
+
+!!! success
+	Wir kennen jetzt Arrays. Wir können sie erzeugen, wir können sie miteinander verbinden. Wir können Elemente darin suchen, sowohl in sortierten als auch in unsortierten Arrays. Wir können Elemente einfügen. Bitte beachten Sie, dass die Elemente eines Arrays von jedem beliebigen Typ sein können, auch Referenztypen. Jetzt lernen wir noch, wie wir Arrays sortieren können und werden uns später nochmal mit Arrays beschäftigen, deren Elemente von Referenztypen sind und somit Objekte beinhalten. 
 
 
 
