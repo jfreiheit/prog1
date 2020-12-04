@@ -553,7 +553,7 @@ double area = PI * 25.0;
 System.out.println(area);
 System.out.println(DEGREE_FAHRENHEIT);
 System.out.println(DEGREE_CELSIUS);
-String fahrenheit = "F"+DEGREE_SYMBOL;
+String fahrenheit = DEGREE_SYMBOL+"F";
 System.out.println(fahrenheit);
 ```
 
@@ -563,10 +563,257 @@ ergibt folgende Ausgabe:
 78.53981633975
 ℉
 ℃
-F°
+°F
 ```
 
 Wenn Sie in Ihrem Programm versuchen, einer Konstanten einen neuen Wert zuzuweisen, erhalten Sie einen Fehler (`The final variable cannot be assigned`) und Sie können das Programm gar nicht erst compilieren. 
 
 Wann immer Sie in Ihrem Programm ein Literal verwenden, also einen Wert, sollten Sie überlegen, ob Sie diesem Wert nicht besser einen Namen geben können, nämlich dafür eine Konstante verwenden, und dann stets die Konstante anstelle des Wertes verwenden. Damit werden sogenannte *magic numbers* vermieden und das Programm ist lesbarer. 
+
+## Typkonvertierung (type-cast)
+
+Java ist *statisch typisiert*, d.h. dass jede Variable (und jedes Literal) einen Datentyp hat. Dieser wird bei der Deklaration der Variablen festegelgt und ist somit bereits zur Compile-Zeit bekannt. Der Datentyp einer Variablen kann auch nicht mehr geändert werden[^4].
+
+[^4]: Das ist nicht in Allen Programmiersprachen so. Beispielsweise wird in JavaScript erst zur Laufzeit ermittelt, von welchem Typ die Variable ist, denn das hängt von ihrem Wert ab. Dort kann eine Variable `foo="String"` vom Typ `string` sein und dann durch `foo=4` vom Typ `number`. Die Typisierung in solchen Programmiersprachen nennt man *dynamisch typisiert*. 
+
+Die Typisierung einer Variablen gibt den Wertebereich vor, aus dem die Variable Werte annehmen kann (`int`-Variablen aus dem `int`-Wertebereich, `boolean` aus dem Wertebereich `{true, false}`usw.). Trotzdem ist in Java auch erlaubt, dass Wertezuweisungen nicht nur aus *identischen* Datentypen möglich sind, sondern auch aus *kampatiblen* Datentypen:
+
+```java linenums="1"
+int a = 5; 			// links ist int und rechts ist int --> identische Datentypen
+long b = 5; 		// links ist long und rechts ist int --> kompatible Datentypen
+int c = boolean; 	// nicht erlaubt --> Fehler!!! keine kompatiblen Datentypen (int vs. boolean)
+float d = 5.0f; 	// links ist float und rechts ist float --> identische Datentypen
+double e = d;		// links ist double und rechts ist float --> kompatible Datentypen
+```
+
+In den Zeilen `2` und `5` werden die Datentypen bei der Zuweisung automatisch vom Compiler umgewandelt (in Zeile `2` automatisch von `int` nach `long` und in Zeile `5` automatisch von `float` nach `double`). Diese Umwandlung von Datentypen nennt sich *Typkonvertierung* (engl. *type cast*). Die beiden Beispiele aus Zeile `2` und Zeile `5` heißen *implizite*  Typkonvertierung. 
+
+### Implizite Typkonvertierung
+
+Jeder Wert (jedes *Literal*) in Java ist von einem bestimmten Typ, z.B. 
+
+```java linenums="1"
+4 		// Datentyp int
+4.0		// Datentyp double
+true	// Datentyp boolean
+'a'		// Datentyp char
+"FIW"	// Datentyp String
+```
+
+Was passiert bei 
+
+```java
+double number = 4;
+```
+
+? Wir haben links eine Variable vom Typ `double` und rechts einen Wert vom Typ `int`. Die Antwort ist, dass der Compiler *implizit* den Wert `4` in den Wert `4.0` umwandelt und diesen Wert der Variablen `number` zuweist. Es findet also eine *implizite* Typkonvertierung statt. 
+
+**Typkonvertierung** 
+
+- immer, wenn in einer Zuweisung verschiedene Typen im Spiel sind, erfolgt eine Typkonvertierung
+- der Typ, der rechts vom Zuweisungsoperator steht, muss in den Typ konvertiert werden, der links vom Zuweisungsoperator steht
+- hier: von `int` nach `double`
+
+> Wenn von Typen mit einem kleineren Wertebereich zu Typen mit einem größeren Wertebereich umgewandelt (konvertiert) werden sollen, kann dies automatisch (implizit) erfolgen --> implizite Typkonvertierung
+
+```java linenums="1"
+// Beispiel Umrechnung Fahrenheit in Celsius --> ohne Typkonvertierung
+final char DEGREE_SYMBOL = '\u00b0';
+int celsius = 0;
+for(int fahrenheit = 0; fahrenheit <= 100; fahrenheit+=20)
+{
+	celsius = 5 * (fahrenheit - 32) / 9;
+	System.out.printf("%3d %cF --> %3d %cC %n", fahrenheit, DEGREE_SYMBOL, celsius, DEGREE_SYMBOL);
+}
+```
+
+In dem Beispiel werden `fahrenheit`-Werte in `celsius`-Werte umgerechnet. Die Variablen `celsius` und `fahrenheit` und auch die Werte `5`, `32` und `9` sind vom Typ `int`. Die Berechnungen laufen ohne Typkonvertierung ab, alles bleibt im Wertebereich von `int`. Deshalb handelt es sich bei `(fahrenheit - 32) / 9` um eine **ganzzahlige Division**. Die Ausgabe ist wie folgt:
+
+```bash
+  0 °F --> -17 °C 
+ 20 °F -->  -6 °C 
+ 40 °F -->   4 °C 
+ 60 °F -->  15 °C 
+ 80 °F -->  26 °C 
+100 °F -->  37 °C
+```
+
+Wir ändern das Beispiel und deklarieren die beiden Variablen `fahrenheit` und `celsius` als `double`:
+
+```java linenums="1"
+// Beispiel Umrechnung Fahrenheit in Celsius --> mit Typkonvertierung
+final char DEGREE_SYMBOL = '\u00b0';
+double celsius = 0;
+for(double fahrenheit = 0; fahrenheit <= 100; fahrenheit+=20)
+{
+	celsius = 5 * (fahrenheit - 32) / 9;
+	System.out.printf("%6.2f %cF --> %7.3f %cC %n", fahrenheit, DEGREE_SYMBOL, celsius, DEGREE_SYMBOL);
+}
+```
+
+Dadurch ergibt sich eine andere Ausgabe (die Platzhalter in `printf()` mussten auch angepasst werden):
+
+```bash
+  0,00 °F --> -17,778 °C 
+ 20,00 °F -->  -6,667 °C 
+ 40,00 °F -->   4,444 °C 
+ 60,00 °F -->  15,556 °C 
+ 80,00 °F -->  26,667 °C 
+100,00 °F -->  37,778 °C
+```
+
+Was ist passiert? Dadurch, dass in der Wertezuweisung `celsius = 5 * (fahrenheit - 32) / 9;` auf der linken Seite ein `double` steht, wird der gesamte Ausdruck auf der rechten Seite in ein `double` *konvertiert*. Das würde aber erst **nach** Ausrechnen des Ausdrucks erfolgen, wenn nicht auch `fahrenheit` ein `double` wäre. Es passiert folgendes:
+
+- zuerst wird der Ausdruck `(fahrenheit - 32)` aufgelöst, da er in Klammern steht. Hier ist die Operation `double - int`. Sobald einer der beiden Operanden ein `double` ist, wird der `double`-Operator `-` verwendet --> dazu wird die `32` in eine `32.0` konvertiert --> das Ergebnis ist ein `double`
+- dann wird von links nach rechts aufgelöst, also zunächst `5 * double`. Auch hier ist die Operation also `int * double`, d.h. `double`-Multiplikation und somit wird aus der `5` eine `5.0`. Das Ergebnis dieser Multiplikation ist `double`
+- dann erfolgt die Berechnung von `double / 9`. Wenn einer der beiden Operanden ein `double` ist, handelt es sich bei der Division um eine **Gleikommadivision**. Also gibt es auch Nachkommastellen --> das Ergebnis ist ein `double`
+
+Diese *implizite* Typkonvertierung macht der Compiler automatisch. *Implizite* Typkonvertierung kann immer dann erfolgen, wenn von einem **schmalen** in einen **breiten** Datentyp konvertiert wird, d.h. wenn alle Werte aus dem "schmalen" Wertebereich auch Werte aus dem "breiten" Wertebereich sind. Dies ist bei `int` (schmal) nach `double` (breit) der Fall, da alle `int`-Werte auch im `double`-Wertebereich enthalten sind. 
+
+Das hier ist also kein Problem:
+
+```java
+int v1 = 1;
+double v2 = v1;					// ok
+System.out.println("Wert von v2: " + v2);		// 1.0
+```
+
+aber das geht **nicht**:
+
+```java
+double v3 = 1.0;
+int v4 = v3;					// Fehler!
+System.out.println("Wert von v4: " + v4);
+```
+
+Obwohl ja die `1.0` ein Wert aus `int` darstellt, prüft der Compiler nicht den Wert, sondern den Typ. Da der `double`-Wertebereich viele Werte umfasst, die nicht Teil des Wertebereichs von `int` sind (z.B. `1.5`), kann hier keine implizite Typkonvertierung erfolgen, denn diese wäre von einem "breiten" in einen "schmalen" Datentypen. Wenn man sich jedoch ganz sicher ist, dass eine solche Typkonvertierung sinnvoll ist (z.B. kann man ja `1.0` nach `1` und somit `int` ohne Verlust umwandeln), kann eine solche Typkonvertierung *explizit* angestoßen werden.
+
+### Explizite Typkonvertierung
+
+In dem Beispiel von eben
+
+```java
+double v3 = 1.0;
+int v4 = v3;					// Fehler!
+System.out.println("Wert von v4: " + v4);
+```
+
+führt der Compiler keine implizite Typkonvertierung durch. Das Programm wird gar nicht compiliert. Wenn wir nun aber wollen, dass diese Typkonvertierung trotzdem durchgeführt wird, müssen wir den **Typkonvertierungsoperator** (auch *type cast operator*) verwenden. Der Typkonvertierungsoperator enthält in runden Klammern den Zieltyp und steht vor dem Wert der umgewandelt werden soll:
+
+> `typ_A variable = (typ_A)wert;`
+
+Die `variable` sei vom `typ_A` und der Wert von einem Typ, der nicht impliziert nach `typ_A` konvertiert werden kann. Unter Angabe von `(typ_A)` direkt vor dem `wert` wird der Wert *explizit* in `typ_A` konvertiert. 
+
+Obiges Beispiel würde dann so aussehen:
+
+```java
+double v3 = 1.0;
+int v4 = (int)v3;					// ok
+System.out.println("Wert von v4: " + v4);		// 1
+```
+
+Da wir wissen, dass die `1` (der von uns zugewiesene Wert von `v3`) im Wertebereich von `int` liegt, können wir den Compiler anweisen, von `double` nach `int` zu konvertieren --> *explizite* Typkonvertierung. 
+
+Aber **Achtung!** Explizite Typkonvertierung kann zu **Informationsverlust** führen!
+
+```java
+double v3 = 1.23456;
+int v4 = (int)v3;				// explizite TK
+System.out.println("Wert von v4: " + v4); 	// 1
+```
+
+Wird ein `double` in ein `int` konvertiert, werden die Nachkommastellen einfach abgeschnitten (kein Runden!).
+
+Aber **Achtung!** Explizite Typkonvertierung kann zu **ganz anderen Werten** führen!
+
+```java
+long v5 = 2147483648L;						// L mit angeben!
+int v6 = (int)v5;							// 2 hoch 31
+System.out.println("Wert von v6: " + v6);	// -2147483648
+```
+
+`2147483648` ist zwar ganzzahlig, ist aber nicht mehr Teil des Wertebereiches von `int` (um `1`zu groß) --> aufgrund der [internen Zahlendarstellung (Zweierkomplement)](./#ganzzahlige-datentypen-int-long-short-byte), bekommt `v6` den Wert `-2147483648`.
+
+> Bei expliziter Typkonvertierung muss selbständig darauf geachtet werden, dass der Wertebereich nicht überschritten bzw. nicht verlassen wird!
+
+#### Sinnvolle Anwendungen des Typkonvertierungsoperators
+
+Angenommen, wir haben ein `int`-Array `ia` und wollen aus den Werten in diesem Array den Mittelwert berechnen. Dann wäre folgender erster Implementierungsversuch denkbar:
+
+```java
+int[] ia = { 1, 2, 3, 4 };
+int sum = 0;
+for (int index = 0; index < ia.length; index++)
+{
+	sum = sum + ia[index];
+}
+double average = sum / ia.length;
+System.out.println("Durchschnitt ist " + average);		// 2.0
+```
+
+Wir bilden also die Summe über alle Werte und teilen durch die Anzahl der Werte. Das entspricht der Definition des Durchschnitts. Wir überschlagen im Kopf, dass für die vier Werte `1`, `2`, `3` und `4` der Durchschnitt `2.5` ist. Ausgegeben wird aber 
+
+```bash
+Durchschnitt ist 2.0
+```
+
+Das ist **falsch** und der Grund dafür liegt darin, dass es sich bei `sum / ia.length` um die ganzzahlige Divsion handelt, da beide Operanden vom Typ `int` sind. Eine Möglichkeit wäre, die Variable `sum` als `double` zu deklarieren. Dann haben wir bereits das gewünschte Ergebnis. Eine andere ist, einen der beiden (oder beide) explizit nach `double` zu konvertieren:
+
+```java
+int[] ia = { 1, 2, 3, 4 };
+int sum = 0;
+for (int index = 0; index < ia.length; index++)
+{
+	sum = sum + ia[index];
+}
+double average = sum / (double)ia.length;
+System.out.println("Durchschnitt ist " + average);		// 2.5
+```
+
+Wir haben jetzt die Länge explizit nach `double` konvertiert und somit ist einer der beiden Operanden der Division ein `double` und somit wird die Gleitkommadivision durchgeführt. Nun erhalten wir das richtige Ergebnis:
+Kopf, dass für die vier Werte `1`, `2`, `3` und `4` der Durchschnitt `2.5` ist. Ausgegeben wird aber 
+
+```bash
+Durchschnitt ist 2.5
+```
+
+---
+
+Ein anderes sinnvolles Beispiel ist die explizite Konvertierung eines `int`-Wertes nach `char`. Beides sind ganzzahlige Datentypen, aber der Wertebereich von `char` (8 Bit) umfasst viel weniger Werte als der Wertebereich von `int` (16 Bit). `int` ist der "breite" Datentyp und `char` der schmale und somit findet keine implizite Typkonvertierung von `int` nach `char` statt. Trotzdem möchte man häufig `int` in Bezug auf `char` nutzen, weil man unter Verwendung der numerischen ASCII-Codes (`int`) gut mit Zeichen "rechnen" kann:
+
+```java
+for(int ascii = 65; ascii < 91; ascii++)
+{
+	char c = (char)ascii;
+	System.out.print(c+" ");
+}
+```
+
+Wir müssen hier explizit konvertieren, da die implizite Typkonvertierung `char c = ascii;` nicht existiert. Das wäre also ein Fehler. Mit der expliziten Typkonvertierung klappt aber alles wie gewünscht:
+
+```bash
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z 
+```
+
+---
+
+Hier nochmal zur Veranschaulichung, zwischen welchen Datentypen eine *implizite* Typkonvertierung durchgeführt wird:
+
+![implicittypecast](./files/51_typecast.png)
+
+Beachten Sie, dass von und nach `boolean` in Java keine implizite Typkonvertierung durchgeführt wird!
+
+Hier nochmal zur Veranschaulichung, zwischen welchen Datentypen eine *explizite* Typkonvertierung durchgeführt werden kann (*kompatible* Datentypen):
+
+![implicittypecast](./files/52_typecast.png)
+
+Beachten Sie, dass von und nach `boolean` in Java auch keine explizite Typkonvertierung möglich ist!
+
+
+
+
+
+
+
+
 

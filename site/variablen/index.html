@@ -193,6 +193,8 @@
       
         
       
+        
+      
     </ul>
   </div>
 </nav>
@@ -435,6 +437,46 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#typkonvertierung-type-cast" class="md-nav__link">
+    Typkonvertierung (type-cast)
+  </a>
+  
+    <nav class="md-nav" aria-label="Typkonvertierung (type-cast)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implizite-typkonvertierung" class="md-nav__link">
+    Implizite Typkonvertierung
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#explizite-typkonvertierung" class="md-nav__link">
+    Explizite Typkonvertierung
+  </a>
+  
+    <nav class="md-nav" aria-label="Explizite Typkonvertierung">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sinnvolle-anwendungen-des-typkonvertierungsoperators" class="md-nav__link">
+    Sinnvolle Anwendungen des Typkonvertierungsoperators
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -522,6 +564,18 @@
   <li class="md-nav__item">
     <a href="../arrays/" title="Arrays" class="md-nav__link">
       Arrays
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../sortieren/" title="Sortieren" class="md-nav__link">
+      Sortieren
     </a>
   </li>
 
@@ -737,6 +791,46 @@
   <a href="#konstanten" class="md-nav__link">
     Konstanten
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#typkonvertierung-type-cast" class="md-nav__link">
+    Typkonvertierung (type-cast)
+  </a>
+  
+    <nav class="md-nav" aria-label="Typkonvertierung (type-cast)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implizite-typkonvertierung" class="md-nav__link">
+    Implizite Typkonvertierung
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#explizite-typkonvertierung" class="md-nav__link">
+    Explizite Typkonvertierung
+  </a>
+  
+    <nav class="md-nav" aria-label="Explizite Typkonvertierung">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sinnvolle-anwendungen-des-typkonvertierungsoperators" class="md-nav__link">
+    Sinnvolle Anwendungen des Typkonvertierungsoperators
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1572,7 +1666,7 @@ Sie erhalten jedoch nicht die gewünschte Ausgabe. Warum nicht? Wie können Sie 
 <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">area</span><span class="p">);</span>
 <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">DEGREE_FAHRENHEIT</span><span class="p">);</span>
 <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">DEGREE_CELSIUS</span><span class="p">);</span>
-<span class="n">String</span> <span class="n">fahrenheit</span> <span class="o">=</span> <span class="s">&quot;F&quot;</span><span class="o">+</span><span class="n">DEGREE_SYMBOL</span><span class="p">;</span>
+<span class="n">String</span> <span class="n">fahrenheit</span> <span class="o">=</span> <span class="n">DEGREE_SYMBOL</span><span class="o">+</span><span class="s">&quot;F&quot;</span><span class="p">;</span>
 <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">fahrenheit</span><span class="p">);</span>
 </code></pre></div>
 
@@ -1580,11 +1674,218 @@ Sie erhalten jedoch nicht die gewünschte Ausgabe. Warum nicht? Wie können Sie 
 <div class="highlight"><pre><span></span><code><span class="m">78</span>.53981633975
 ℉
 ℃
-F°
+°F
 </code></pre></div>
 
 <p>Wenn Sie in Ihrem Programm versuchen, einer Konstanten einen neuen Wert zuzuweisen, erhalten Sie einen Fehler (<code>The final variable cannot be assigned</code>) und Sie können das Programm gar nicht erst compilieren. </p>
 <p>Wann immer Sie in Ihrem Programm ein Literal verwenden, also einen Wert, sollten Sie überlegen, ob Sie diesem Wert nicht besser einen Namen geben können, nämlich dafür eine Konstante verwenden, und dann stets die Konstante anstelle des Wertes verwenden. Damit werden sogenannte <em>magic numbers</em> vermieden und das Programm ist lesbarer. </p>
+<h2 id="typkonvertierung-type-cast">Typkonvertierung (type-cast)<a class="headerlink" href="#typkonvertierung-type-cast" title="Permanent link">&para;</a></h2>
+<p>Java ist <em>statisch typisiert</em>, d.h. dass jede Variable (und jedes Literal) einen Datentyp hat. Dieser wird bei der Deklaration der Variablen festegelgt und ist somit bereits zur Compile-Zeit bekannt. Der Datentyp einer Variablen kann auch nicht mehr geändert werden<sup id="fnref:4"><a class="footnote-ref" href="#fn:4">4</a></sup>.</p>
+<p>Die Typisierung einer Variablen gibt den Wertebereich vor, aus dem die Variable Werte annehmen kann (<code>int</code>-Variablen aus dem <code>int</code>-Wertebereich, <code>boolean</code> aus dem Wertebereich <code>{true, false}</code>usw.). Trotzdem ist in Java auch erlaubt, dass Wertezuweisungen nicht nur aus <em>identischen</em> Datentypen möglich sind, sondern auch aus <em>kampatiblen</em> Datentypen:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>          <span class="c1">// links ist int und rechts ist int --&gt; identische Datentypen</span>
+<span class="kt">long</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>         <span class="c1">// links ist long und rechts ist int --&gt; kompatible Datentypen</span>
+<span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="kt">boolean</span><span class="p">;</span>    <span class="c1">// nicht erlaubt --&gt; Fehler!!! keine kompatiblen Datentypen (int vs. boolean)</span>
+<span class="kt">float</span> <span class="n">d</span> <span class="o">=</span> <span class="mf">5.0f</span><span class="p">;</span>     <span class="c1">// links ist float und rechts ist float --&gt; identische Datentypen</span>
+<span class="kt">double</span> <span class="n">e</span> <span class="o">=</span> <span class="n">d</span><span class="p">;</span>       <span class="c1">// links ist double und rechts ist float --&gt; kompatible Datentypen</span>
+</code></pre></div>
+</td></tr></table>
+
+<p>In den Zeilen <code>2</code> und <code>5</code> werden die Datentypen bei der Zuweisung automatisch vom Compiler umgewandelt (in Zeile <code>2</code> automatisch von <code>int</code> nach <code>long</code> und in Zeile <code>5</code> automatisch von <code>float</code> nach <code>double</code>). Diese Umwandlung von Datentypen nennt sich <em>Typkonvertierung</em> (engl. <em>type cast</em>). Die beiden Beispiele aus Zeile <code>2</code> und Zeile <code>5</code> heißen <em>implizite</em>  Typkonvertierung. </p>
+<h3 id="implizite-typkonvertierung">Implizite Typkonvertierung<a class="headerlink" href="#implizite-typkonvertierung" title="Permanent link">&para;</a></h3>
+<p>Jeder Wert (jedes <em>Literal</em>) in Java ist von einem bestimmten Typ, z.B. </p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="mi">4</span>       <span class="c1">// Datentyp int</span>
+<span class="mf">4.0</span>     <span class="c1">// Datentyp double</span>
+<span class="kc">true</span>    <span class="c1">// Datentyp boolean</span>
+<span class="sc">&#39;a&#39;</span>     <span class="c1">// Datentyp char</span>
+<span class="s">&quot;FIW&quot;</span>   <span class="c1">// Datentyp String</span>
+</code></pre></div>
+</td></tr></table>
+
+<p>Was passiert bei </p>
+<div class="highlight"><pre><span></span><code><span class="kt">double</span> <span class="n">number</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+</code></pre></div>
+
+<p>? Wir haben links eine Variable vom Typ <code>double</code> und rechts einen Wert vom Typ <code>int</code>. Die Antwort ist, dass der Compiler <em>implizit</em> den Wert <code>4</code> in den Wert <code>4.0</code> umwandelt und diesen Wert der Variablen <code>number</code> zuweist. Es findet also eine <em>implizite</em> Typkonvertierung statt. </p>
+<p><strong>Typkonvertierung</strong> </p>
+<ul>
+<li>immer, wenn in einer Zuweisung verschiedene Typen im Spiel sind, erfolgt eine Typkonvertierung</li>
+<li>der Typ, der rechts vom Zuweisungsoperator steht, muss in den Typ konvertiert werden, der links vom Zuweisungsoperator steht</li>
+<li>hier: von <code>int</code> nach <code>double</code></li>
+</ul>
+<blockquote>
+<p>Wenn von Typen mit einem kleineren Wertebereich zu Typen mit einem größeren Wertebereich umgewandelt (konvertiert) werden sollen, kann dies automatisch (implizit) erfolgen &rarr; implizite Typkonvertierung</p>
+</blockquote>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">// Beispiel Umrechnung Fahrenheit in Celsius --&gt; ohne Typkonvertierung</span>
+<span class="kd">final</span> <span class="kt">char</span> <span class="n">DEGREE_SYMBOL</span> <span class="o">=</span> <span class="sc">&#39;\u00b0&#39;</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">celsius</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">fahrenheit</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">fahrenheit</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">;</span> <span class="n">fahrenheit</span><span class="o">+=</span><span class="mi">20</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">celsius</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">*</span> <span class="p">(</span><span class="n">fahrenheit</span> <span class="o">-</span> <span class="mi">32</span><span class="p">)</span> <span class="o">/</span> <span class="mi">9</span><span class="p">;</span>
+    <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%3d %cF --&gt; %3d %cC %n&quot;</span><span class="p">,</span> <span class="n">fahrenheit</span><span class="p">,</span> <span class="n">DEGREE_SYMBOL</span><span class="p">,</span> <span class="n">celsius</span><span class="p">,</span> <span class="n">DEGREE_SYMBOL</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+
+<p>In dem Beispiel werden <code>fahrenheit</code>-Werte in <code>celsius</code>-Werte umgerechnet. Die Variablen <code>celsius</code> und <code>fahrenheit</code> und auch die Werte <code>5</code>, <code>32</code> und <code>9</code> sind vom Typ <code>int</code>. Die Berechnungen laufen ohne Typkonvertierung ab, alles bleibt im Wertebereich von <code>int</code>. Deshalb handelt es sich bei <code>(fahrenheit - 32) / 9</code> um eine <strong>ganzzahlige Division</strong>. Die Ausgabe ist wie folgt:</p>
+<div class="highlight"><pre><span></span><code>  <span class="m">0</span> °F --&gt; -17 °C 
+ <span class="m">20</span> °F --&gt;  -6 °C 
+ <span class="m">40</span> °F --&gt;   <span class="m">4</span> °C 
+ <span class="m">60</span> °F --&gt;  <span class="m">15</span> °C 
+ <span class="m">80</span> °F --&gt;  <span class="m">26</span> °C 
+<span class="m">100</span> °F --&gt;  <span class="m">37</span> °C
+</code></pre></div>
+
+<p>Wir ändern das Beispiel und deklarieren die beiden Variablen <code>fahrenheit</code> und <code>celsius</code> als <code>double</code>:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">// Beispiel Umrechnung Fahrenheit in Celsius --&gt; mit Typkonvertierung</span>
+<span class="kd">final</span> <span class="kt">char</span> <span class="n">DEGREE_SYMBOL</span> <span class="o">=</span> <span class="sc">&#39;\u00b0&#39;</span><span class="p">;</span>
+<span class="kt">double</span> <span class="n">celsius</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">for</span><span class="p">(</span><span class="kt">double</span> <span class="n">fahrenheit</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">fahrenheit</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">;</span> <span class="n">fahrenheit</span><span class="o">+=</span><span class="mi">20</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">celsius</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">*</span> <span class="p">(</span><span class="n">fahrenheit</span> <span class="o">-</span> <span class="mi">32</span><span class="p">)</span> <span class="o">/</span> <span class="mi">9</span><span class="p">;</span>
+    <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%6.2f %cF --&gt; %7.3f %cC %n&quot;</span><span class="p">,</span> <span class="n">fahrenheit</span><span class="p">,</span> <span class="n">DEGREE_SYMBOL</span><span class="p">,</span> <span class="n">celsius</span><span class="p">,</span> <span class="n">DEGREE_SYMBOL</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+
+<p>Dadurch ergibt sich eine andere Ausgabe (die Platzhalter in <code>printf()</code> mussten auch angepasst werden):</p>
+<div class="highlight"><pre><span></span><code>  <span class="m">0</span>,00 °F --&gt; -17,778 °C 
+ <span class="m">20</span>,00 °F --&gt;  -6,667 °C 
+ <span class="m">40</span>,00 °F --&gt;   <span class="m">4</span>,444 °C 
+ <span class="m">60</span>,00 °F --&gt;  <span class="m">15</span>,556 °C 
+ <span class="m">80</span>,00 °F --&gt;  <span class="m">26</span>,667 °C 
+<span class="m">100</span>,00 °F --&gt;  <span class="m">37</span>,778 °C
+</code></pre></div>
+
+<p>Was ist passiert? Dadurch, dass in der Wertezuweisung <code>celsius = 5 * (fahrenheit - 32) / 9;</code> auf der linken Seite ein <code>double</code> steht, wird der gesamte Ausdruck auf der rechten Seite in ein <code>double</code> <em>konvertiert</em>. Das würde aber erst <strong>nach</strong> Ausrechnen des Ausdrucks erfolgen, wenn nicht auch <code>fahrenheit</code> ein <code>double</code> wäre. Es passiert folgendes:</p>
+<ul>
+<li>zuerst wird der Ausdruck <code>(fahrenheit - 32)</code> aufgelöst, da er in Klammern steht. Hier ist die Operation <code>double - int</code>. Sobald einer der beiden Operanden ein <code>double</code> ist, wird der <code>double</code>-Operator <code>-</code> verwendet &rarr; dazu wird die <code>32</code> in eine <code>32.0</code> konvertiert &rarr; das Ergebnis ist ein <code>double</code></li>
+<li>dann wird von links nach rechts aufgelöst, also zunächst <code>5 * double</code>. Auch hier ist die Operation also <code>int * double</code>, d.h. <code>double</code>-Multiplikation und somit wird aus der <code>5</code> eine <code>5.0</code>. Das Ergebnis dieser Multiplikation ist <code>double</code></li>
+<li>dann erfolgt die Berechnung von <code>double / 9</code>. Wenn einer der beiden Operanden ein <code>double</code> ist, handelt es sich bei der Division um eine <strong>Gleikommadivision</strong>. Also gibt es auch Nachkommastellen &rarr; das Ergebnis ist ein <code>double</code></li>
+</ul>
+<p>Diese <em>implizite</em> Typkonvertierung macht der Compiler automatisch. <em>Implizite</em> Typkonvertierung kann immer dann erfolgen, wenn von einem <strong>schmalen</strong> in einen <strong>breiten</strong> Datentyp konvertiert wird, d.h. wenn alle Werte aus dem "schmalen" Wertebereich auch Werte aus dem "breiten" Wertebereich sind. Dies ist bei <code>int</code> (schmal) nach <code>double</code> (breit) der Fall, da alle <code>int</code>-Werte auch im <code>double</code>-Wertebereich enthalten sind. </p>
+<p>Das hier ist also kein Problem:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span> <span class="n">v1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="kt">double</span> <span class="n">v2</span> <span class="o">=</span> <span class="n">v1</span><span class="p">;</span>                 <span class="c1">// ok</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Wert von v2: &quot;</span> <span class="o">+</span> <span class="n">v2</span><span class="p">);</span>       <span class="c1">// 1.0</span>
+</code></pre></div>
+
+<p>aber das geht <strong>nicht</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">double</span> <span class="n">v3</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">v4</span> <span class="o">=</span> <span class="n">v3</span><span class="p">;</span>                    <span class="c1">// Fehler!</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Wert von v4: &quot;</span> <span class="o">+</span> <span class="n">v4</span><span class="p">);</span>
+</code></pre></div>
+
+<p>Obwohl ja die <code>1.0</code> ein Wert aus <code>int</code> darstellt, prüft der Compiler nicht den Wert, sondern den Typ. Da der <code>double</code>-Wertebereich viele Werte umfasst, die nicht Teil des Wertebereichs von <code>int</code> sind (z.B. <code>1.5</code>), kann hier keine implizite Typkonvertierung erfolgen, denn diese wäre von einem "breiten" in einen "schmalen" Datentypen. Wenn man sich jedoch ganz sicher ist, dass eine solche Typkonvertierung sinnvoll ist (z.B. kann man ja <code>1.0</code> nach <code>1</code> und somit <code>int</code> ohne Verlust umwandeln), kann eine solche Typkonvertierung <em>explizit</em> angestoßen werden.</p>
+<h3 id="explizite-typkonvertierung">Explizite Typkonvertierung<a class="headerlink" href="#explizite-typkonvertierung" title="Permanent link">&para;</a></h3>
+<p>In dem Beispiel von eben</p>
+<div class="highlight"><pre><span></span><code><span class="kt">double</span> <span class="n">v3</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">v4</span> <span class="o">=</span> <span class="n">v3</span><span class="p">;</span>                    <span class="c1">// Fehler!</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Wert von v4: &quot;</span> <span class="o">+</span> <span class="n">v4</span><span class="p">);</span>
+</code></pre></div>
+
+<p>führt der Compiler keine implizite Typkonvertierung durch. Das Programm wird gar nicht compiliert. Wenn wir nun aber wollen, dass diese Typkonvertierung trotzdem durchgeführt wird, müssen wir den <strong>Typkonvertierungsoperator</strong> (auch <em>type cast operator</em>) verwenden. Der Typkonvertierungsoperator enthält in runden Klammern den Zieltyp und steht vor dem Wert der umgewandelt werden soll:</p>
+<blockquote>
+<p><code>typ_A variable = (typ_A)wert;</code></p>
+</blockquote>
+<p>Die <code>variable</code> sei vom <code>typ_A</code> und der Wert von einem Typ, der nicht impliziert nach <code>typ_A</code> konvertiert werden kann. Unter Angabe von <code>(typ_A)</code> direkt vor dem <code>wert</code> wird der Wert <em>explizit</em> in <code>typ_A</code> konvertiert. </p>
+<p>Obiges Beispiel würde dann so aussehen:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">double</span> <span class="n">v3</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">v4</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">v3</span><span class="p">;</span>                   <span class="c1">// ok</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Wert von v4: &quot;</span> <span class="o">+</span> <span class="n">v4</span><span class="p">);</span>       <span class="c1">// 1</span>
+</code></pre></div>
+
+<p>Da wir wissen, dass die <code>1</code> (der von uns zugewiesene Wert von <code>v3</code>) im Wertebereich von <code>int</code> liegt, können wir den Compiler anweisen, von <code>double</code> nach <code>int</code> zu konvertieren &rarr; <em>explizite</em> Typkonvertierung. </p>
+<p>Aber <strong>Achtung!</strong> Explizite Typkonvertierung kann zu <strong>Informationsverlust</strong> führen!</p>
+<div class="highlight"><pre><span></span><code><span class="kt">double</span> <span class="n">v3</span> <span class="o">=</span> <span class="mf">1.23456</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">v4</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">v3</span><span class="p">;</span>               <span class="c1">// explizite TK</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Wert von v4: &quot;</span> <span class="o">+</span> <span class="n">v4</span><span class="p">);</span>   <span class="c1">// 1</span>
+</code></pre></div>
+
+<p>Wird ein <code>double</code> in ein <code>int</code> konvertiert, werden die Nachkommastellen einfach abgeschnitten (kein Runden!).</p>
+<p>Aber <strong>Achtung!</strong> Explizite Typkonvertierung kann zu <strong>ganz anderen Werten</strong> führen!</p>
+<div class="highlight"><pre><span></span><code><span class="kt">long</span> <span class="n">v5</span> <span class="o">=</span> <span class="mi">2147483648L</span><span class="p">;</span>                      <span class="c1">// L mit angeben!</span>
+<span class="kt">int</span> <span class="n">v6</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">v5</span><span class="p">;</span>                           <span class="c1">// 2 hoch 31</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Wert von v6: &quot;</span> <span class="o">+</span> <span class="n">v6</span><span class="p">);</span>   <span class="c1">// -2147483648</span>
+</code></pre></div>
+
+<p><code>2147483648</code> ist zwar ganzzahlig, ist aber nicht mehr Teil des Wertebereiches von <code>int</code> (um <code>1</code>zu groß) &rarr; aufgrund der <a href="./#ganzzahlige-datentypen-int-long-short-byte">internen Zahlendarstellung (Zweierkomplement)</a>, bekommt <code>v6</code> den Wert <code>-2147483648</code>.</p>
+<blockquote>
+<p>Bei expliziter Typkonvertierung muss selbständig darauf geachtet werden, dass der Wertebereich nicht überschritten bzw. nicht verlassen wird!</p>
+</blockquote>
+<h4 id="sinnvolle-anwendungen-des-typkonvertierungsoperators">Sinnvolle Anwendungen des Typkonvertierungsoperators<a class="headerlink" href="#sinnvolle-anwendungen-des-typkonvertierungsoperators" title="Permanent link">&para;</a></h4>
+<p>Angenommen, wir haben ein <code>int</code>-Array <code>ia</code> und wollen aus den Werten in diesem Array den Mittelwert berechnen. Dann wäre folgender erster Implementierungsversuch denkbar:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="o">[]</span> <span class="n">ia</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span> <span class="p">};</span>
+<span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">ia</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">index</span><span class="o">++</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">sum</span> <span class="o">=</span> <span class="n">sum</span> <span class="o">+</span> <span class="n">ia</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">double</span> <span class="n">average</span> <span class="o">=</span> <span class="n">sum</span> <span class="o">/</span> <span class="n">ia</span><span class="p">.</span><span class="na">length</span><span class="p">;</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Durchschnitt ist &quot;</span> <span class="o">+</span> <span class="n">average</span><span class="p">);</span>      <span class="c1">// 2.0</span>
+</code></pre></div>
+
+<p>Wir bilden also die Summe über alle Werte und teilen durch die Anzahl der Werte. Das entspricht der Definition des Durchschnitts. Wir überschlagen im Kopf, dass für die vier Werte <code>1</code>, <code>2</code>, <code>3</code> und <code>4</code> der Durchschnitt <code>2.5</code> ist. Ausgegeben wird aber </p>
+<div class="highlight"><pre><span></span><code>Durchschnitt ist <span class="m">2</span>.0
+</code></pre></div>
+
+<p>Das ist <strong>falsch</strong> und der Grund dafür liegt darin, dass es sich bei <code>sum / ia.length</code> um die ganzzahlige Divsion handelt, da beide Operanden vom Typ <code>int</code> sind. Eine Möglichkeit wäre, die Variable <code>sum</code> als <code>double</code> zu deklarieren. Dann haben wir bereits das gewünschte Ergebnis. Eine andere ist, einen der beiden (oder beide) explizit nach <code>double</code> zu konvertieren:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="o">[]</span> <span class="n">ia</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span> <span class="p">};</span>
+<span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">ia</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">index</span><span class="o">++</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">sum</span> <span class="o">=</span> <span class="n">sum</span> <span class="o">+</span> <span class="n">ia</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">double</span> <span class="n">average</span> <span class="o">=</span> <span class="n">sum</span> <span class="o">/</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">ia</span><span class="p">.</span><span class="na">length</span><span class="p">;</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Durchschnitt ist &quot;</span> <span class="o">+</span> <span class="n">average</span><span class="p">);</span>      <span class="c1">// 2.5</span>
+</code></pre></div>
+
+<p>Wir haben jetzt die Länge explizit nach <code>double</code> konvertiert und somit ist einer der beiden Operanden der Division ein <code>double</code> und somit wird die Gleitkommadivision durchgeführt. Nun erhalten wir das richtige Ergebnis:
+Kopf, dass für die vier Werte <code>1</code>, <code>2</code>, <code>3</code> und <code>4</code> der Durchschnitt <code>2.5</code> ist. Ausgegeben wird aber </p>
+<div class="highlight"><pre><span></span><code>Durchschnitt ist <span class="m">2</span>.5
+</code></pre></div>
+
+<hr />
+<p>Ein anderes sinnvolles Beispiel ist die explizite Konvertierung eines <code>int</code>-Wertes nach <code>char</code>. Beides sind ganzzahlige Datentypen, aber der Wertebereich von <code>char</code> (8 Bit) umfasst viel weniger Werte als der Wertebereich von <code>int</code> (16 Bit). <code>int</code> ist der "breite" Datentyp und <code>char</code> der schmale und somit findet keine implizite Typkonvertierung von <code>int</code> nach <code>char</code> statt. Trotzdem möchte man häufig <code>int</code> in Bezug auf <code>char</code> nutzen, weil man unter Verwendung der numerischen ASCII-Codes (<code>int</code>) gut mit Zeichen "rechnen" kann:</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">ascii</span> <span class="o">=</span> <span class="mi">65</span><span class="p">;</span> <span class="n">ascii</span> <span class="o">&lt;</span> <span class="mi">91</span><span class="p">;</span> <span class="n">ascii</span><span class="o">++</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span><span class="p">)</span><span class="n">ascii</span><span class="p">;</span>
+    <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="n">c</span><span class="o">+</span><span class="s">&quot; &quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Wir müssen hier explizit konvertieren, da die implizite Typkonvertierung <code>char c = ascii;</code> nicht existiert. Das wäre also ein Fehler. Mit der expliziten Typkonvertierung klappt aber alles wie gewünscht:</p>
+<div class="highlight"><pre><span></span><code>A B C D E F G H I J K L M N O P Q R S T U V W X Y Z 
+</code></pre></div>
+
+<hr />
+<p>Hier nochmal zur Veranschaulichung, zwischen welchen Datentypen eine <em>implizite</em> Typkonvertierung durchgeführt wird:</p>
+<p><img alt="implicittypecast" src="../files/51_typecast.png" /></p>
+<p>Beachten Sie, dass von und nach <code>boolean</code> in Java keine implizite Typkonvertierung durchgeführt wird!</p>
+<p>Hier nochmal zur Veranschaulichung, zwischen welchen Datentypen eine <em>explizite</em> Typkonvertierung durchgeführt werden kann (<em>kompatible</em> Datentypen):</p>
+<p><img alt="implicittypecast" src="../files/52_typecast.png" /></p>
+<p>Beachten Sie, dass von und nach <code>boolean</code> in Java auch keine explizite Typkonvertierung möglich ist!</p>
 <div class="footnote">
 <hr />
 <ol>
@@ -1596,6 +1897,9 @@ F°
 </li>
 <li id="fn:3">
 <p>Man könnte auch nit dem kleinen Buchstaben <code>l</code> ergänzen, das macht man aber nicht, weil die Verwechselungsgefahr mit der <code>1</code> zu groß ist.&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:4">
+<p>Das ist nicht in Allen Programmiersprachen so. Beispielsweise wird in JavaScript erst zur Laufzeit ermittelt, von welchem Typ die Variable ist, denn das hängt von ihrem Wert ab. Dort kann eine Variable <code>foo="String"</code> vom Typ <code>string</code> sein und dann durch <code>foo=4</code> vom Typ <code>number</code>. Die Typisierung in solchen Programmiersprachen nennt man <em>dynamisch typisiert</em>.&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 4 in the text">&#8617;</a></p>
 </li>
 </ol>
 </div>

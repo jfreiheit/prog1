@@ -720,3 +720,12 @@ Hier sind die Themen in chronologischer Folge aufgeführt, wie wir sie auch in d
 	- diese Woche kein Video - Skript ist eh informativer (meine Meinung). Arbeiten Sie das Skript ([Arrays](./arrays/#arrays)) bitte eingehend durch! Sowohl in dem Abschnitt über [Arrays](./arrays/#arrays) als auch [hier](./uebungen/#arrays) gibt es Übungen zum Thema. 
 
 
+??? question "04.12. + 08.12.2020 - Sortieren von Arrays"
+	- siehe [**Aufgabe 4**](./aufgaben/#aufgaben_1)
+	- siehe [**Übung 5**](./uebungen/#ubungsblatter-wochenweise)
+	- siehe [**Sortieren von Arrays**](./sortieren/#sortieren-von-arrays)
+	- Bitte keinen Schreck bekommen, wenn Sie sich das Skript zu [**Sortieren von Arrays**](./sortieren/#sortieren-von-arrays) anschauen - es ist nämlich recht lang. Aber Sie müssen nur **einen** Sortieralgorithmus beherrschen. Die allermeisten wählen **Bubble-Sort** - der scheint am einfachsten zu sein. Ich habe auch extra damit angefangen. Sie müssen also tatsächlich nur **einen** Sortieralgorithmus wirklich durcharbeiten. Aber ich freue mich natürlich, wenn Sie sich die anderen auch anschauen - habe ja extra das Skript erstellt ;-). Es ist noch nicht ganz fertig - ich hoffe, ich schaffe es über's Wochenende (aber, wie gesagt, ist dann eh nur zur Information). 
+	- Sowohl in der Aufgabe als auch in der Übung gibt es jeweils einen "Pflichtteil" und einen Zusatzteil. Auch hier genügt es, wenn Sie sich jeweils auf den Pflichtteil konzentrieren. 
+	- unter dem Abschnitt zu [Variablen](./variablen/#variablen-und-datentypen) habe ich einen Unterabschnitt [**Typkonvertierung**](./variablen/#typkonvertierung-type-cast) hinzugefügt. Der ist größtenteils zur Information. Sie müssen "nur" den Typkonvertierungsoperator kennen. 
+	- Ich hoffe, dass es dieses Mal nicht zu viel ist (es sieht, wie gesagt, zunächst mehr aus als es ist). Wenn aber doch, dann sagen Sie Bescheid!
+	- für die [**Aufgabe 2**](./aufgaben/#aufgaben_1) habe ich noch ein Video erstellt und die Lösung hochgeladen
