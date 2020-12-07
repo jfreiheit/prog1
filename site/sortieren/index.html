@@ -451,6 +451,33 @@
     Merge-Sort
   </a>
   
+    <nav class="md-nav" aria-label="Merge-Sort">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rekursion" class="md-nav__link">
+    Rekursion
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#merge-sort-rekursiv" class="md-nav__link">
+    Merge-Sort rekursiv
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quicksort" class="md-nav__link">
+    Quicksort
+  </a>
+  
 </li>
       
     </ul>
@@ -590,6 +617,33 @@
         <li class="md-nav__item">
   <a href="#merge-sort" class="md-nav__link">
     Merge-Sort
+  </a>
+  
+    <nav class="md-nav" aria-label="Merge-Sort">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rekursion" class="md-nav__link">
+    Rekursion
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#merge-sort-rekursiv" class="md-nav__link">
+    Merge-Sort rekursiv
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quicksort" class="md-nav__link">
+    Quicksort
   </a>
   
 </li>
@@ -2104,6 +2158,896 @@ Aktueller <span class="nv">Index</span><span class="o">=</span> <span class="m">
 <p>Auch für den Insertion-Sort-Algorithmus gibt es Optimierungsvorschläge, von denen wir hier aber keine betrachten wollen. Wir werden uns noch einen letzten Sortier-Algorithmus anschauen, der allerdings ein wenig komplizierter auf den ersten Blick aussieht, der Merge-Sort-Algorithmus. </p>
 <hr />
 <h2 id="merge-sort">Merge-Sort<a class="headerlink" href="#merge-sort" title="Permanent link">&para;</a></h2>
+<p>In <code>Merge-Sort</code> kommt ein völlig neues Konzept hinzu, das wir noch gar nicht kennen. Es handelt sich um <em>Rekursion</em>. In der Programmierung spricht man von <em>Rekursion</em>, wenn sich eine Methode selbst wieder aufruft. </p>
+<h3 id="rekursion">Rekursion<a class="headerlink" href="#rekursion" title="Permanent link">&para;</a></h3>
+<p>Ruft sich eine Methode selbst wieder auf, sprechen wir von <em>Rekursion</em> (latein recurrere „zurücklaufen“). Das Prinzip kennen wir schon aus der Mathematik - das klassische Beispiel ist die Definition der Fakultät:</p>
+<p><img alt="fakultaet" src="../files/53_fakultaet.png" /></p>
+<p>Diese Funktion ist rekursiv definiert, d.h. in der Definition für Fakultät wird selbst wieder die Fakultät verwendet (<code>n! = n * (n-1)!</code>). Beachten Sie, dass es eine <em>Abbruchbedingung</em> für die Rekursion gibt, nämlich hier <code>1! = 1</code>, d.h. es gibt einen (oder mehrere) Wert(e) (<code>n &lt;= 1</code>), für den kein rekursicher Aufruf (keine rekursive Defintion) verwendet wird. Als Implementierung sieht diese Funktion so aus:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">fakultaet</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">fak</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">n</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">fak</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="n">fakultaet</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">fak</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+
+<p>Für <code>n&gt;1</code> wird also erneut die Methode aufgerufen, wobei der Parameterwert um <code>1</code> rediziert wird und sich somit der <em>Abbruchbedingung</em> (dem Rekursionsende) annähert. </p>
+<p><img alt="fakultaet" src="../files/54_fakultaet.png" /></p>
+<p>Wir betrachten einmal den Methodenstack bei der Ausführung der Methode für den Aufruf von <code>fakultaet(5)</code>:</p>
+<p><img alt="fakultaet" src="../files/62_fakultaet.png" /></p>
+<p>Beginnend, mit <code>fakultatet(5)</code> (links oben) wird im Ausdruck <code>5 * fakulatet(4)</code> die Methode <code>fakultatet(4)</code> aufgerufen. Darin gibt es den Ausdruck <code>4 * fakulatet(3)</code>, so dass dort <code>fakultaet(3)</code> aufgerufen wird usw. bis zum Aufruf von <code>fakulaet(1)</code>. Dieser Aufruf gibt <code>1</code> zurück. Damit wird die Ausführung der Methode <code>fakultaet(1)</code> beendet und wir landen im Stack zurück beim Aufruf von <code>fakultaet(2)</code>. Darin wird nun <code>2 * 1</code> zurückgegeben, also <code>2</code> und wir landen im Stack zurück beim Aufruf von <code>fakultaet(3)</code>. Darin wird nun <code>3 * 2</code> zurückgegeben, also <code>6</code> usw. bis der Aufruf von <code>fakultaet(5)</code> die <code>5 * 24</code>, also <code>120</code> zurückgibt. Das ist der Wert, dem der Aufruf von <code>fakultaet(5)</code> entspricht. </p>
+<p>Mit Rekursion kann nicht mehr berechnet werden als mit Iteration, d.h. die Rekursion ist kein mächtigeres Konzept als die Iteration. Alles, was mit Iteration geht, geht auch mit Rekursion und umgedreht. Manchmal sind die Algorithmen aber als Rekursion leichter zu implementieren als ohne. Beispiele dafür sind </p>
+<ul>
+<li>
+<p><code>gebeOrdnerstrukturAus(ordnerOderDatei)</code></p>
+<ul>
+<li>wenn <code>Datei</code>, dann Ende</li>
+<li>wenn <code>Ordner</code>, dann alle Unterordner ermitteln und für alle Unterordner: <code>gebeOrdnerstrukturAus(unterOrdner)</code> </li>
+</ul>
+</li>
+<li>
+<p><code>gebeBaumAus(knoten)</code></p>
+<ul>
+<li>wenn <code>Blatt</code>, dann Ende</li>
+<li>sonst:    <ul>
+<li>ermittle linkes und rechtes Kind des Knotens und rufe auf: </li>
+<li><code>gebeBaumAus(linkesKind)</code> </li>
+<li><code>gebeBaumAus(rechtesKind)</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="merge-sort-rekursiv">Merge-Sort rekursiv<a class="headerlink" href="#merge-sort-rekursiv" title="Permanent link">&para;</a></h3>
+<p>Der Merge-Sort-Algorithmus gehört zu den Algorithmen, die rekursiv besser zu implementieren sind, als iterativ. Das liegt daran, dass Merge-Sort auf dem sogenannten <em>Divide-and-Conquer</em>-Prinzip basiert. Dieses Prinzip ist eine rekursive Programmiertechnik, in dem ein großes Problem in gleichartige, aber einfachere Teilprobleme zerlegt wird. Das Grundprinzip bei <em>Divide-and-Conquer</em> ist wie folgt:</p>
+<ul>
+<li>Bestimme ein Maß für die Größe des Problems (z.B. Größe des Arrays)</li>
+<li>Finde eine kleinere Größe, für das Problem einfach zu lösen ist (z.B. kleinere Arrays)</li>
+<li>Löse die kleineren Probleme und füge die Lösungen so zusammen, dass sich die Lösung des großen Problems ergibt</li>
+</ul>
+<p>Bei Merge-Sort sieht das so aus:</p>
+<ul>
+<li>teile den Datensatz (meistens einfach halbieren)</li>
+<li>sortiere beide Datensätze</li>
+<li>füge sie zusammen (einsortieren der Größe nach)</li>
+<li>das Teilen erfolgt dabei so lange, bis der kleine Datensatz meistens nur noch aus einem einzigen Datum besteht</li>
+</ul>
+<p><img alt="fakultaet" src="../files/63_mergesort.png" /></p>
+<p>Wir betrachten ein konkretes Beispiel. Angenommen, wir wollen das Array <code>{ 2, 4, 1, 6, 8, 5, 3, 7 }</code> mithilfe von Merge-Sort sortieren:</p>
+<p><img alt="fakultaet" src="../files/64_mergesort.png" /></p>
+<p>Dann zerlegen wir das Ausgangsarray zunächst so lange, bis die einzelnen Arrays nur noch jeweils ein Element enthalten:</p>
+<p><img alt="fakultaet" src="../files/65_mergesort.png" /></p>
+<p>Das <strong>Teilen</strong> ist also einfach, wir ermitteln einfach immer die Mitte (<code>mid</code>) des Ausgangsarrays (<code>a</code>) und zwerlegen das Ausgangsarray dann in einen linken und in einen rechten Teil:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">mergesort</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">a</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">b</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="na">length</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="na">length</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>
+
+        <span class="cm">/*</span>
+<span class="cm">         * linken Teil von b in neues Array left kopieren </span>
+<span class="cm">         */</span> 
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">left</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">mid</span><span class="o">]</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">mid</span><span class="p">;</span> <span class="n">index</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">left</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">=</span> <span class="n">b</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="cm">/*</span>
+<span class="cm">         * rechten Teil von b in neues Array rechts kopieren </span>
+<span class="cm">         */</span>  
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">right</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">b</span><span class="p">.</span><span class="na">length</span> <span class="o">-</span> <span class="n">mid</span><span class="o">]</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="n">mid</span><span class="p">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">index</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">right</span><span class="o">[</span><span class="n">index</span> <span class="o">-</span> <span class="n">mid</span><span class="o">]</span> <span class="o">=</span> <span class="n">b</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="cm">/* </span>
+<span class="cm">         * jetzt haben wir zwei Arrays: left und right</span>
+<span class="cm">         * diese sollen jetzt mithilfe von mergesort()</span>
+<span class="cm">         * sortiert werden</span>
+<span class="cm">         * dazu rufen wir   mergesort für Array left </span>
+<span class="cm">         * und              mergesort für Array right </span>
+<span class="cm">         * auf. Wir bekommen sie sortiert zurück. </span>
+<span class="cm">         * </span>
+<span class="cm">         * Die Methode ruft sich selber wieder auf --&gt;</span>
+<span class="cm">         * das nennen wir Rekursion</span>
+<span class="cm">         * </span>
+<span class="cm">         */</span>
+        <span class="n">left</span> <span class="o">=</span> <span class="n">mergesort</span><span class="p">(</span><span class="n">left</span><span class="p">);</span>         <span class="c1">// hier der rekursive Aufruf fuer left</span>
+        <span class="n">right</span> <span class="o">=</span> <span class="n">mergesort</span><span class="p">(</span><span class="n">right</span><span class="p">);</span>       <span class="c1">// hier der rekursive Aufruf fuer right</span>
+
+        <span class="cm">/*</span>
+<span class="cm">         * jetzt sind left und right jeweils sortiert</span>
+<span class="cm">         * jetzt &quot;mergen&quot; wir sie so, dass insgesamt</span>
+<span class="cm">         * ein sortiertes Array entsteht, d.h. wir</span>
+<span class="cm">         * nehmen immer ein Element aus left und right und</span>
+<span class="cm">         * vergleichen sie miteinander; das kleinere kommt</span>
+<span class="cm">         * nach b, das größere bleibt noch und wir </span>
+<span class="cm">         * nehmen aus dem Array, aus dem gerade das Element </span>
+<span class="cm">         * einsortiert wurde, ein neues Element</span>
+<span class="cm">         */</span>  
+
+         <span class="cm">/* kommt gleich - siehe unten */</span>
+</code></pre></div>
+
+<p>Das <strong>Zusammenfügen</strong> (<em>merge</em>) ist bei Merge-Sort komplizierter - deshalb <em>Merge-Sort</em>. Aus dem linken und aus dem rechten Array werden jetzt jeweils die ersten Elemente betrachtet und miteinander verglichen. Das kleinere von beiden kommt in das "zusammengesetzte" (<em>merged</em>) Array, das so nach und nach sortiert wächst. </p>
+<p><img alt="fakultaet" src="../files/66_mergesort.png" /></p>
+<div class="highlight"><pre><span></span><code>        <span class="cm">/*</span>
+<span class="cm">         * jetzt sind left und right jeweils sortiert</span>
+<span class="cm">         * jetzt &quot;mergen&quot; wir sie so, dass insgesamt</span>
+<span class="cm">         * ein sortiertes Array entsteht, d.h. wir</span>
+<span class="cm">         * nehmen immer ein Element aus left und right und</span>
+<span class="cm">         * vergleichen sie miteinander; das kleinere kommt</span>
+<span class="cm">         * nach b, das größere bleibt noch und wir </span>
+<span class="cm">         * nehmen aus dem Array, aus dem gerade das Element </span>
+<span class="cm">         * einsortiert wurde, ein neues Element</span>
+<span class="cm">         */</span> 
+            <span class="kt">int</span> <span class="n">indexLeft</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="kt">int</span> <span class="n">indexRight</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="kt">int</span> <span class="n">indexB</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+            <span class="cm">/*</span>
+<span class="cm">             * merge von left und right</span>
+<span class="cm">             * solange noch in einem Elemente sind</span>
+<span class="cm">             */</span>
+            <span class="k">while</span><span class="p">(</span><span class="n">indexLeft</span> <span class="o">&lt;</span> <span class="n">left</span><span class="p">.</span><span class="na">length</span> <span class="o">&amp;&amp;</span> <span class="n">indexRight</span> <span class="o">&lt;</span> <span class="n">right</span><span class="p">.</span><span class="na">length</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">left</span><span class="o">[</span><span class="n">indexLeft</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">right</span><span class="o">[</span><span class="n">indexRight</span><span class="o">]</span><span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="n">b</span><span class="o">[</span><span class="n">indexB</span><span class="o">]</span> <span class="o">=</span> <span class="n">left</span><span class="o">[</span><span class="n">indexLeft</span><span class="o">]</span><span class="p">;</span>
+                    <span class="n">indexLeft</span><span class="o">++</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="k">else</span>
+                <span class="p">{</span>
+                    <span class="n">b</span><span class="o">[</span><span class="n">indexB</span><span class="o">]</span> <span class="o">=</span> <span class="n">right</span><span class="o">[</span><span class="n">indexRight</span><span class="o">]</span><span class="p">;</span>
+                    <span class="n">indexRight</span><span class="o">++</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="n">indexB</span><span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span>
+
+            <span class="cm">/*</span>
+<span class="cm">             * jetzt ist left oder right leer, aber in dem </span>
+<span class="cm">             * jeweils anderen sind noch Elemente</span>
+<span class="cm">             */</span>
+
+            <span class="cm">/*</span>
+<span class="cm">             * falls noch in left Elemente sind, werden sie</span>
+<span class="cm">             * jetzt nach b kopiert</span>
+<span class="cm">             */</span>
+            <span class="k">while</span><span class="p">(</span><span class="n">indexLeft</span> <span class="o">&lt;</span> <span class="n">left</span><span class="p">.</span><span class="na">length</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">b</span><span class="o">[</span><span class="n">indexB</span><span class="o">]</span> <span class="o">=</span> <span class="n">left</span><span class="o">[</span><span class="n">indexLeft</span><span class="o">]</span><span class="p">;</span>
+                <span class="n">indexLeft</span><span class="o">++</span><span class="p">;</span>
+                <span class="n">indexB</span><span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span>
+
+            <span class="cm">/*</span>
+<span class="cm">             * falls noch in right Elemente sind, werden sie</span>
+<span class="cm">             * jetzt nach b kopiert</span>
+<span class="cm">             */</span>
+            <span class="k">while</span><span class="p">(</span><span class="n">indexRight</span> <span class="o">&lt;</span> <span class="n">right</span><span class="p">.</span><span class="na">length</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">b</span><span class="o">[</span><span class="n">indexB</span><span class="o">]</span> <span class="o">=</span> <span class="n">right</span><span class="o">[</span><span class="n">indexRight</span><span class="o">]</span><span class="p">;</span>
+                <span class="n">indexRight</span><span class="o">++</span><span class="p">;</span>
+                <span class="n">indexB</span><span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">b</span><span class="p">;</span>
+    <span class="p">}</span>   
+</code></pre></div>
+
+<p>Insgesamt sieht die Implementierung von Merge-Sort also so aus:</p>
+<details><summary>mergesort(int[] a)</summary><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+ 16
+ 17
+ 18
+ 19
+ 20
+ 21
+ 22
+ 23
+ 24
+ 25
+ 26
+ 27
+ 28
+ 29
+ 30
+ 31
+ 32
+ 33
+ 34
+ 35
+ 36
+ 37
+ 38
+ 39
+ 40
+ 41
+ 42
+ 43
+ 44
+ 45
+ 46
+ 47
+ 48
+ 49
+ 50
+ 51
+ 52
+ 53
+ 54
+ 55
+ 56
+ 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">mergesort</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">a</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">b</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="na">length</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="na">length</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+
+        <span class="cm">/*</span>
+<span class="cm">         * linken Teil von b in neues Array left kopieren </span>
+<span class="cm">         */</span> 
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">left</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">mid</span><span class="o">]</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">mid</span><span class="p">;</span> <span class="n">index</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">left</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">=</span> <span class="n">b</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="cm">/*</span>
+<span class="cm">         * rechten Teil von b in neues Array rechts kopieren </span>
+<span class="cm">         */</span>  
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">right</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">b</span><span class="p">.</span><span class="na">length</span> <span class="o">-</span> <span class="n">mid</span><span class="o">]</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="n">mid</span><span class="p">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">index</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">right</span><span class="o">[</span><span class="n">index</span> <span class="o">-</span> <span class="n">mid</span><span class="o">]</span> <span class="o">=</span> <span class="n">b</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="cm">/* </span>
+<span class="cm">         * jetzt haben wir zwei Arrays: left und right</span>
+<span class="cm">         * diese sollen jetzt mithilfe von mergesort()</span>
+<span class="cm">         * sortiert werden</span>
+<span class="cm">         * dazu rufen wir   mergesort für Array left </span>
+<span class="cm">         * und              mergesort für Array right </span>
+<span class="cm">         * auf. Wir bekommen sie sortiert zurück. </span>
+<span class="cm">         * </span>
+<span class="cm">         * Die Methode ruft sich selber wieder auf --&gt;</span>
+<span class="cm">         * das nennen wir Rekursion</span>
+<span class="cm">         * </span>
+<span class="cm">         */</span>
+        <span class="n">left</span> <span class="o">=</span> <span class="n">mergesort</span><span class="p">(</span><span class="n">left</span><span class="p">);</span>
+        <span class="n">right</span> <span class="o">=</span> <span class="n">mergesort</span><span class="p">(</span><span class="n">right</span><span class="p">);</span>
+
+        <span class="cm">/*</span>
+<span class="cm">         * jetzt sind left und right jeweils sortiert</span>
+<span class="cm">         * jetzt &quot;mergen&quot; wir sie so, dass insgesamt</span>
+<span class="cm">         * ein sortiertes Array entsteht, d.h. wir</span>
+<span class="cm">         * nehmen immer ein Element aus left und right und</span>
+<span class="cm">         * vergleichen sie miteinander; das kleinere kommt</span>
+<span class="cm">         * nach b, das größere bleibt noch und wir </span>
+<span class="cm">         * nehmen aus dem Array, aus dem gerade das Element </span>
+<span class="cm">         * einsortiert wurde, ein neues Element</span>
+<span class="cm">         */</span>       
+        <span class="kt">int</span> <span class="n">indexLeft</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">indexRight</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">indexB</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+        <span class="cm">/*</span>
+<span class="cm">         * merge von left und right</span>
+<span class="cm">         * solange noch in einem Elemente sind</span>
+<span class="cm">         */</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">indexLeft</span> <span class="o">&lt;</span> <span class="n">left</span><span class="p">.</span><span class="na">length</span> <span class="o">&amp;&amp;</span> <span class="n">indexRight</span> <span class="o">&lt;</span> <span class="n">right</span><span class="p">.</span><span class="na">length</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">left</span><span class="o">[</span><span class="n">indexLeft</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">right</span><span class="o">[</span><span class="n">indexRight</span><span class="o">]</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">b</span><span class="o">[</span><span class="n">indexB</span><span class="o">]</span> <span class="o">=</span> <span class="n">left</span><span class="o">[</span><span class="n">indexLeft</span><span class="o">]</span><span class="p">;</span>
+                <span class="n">indexLeft</span><span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">else</span>
+            <span class="p">{</span>
+                <span class="n">b</span><span class="o">[</span><span class="n">indexB</span><span class="o">]</span> <span class="o">=</span> <span class="n">right</span><span class="o">[</span><span class="n">indexRight</span><span class="o">]</span><span class="p">;</span>
+                <span class="n">indexRight</span><span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="n">indexB</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="cm">/*</span>
+<span class="cm">         * jetzt ist left oder right leer, aber in dem </span>
+<span class="cm">         * jeweils anderen sind noch Elemente</span>
+<span class="cm">         */</span>
+
+        <span class="cm">/*</span>
+<span class="cm">         * falls noch in left Elemente sind, werden sie</span>
+<span class="cm">         * jetzt nach b kopiert</span>
+<span class="cm">         */</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">indexLeft</span> <span class="o">&lt;</span> <span class="n">left</span><span class="p">.</span><span class="na">length</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">b</span><span class="o">[</span><span class="n">indexB</span><span class="o">]</span> <span class="o">=</span> <span class="n">left</span><span class="o">[</span><span class="n">indexLeft</span><span class="o">]</span><span class="p">;</span>
+            <span class="n">indexLeft</span><span class="o">++</span><span class="p">;</span>
+            <span class="n">indexB</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="cm">/*</span>
+<span class="cm">         * falls noch in right Elemente sind, werden sie</span>
+<span class="cm">         * jetzt nach b kopiert</span>
+<span class="cm">         */</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">indexRight</span> <span class="o">&lt;</span> <span class="n">right</span><span class="p">.</span><span class="na">length</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">b</span><span class="o">[</span><span class="n">indexB</span><span class="o">]</span> <span class="o">=</span> <span class="n">right</span><span class="o">[</span><span class="n">indexRight</span><span class="o">]</span><span class="p">;</span>
+            <span class="n">indexRight</span><span class="o">++</span><span class="p">;</span>
+            <span class="n">indexB</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">b</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+
+</details>
+<details><summary>Sortieren.java</summary><div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">themen.arrays.sortieren</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.Random</span><span class="p">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Sortieren</span>
+<span class="p">{</span>
+    <span class="cm">/*</span>
+<span class="cm">     * aus Skript</span>
+<span class="cm">     */</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">printArray</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">a</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">String</span> <span class="n">s</span> <span class="o">=</span> <span class="s">&quot;[ &quot;</span><span class="p">;</span> 
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">index</span><span class="o">&lt;</span><span class="n">a</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">index</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">s</span> <span class="o">+</span> <span class="n">a</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">+</span> <span class="s">&quot;, &quot;</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="na">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">s</span> <span class="o">+</span> <span class="n">a</span><span class="o">[</span><span class="n">a</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">+</span> <span class="s">&quot; ]&quot;</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="cm">/*</span>
+<span class="cm">     * angepasste printArray-Methode</span>
+<span class="cm">     * hier wird davon ausgegangen, dass die Zahlen</span>
+<span class="cm">     * in dem Array nie größer als zweistellig sind</span>
+<span class="cm">     * ist hauptsächlich, damit die Ausgaben der Arrays besser</span>
+<span class="cm">     * miteinander verglichen werden können auf der Konsole</span>
+<span class="cm">     * </span>
+<span class="cm">     */</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">print</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">a</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">String</span> <span class="n">s</span> <span class="o">=</span> <span class="s">&quot;--&gt; [ &quot;</span><span class="p">;</span> 
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">index</span><span class="o">&lt;</span><span class="n">a</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">index</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">s</span> <span class="o">+</span> <span class="n">String</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="s">&quot;%2d, &quot;</span><span class="p">,</span> <span class="n">a</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="na">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">s</span> <span class="o">+</span> <span class="n">String</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="s">&quot;%2d ]&quot;</span><span class="p">,</span> <span class="n">a</span><span class="o">[</span><span class="n">a</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="cm">/*</span>
+<span class="cm">     * aus Skript</span>
+<span class="cm">     */</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">createAndFillArray</span><span class="p">(</span><span class="kt">int</span> <span class="n">length</span><span class="p">,</span> <span class="kt">int</span> <span class="n">bound</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">a</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">length</span><span class="o">]</span><span class="p">;</span>
+        <span class="n">Random</span> <span class="n">r</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Random</span><span class="p">();</span>                    
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">a</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">a</span><span class="o">[</span><span class="n">i</span><span class="o">]=</span><span class="n">r</span><span class="p">.</span><span class="na">nextInt</span><span class="p">(</span><span class="n">bound</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">a</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">copy</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">a</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">b</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">a</span><span class="p">.</span><span class="na">length</span><span class="o">]</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">index</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">b</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">b</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">bubblesortDebug</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">a</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="cm">/*</span>
+<span class="cm">         * zuerst a nach b kopieren</span>
+<span class="cm">         */</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">b</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">&quot;ori-&quot;</span><span class="p">);</span>
+        <span class="n">print</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>       <span class="c1">// Ausgangs-Array</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">();</span>
+        <span class="cm">/*</span>
+<span class="cm">         * jetzt b sortieren</span>
+<span class="cm">         * aeussere for-Schleife: Bubble-Phasen</span>
+<span class="cm">         * innere for-Schleife: Nachbarn vergleichen und eventuell tauschen</span>
+<span class="cm">         */</span>
+        <span class="kt">boolean</span> <span class="n">swapped</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">bubble</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">bubble</span><span class="o">&lt;=</span><span class="n">b</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">swapped</span><span class="p">;</span> <span class="n">bubble</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%3d. Bubble-Phase : %n----&quot;</span><span class="p">,</span> <span class="n">bubble</span><span class="p">);</span>
+            <span class="n">print</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+            <span class="n">swapped</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">index</span><span class="o">&lt;</span><span class="n">b</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="n">bubble</span><span class="p">;</span> <span class="n">index</span><span class="o">++</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">b</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">b</span><span class="o">[</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="kt">int</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">b</span><span class="o">[</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">;</span>
+                    <span class="n">b</span><span class="o">[</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">b</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="p">;</span>
+                    <span class="n">b</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+                    <span class="n">swapped</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+                    <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%3d &quot;</span><span class="p">,</span> <span class="n">index</span><span class="p">);</span>
+                    <span class="n">print</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">b</span><span class="p">;</span>
+    <span class="p">}</span>
+
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">bubblesort</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">a</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="cm">/*</span>
+<span class="cm">         * zuerst a nach b kopieren</span>
+<span class="cm">         */</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">b</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+
+        <span class="cm">/*</span>
+<span class="cm">         * jetzt b sortieren</span>
+<span class="cm">         * aeussere for-Schleife: Bubble-Phasen</span>
+<span class="cm">         * innere for-Schleife: Nachbarn vergleichen und eventuell tauschen</span>
+<span class="cm">         */</span>
+        <span class="kt">boolean</span> <span class="n">swapped</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">bubble</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">bubble</span><span class="o">&lt;=</span><span class="n">b</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">swapped</span><span class="p">;</span> <span class="n">bubble</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">swapped</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">index</span><span class="o">&lt;</span><span class="n">b</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="n">bubble</span><span class="p">;</span> <span class="n">index</span><span class="o">++</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">b</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">b</span><span class="o">[</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="kt">int</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">b</span><span class="o">[</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">;</span>
+                    <span class="n">b</span><span class="o">[</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">b</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="p">;</span>
+                    <span class="n">b</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+                    <span class="n">swapped</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">b</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">selectionsortDebug</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">a</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">b</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>  <span class="c1">// copy erzeugt eine Kopie von a und gibt diese zurueck</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">&quot;  original -----&quot;</span><span class="p">);</span>
+        <span class="n">print</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>       <span class="c1">// Ausgangs-Array</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">();</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">durchlauf</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">durchlauf</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">durchlauf</span><span class="o">++</span><span class="p">)</span>  <span class="c1">// durchlauf ist in Vorgehen j (siehe oben)</span>
+        <span class="p">{</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%3d. Durchlauf - kleinstes Element soll auf den index %2d %n----&gt; &quot;</span><span class="p">,</span> <span class="n">durchlauf</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">durchlauf</span><span class="p">);</span>
+            <span class="kt">int</span> <span class="n">minValue</span> <span class="o">=</span> <span class="n">b</span><span class="o">[</span><span class="n">durchlauf</span><span class="o">]</span><span class="p">;</span>    <span class="c1">// in minValue merken wir uns den aktuell kleinsten Wert</span>
+            <span class="kt">int</span> <span class="n">minIndex</span> <span class="o">=</span> <span class="n">durchlauf</span><span class="p">;</span>       <span class="c1">// in minIndex merken wir uns den Index des aktuell kleinsten Wertes</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="n">durchlauf</span><span class="p">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">index</span><span class="o">++</span><span class="p">)</span>  <span class="c1">// Suche nach dem kleinsten Wert</span>
+            <span class="p">{</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">minValue</span> <span class="o">&gt;</span> <span class="n">b</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="n">minValue</span> <span class="o">=</span> <span class="n">b</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="p">;</span>    <span class="c1">// aktuell kleinster Wert</span>
+                    <span class="n">minIndex</span> <span class="o">=</span> <span class="n">index</span><span class="p">;</span>       <span class="c1">// aktueller Index des kleinsten Wertes</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;kleinster Wert ist %3d auf dem Index %3d %n&quot;</span><span class="p">,</span> <span class="n">minValue</span><span class="p">,</span> <span class="n">minIndex</span><span class="p">);</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%13s : &quot;</span><span class="p">,</span> <span class="s">&quot;vor Tausch &quot;</span><span class="p">);</span> <span class="n">print</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+            <span class="c1">// jetzt den kleinsten Wert auf den Index durchlauf legen</span>
+            <span class="c1">// der Wert, der auf durchlauf lag, kommt nach minIndex</span>
+            <span class="kt">int</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">b</span><span class="o">[</span><span class="n">durchlauf</span><span class="o">]</span><span class="p">;</span>
+            <span class="n">b</span><span class="o">[</span><span class="n">durchlauf</span><span class="o">]</span> <span class="o">=</span> <span class="n">b</span><span class="o">[</span><span class="n">minIndex</span><span class="o">]</span><span class="p">;</span>
+            <span class="n">b</span><span class="o">[</span><span class="n">minIndex</span><span class="o">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%13s : &quot;</span><span class="p">,</span> <span class="s">&quot;nach Tausch &quot;</span><span class="p">);</span> <span class="n">print</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">b</span><span class="p">;</span>
+    <span class="p">}</span>
+
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">selectionsort</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">a</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">b</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>  <span class="c1">// copy erzeugt eine Kopie von a und gibt diese zurueck</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">durchlauf</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">durchlauf</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">durchlauf</span><span class="o">++</span><span class="p">)</span>  <span class="c1">// durchlauf ist in Vorgehen j (siehe oben)</span>
+        <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">minValue</span> <span class="o">=</span> <span class="n">b</span><span class="o">[</span><span class="n">durchlauf</span><span class="o">]</span><span class="p">;</span>    <span class="c1">// in minValue merken wir uns den aktuell kleinsten Wert</span>
+            <span class="kt">int</span> <span class="n">minIndex</span> <span class="o">=</span> <span class="n">durchlauf</span><span class="p">;</span>       <span class="c1">// in minIndex merken wir uns den Index des aktuell kleinsten Wertes</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="n">durchlauf</span><span class="p">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">index</span><span class="o">++</span><span class="p">)</span>  <span class="c1">// Suche nach dem kleinsten Wert</span>
+            <span class="p">{</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">minValue</span> <span class="o">&gt;</span> <span class="n">b</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="n">minValue</span> <span class="o">=</span> <span class="n">b</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="p">;</span>    <span class="c1">// aktuell kleinster Wert</span>
+                    <span class="n">minIndex</span> <span class="o">=</span> <span class="n">index</span><span class="p">;</span>       <span class="c1">// aktueller Index des kleinsten Wertes</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="c1">// jetzt den kleinsten Wert auf den Index durchlauf legen</span>
+            <span class="c1">// der Wert, der auf durchlauf lag, kommt nach minIndex</span>
+            <span class="kt">int</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">b</span><span class="o">[</span><span class="n">durchlauf</span><span class="o">]</span><span class="p">;</span>
+            <span class="n">b</span><span class="o">[</span><span class="n">durchlauf</span><span class="o">]</span> <span class="o">=</span> <span class="n">b</span><span class="o">[</span><span class="n">minIndex</span><span class="o">]</span><span class="p">;</span>
+            <span class="n">b</span><span class="o">[</span><span class="n">minIndex</span><span class="o">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">b</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">insertionsort</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">a</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">b</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>  <span class="c1">// copy erzeugt eine Kopie von a und gibt diese zurueck</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">index</span><span class="o">++</span><span class="p">)</span>  <span class="c1">// das Element von index soll an die richtige </span>
+        <span class="p">{</span>                                               <span class="c1">// Position &lt;= index eingefuegt werden</span>
+            <span class="kt">int</span> <span class="n">indexLinks</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="k">while</span><span class="p">(</span><span class="n">indexLinks</span> <span class="o">&lt;</span> <span class="n">index</span> <span class="o">&amp;&amp;</span> <span class="n">b</span><span class="o">[</span><span class="n">indexLinks</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">b</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">indexLinks</span><span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="cm">/*</span>
+<span class="cm">             * jetzt muss der Wert von b[index] an die Stelle von indexLinks eingefuegt werden</span>
+<span class="cm">             * dazu muessen alle Elemente von indexLinks bis index-1 um eins nach rechts geschoben</span>
+<span class="cm">             * werden</span>
+<span class="cm">             * wir merken uns dazu b[index] und schieben dann alle Elemente:</span>
+<span class="cm">             *  b[index-1] nach b[index]</span>
+<span class="cm">             *  b[index-2] nach b[index-1]</span>
+<span class="cm">             *  ...</span>
+<span class="cm">             *  b[indexLinks] nach b[indexLinks+1]</span>
+<span class="cm">             */</span>
+            <span class="kt">int</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">b</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="p">;</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">indexInsert</span> <span class="o">=</span> <span class="n">index</span><span class="p">;</span> <span class="n">indexInsert</span><span class="o">&gt;</span><span class="n">indexLinks</span><span class="p">;</span> <span class="n">indexInsert</span><span class="o">--</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">b</span><span class="o">[</span><span class="n">indexInsert</span><span class="o">]</span> <span class="o">=</span> <span class="n">b</span><span class="o">[</span><span class="n">indexInsert</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="n">b</span><span class="o">[</span><span class="n">indexLinks</span><span class="o">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">b</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">insertionsortDebug</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">a</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">b</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>  <span class="c1">// copy erzeugt eine Kopie von a und gibt diese zurueck</span>
+
+        <span class="n">print</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>       <span class="c1">// Ausgangs-Array</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">();</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">index</span><span class="o">++</span><span class="p">)</span>  <span class="c1">// das Element von index soll an die richtige </span>
+        <span class="p">{</span>                                               <span class="c1">// Position &lt;= index eingefuegt werden</span>
+            <span class="kt">int</span> <span class="n">indexLinks</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="k">while</span><span class="p">(</span><span class="n">indexLinks</span> <span class="o">&lt;</span> <span class="n">index</span> <span class="o">&amp;&amp;</span> <span class="n">b</span><span class="o">[</span><span class="n">indexLinks</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">b</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">indexLinks</span><span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;Aktueller Index=%3d, aktueller Wert=%3d, wird eingefügt an Index=%3d%n&quot;</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">b</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="p">,</span> <span class="n">indexLinks</span><span class="p">);</span>
+            <span class="n">print</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">();</span>
+            <span class="cm">/*</span>
+<span class="cm">             * jetzt muss der Wert von b[index] an die Stelle von indexLinks eingefuegt werden</span>
+<span class="cm">             * dazu muessen alle Elemente von indexLinks bis index-1 um eins nach rechts geschoben</span>
+<span class="cm">             * werden</span>
+<span class="cm">             * wir merken uns dazu b[index] und schieben dann alle Elemente:</span>
+<span class="cm">             *  b[index-1] nach b[index]</span>
+<span class="cm">             *  b[index-2] nach b[index-1]</span>
+<span class="cm">             *  ...</span>
+<span class="cm">             *  b[indexLinks] nach b[indexLinks+1]</span>
+<span class="cm">             */</span>
+            <span class="kt">int</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">b</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="p">;</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">indexInsert</span> <span class="o">=</span> <span class="n">index</span><span class="p">;</span> <span class="n">indexInsert</span><span class="o">&gt;</span><span class="n">indexLinks</span><span class="p">;</span> <span class="n">indexInsert</span><span class="o">--</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">b</span><span class="o">[</span><span class="n">indexInsert</span><span class="o">]</span> <span class="o">=</span> <span class="n">b</span><span class="o">[</span><span class="n">indexInsert</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="n">b</span><span class="o">[</span><span class="n">indexLinks</span><span class="o">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">b</span><span class="p">;</span>
+    <span class="p">}</span>
+
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">selectionsortOptimiert</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">a</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">b</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="na">length</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>  <span class="c1">// copy erzeugt eine Kopie von a und gibt diese zurueck</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">&quot;                    &quot;</span><span class="p">);</span><span class="n">print</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>      <span class="c1">// Ausgangs-Array</span>
+
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">durchlauf</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">durchlauf</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">.</span><span class="na">length</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span> <span class="n">durchlauf</span><span class="o">++</span><span class="p">)</span>    <span class="c1">// durchlauf ist in Vorgehen j (siehe oben)</span>
+            <span class="p">{</span>
+                <span class="kt">int</span> <span class="n">minValue</span> <span class="o">=</span> <span class="n">b</span><span class="o">[</span><span class="n">durchlauf</span><span class="o">]</span><span class="p">;</span>    <span class="c1">// in minValue merken wir uns den aktuell kleinsten Wert</span>
+                <span class="kt">int</span> <span class="n">minIndex</span> <span class="o">=</span> <span class="n">durchlauf</span><span class="p">;</span>       <span class="c1">// in minIndex merken wir uns den Index des aktuell kleinsten Wertes</span>
+                <span class="kt">int</span> <span class="n">maxValue</span> <span class="o">=</span> <span class="n">b</span><span class="o">[</span><span class="n">b</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">durchlauf</span><span class="o">]</span><span class="p">;</span> <span class="c1">// in maxValue merken wir uns den aktuell groessten Wert</span>
+                <span class="kt">int</span> <span class="n">maxIndex</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">durchlauf</span><span class="p">;</span>        <span class="c1">// in maxIndex merken wir uns den Index des aktuell groessten Wertes</span>
+                <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%3d %3d %3d %3d %3d %n&quot;</span><span class="p">,</span> <span class="n">durchlauf</span><span class="p">,</span> <span class="n">minValue</span><span class="p">,</span> <span class="n">minIndex</span><span class="p">,</span> <span class="n">maxValue</span><span class="p">,</span> <span class="n">maxIndex</span><span class="p">);</span>
+                <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="n">durchlauf</span><span class="p">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="n">durchlauf</span><span class="p">;</span> <span class="n">index</span><span class="o">++</span><span class="p">)</span>    <span class="c1">// Suche nach dem kleinsten UND groessten Wert</span>
+                <span class="p">{</span>
+                    <span class="k">if</span><span class="p">(</span><span class="n">minValue</span> <span class="o">&gt;</span> <span class="n">b</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="p">)</span>
+                    <span class="p">{</span>
+                        <span class="n">minValue</span> <span class="o">=</span> <span class="n">b</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="p">;</span>    <span class="c1">// aktuell kleinster Wert</span>
+                        <span class="n">minIndex</span> <span class="o">=</span> <span class="n">index</span><span class="p">;</span>       <span class="c1">// aktueller Index des kleinsten Wertes</span>
+                    <span class="p">}</span>
+                    <span class="k">if</span><span class="p">(</span><span class="n">maxValue</span> <span class="o">&lt;</span> <span class="n">b</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="p">)</span>
+                    <span class="p">{</span>
+                        <span class="n">maxValue</span> <span class="o">=</span> <span class="n">b</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="p">;</span>    <span class="c1">// aktuell groesster Wert</span>
+                        <span class="n">maxIndex</span> <span class="o">=</span> <span class="n">index</span><span class="p">;</span>       <span class="c1">// aktueller Index des groessten Wertes</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+                <span class="cm">/* </span>
+<span class="cm">                 * jetzt den kleinsten Wert auf den Index durchlauf legen</span>
+<span class="cm">                 * der Wert, der auf durchlauf lag, kommt nach minIndex</span>
+<span class="cm">                 * UND den groessten Wert auf den Index b.length-1-durchlauf legen</span>
+<span class="cm">                 * der Wert, der auf b.length-1-durchlauf lag, kommt nach maxIndex</span>
+<span class="cm">                 * wir müssen zunächst aber beide Werte sichern, sonst kann es zu</span>
+<span class="cm">                 * Konflikten beim Tauschen kommen!</span>
+<span class="cm">                 * </span>
+<span class="cm">                 */</span>
+                <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%3d %3d %3d %3d %3d &quot;</span><span class="p">,</span> <span class="n">durchlauf</span><span class="p">,</span> <span class="n">minValue</span><span class="p">,</span> <span class="n">minIndex</span><span class="p">,</span> <span class="n">maxValue</span><span class="p">,</span> <span class="n">maxIndex</span><span class="p">);</span>
+                <span class="kt">int</span> <span class="n">tmpMin</span> <span class="o">=</span> <span class="n">b</span><span class="o">[</span><span class="n">durchlauf</span><span class="o">]</span><span class="p">;</span>
+                <span class="kt">int</span> <span class="n">tmpMax</span> <span class="o">=</span> <span class="n">b</span><span class="o">[</span><span class="n">b</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">durchlauf</span><span class="o">]</span><span class="p">;</span>
+                <span class="n">b</span><span class="o">[</span><span class="n">durchlauf</span><span class="o">]</span> <span class="o">=</span> <span class="n">minValue</span><span class="p">;</span>
+                <span class="n">b</span><span class="o">[</span><span class="n">minIndex</span><span class="o">]</span> <span class="o">=</span> <span class="n">tmpMin</span><span class="p">;</span>
+                <span class="cm">/*</span>
+<span class="cm">                 * hier wird es sehr kompliziert</span>
+<span class="cm">                 * wenn der MaximumWert dort war, wo das neue Minimum hin kommt (Index durchlauf), </span>
+<span class="cm">                 * dann müssen wir aufpassen, dass wir den alten Wert tmpMax nicht verlieren</span>
+<span class="cm">                 * es sind jetzt nur noch 3 Werte im Spiel</span>
+<span class="cm">                 * der alte Wert von durchlauf - ist in tmpMin UND ist gleichzeitig maxValue!</span>
+<span class="cm">                 * der alte Wert von length-1-durchlauf - ist in tmpMax</span>
+<span class="cm">                 * der alte Wert von minIndex ist minValue und jetzt auf durchlauf</span>
+<span class="cm">                 * Versuchen Sie es mal ohne die Bedingung und nur</span>
+<span class="cm">                 *  b[b.length-1-durchlauf] = maxValue;</span>
+<span class="cm">                 *  b[maxIndex] = tmpMax;</span>
+<span class="cm">                 * dann sehen Sie den Fehler</span>
+<span class="cm">                 */</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">maxIndex</span> <span class="o">==</span> <span class="n">durchlauf</span><span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="n">b</span><span class="o">[</span><span class="n">b</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">durchlauf</span><span class="o">]</span> <span class="o">=</span> <span class="n">b</span><span class="o">[</span><span class="n">minIndex</span><span class="o">]</span><span class="p">;</span>
+                    <span class="n">b</span><span class="o">[</span><span class="n">minIndex</span><span class="o">]</span> <span class="o">=</span> <span class="n">tmpMax</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="k">else</span>
+                <span class="p">{</span>
+                    <span class="n">b</span><span class="o">[</span><span class="n">b</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">durchlauf</span><span class="o">]</span> <span class="o">=</span> <span class="n">maxValue</span><span class="p">;</span>
+                    <span class="n">b</span><span class="o">[</span><span class="n">maxIndex</span><span class="o">]</span> <span class="o">=</span> <span class="n">tmpMax</span><span class="p">;</span>
+                <span class="p">}</span>   
+
+                <span class="n">print</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">b</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">mergesort</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">a</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">b</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+
+        <span class="k">if</span><span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="na">length</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="na">length</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+
+            <span class="cm">/*</span>
+<span class="cm">             * linken Teil von b in neues Array left kopieren </span>
+<span class="cm">             */</span> 
+            <span class="kt">int</span><span class="o">[]</span> <span class="n">left</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">mid</span><span class="o">]</span><span class="p">;</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">mid</span><span class="p">;</span> <span class="n">index</span><span class="o">++</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">left</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">=</span> <span class="n">b</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="p">;</span>
+            <span class="p">}</span>
+
+            <span class="cm">/*</span>
+<span class="cm">             * rechten Teil von b in neues Array rechts kopieren </span>
+<span class="cm">             */</span>  
+            <span class="kt">int</span><span class="o">[]</span> <span class="n">right</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">b</span><span class="p">.</span><span class="na">length</span> <span class="o">-</span> <span class="n">mid</span><span class="o">]</span><span class="p">;</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="n">mid</span><span class="p">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">index</span><span class="o">++</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">right</span><span class="o">[</span><span class="n">index</span> <span class="o">-</span> <span class="n">mid</span><span class="o">]</span> <span class="o">=</span> <span class="n">b</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="p">;</span>
+            <span class="p">}</span>
+
+            <span class="cm">/* </span>
+<span class="cm">             * jetzt haben wir zwei Arrays: left und right</span>
+<span class="cm">             * diese sollen jetzt mithilfe von mergesort()</span>
+<span class="cm">             * sortiert werden</span>
+<span class="cm">             * dazu rufen wir   mergesort für Array left </span>
+<span class="cm">             * und              mergesort für Array right </span>
+<span class="cm">             * auf. Wir bekommen sie sortiert zurück. </span>
+<span class="cm">             * </span>
+<span class="cm">             * Die Methode ruft sich selber wieder auf --&gt;</span>
+<span class="cm">             * das nennen wir Rekursion</span>
+<span class="cm">             * </span>
+<span class="cm">             */</span>
+            <span class="n">left</span> <span class="o">=</span> <span class="n">mergesort</span><span class="p">(</span><span class="n">left</span><span class="p">);</span>
+            <span class="n">right</span> <span class="o">=</span> <span class="n">mergesort</span><span class="p">(</span><span class="n">right</span><span class="p">);</span>
+
+            <span class="cm">/*</span>
+<span class="cm">             * jetzt sind left und right jeweils sortiert</span>
+<span class="cm">             * jetzt &quot;mergen&quot; wir sie so, dass insgesamt</span>
+<span class="cm">             * ein sortiertes Array entsteht, d.h. wir</span>
+<span class="cm">             * nehmen immer ein Element aus left und right und</span>
+<span class="cm">             * vergleichen sie miteinander; das kleinere kommt</span>
+<span class="cm">             * nach b, das größere bleibt noch und wir </span>
+<span class="cm">             * nehmen aus dem Array, aus dem gerade das Element </span>
+<span class="cm">             * einsortiert wurde, ein neues Element</span>
+<span class="cm">             */</span>       
+            <span class="kt">int</span> <span class="n">indexLeft</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="kt">int</span> <span class="n">indexRight</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="kt">int</span> <span class="n">indexB</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+            <span class="cm">/*</span>
+<span class="cm">             * merge von left und right</span>
+<span class="cm">             * solange noch in einem Elemente sind</span>
+<span class="cm">             */</span>
+            <span class="k">while</span><span class="p">(</span><span class="n">indexLeft</span> <span class="o">&lt;</span> <span class="n">left</span><span class="p">.</span><span class="na">length</span> <span class="o">&amp;&amp;</span> <span class="n">indexRight</span> <span class="o">&lt;</span> <span class="n">right</span><span class="p">.</span><span class="na">length</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">left</span><span class="o">[</span><span class="n">indexLeft</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">right</span><span class="o">[</span><span class="n">indexRight</span><span class="o">]</span><span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="n">b</span><span class="o">[</span><span class="n">indexB</span><span class="o">]</span> <span class="o">=</span> <span class="n">left</span><span class="o">[</span><span class="n">indexLeft</span><span class="o">]</span><span class="p">;</span>
+                    <span class="n">indexLeft</span><span class="o">++</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="k">else</span>
+                <span class="p">{</span>
+                    <span class="n">b</span><span class="o">[</span><span class="n">indexB</span><span class="o">]</span> <span class="o">=</span> <span class="n">right</span><span class="o">[</span><span class="n">indexRight</span><span class="o">]</span><span class="p">;</span>
+                    <span class="n">indexRight</span><span class="o">++</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="n">indexB</span><span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span>
+
+            <span class="cm">/*</span>
+<span class="cm">             * jetzt ist left oder right leer, aber in dem </span>
+<span class="cm">             * jeweils anderen sind noch Elemente</span>
+<span class="cm">             */</span>
+
+            <span class="cm">/*</span>
+<span class="cm">             * falls noch in left Elemente sind, werden sie</span>
+<span class="cm">             * jetzt nach b kopiert</span>
+<span class="cm">             */</span>
+            <span class="k">while</span><span class="p">(</span><span class="n">indexLeft</span> <span class="o">&lt;</span> <span class="n">left</span><span class="p">.</span><span class="na">length</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">b</span><span class="o">[</span><span class="n">indexB</span><span class="o">]</span> <span class="o">=</span> <span class="n">left</span><span class="o">[</span><span class="n">indexLeft</span><span class="o">]</span><span class="p">;</span>
+                <span class="n">indexLeft</span><span class="o">++</span><span class="p">;</span>
+                <span class="n">indexB</span><span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span>
+
+            <span class="cm">/*</span>
+<span class="cm">             * falls noch in right Elemente sind, werden sie</span>
+<span class="cm">             * jetzt nach b kopiert</span>
+<span class="cm">             */</span>
+            <span class="k">while</span><span class="p">(</span><span class="n">indexRight</span> <span class="o">&lt;</span> <span class="n">right</span><span class="p">.</span><span class="na">length</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">b</span><span class="o">[</span><span class="n">indexB</span><span class="o">]</span> <span class="o">=</span> <span class="n">right</span><span class="o">[</span><span class="n">indexRight</span><span class="o">]</span><span class="p">;</span>
+                <span class="n">indexRight</span><span class="o">++</span><span class="p">;</span>
+                <span class="n">indexB</span><span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">b</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">fakultaet</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">fak</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">n</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">fak</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="n">fakultaet</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">fak</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">unsorted</span> <span class="o">=</span> <span class="n">createAndFillArray</span><span class="p">(</span><span class="mi">21</span><span class="p">,</span> <span class="mi">50</span><span class="p">);</span>
+
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%n%n--------------- bubblesort ----------------------%n%n&quot;</span><span class="p">);</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">sorted</span> <span class="o">=</span> <span class="n">bubblesort</span><span class="p">(</span><span class="n">unsorted</span><span class="p">);</span>
+        <span class="n">printArray</span><span class="p">(</span><span class="n">unsorted</span><span class="p">);</span>
+        <span class="n">printArray</span><span class="p">(</span><span class="n">sorted</span><span class="p">);</span>
+
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%n%n--------------- selectionsort ----------------------%n%n&quot;</span><span class="p">);</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">us</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">41</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">41</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">29</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span>  <span class="mi">5</span><span class="p">,</span>  <span class="mi">6</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span>  <span class="mi">3</span> <span class="p">};</span>
+        <span class="n">sorted</span> <span class="o">=</span> <span class="n">selectionsortOptimiert</span><span class="p">(</span><span class="n">unsorted</span><span class="p">);</span>
+        <span class="n">printArray</span><span class="p">(</span><span class="n">unsorted</span><span class="p">);</span>
+        <span class="n">printArray</span><span class="p">(</span><span class="n">sorted</span><span class="p">);</span>
+
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%n%n--------------- insertionsort ----------------------%n%n&quot;</span><span class="p">);</span>
+        <span class="n">sorted</span> <span class="o">=</span> <span class="n">insertionsortDebug</span><span class="p">(</span><span class="n">unsorted</span><span class="p">);</span>
+        <span class="n">printArray</span><span class="p">(</span><span class="n">unsorted</span><span class="p">);</span>
+        <span class="n">printArray</span><span class="p">(</span><span class="n">sorted</span><span class="p">);</span>
+
+
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%n%n--------------- mergesort ----------------------%n%n&quot;</span><span class="p">);</span>
+        <span class="n">sorted</span> <span class="o">=</span> <span class="n">mergesort</span><span class="p">(</span><span class="n">unsorted</span><span class="p">);</span>
+        <span class="n">printArray</span><span class="p">(</span><span class="n">unsorted</span><span class="p">);</span>
+        <span class="n">printArray</span><span class="p">(</span><span class="n">sorted</span><span class="p">);</span>
+
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">fakultaet</span><span class="p">(</span><span class="mi">5</span><span class="p">));</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+
+</details>
+<h2 id="quicksort">Quicksort<a class="headerlink" href="#quicksort" title="Permanent link">&para;</a></h2>
+<p>Ein Sortier-Algorithmus, der ebenfalls auf dem <em>Divide-and-Conquer</em>-Prinzip berucht, ist <a href="https://de.wikipedia.org/wiki/Quicksort">Quicksort</a>. Bei Quicksort ist, im Gegensatz zu Merge-Sort, das Teilen kompliziert und das Zusammenfügen einfach. Die Methode <code>sort()</code> der Klasse <code>Arrays</code> verwendet Quicksort. Wir gehen hier aber aus Zeitgründen nicht weiter auf den Algroithmus ein. Sie können sich aber gerne darüber selbständig informieren. Es gibt viele Implementierungen und Erläuterungen davon im Netz, z.B. <a href="https://www.codeflow.site/de/article/java-quicksort">hier</a>, <a href="https://javabeginners.de/Algorithmen/Sortieralgorithmen/Quicksort.php">hier</a> und <a href="https://studyflix.de/informatik/quicksort-1322">hier</a>.</p>
                 
               
               

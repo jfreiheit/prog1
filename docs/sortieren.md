@@ -1402,3 +1402,800 @@ Auch für den Insertion-Sort-Algorithmus gibt es Optimierungsvorschläge, von de
 
 ## Merge-Sort
 
+In `Merge-Sort` kommt ein völlig neues Konzept hinzu, das wir noch gar nicht kennen. Es handelt sich um *Rekursion*. In der Programmierung spricht man von *Rekursion*, wenn sich eine Methode selbst wieder aufruft. 
+
+### Rekursion
+
+Ruft sich eine Methode selbst wieder auf, sprechen wir von *Rekursion* (latein recurrere „zurücklaufen“). Das Prinzip kennen wir schon aus der Mathematik - das klassische Beispiel ist die Definition der Fakultät:
+
+![fakultaet](./files/53_fakultaet.png)
+
+Diese Funktion ist rekursiv definiert, d.h. in der Definition für Fakultät wird selbst wieder die Fakultät verwendet (`n! = n * (n-1)!`). Beachten Sie, dass es eine *Abbruchbedingung* für die Rekursion gibt, nämlich hier `1! = 1`, d.h. es gibt einen (oder mehrere) Wert(e) (`n <= 1`), für den kein rekursicher Aufruf (keine rekursive Defintion) verwendet wird. Als Implementierung sieht diese Funktion so aus:
+
+```java linenums="1"
+public static int fakultaet(int n)
+{
+	int fak = 1;
+	if(n>1)
+	{
+		fak = n * fakultaet(n-1);
+	}
+	return fak;
+}
+```
+
+Für `n>1` wird also erneut die Methode aufgerufen, wobei der Parameterwert um `1` rediziert wird und sich somit der *Abbruchbedingung* (dem Rekursionsende) annähert. 
+
+![fakultaet](./files/54_fakultaet.png)
+
+Wir betrachten einmal den Methodenstack bei der Ausführung der Methode für den Aufruf von `fakultaet(5)`:
+
+![fakultaet](./files/62_fakultaet.png)
+
+Beginnend, mit `fakultatet(5)` (links oben) wird im Ausdruck `5 * fakulatet(4)` die Methode `fakultatet(4)` aufgerufen. Darin gibt es den Ausdruck `4 * fakulatet(3)`, so dass dort `fakultaet(3)` aufgerufen wird usw. bis zum Aufruf von `fakulaet(1)`. Dieser Aufruf gibt `1` zurück. Damit wird die Ausführung der Methode `fakultaet(1)` beendet und wir landen im Stack zurück beim Aufruf von `fakultaet(2)`. Darin wird nun `2 * 1` zurückgegeben, also `2` und wir landen im Stack zurück beim Aufruf von `fakultaet(3)`. Darin wird nun `3 * 2` zurückgegeben, also `6` usw. bis der Aufruf von `fakultaet(5)` die `5 * 24`, also `120` zurückgibt. Das ist der Wert, dem der Aufruf von `fakultaet(5)` entspricht. 
+
+Mit Rekursion kann nicht mehr berechnet werden als mit Iteration, d.h. die Rekursion ist kein mächtigeres Konzept als die Iteration. Alles, was mit Iteration geht, geht auch mit Rekursion und umgedreht. Manchmal sind die Algorithmen aber als Rekursion leichter zu implementieren als ohne. Beispiele dafür sind 
+
+- `gebeOrdnerstrukturAus(ordnerOderDatei)`
+	- wenn `Datei`, dann Ende
+	- wenn `Ordner`, dann alle Unterordner ermitteln und für alle Unterordner: `gebeOrdnerstrukturAus(unterOrdner)` 
+
+- `gebeBaumAus(knoten)`
+	- wenn `Blatt`, dann Ende
+	- sonst:    
+		- ermittle linkes und rechtes Kind des Knotens und rufe auf: 
+		- `gebeBaumAus(linkesKind)` 
+		- `gebeBaumAus(rechtesKind)`
+
+
+### Merge-Sort rekursiv
+
+Der Merge-Sort-Algorithmus gehört zu den Algorithmen, die rekursiv besser zu implementieren sind, als iterativ. Das liegt daran, dass Merge-Sort auf dem sogenannten *Divide-and-Conquer*-Prinzip basiert. Dieses Prinzip ist eine rekursive Programmiertechnik, in dem ein großes Problem in gleichartige, aber einfachere Teilprobleme zerlegt wird. Das Grundprinzip bei *Divide-and-Conquer* ist wie folgt:
+
+- Bestimme ein Maß für die Größe des Problems (z.B. Größe des Arrays)
+- Finde eine kleinere Größe, für das Problem einfach zu lösen ist (z.B. kleinere Arrays)
+- Löse die kleineren Probleme und füge die Lösungen so zusammen, dass sich die Lösung des großen Problems ergibt
+
+Bei Merge-Sort sieht das so aus:
+
+- teile den Datensatz (meistens einfach halbieren)
+- sortiere beide Datensätze
+- füge sie zusammen (einsortieren der Größe nach)
+- das Teilen erfolgt dabei so lange, bis der kleine Datensatz meistens nur noch aus einem einzigen Datum besteht
+
+![fakultaet](./files/63_mergesort.png)
+
+Wir betrachten ein konkretes Beispiel. Angenommen, wir wollen das Array `{ 2, 4, 1, 6, 8, 5, 3, 7 }` mithilfe von Merge-Sort sortieren:
+
+![fakultaet](./files/64_mergesort.png)
+
+Dann zerlegen wir das Ausgangsarray zunächst so lange, bis die einzelnen Arrays nur noch jeweils ein Element enthalten:
+
+![fakultaet](./files/65_mergesort.png)
+
+Das **Teilen** ist also einfach, wir ermitteln einfach immer die Mitte (`mid`) des Ausgangsarrays (`a`) und zwerlegen das Ausgangsarray dann in einen linken und in einen rechten Teil:
+
+```java
+public int[] mergesort(int[] a)
+{
+	int[] b = copy(a);
+
+	if(b.length > 1)
+	{
+		int mid = b.length/2;
+
+		/*
+		 * linken Teil von b in neues Array left kopieren 
+		 */	
+		int[] left = new int[mid];
+		for(int index = 0; index < mid; index++)
+		{
+			left[index] = b[index];
+		}
+
+		/*
+		 * rechten Teil von b in neues Array rechts kopieren 
+		 */	 
+		int[] right = new int[b.length - mid];
+		for(int index = mid; index < b.length; index++)
+		{
+			right[index - mid] = b[index];
+		}
+
+		/* 
+		 * jetzt haben wir zwei Arrays: left und right
+		 * diese sollen jetzt mithilfe von mergesort()
+		 * sortiert werden
+		 * dazu rufen wir   mergesort für Array left 
+		 * und				mergesort für Array right 
+		 * auf. Wir bekommen sie sortiert zurück. 
+		 * 
+		 * Die Methode ruft sich selber wieder auf -->
+		 * das nennen wir Rekursion
+		 * 
+		 */
+		left = mergesort(left);			// hier der rekursive Aufruf fuer left
+		right = mergesort(right);		// hier der rekursive Aufruf fuer right
+
+		/*
+		 * jetzt sind left und right jeweils sortiert
+		 * jetzt "mergen" wir sie so, dass insgesamt
+		 * ein sortiertes Array entsteht, d.h. wir
+		 * nehmen immer ein Element aus left und right und
+		 * vergleichen sie miteinander; das kleinere kommt
+		 * nach b, das größere bleibt noch und wir 
+		 * nehmen aus dem Array, aus dem gerade das Element 
+		 * einsortiert wurde, ein neues Element
+		 */  
+
+		 /* kommt gleich - siehe unten */
+``` 
+
+Das **Zusammenfügen** (*merge*) ist bei Merge-Sort komplizierter - deshalb *Merge-Sort*. Aus dem linken und aus dem rechten Array werden jetzt jeweils die ersten Elemente betrachtet und miteinander verglichen. Das kleinere von beiden kommt in das "zusammengesetzte" (*merged*) Array, das so nach und nach sortiert wächst. 
+
+![fakultaet](./files/66_mergesort.png)
+
+
+```java
+		/*
+		 * jetzt sind left und right jeweils sortiert
+		 * jetzt "mergen" wir sie so, dass insgesamt
+		 * ein sortiertes Array entsteht, d.h. wir
+		 * nehmen immer ein Element aus left und right und
+		 * vergleichen sie miteinander; das kleinere kommt
+		 * nach b, das größere bleibt noch und wir 
+		 * nehmen aus dem Array, aus dem gerade das Element 
+		 * einsortiert wurde, ein neues Element
+		 */ 
+			int indexLeft = 0;
+			int indexRight = 0;
+			int indexB = 0;
+
+			/*
+			 * merge von left und right
+			 * solange noch in einem Elemente sind
+			 */
+			while(indexLeft < left.length && indexRight < right.length)
+			{
+				if(left[indexLeft] < right[indexRight])
+				{
+					b[indexB] = left[indexLeft];
+					indexLeft++;
+				}
+				else
+				{
+					b[indexB] = right[indexRight];
+					indexRight++;
+				}
+				indexB++;
+			}
+
+			/*
+			 * jetzt ist left oder right leer, aber in dem 
+			 * jeweils anderen sind noch Elemente
+			 */
+
+			/*
+			 * falls noch in left Elemente sind, werden sie
+			 * jetzt nach b kopiert
+			 */
+			while(indexLeft < left.length)
+			{
+				b[indexB] = left[indexLeft];
+				indexLeft++;
+				indexB++;
+			}
+
+			/*
+			 * falls noch in right Elemente sind, werden sie
+			 * jetzt nach b kopiert
+			 */
+			while(indexRight < right.length)
+			{
+				b[indexB] = right[indexRight];
+				indexRight++;
+				indexB++;
+			}
+		}
+		return b;
+	}	
+``` 
+
+Insgesamt sieht die Implementierung von Merge-Sort also so aus:
+
+??? "mergesort(int[] a)"
+	```java linenums="1"
+	public static int[] mergesort(int[] a)
+	{
+		int[] b = copy(a);
+
+		if(b.length > 1)
+		{
+			int mid = b.length / 2;
+
+			/*
+			 * linken Teil von b in neues Array left kopieren 
+			 */	
+			int[] left = new int[mid];
+			for(int index = 0; index < mid; index++)
+			{
+				left[index] = b[index];
+			}
+
+			/*
+			 * rechten Teil von b in neues Array rechts kopieren 
+			 */	 
+			int[] right = new int[b.length - mid];
+			for(int index = mid; index < b.length; index++)
+			{
+				right[index - mid] = b[index];
+			}
+
+			/* 
+			 * jetzt haben wir zwei Arrays: left und right
+			 * diese sollen jetzt mithilfe von mergesort()
+			 * sortiert werden
+			 * dazu rufen wir   mergesort für Array left 
+			 * und				mergesort für Array right 
+			 * auf. Wir bekommen sie sortiert zurück. 
+			 * 
+			 * Die Methode ruft sich selber wieder auf -->
+			 * das nennen wir Rekursion
+			 * 
+			 */
+			left = mergesort(left);
+			right = mergesort(right);
+
+			/*
+			 * jetzt sind left und right jeweils sortiert
+			 * jetzt "mergen" wir sie so, dass insgesamt
+			 * ein sortiertes Array entsteht, d.h. wir
+			 * nehmen immer ein Element aus left und right und
+			 * vergleichen sie miteinander; das kleinere kommt
+			 * nach b, das größere bleibt noch und wir 
+			 * nehmen aus dem Array, aus dem gerade das Element 
+			 * einsortiert wurde, ein neues Element
+			 */       
+			int indexLeft = 0;
+			int indexRight = 0;
+			int indexB = 0;
+
+			/*
+			 * merge von left und right
+			 * solange noch in einem Elemente sind
+			 */
+			while(indexLeft < left.length && indexRight < right.length)
+			{
+				if(left[indexLeft] < right[indexRight])
+				{
+					b[indexB] = left[indexLeft];
+					indexLeft++;
+				}
+				else
+				{
+					b[indexB] = right[indexRight];
+					indexRight++;
+				}
+				indexB++;
+			}
+
+			/*
+			 * jetzt ist left oder right leer, aber in dem 
+			 * jeweils anderen sind noch Elemente
+			 */
+
+			/*
+			 * falls noch in left Elemente sind, werden sie
+			 * jetzt nach b kopiert
+			 */
+			while(indexLeft < left.length)
+			{
+				b[indexB] = left[indexLeft];
+				indexLeft++;
+				indexB++;
+			}
+
+			/*
+			 * falls noch in right Elemente sind, werden sie
+			 * jetzt nach b kopiert
+			 */
+			while(indexRight < right.length)
+			{
+				b[indexB] = right[indexRight];
+				indexRight++;
+				indexB++;
+			}
+		}
+		return b;
+	}
+	```
+
+??? "Sortieren.java"
+	```java
+	package themen.arrays.sortieren;
+
+	import java.util.Random;
+
+	public class Sortieren
+	{
+		/*
+		 * aus Skript
+		 */
+		public static void printArray(int[] a)
+		{
+			String s = "[ "; 
+			for(int index=0; index<a.length-1; index++)
+			{
+				s = s + a[index] + ", ";
+			}
+			if(a.length > 0)
+			{
+				s = s + a[a.length-1] + " ]";
+			}
+			System.out.println(s);
+		}
+
+		/*
+		 * angepasste printArray-Methode
+		 * hier wird davon ausgegangen, dass die Zahlen
+		 * in dem Array nie größer als zweistellig sind
+		 * ist hauptsächlich, damit die Ausgaben der Arrays besser
+		 * miteinander verglichen werden können auf der Konsole
+		 * 
+		 */
+		public static void print(int[] a)
+		{
+			String s = "--> [ "; 
+			for(int index=0; index<a.length-1; index++)
+			{
+				s = s + String.format("%2d, ", a[index]);
+			}
+			if(a.length > 0)
+			{
+				s = s + String.format("%2d ]", a[a.length-1]);
+			}
+			System.out.println(s);
+		}
+
+		/*
+		 * aus Skript
+		 */
+		public static int[] createAndFillArray(int length, int bound)
+		{
+			int[] a = new int[length];
+			Random r = new Random();					
+			for(int i=0; i<a.length; i++)
+			{
+				a[i]=r.nextInt(bound);
+			}
+			return a;
+		}
+
+		public static int[] copy(int[] a)
+		{
+			int[] b = new int[a.length];
+			for (int index = 0; index < b.length; index++)
+			{
+				b[index] = a[index];
+			}
+			return b;
+		}
+
+		public static int[] bubblesortDebug(int[] a)
+		{
+			/*
+			 * zuerst a nach b kopieren
+			 */
+			int[] b = copy(a);
+
+			System.out.print("ori-");
+			print(b);		// Ausgangs-Array
+			System.out.println();
+			/*
+			 * jetzt b sortieren
+			 * aeussere for-Schleife: Bubble-Phasen
+			 * innere for-Schleife: Nachbarn vergleichen und eventuell tauschen
+			 */
+			boolean swapped = true;
+			for(int bubble=1; bubble<=b.length-1 && swapped; bubble++)
+			{
+				System.out.printf("%3d. Bubble-Phase : %n----", bubble);
+				print(b);
+				swapped = false;
+				for(int index=0; index<b.length-bubble; index++)
+				{
+					if(b[index] > b[index+1])
+					{
+						int tmp = b[index+1];
+						b[index+1] = b[index];
+						b[index] = tmp;
+						swapped = true;
+						System.out.printf("%3d ", index);
+						print(b);
+					}
+				}
+				System.out.println();
+			}
+			return b;
+		}
+
+
+		public static int[] bubblesort(int[] a)
+		{
+			/*
+			 * zuerst a nach b kopieren
+			 */
+			int[] b = copy(a);
+
+			/*
+			 * jetzt b sortieren
+			 * aeussere for-Schleife: Bubble-Phasen
+			 * innere for-Schleife: Nachbarn vergleichen und eventuell tauschen
+			 */
+			boolean swapped = true;
+			for(int bubble=1; bubble<=b.length-1 && swapped; bubble++)
+			{
+				swapped = false;
+				for(int index=0; index<b.length-bubble; index++)
+				{
+					if(b[index] > b[index+1])
+					{
+						int tmp = b[index+1];
+						b[index+1] = b[index];
+						b[index] = tmp;
+						swapped = true;
+					}
+				}
+			}
+			return b;
+		}
+
+		public static int[] selectionsortDebug(int[] a)
+		{
+			int[] b = copy(a);  // copy erzeugt eine Kopie von a und gibt diese zurueck
+			System.out.print("  original -----");
+			print(b);		// Ausgangs-Array
+			System.out.println();
+
+			for (int durchlauf = 0; durchlauf < b.length; durchlauf++)	// durchlauf ist in Vorgehen j (siehe oben)
+			{
+				System.out.printf("%3d. Durchlauf - kleinstes Element soll auf den index %2d %n----> ", durchlauf+1, durchlauf);
+				int minValue = b[durchlauf];	// in minValue merken wir uns den aktuell kleinsten Wert
+				int minIndex = durchlauf;		// in minIndex merken wir uns den Index des aktuell kleinsten Wertes
+				for (int index = durchlauf; index < b.length; index++)	// Suche nach dem kleinsten Wert
+				{
+					if(minValue > b[index])
+					{
+						minValue = b[index];	// aktuell kleinster Wert
+						minIndex = index;		// aktueller Index des kleinsten Wertes
+					}
+				}
+				System.out.printf("kleinster Wert ist %3d auf dem Index %3d %n", minValue, minIndex);
+				System.out.printf("%13s : ", "vor Tausch "); print(b);
+				// jetzt den kleinsten Wert auf den Index durchlauf legen
+				// der Wert, der auf durchlauf lag, kommt nach minIndex
+				int tmp = b[durchlauf];
+				b[durchlauf] = b[minIndex];
+				b[minIndex] = tmp;
+				System.out.printf("%13s : ", "nach Tausch "); print(b);
+				System.out.println();
+			}
+			return b;
+		}
+
+
+		public static int[] selectionsort(int[] a)
+		{
+			int[] b = copy(a);  // copy erzeugt eine Kopie von a und gibt diese zurueck
+
+			for (int durchlauf = 0; durchlauf < b.length; durchlauf++)	// durchlauf ist in Vorgehen j (siehe oben)
+			{
+				int minValue = b[durchlauf];	// in minValue merken wir uns den aktuell kleinsten Wert
+				int minIndex = durchlauf;		// in minIndex merken wir uns den Index des aktuell kleinsten Wertes
+				for (int index = durchlauf; index < b.length; index++)	// Suche nach dem kleinsten Wert
+				{
+					if(minValue > b[index])
+					{
+						minValue = b[index];	// aktuell kleinster Wert
+						minIndex = index;		// aktueller Index des kleinsten Wertes
+					}
+				}
+				// jetzt den kleinsten Wert auf den Index durchlauf legen
+				// der Wert, der auf durchlauf lag, kommt nach minIndex
+				int tmp = b[durchlauf];
+				b[durchlauf] = b[minIndex];
+				b[minIndex] = tmp;
+			}
+			return b;
+		}
+
+		public static int[] insertionsort(int[] a)
+		{
+			int[] b = copy(a);  // copy erzeugt eine Kopie von a und gibt diese zurueck
+
+			for (int index = 1; index < b.length; index++)	// das Element von index soll an die richtige 
+			{												// Position <= index eingefuegt werden
+				int indexLinks = 0;
+				while(indexLinks < index && b[indexLinks] < b[index])
+				{
+					indexLinks++;
+				}
+				/*
+				 * jetzt muss der Wert von b[index] an die Stelle von indexLinks eingefuegt werden
+				 * dazu muessen alle Elemente von indexLinks bis index-1 um eins nach rechts geschoben
+				 * werden
+				 * wir merken uns dazu b[index] und schieben dann alle Elemente:
+				 *  b[index-1] nach b[index]
+				 *  b[index-2] nach b[index-1]
+				 *  ...
+				 *  b[indexLinks] nach b[indexLinks+1]
+				 */
+				int tmp = b[index];
+				for(int indexInsert = index; indexInsert>indexLinks; indexInsert--)
+				{
+					b[indexInsert] = b[indexInsert-1];
+				}
+				b[indexLinks] = tmp;
+			}
+			return b;
+		}
+
+		public static int[] insertionsortDebug(int[] a)
+		{
+			int[] b = copy(a);  // copy erzeugt eine Kopie von a und gibt diese zurueck
+
+			print(b);		// Ausgangs-Array
+			System.out.println();
+
+			for (int index = 1; index < b.length; index++)	// das Element von index soll an die richtige 
+			{												// Position <= index eingefuegt werden
+				int indexLinks = 0;
+				while(indexLinks < index && b[indexLinks] < b[index])
+				{
+					indexLinks++;
+				}
+				System.out.printf("Aktueller Index=%3d, aktueller Wert=%3d, wird eingefügt an Index=%3d%n", index, b[index], indexLinks);
+				print(b);
+				System.out.println();
+				/*
+				 * jetzt muss der Wert von b[index] an die Stelle von indexLinks eingefuegt werden
+				 * dazu muessen alle Elemente von indexLinks bis index-1 um eins nach rechts geschoben
+				 * werden
+				 * wir merken uns dazu b[index] und schieben dann alle Elemente:
+				 *  b[index-1] nach b[index]
+				 *  b[index-2] nach b[index-1]
+				 *  ...
+				 *  b[indexLinks] nach b[indexLinks+1]
+				 */
+				int tmp = b[index];
+				for(int indexInsert = index; indexInsert>indexLinks; indexInsert--)
+				{
+					b[indexInsert] = b[indexInsert-1];
+				}
+				b[indexLinks] = tmp;
+			}
+			return b;
+		}
+
+
+		public static int[] selectionsortOptimiert(int[] a)
+		{
+			int[] b = new int[0];
+			if(a.length>1)
+			{
+				b = copy(a);  // copy erzeugt eine Kopie von a und gibt diese zurueck
+				System.out.print("                    ");print(b);		// Ausgangs-Array
+
+				for (int durchlauf = 0; durchlauf < b.length/2; durchlauf++)	// durchlauf ist in Vorgehen j (siehe oben)
+				{
+					int minValue = b[durchlauf];	// in minValue merken wir uns den aktuell kleinsten Wert
+					int minIndex = durchlauf;		// in minIndex merken wir uns den Index des aktuell kleinsten Wertes
+					int maxValue = b[b.length-1-durchlauf];	// in maxValue merken wir uns den aktuell groessten Wert
+					int maxIndex = b.length-1-durchlauf;		// in maxIndex merken wir uns den Index des aktuell groessten Wertes
+					System.out.printf("%3d %3d %3d %3d %3d %n", durchlauf, minValue, minIndex, maxValue, maxIndex);
+					for (int index = durchlauf; index < b.length-durchlauf; index++)	// Suche nach dem kleinsten UND groessten Wert
+					{
+						if(minValue > b[index])
+						{
+							minValue = b[index];	// aktuell kleinster Wert
+							minIndex = index;		// aktueller Index des kleinsten Wertes
+						}
+						if(maxValue < b[index])
+						{
+							maxValue = b[index];	// aktuell groesster Wert
+							maxIndex = index;		// aktueller Index des groessten Wertes
+						}
+					}
+					/* 
+					 * jetzt den kleinsten Wert auf den Index durchlauf legen
+					 * der Wert, der auf durchlauf lag, kommt nach minIndex
+					 * UND den groessten Wert auf den Index b.length-1-durchlauf legen
+					 * der Wert, der auf b.length-1-durchlauf lag, kommt nach maxIndex
+					 * wir müssen zunächst aber beide Werte sichern, sonst kann es zu
+					 * Konflikten beim Tauschen kommen!
+					 * 
+					 */
+					System.out.printf("%3d %3d %3d %3d %3d ", durchlauf, minValue, minIndex, maxValue, maxIndex);
+					int tmpMin = b[durchlauf];
+					int tmpMax = b[b.length-1-durchlauf];
+					b[durchlauf] = minValue;
+					b[minIndex] = tmpMin;
+					/*
+					 * hier wird es sehr kompliziert
+					 * wenn der MaximumWert dort war, wo das neue Minimum hin kommt (Index durchlauf), 
+					 * dann müssen wir aufpassen, dass wir den alten Wert tmpMax nicht verlieren
+					 * es sind jetzt nur noch 3 Werte im Spiel
+					 * der alte Wert von durchlauf - ist in tmpMin UND ist gleichzeitig maxValue!
+					 * der alte Wert von length-1-durchlauf - ist in tmpMax
+					 * der alte Wert von minIndex ist minValue und jetzt auf durchlauf
+					 * Versuchen Sie es mal ohne die Bedingung und nur
+					 * 	b[b.length-1-durchlauf] = maxValue;
+					 * 	b[maxIndex] = tmpMax;
+					 * dann sehen Sie den Fehler
+					 */
+					if(maxIndex == durchlauf)
+					{
+						b[b.length-1-durchlauf] = b[minIndex];
+						b[minIndex] = tmpMax;
+					}
+					else
+					{
+						b[b.length-1-durchlauf] = maxValue;
+						b[maxIndex] = tmpMax;
+					}	
+
+					print(b);
+				}
+			}
+			return b;
+		}
+
+		public static int[] mergesort(int[] a)
+		{
+			int[] b = copy(a);
+
+			if(b.length > 1)
+			{
+				int mid = b.length / 2;
+
+				/*
+				 * linken Teil von b in neues Array left kopieren 
+				 */	
+				int[] left = new int[mid];
+				for(int index = 0; index < mid; index++)
+				{
+					left[index] = b[index];
+				}
+
+				/*
+				 * rechten Teil von b in neues Array rechts kopieren 
+				 */	 
+				int[] right = new int[b.length - mid];
+				for(int index = mid; index < b.length; index++)
+				{
+					right[index - mid] = b[index];
+				}
+
+				/* 
+				 * jetzt haben wir zwei Arrays: left und right
+				 * diese sollen jetzt mithilfe von mergesort()
+				 * sortiert werden
+				 * dazu rufen wir   mergesort für Array left 
+				 * und				mergesort für Array right 
+				 * auf. Wir bekommen sie sortiert zurück. 
+				 * 
+				 * Die Methode ruft sich selber wieder auf -->
+				 * das nennen wir Rekursion
+				 * 
+				 */
+				left = mergesort(left);
+				right = mergesort(right);
+
+				/*
+				 * jetzt sind left und right jeweils sortiert
+				 * jetzt "mergen" wir sie so, dass insgesamt
+				 * ein sortiertes Array entsteht, d.h. wir
+				 * nehmen immer ein Element aus left und right und
+				 * vergleichen sie miteinander; das kleinere kommt
+				 * nach b, das größere bleibt noch und wir 
+				 * nehmen aus dem Array, aus dem gerade das Element 
+				 * einsortiert wurde, ein neues Element
+				 */       
+				int indexLeft = 0;
+				int indexRight = 0;
+				int indexB = 0;
+
+				/*
+				 * merge von left und right
+				 * solange noch in einem Elemente sind
+				 */
+				while(indexLeft < left.length && indexRight < right.length)
+				{
+					if(left[indexLeft] < right[indexRight])
+					{
+						b[indexB] = left[indexLeft];
+						indexLeft++;
+					}
+					else
+					{
+						b[indexB] = right[indexRight];
+						indexRight++;
+					}
+					indexB++;
+				}
+
+				/*
+				 * jetzt ist left oder right leer, aber in dem 
+				 * jeweils anderen sind noch Elemente
+				 */
+
+				/*
+				 * falls noch in left Elemente sind, werden sie
+				 * jetzt nach b kopiert
+				 */
+				while(indexLeft < left.length)
+				{
+					b[indexB] = left[indexLeft];
+					indexLeft++;
+					indexB++;
+				}
+
+				/*
+				 * falls noch in right Elemente sind, werden sie
+				 * jetzt nach b kopiert
+				 */
+				while(indexRight < right.length)
+				{
+					b[indexB] = right[indexRight];
+					indexRight++;
+					indexB++;
+				}
+			}
+			return b;
+		}
+		
+		public static int fakultaet(int n)
+		{
+			int fak = 1;
+			if(n>1)
+			{
+				fak = n * fakultaet(n-1);
+			}
+			return fak;
+		}
+
+		public static void main(String[] args)
+		{
+			int[] unsorted = createAndFillArray(21, 50);
+
+			System.out.printf("%n%n--------------- bubblesort ----------------------%n%n");
+			int[] sorted = bubblesort(unsorted);
+			printArray(unsorted);
+			printArray(sorted);
+
+			System.out.printf("%n%n--------------- selectionsort ----------------------%n%n");
+			int[] us = { 1, 12, 41, 35, 49,  2, 28, 38, 21, 35, 41, 12, 21, 29, 27, 17,  5,  6, 18,  3 };
+			sorted = selectionsortOptimiert(unsorted);
+			printArray(unsorted);
+			printArray(sorted);
+
+			System.out.printf("%n%n--------------- insertionsort ----------------------%n%n");
+			sorted = insertionsortDebug(unsorted);
+			printArray(unsorted);
+			printArray(sorted);
+
+
+			System.out.printf("%n%n--------------- mergesort ----------------------%n%n");
+			sorted = mergesort(unsorted);
+			printArray(unsorted);
+			printArray(sorted);
+			
+			System.out.println(fakultaet(5));
+		}
+
+	}
+	```
+
+## Quicksort
+
+Ein Sortier-Algorithmus, der ebenfalls auf dem *Divide-and-Conquer*-Prinzip berucht, ist [Quicksort](https://de.wikipedia.org/wiki/Quicksort). Bei Quicksort ist, im Gegensatz zu Merge-Sort, das Teilen kompliziert und das Zusammenfügen einfach. Die Methode `sort()` der Klasse `Arrays` verwendet Quicksort. Wir gehen hier aber aus Zeitgründen nicht weiter auf den Algroithmus ein. Sie können sich aber gerne darüber selbständig informieren. Es gibt viele Implementierungen und Erläuterungen davon im Netz, z.B. [hier](https://www.codeflow.site/de/article/java-quicksort), [hier](https://javabeginners.de/Algorithmen/Sortieralgorithmen/Quicksort.php) und [hier](https://studyflix.de/informatik/quicksort-1322).
