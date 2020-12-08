@@ -1792,6 +1792,122 @@ Es wurden <span class="m">31</span> Versuche benötigt, um <span class="m">100</
 </li>
 </ol>
 </details>
+<details class="question"><summary>Eine mögliche Lösung für Übung 5</summary><div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">uebungen.uebung5</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.Random</span><span class="p">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Uebung5</span>
+<span class="p">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">throwDice</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">Random</span> <span class="n">r</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Random</span><span class="p">();</span>
+        <span class="kt">int</span> <span class="n">wurf</span> <span class="o">=</span> <span class="n">r</span><span class="p">.</span><span class="na">nextInt</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>        
+        <span class="k">return</span> <span class="n">wurf</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">printThrow</span><span class="p">(</span><span class="kt">int</span> <span class="n">cast</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Es wurde eine &quot;</span> <span class="o">+</span> <span class="n">cast</span> <span class="o">+</span> <span class="s">&quot; gewuerfelt&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">insertIntoStatistics</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">statistics</span><span class="p">,</span> <span class="kt">int</span> <span class="n">cast</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">cast</span><span class="o">&gt;=</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">cast</span><span class="o">&lt;=</span><span class="mi">6</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">statistics</span><span class="o">[</span><span class="n">cast</span><span class="o">-</span><span class="mi">1</span><span class="o">]++</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">statistics</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">printStatistics</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">statistics</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">&quot;[ &quot;</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">statistics</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">index</span><span class="o">++</span><span class="p">)</span>     <span class="c1">// index = index + 1</span>
+        <span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">index</span> <span class="o">&lt;</span> <span class="n">statistics</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">&quot;(&quot;</span> <span class="o">+</span> <span class="n">statistics</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">+</span> <span class="s">&quot; x &quot;</span> <span class="o">+</span> <span class="p">(</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;), &quot;</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="k">else</span>    <span class="c1">// index == statistics.length-1</span>
+            <span class="p">{</span>
+                <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">&quot;(&quot;</span> <span class="o">+</span> <span class="n">statistics</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">+</span> <span class="s">&quot; x &quot;</span> <span class="o">+</span> <span class="p">(</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;)&quot;</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot; ]&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">sumOfStatistics</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">statistics</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">statistics</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">index</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">sum</span> <span class="o">=</span> <span class="n">sum</span> <span class="o">+</span> <span class="p">(</span><span class="n">statistics</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">));</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">sum</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">throwDiceUntilTarget</span><span class="p">(</span><span class="kt">int</span> <span class="n">target</span><span class="p">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">statistics</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">tries</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">cast</span> <span class="o">=</span> <span class="n">throwDice</span><span class="p">();</span>
+        <span class="n">printThrow</span><span class="p">(</span><span class="n">cast</span><span class="p">);</span>           <span class="c1">// Nebeneffekt - nicht so gut!</span>
+        <span class="n">tries</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">insertIntoStatistics</span><span class="p">(</span><span class="n">statistics</span><span class="p">,</span> <span class="n">cast</span><span class="p">);</span>
+        <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">sumOfStatistics</span><span class="p">(</span><span class="n">statistics</span><span class="p">);</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">sum</span> <span class="o">&lt;</span> <span class="n">target</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">cast</span> <span class="o">=</span> <span class="n">throwDice</span><span class="p">();</span>
+            <span class="n">printThrow</span><span class="p">(</span><span class="n">cast</span><span class="p">);</span>       <span class="c1">// Nebeneffekt - nicht so gut!</span>
+            <span class="n">tries</span><span class="o">++</span><span class="p">;</span>
+            <span class="n">insertIntoStatistics</span><span class="p">(</span><span class="n">statistics</span><span class="p">,</span> <span class="n">cast</span><span class="p">);</span>
+            <span class="n">sum</span> <span class="o">=</span> <span class="n">sumOfStatistics</span><span class="p">(</span><span class="n">statistics</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">tries</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">statistics</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">6</span><span class="o">]</span><span class="p">;</span>
+
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%n%n------------------- Test throwDice and printThrow -------------------%n%n&quot;</span><span class="p">);</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">index</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">;</span> <span class="n">index</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">cast</span> <span class="o">=</span> <span class="n">throwDice</span><span class="p">();</span>
+            <span class="n">printThrow</span><span class="p">(</span><span class="n">cast</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%n%n------------------ Test insert- and printStatistics -----------------%n%n&quot;</span><span class="p">);</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">index</span><span class="o">&lt;</span><span class="mi">100</span><span class="p">;</span> <span class="n">index</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">cast</span> <span class="o">=</span> <span class="n">throwDice</span><span class="p">();</span>
+            <span class="n">statistics</span> <span class="o">=</span> <span class="n">insertIntoStatistics</span><span class="p">(</span><span class="n">statistics</span><span class="p">,</span> <span class="n">cast</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">printStatistics</span><span class="p">(</span><span class="n">statistics</span><span class="p">);</span>    
+
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%n%n--------------------- Test sumOfStatistics --------------------------%n%n&quot;</span><span class="p">);</span>
+        <span class="n">printStatistics</span><span class="p">(</span><span class="n">statistics</span><span class="p">);</span>
+        <span class="kt">int</span> <span class="n">sumTest</span> <span class="o">=</span> <span class="n">sumOfStatistics</span><span class="p">(</span><span class="n">statistics</span><span class="p">);</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Summe = &quot;</span> <span class="o">+</span> <span class="n">sumTest</span><span class="p">);</span>
+
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%n%n------------------- Test throwDiceUntilTarget -----------------------%n%n&quot;</span><span class="p">);</span>
+        <span class="n">statistics</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">6</span><span class="o">]</span><span class="p">;</span>    <span class="c1">// altes Array war schon befuellt </span>
+        <span class="kd">final</span> <span class="kt">int</span> <span class="n">TARGET</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">tries</span> <span class="o">=</span> <span class="n">throwDiceUntilTarget</span><span class="p">(</span><span class="n">TARGET</span><span class="p">,</span> <span class="n">statistics</span><span class="p">);</span>
+        <span class="n">printStatistics</span><span class="p">(</span><span class="n">statistics</span><span class="p">);</span>
+        <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">sumOfStatistics</span><span class="p">(</span><span class="n">statistics</span><span class="p">);</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Es wurden &quot;</span> <span class="o">+</span> <span class="n">tries</span> <span class="o">+</span> <span class="s">&quot; Versuche benötigt, um &quot;</span> <span class="o">+</span> <span class="n">sum</span> <span class="o">+</span> <span class="s">&quot; Punkte zu erzielen.&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+
+</details>
+<details class="question"><summary>Video zu Übung 5</summary><ul>
+<li><iframe src="https://mediathek.htw-berlin.de/media/embed?key=399b328c0d82e698936e2df57c6d87d0&width=720&height=383&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="383" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe></li>
+</ul>
+</details>
 <h2 id="weitere-ubungsaufgaben-selbstandiges-uben">Weitere Übungsaufgaben (selbständiges Üben)<a class="headerlink" href="#weitere-ubungsaufgaben-selbstandiges-uben" title="Permanent link">&para;</a></h2>
 <p>Hier werden lose und unregelmäßig Übungsaufgaben gesammelt. Am Ende des Semesters soll dann hier eine große Sammlung von Übungsaufgaben entstanden sein, die der eigenen Kontrolle dienen sollen. Die Übungen sind thematisch sortiert, allerdings überschneiden sich manche Themen in einigen Übungen.  </p>
 <h3 id="ausdrucke">Ausdrücke<a class="headerlink" href="#ausdrucke" title="Permanent link">&para;</a></h3>
