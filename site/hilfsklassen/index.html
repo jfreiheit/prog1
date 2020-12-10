@@ -195,6 +195,8 @@
       
         
       
+        
+      
     </ul>
   </div>
 </nav>
@@ -462,6 +464,19 @@
     format()-Methode und printf()
   </a>
   
+    <nav class="md-nav" aria-label="format()-Methode und printf()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#formatierung-von-gleikommazahlen" class="md-nav__link">
+    Formatierung von Gleikommazahlen
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
       </ul>
@@ -496,6 +511,18 @@
   <li class="md-nav__item">
     <a href="../sortieren/" title="Sortieren" class="md-nav__link">
       Sortieren
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../objekte/" title="Klassen und Objekte" class="md-nav__link">
+      Klassen und Objekte
     </a>
   </li>
 
@@ -666,6 +693,19 @@
   <a href="#format-methode-und-printf" class="md-nav__link">
     format()-Methode und printf()
   </a>
+  
+    <nav class="md-nav" aria-label="format()-Methode und printf()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#formatierung-von-gleikommazahlen" class="md-nav__link">
+    Formatierung von Gleikommazahlen
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1464,6 +1504,30 @@ Mithilfe der Methode <code>toUpperCase()</code> werden alle Buchstaben eines Str
    <span class="m">9</span>  <span class="m">18</span>  <span class="m">27</span>  <span class="m">36</span>  <span class="m">45</span>  <span class="m">54</span>  <span class="m">63</span>  <span class="m">72</span>  <span class="m">81</span>  <span class="m">90</span>
   <span class="m">10</span>  <span class="m">20</span>  <span class="m">30</span>  <span class="m">40</span>  <span class="m">50</span>  <span class="m">60</span>  <span class="m">70</span>  <span class="m">80</span>  <span class="m">90</span> <span class="m">100</span>
 </code></pre></div>
+
+<h4 id="formatierung-von-gleikommazahlen">Formatierung von Gleikommazahlen<a class="headerlink" href="#formatierung-von-gleikommazahlen" title="Permanent link">&para;</a></h4>
+<p>Um Gleitkommazahlen in der Standardnotation (nicht wissenschaftliche Notation) formatiert auszugeben, wird der Platzhalter <code>%f</code> verwendet. Die allgemeine Syntax ist also</p>
+<div class="highlight"><pre><span></span><code>% <span class="o">[</span>Schalter<span class="o">]</span> <span class="o">[</span>Breite<span class="o">]</span> . <span class="o">[</span>Genauigkeit<span class="o">]</span> f
+</code></pre></div>
+
+<p>Der <code>Schalter</code> kann <code>-</code> sein, dann wird die Zahl linksbündig dargestellt. Ist kein <code>Schalter</code> angegeben, erfolgt die Ausgabe rechtsbündig. Die <code>Breite</code> beschreibt die gesamte Anzahl der Stellen für die Zahl. Die <code>Breite</code> enthält insbesondere auch eine Stelle für das Komma und die Anzahl der Stellen für die <code>Genauigkeit</code>. Die <code>Genauigkeit</code> gibt die Anzahl der Nachkommastellen an.  </p>
+<p>Angenommen, der Plathalter lautet <code>%7.2f</code>. Dann werden insgesamt sieben Stellen für die gesamte Zahl reserviert, inklusive dem Komma und den <code>2</code> Nachkommastellen, also</p>
+<div class="highlight"><pre><span></span><code>_ _ _ _ , _ _ 
+</code></pre></div>
+
+<p>Wenn die Gesamtlänge beliebig ist, Sie aber nur genau 2 Nachkommastellen haben möchten, dann können Sie auch <code>%.2f</code> als Platzhalter angeben. Für eine Nachkommastelle <code>%.1f</code>. Die Nachkommastellen werden sogar gerundet. </p>
+<p>Hier nochmal einige Beispiele von oben nur für Gleikommazahlen:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;|%10.2f|&quot;</span><span class="p">,</span> <span class="mf">1234.567</span><span class="p">);</span>        <span class="c1">// |   1234,57|</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;|%-10.2f|&quot;</span><span class="p">,</span> <span class="mf">1234.567</span><span class="p">);</span>       <span class="c1">// |1234,57   |</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;|%7.2f|&quot;</span><span class="p">,</span> <span class="mf">1234.567</span><span class="p">);</span>         <span class="c1">// |1234,57|</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;|%5.2f|&quot;</span><span class="p">,</span> <span class="mf">1234.567</span><span class="p">);</span>         <span class="c1">// |1234,57|</span>
+</code></pre></div>
+</td></tr></table>
+
+<p>Beachten Sie auch das letzte Beispiel (Zeile <code>4</code>). Es wurden nur insgesamt <code>5</code> Stellen für die gesamte Zahl reserviert. Davon benötigen wir alleine <code>2</code> Stellen für die Nachkommastellen und <code>1</code> Stelle für das Komma. Die Vorkommastellen hätten also nur <code>2</code>Stellen Platz. Vorne wird die Zahl aber <strong>nie</strong> abgeschnitten. Sollte der reservierte Platz für die Vorkommastellen nicht ausreichen, wird der Vorkommabereich trotzdem vollständig dargestellt. Es kann also trotz der Formatierung zu Verzerrungen in der Ausgabe kommen!</p>
                 
               
               

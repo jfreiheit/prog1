@@ -195,6 +195,8 @@
       
         
       
+        
+      
     </ul>
   </div>
 </nav>
@@ -360,6 +362,18 @@
   <li class="md-nav__item">
     <a href="../sortieren/" title="Sortieren" class="md-nav__link">
       Sortieren
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../objekte/" title="Klassen und Objekte" class="md-nav__link">
+      Klassen und Objekte
     </a>
   </li>
 
@@ -3559,6 +3573,184 @@
 </li>
 </ul>
 </details>
+<details class="question"><summary>Eine mögliche Lösung für Aufgabe 3</summary><div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">loesungen.aufgaben.aufgabe3</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.Random</span><span class="p">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Aufgabe3</span>
+<span class="p">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">printArray</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">a</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">String</span> <span class="n">s</span> <span class="o">=</span> <span class="s">&quot;[ &quot;</span><span class="p">;</span> 
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">index</span><span class="o">&lt;</span><span class="n">a</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">index</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">s</span> <span class="o">+</span> <span class="n">a</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">+</span> <span class="s">&quot;, &quot;</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="na">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">s</span> <span class="o">+</span> <span class="n">a</span><span class="o">[</span><span class="n">a</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">+</span> <span class="s">&quot; ]&quot;</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">createAndFillArray</span><span class="p">(</span><span class="kt">int</span> <span class="n">length</span><span class="p">,</span> <span class="kt">int</span> <span class="n">fromInclusive</span><span class="p">,</span> <span class="kt">int</span> <span class="n">toInclusive</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">a</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">length</span><span class="o">]</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">bound</span> <span class="o">=</span> <span class="n">toInclusive</span><span class="o">-</span><span class="n">fromInclusive</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">shift</span> <span class="o">=</span> <span class="n">fromInclusive</span><span class="p">;</span>
+        <span class="n">Random</span> <span class="n">r</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Random</span><span class="p">();</span>                    
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">a</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">a</span><span class="o">[</span><span class="n">i</span><span class="o">]=</span><span class="n">r</span><span class="p">.</span><span class="na">nextInt</span><span class="p">(</span><span class="n">bound</span><span class="p">)</span><span class="o">+</span><span class="n">shift</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">a</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">printTable</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">a</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">String</span> <span class="n">s</span> <span class="o">=</span> <span class="n">String</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="s">&quot;| %-10s |&quot;</span><span class="p">,</span> <span class="s">&quot;Index :&quot;</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">a</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">index</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">s</span> <span class="o">+</span> <span class="n">String</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="s">&quot; %3d  |&quot;</span><span class="p">,</span> <span class="n">index</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">String</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="s">&quot;|------------|&quot;</span><span class="p">,</span> <span class="s">&quot;Index&quot;</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">a</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">index</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">s</span> <span class="o">+</span> <span class="n">String</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="s">&quot;------|&quot;</span><span class="p">,</span> <span class="n">index</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">String</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="s">&quot;| %-10s |&quot;</span><span class="p">,</span> <span class="s">&quot;Wert :&quot;</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">a</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">index</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">s</span> <span class="o">+</span> <span class="n">String</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="s">&quot; %3d  |&quot;</span><span class="p">,</span> <span class="n">a</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">printHorizontal</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">a</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;    | &quot;</span><span class="p">);</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">row</span><span class="o">&lt;</span><span class="n">a</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">row</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot; %2d | &quot;</span><span class="p">,</span> <span class="n">row</span><span class="p">);</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">stars</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">stars</span><span class="o">&lt;</span><span class="n">a</span><span class="o">[</span><span class="n">row</span><span class="o">]</span><span class="p">;</span> <span class="n">stars</span><span class="o">++</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">&quot;*&quot;</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%n    | %n&quot;</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">getMaximum</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">a</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">maximum</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">a</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">index</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="o">[</span><span class="n">index</span><span class="o">]&gt;</span><span class="n">maximum</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">maximum</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">maximum</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">printUpsideDown</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">a</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">String</span> <span class="n">s</span> <span class="o">=</span> <span class="s">&quot;    | &quot;</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">a</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">index</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">s</span> <span class="o">+</span> <span class="n">String</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="s">&quot; %2d  &quot;</span><span class="p">,</span> <span class="n">index</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="s">&quot;----+&quot;</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">a</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">index</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">s</span> <span class="o">+</span> <span class="s">&quot;-----&quot;</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+        <span class="kt">int</span> <span class="n">maximum</span> <span class="o">=</span> <span class="n">getMaximum</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">row</span><span class="o">&lt;=</span><span class="n">maximum</span><span class="p">;</span> <span class="n">row</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot; %2d | &quot;</span><span class="p">,</span> <span class="n">row</span><span class="p">);</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">col</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">col</span><span class="o">&lt;</span><span class="n">a</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">col</span><span class="o">++</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="o">[</span><span class="n">col</span><span class="o">]&gt;=</span><span class="n">row</span><span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">&quot;  *  &quot;</span><span class="p">);</span>
+                <span class="p">}</span>
+                <span class="k">else</span>
+                <span class="p">{</span>
+                    <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">&quot;     &quot;</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">();</span>
+    <span class="p">}</span>
+
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">printVertical</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">a</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">maximum</span> <span class="o">=</span> <span class="n">getMaximum</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">row</span><span class="o">=</span><span class="n">maximum</span><span class="p">;</span> <span class="n">row</span><span class="o">&gt;=</span><span class="mi">1</span><span class="p">;</span> <span class="n">row</span><span class="o">--</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot; %2d | &quot;</span><span class="p">,</span> <span class="n">row</span><span class="p">);</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">col</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">col</span><span class="o">&lt;</span><span class="n">a</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">col</span><span class="o">++</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="o">[</span><span class="n">col</span><span class="o">]&gt;=</span><span class="n">row</span><span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">&quot;  *  &quot;</span><span class="p">);</span>
+                <span class="p">}</span>
+                <span class="k">else</span>
+                <span class="p">{</span>
+                    <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">&quot;     &quot;</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="n">String</span> <span class="n">s</span> <span class="o">=</span> <span class="s">&quot;----+&quot;</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">a</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">index</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">s</span> <span class="o">+</span> <span class="s">&quot;-----&quot;</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="s">&quot;    | &quot;</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">a</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">index</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">s</span> <span class="o">+</span> <span class="n">String</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="s">&quot; %2d  &quot;</span><span class="p">,</span> <span class="n">index</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">();</span>
+    <span class="p">}</span>
+
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// int[] arr2 = {10, 2, 9, 12, 12, 4, 17, 2, 2, 6, 13, 4, 3, 18, 11};</span>
+        <span class="n">Random</span> <span class="n">r</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Random</span><span class="p">();</span>
+        <span class="kt">int</span> <span class="n">length</span> <span class="o">=</span> <span class="n">r</span><span class="p">.</span><span class="na">nextInt</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">+</span><span class="mi">10</span><span class="p">;</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">arr1</span> <span class="o">=</span> <span class="n">createAndFillArray</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
+
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%n%n%n----------- printArray -----------------%n%n%n&quot;</span><span class="p">);</span>
+        <span class="n">printArray</span><span class="p">(</span><span class="n">arr1</span><span class="p">);</span>
+        <span class="c1">//printArray(arr2);</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%n%n%n----------- printTable -----------------%n%n%n&quot;</span><span class="p">);</span>
+        <span class="n">printTable</span><span class="p">(</span><span class="n">arr1</span><span class="p">);</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%n%n%n----------- printHorizontal ------------%n%n%n&quot;</span><span class="p">);</span>
+        <span class="n">printHorizontal</span><span class="p">(</span><span class="n">arr1</span><span class="p">);</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%n%n%n----------- printUpsideDown ------------%n%n%n&quot;</span><span class="p">);</span>
+        <span class="n">printUpsideDown</span><span class="p">(</span><span class="n">arr1</span><span class="p">);</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%n%n%n----------- printVertical --------------%n%n%n&quot;</span><span class="p">);</span>
+        <span class="n">printVertical</span><span class="p">(</span><span class="n">arr1</span><span class="p">);</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+
+</details>
 <details><summary>Aufgabe 4 - Arrays befüllen</summary><ul>
 <li>
 <p>Wir befüllen ein <code>char</code>-Array, aber das ist leider gar nicht so einfach ;-)</p>
@@ -3667,6 +3859,225 @@ nn <span class="o">(</span><span class="m">1</span><span class="o">)</span>
 </code></pre></div>
 
 <p>Die Ausgabe erfolgte durch den Aufruf von <code>findWord("weihnachten");</code>. Ganz links in der Zeile steht immer das Zeichen des Strings, das gerade betrachtet wird. Dann kommen für jeden fehlgeschlagenen Versuch, durch <code>getMissingLetter()</code> das <code>'w' zurück zu bekommen, die Ausgabe eines Punktes. Sollte</code>getMissingLetter()<code>das</code>'w'` zurückgeben, wird es ausgegeben und außerdem noch in Klammern die Anzahl der Versuche. Der Cursor wechselt in die nächste Zeile und das nächste Zeichen des Strings ist dran. </p>
+</li>
+<li>
+<p>Viel Spaß und viel Erfolg!</p>
+</li>
+</ul>
+</details>
+<details><summary>Aufgabe 5 - Triangle</summary><ul>
+<li>
+<p>Wir erstellen uns einen neuen Datentyp <code>Triangle</code></p>
+</li>
+<li>
+<p>Erstellen Sie im package <code>aufgaben.aufgabe6</code> eine Klasse <code>Triangle</code> ohne <code>main()</code>-Methode und eine Klasse <code>Testklasse</code> mit <code>main()</code>-Methode. </p>
+</li>
+<li>
+<p>In der Klasse <code>Triangle</code> erstellen Sie drei Objektvariablen <code>a</code>, <code>b</code> und <code>c</code> jeweils vom Typ <code>int</code> und alle <code>private</code>. Das sollen die Seiten unseres Dreiecks sein. </p>
+</li>
+<li>
+<p>Erstellen Sie einen Konstruktor, dem drei Parameterwerte übergeben werden <code>pa</code>, <code>pb</code> und <code>pc</code> alle vom Typ <code>int</code>. Mit diesen Werten werden die Objektvariablen initialisiert. </p>
+</li>
+<li>
+<p>Schreiben Sie eine Objektmethode <code>print()</code>, die die Seitenlängen des Dreiecks in der folgenden Form ausgibt:
+    <div class="highlight"><pre><span></span><code>Seiten          : <span class="nv">a</span><span class="o">=</span><span class="m">3</span>, <span class="nv">b</span><span class="o">=</span><span class="m">4</span>, <span class="nv">c</span><span class="o">=</span><span class="m">5</span>
+</code></pre></div>
+    für den Fall, dass die Seitenlängen <code>3</code>, <code>4</code> und <code>5</code> sind. </p>
+</li>
+<li>
+<p>Wenn Sie jetzt in der <code>main()</code>-Methode der <code>Testklasse</code> folgende Anweisungen ausführen
+    <div class="highlight"><pre><span></span><code><span class="n">Triangle</span> <span class="n">t1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Triangle</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+<span class="n">Triangle</span> <span class="n">t2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Triangle</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">);</span>
+<span class="n">Triangle</span> <span class="n">t3</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Triangle</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+<span class="n">Triangle</span> <span class="n">t4</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Triangle</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+<span class="n">Triangle</span> <span class="n">t5</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Triangle</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+<span class="n">Triangle</span> <span class="n">t6</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Triangle</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+
+<span class="n">t1</span><span class="p">.</span><span class="na">print</span><span class="p">();</span>
+<span class="n">t2</span><span class="p">.</span><span class="na">print</span><span class="p">();</span>
+<span class="n">t3</span><span class="p">.</span><span class="na">print</span><span class="p">();</span>
+<span class="n">t4</span><span class="p">.</span><span class="na">print</span><span class="p">();</span>
+<span class="n">t5</span><span class="p">.</span><span class="na">print</span><span class="p">();</span>
+<span class="n">t6</span><span class="p">.</span><span class="na">print</span><span class="p">();</span>
+</code></pre></div>
+    dann sollte die Ausgabe ungefähr so aussehen:
+    <div class="highlight"><pre><span></span><code>Seiten          : <span class="nv">a</span><span class="o">=</span><span class="m">3</span>, <span class="nv">b</span><span class="o">=</span><span class="m">4</span>, <span class="nv">c</span><span class="o">=</span><span class="m">5</span>
+Seiten          : <span class="nv">a</span><span class="o">=</span><span class="m">4</span>, <span class="nv">b</span><span class="o">=</span><span class="m">4</span>, <span class="nv">c</span><span class="o">=</span><span class="m">7</span>
+Seiten          : <span class="nv">a</span><span class="o">=</span><span class="m">5</span>, <span class="nv">b</span><span class="o">=</span><span class="m">5</span>, <span class="nv">c</span><span class="o">=</span><span class="m">5</span>
+Seiten          : <span class="nv">a</span><span class="o">=</span><span class="m">4</span>, <span class="nv">b</span><span class="o">=</span><span class="m">5</span>, <span class="nv">c</span><span class="o">=</span><span class="m">3</span>
+Seiten          : <span class="nv">a</span><span class="o">=</span><span class="m">4</span>, <span class="nv">b</span><span class="o">=</span><span class="m">3</span>, <span class="nv">c</span><span class="o">=</span><span class="m">5</span>
+Seiten          : <span class="nv">a</span><span class="o">=</span><span class="m">3</span>, <span class="nv">b</span><span class="o">=</span><span class="m">4</span>, <span class="nv">c</span><span class="o">=</span><span class="m">5</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>Erstellen Sie in der Klasse <code>Triangle</code> eine Objektmethode <code>public int circumference()</code>, die den Umfang des Dreiecks zurückgibt (also die Summe der drei Seitenlängen).</p>
+</li>
+<li>
+<p>Erstellen Sie in der Klasse <code>Triangle</code> eine Objektmethode <code>public int area()</code>, die den Flaecheninhalt des Dreiecks zurückgibt.  Der Flächeninhalt <code>A</code> eines Dreiecks lässt sich nach der <a href="https://de.wikipedia.org/wiki/Satz_des_Heron">Heron'schen Formel</a> wie folgt berechnen:</p>
+<ul>
+<li><code>A</code> = Math.sqrt(s * (s-a) * (s-b) * (s-c))</li>
+<li>wobei <code>s = (a + b + c) / 2</code></li>
+<li>Beachten Sie, dass in einem Dreieck keine Seite länger sein darf als die Summe der beiden anderen. Für die oben in der <code>main()</code>-Methode erstellten Objekte gilt das aber. Wir müssen deshalb nichts weiter beachten. </li>
+</ul>
+</li>
+<li>
+<p>Erweitern Sie die Objektmethode <code>print()</code> nun so, dass auch der Umfang und der Flaecheninhalt in der folgenden Form ausgegeben werden (Sie können in die <code>print()</code>-methode auch die Leerzeile integrieren):
+    <div class="highlight"><pre><span></span><code>Seiten          : <span class="nv">a</span><span class="o">=</span><span class="m">3</span>, <span class="nv">b</span><span class="o">=</span><span class="m">4</span>, <span class="nv">c</span><span class="o">=</span><span class="m">5</span>
+Umfang          : <span class="m">12</span>
+Flaecheninhalt  : <span class="m">6</span>.0
+
+Seiten          : <span class="nv">a</span><span class="o">=</span><span class="m">4</span>, <span class="nv">b</span><span class="o">=</span><span class="m">4</span>, <span class="nv">c</span><span class="o">=</span><span class="m">7</span>
+Umfang          : <span class="m">15</span>
+Flaecheninhalt  : <span class="m">6</span>.777720855862979
+
+Seiten          : <span class="nv">a</span><span class="o">=</span><span class="m">5</span>, <span class="nv">b</span><span class="o">=</span><span class="m">5</span>, <span class="nv">c</span><span class="o">=</span><span class="m">5</span>
+Umfang          : <span class="m">15</span>
+Flaecheninhalt  : <span class="m">10</span>.825317547305483
+
+Seiten          : <span class="nv">a</span><span class="o">=</span><span class="m">4</span>, <span class="nv">b</span><span class="o">=</span><span class="m">5</span>, <span class="nv">c</span><span class="o">=</span><span class="m">3</span>
+Umfang          : <span class="m">12</span>
+Flaecheninhalt  : <span class="m">6</span>.0
+
+Seiten          : <span class="nv">a</span><span class="o">=</span><span class="m">4</span>, <span class="nv">b</span><span class="o">=</span><span class="m">3</span>, <span class="nv">c</span><span class="o">=</span><span class="m">5</span>
+Umfang          : <span class="m">12</span>
+Flaecheninhalt  : <span class="m">6</span>.0
+
+Seiten          : <span class="nv">a</span><span class="o">=</span><span class="m">3</span>, <span class="nv">b</span><span class="o">=</span><span class="m">4</span>, <span class="nv">c</span><span class="o">=</span><span class="m">5</span>
+Umfang          : <span class="m">12</span>
+Flaecheninhalt  : <span class="m">6</span>.0
+</code></pre></div></p>
+</li>
+<li>
+<p>Erstellen Sie in der Klasse <code>Triangle</code> eine Objektmethode <code>public boolean equilateral()</code>, die ein <code>true</code> zurückgibt, wenn das Dreieck gleichseitig ist (also alle Seiten des Dreiecks gleich lang sind) und <code>false</code> sonst.</p>
+</li>
+<li>
+<p>Erstellen Sie in der Klasse <code>Triangle</code> eine Objektmethode <code>public boolean isosceles()</code>, die ein <code>true</code> zurückgibt, wenn das Dreieck gleichschenklig ist (also zwei Seiten des Dreiecks gleich lang sind) und <code>false</code> sonst.</p>
+</li>
+<li>
+<p>Erweitern Sie die Objektmethode <code>print()</code> nun so, dass die Prüfungen, ob sich um ein gleichseitiges oder gleichschenkliges (oder unregelmäßiges) Dreieck handelt, in der folgenden Form ausgegeben werden:
+    <div class="highlight"><pre><span></span><code>Seiten          : <span class="nv">a</span><span class="o">=</span><span class="m">3</span>, <span class="nv">b</span><span class="o">=</span><span class="m">4</span>, <span class="nv">c</span><span class="o">=</span><span class="m">5</span>
+Umfang          : <span class="m">12</span>
+Flaecheninhalt  : <span class="m">6</span>.0
+Das Dreieck ist unregelmaessig.
+
+Seiten          : <span class="nv">a</span><span class="o">=</span><span class="m">4</span>, <span class="nv">b</span><span class="o">=</span><span class="m">4</span>, <span class="nv">c</span><span class="o">=</span><span class="m">7</span>
+Umfang          : <span class="m">15</span>
+Flaecheninhalt  : <span class="m">6</span>.777720855862979
+Das Dreieck ist gleichschenklig.
+
+Seiten          : <span class="nv">a</span><span class="o">=</span><span class="m">5</span>, <span class="nv">b</span><span class="o">=</span><span class="m">5</span>, <span class="nv">c</span><span class="o">=</span><span class="m">5</span>
+Umfang          : <span class="m">15</span>
+Flaecheninhalt  : <span class="m">10</span>.825317547305483
+Das Dreieck ist gleichseitig.
+
+Seiten          : <span class="nv">a</span><span class="o">=</span><span class="m">4</span>, <span class="nv">b</span><span class="o">=</span><span class="m">5</span>, <span class="nv">c</span><span class="o">=</span><span class="m">3</span>
+Umfang          : <span class="m">12</span>
+Flaecheninhalt  : <span class="m">6</span>.0
+Das Dreieck ist unregelmaessig.
+
+Seiten          : <span class="nv">a</span><span class="o">=</span><span class="m">4</span>, <span class="nv">b</span><span class="o">=</span><span class="m">3</span>, <span class="nv">c</span><span class="o">=</span><span class="m">5</span>
+Umfang          : <span class="m">12</span>
+Flaecheninhalt  : <span class="m">6</span>.0
+Das Dreieck ist unregelmaessig.
+
+Seiten          : <span class="nv">a</span><span class="o">=</span><span class="m">3</span>, <span class="nv">b</span><span class="o">=</span><span class="m">4</span>, <span class="nv">c</span><span class="o">=</span><span class="m">5</span>
+Umfang          : <span class="m">12</span>
+Flaecheninhalt  : <span class="m">6</span>.0
+Das Dreieck ist unregelmaessig.
+</code></pre></div></p>
+</li>
+<li>
+<p>Erstellen Sie in der Klasse <code>Triangle</code> eine Objektmethode <code>public boolean sameCircumference(Triangle t)</code>, die ein <code>true</code> zurückgibt, wenn das aufrufende Objekt den gleichen Umfang hat wie <code>t</code> und <code>false</code> sonst.</p>
+</li>
+<li>
+<p>Erstellen Sie in der Klasse <code>Triangle</code> eine Objektmethode <code>public boolean isSmaller(Triangle t)</code>, die ein <code>true</code> zurückgibt, wenn das aufrufende Objekt einen kleineren Flächeninhalt hat, als <code>t</code> und <code>false</code> sonst.</p>
+</li>
+<li>
+<p>Erstellen Sie in der Klasse <code>Triangle</code> eine Objektmethode <code>public boolean isBigger(Triangle t)</code>, die ein <code>true</code> zurückgibt, wenn das aufrufende Objekt einen größeren Flächeninhalt hat, als <code>t</code> und <code>false</code> sonst.</p>
+</li>
+<li>
+<p>Testen Sie in der <code>main()</code>-Methode der <code>Testklasse</code> die drei zuletztgeschriebenen Methoden, so dass folgende Ausgaben erzeugt werden:
+    <div class="highlight"><pre><span></span><code>t1 und t2 gleicher Umfang ? : <span class="nb">false</span>
+t1 und t3 gleicher Umfang ? : <span class="nb">false</span>
+t2 und t3 gleicher Umfang ? : <span class="nb">true</span>
+
+t1 kleiner als t2 ? : <span class="nb">true</span>
+t2 kleiner als t1 ? : <span class="nb">false</span>
+t1 kleiner als t4 ? : <span class="nb">false</span>
+t4 kleiner als t1 ? : <span class="nb">false</span>
+
+t1 groesser als t2 ? : <span class="nb">false</span>
+t2 groesser als t1 ? : <span class="nb">true</span>
+t1 groesser als t4 ? : <span class="nb">false</span>
+t4 groesser als t1 ? : <span class="nb">false</span>
+</code></pre></div></p>
+</li>
+</ul>
+<hr />
+<ul>
+<li><strong>Wenn Sie das geschafft haben, dann haben Sie die Aufgabe erfüllt! Herzlichen Glückwunsch! Die folgende(n) Aufgabe(n) sind optional :</strong></li>
+</ul>
+<hr />
+<ul>
+<li>
+<p>Erstellen Sie in der Klasse <code>Triangle</code> eine Objektmethode <code>public boolean sidesAreEqual(Triangle t)</code>, die ein <code>true</code> zurückgibt, wenn das aufrufende Objekt die gleichen Seitenlängen hat wie <code>t</code> und <code>false</code> sonst.</p>
+<ul>
+<li>Beachten Sie, dass folgende Dreiecke mit z.B. dem Dreieck (<code>a=3, b=4, c=5</code>) gleich sein sollen: (<code>a=3, b=4, c=5</code>), aber auch (<code>a=4, b=5, c=3</code>), aber auch (<code>a=5, b=3, c=4</code>) &rarr; die "Benennung" der Seiten ist also egal</li>
+<li>Jedoch soll z.B. (<code>a=4, b=3, c=5</code>) nicht gleich zu (<code>a=3, b=4, c=5</code>) sein</li>
+<li>für die obigen Objekte soll somit gelten:
+    <div class="highlight"><pre><span></span><code>t1 und t2 gleiche Seiten ? : <span class="nb">false</span>
+t1 und t4 gleiche Seiten ? : <span class="nb">true</span>
+t1 und t5 gleiche Seiten ? : <span class="nb">false</span>
+t1 und t6 gleiche Seiten ? : <span class="nb">true</span>
+</code></pre></div>
+    Erzeugen Sie diese Ausgabe in <code>main()</code>.</li>
+</ul>
+</li>
+<li>
+<p>Erstellen Sie in der Klasse <code>Triangle</code> eine Objektmethode <code>public boolean isRightAngled()</code>, die ein <code>true</code> zurückgibt, wenn das Dreieck rechtwinklig ist und <code>false</code> sonst.</p>
+<ul>
+<li>der <a href="https://de.wikipedia.org/wiki/Satz_des_Pythagoras">Satz des Pythagoras</a> besagt, dass in einem rechtwinkligen Dreieck gilt: <code>a^2 + b^2 = c^2</code></li>
+<li>es gilt aber auch die Umkehrung, d.h. wenn von 2 Seiten die Summe der Quadrate dem Quadrat der dritten Seite entspricht, dann ist das Dreieck rechtwinklig </li>
+</ul>
+</li>
+<li>
+<p>Erweitern Sie die Objektmethode <code>print()</code> nun so, dass die Prüfungen, ob sich um ein rechtwinkliges Dreieck handelt, in der folgenden Form ausgegeben werden:
+    <div class="highlight"><pre><span></span><code>Seiten          : <span class="nv">a</span><span class="o">=</span><span class="m">3</span>, <span class="nv">b</span><span class="o">=</span><span class="m">4</span>, <span class="nv">c</span><span class="o">=</span><span class="m">5</span>
+Umfang          : <span class="m">12</span>
+Flaecheninhalt  : <span class="m">6</span>.0
+Das Dreieck ist unregelmaessig.
+Das Dreieck ist rechtwinklig.
+
+Seiten          : <span class="nv">a</span><span class="o">=</span><span class="m">4</span>, <span class="nv">b</span><span class="o">=</span><span class="m">4</span>, <span class="nv">c</span><span class="o">=</span><span class="m">7</span>
+Umfang          : <span class="m">15</span>
+Flaecheninhalt  : <span class="m">6</span>.777720855862979
+Das Dreieck ist gleichschenklig.
+Das Dreieck ist nicht rechtwinklig.
+
+Seiten          : <span class="nv">a</span><span class="o">=</span><span class="m">5</span>, <span class="nv">b</span><span class="o">=</span><span class="m">5</span>, <span class="nv">c</span><span class="o">=</span><span class="m">5</span>
+Umfang          : <span class="m">15</span>
+Flaecheninhalt  : <span class="m">10</span>.825317547305483
+Das Dreieck ist gleichseitig.
+Das Dreieck ist nicht rechtwinklig.
+
+Seiten          : <span class="nv">a</span><span class="o">=</span><span class="m">4</span>, <span class="nv">b</span><span class="o">=</span><span class="m">5</span>, <span class="nv">c</span><span class="o">=</span><span class="m">3</span>
+Umfang          : <span class="m">12</span>
+Flaecheninhalt  : <span class="m">6</span>.0
+Das Dreieck ist unregelmaessig.
+Das Dreieck ist rechtwinklig.
+
+Seiten          : <span class="nv">a</span><span class="o">=</span><span class="m">4</span>, <span class="nv">b</span><span class="o">=</span><span class="m">3</span>, <span class="nv">c</span><span class="o">=</span><span class="m">5</span>
+Umfang          : <span class="m">12</span>
+Flaecheninhalt  : <span class="m">6</span>.0
+Das Dreieck ist unregelmaessig.
+Das Dreieck ist rechtwinklig.
+
+Seiten          : <span class="nv">a</span><span class="o">=</span><span class="m">3</span>, <span class="nv">b</span><span class="o">=</span><span class="m">4</span>, <span class="nv">c</span><span class="o">=</span><span class="m">5</span>
+Umfang          : <span class="m">12</span>
+Flaecheninhalt  : <span class="m">6</span>.0
+Das Dreieck ist unregelmaessig.
+Das Dreieck ist rechtwinklig.
+</code></pre></div></p>
 </li>
 <li>
 <p>Viel Spaß und viel Erfolg!</p>
