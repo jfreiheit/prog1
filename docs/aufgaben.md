@@ -3037,6 +3037,185 @@ Die Aufgaben laden Sie in [Moodle](https://moodle.htw-berlin.de/course/view.php?
 	- Viel Spaß und viel Erfolg!
 
 
+??? question "Eine mögliche Lösung für Aufgabe 3"
+	```java
+	package loesungen.aufgaben.aufgabe3;
+
+	import java.util.Random;
+
+	public class Aufgabe3
+	{
+		public static void printArray(int[] a)
+		{
+			String s = "[ "; 
+			for(int index=0; index<a.length-1; index++)
+			{
+				s = s + a[index] + ", ";
+			}
+			if(a.length > 0)
+			{
+				s = s + a[a.length-1] + " ]";
+			}
+			System.out.println(s);
+		}
+		
+		public static int[] createAndFillArray(int length, int fromInclusive, int toInclusive)
+		{
+			int[] a = new int[length];
+			int bound = toInclusive-fromInclusive+1;
+			int shift = fromInclusive;
+			Random r = new Random();					
+			for(int i=0; i<a.length; i++)
+			{
+				a[i]=r.nextInt(bound)+shift;
+			}
+			return a;
+		}
+		
+		public static void printTable(int[] a)
+		{
+			String s = String.format("| %-10s |", "Index :");
+			for (int index = 0; index < a.length; index++)
+			{
+				s = s + String.format(" %3d  |", index);
+			}
+			System.out.println(s);
+			s = String.format("|------------|", "Index");
+			for (int index = 0; index < a.length; index++)
+			{
+				s = s + String.format("------|", index);
+			}
+			System.out.println(s);
+			s = String.format("| %-10s |", "Wert :");
+			for (int index = 0; index < a.length; index++)
+			{
+				s = s + String.format(" %3d  |", a[index]);
+			}
+			System.out.println(s);
+			System.out.println();
+		}
+		
+		public static void printHorizontal(int[] a)
+		{
+			System.out.println("    | ");
+			for(int row=0; row<a.length; row++)
+			{
+				System.out.printf(" %2d | ", row);
+				for(int stars=0; stars<a[row]; stars++)
+				{
+					System.out.print("*");
+				}
+				System.out.printf("%n    | %n");
+			}
+		}
+		
+		public static int getMaximum(int[] a)
+		{
+			int maximum = a[0];
+			for (int index = 1; index < a.length; index++)
+			{
+				if(a[index]>maximum)
+				{
+					maximum = a[index];
+				}
+			}
+			return maximum;
+		}
+		
+		public static void printUpsideDown(int[] a)
+		{
+			String s = "    | ";
+			for (int index = 0; index < a.length; index++)
+			{
+				s = s + String.format(" %2d  ", index);
+			}
+			System.out.println(s);
+			s = "----+";
+			for (int index = 0; index < a.length; index++)
+			{
+				s = s + "-----";
+			}
+			System.out.println(s);
+			int maximum = getMaximum(a);
+			for(int row=1; row<=maximum; row++)
+			{
+				System.out.printf(" %2d | ", row);
+				for(int col=0; col<a.length; col++)
+				{
+					if(a[col]>=row)
+					{
+						System.out.print("  *  ");
+					}
+					else
+					{
+						System.out.print("     ");
+					}
+				}
+				System.out.println();
+			}
+			System.out.println();
+		}
+
+		
+		public static void printVertical(int[] a)
+		{
+			int maximum = getMaximum(a);
+			for(int row=maximum; row>=1; row--)
+			{
+				System.out.printf(" %2d | ", row);
+				for(int col=0; col<a.length; col++)
+				{
+					if(a[col]>=row)
+					{
+						System.out.print("  *  ");
+					}
+					else
+					{
+						System.out.print("     ");
+					}
+				}
+				System.out.println();
+			}
+			String s = "----+";
+			for (int index = 0; index < a.length; index++)
+			{
+				s = s + "-----";
+			}
+			System.out.println(s);
+			s = "    | ";
+			for (int index = 0; index < a.length; index++)
+			{
+				s = s + String.format(" %2d  ", index);
+			}
+			System.out.println(s);
+
+			System.out.println();
+		}
+
+
+		public static void main(String[] args)
+		{
+			// int[] arr2 = {10, 2, 9, 12, 12, 4, 17, 2, 2, 6, 13, 4, 3, 18, 11};
+			Random r = new Random();
+			int length = r.nextInt(10)+10;
+			int[] arr1 = createAndFillArray(length, 20, 30);
+			
+			System.out.printf("%n%n%n----------- printArray -----------------%n%n%n");
+			printArray(arr1);
+			//printArray(arr2);
+			System.out.printf("%n%n%n----------- printTable -----------------%n%n%n");
+			printTable(arr1);
+			System.out.printf("%n%n%n----------- printHorizontal ------------%n%n%n");
+			printHorizontal(arr1);
+			System.out.printf("%n%n%n----------- printUpsideDown ------------%n%n%n");
+			printUpsideDown(arr1);
+			System.out.printf("%n%n%n----------- printVertical --------------%n%n%n");
+			printVertical(arr1);
+		}
+
+	}
+	```
+
 
 ??? "Aufgabe 4 - Arrays befüllen"
 	- Wir befüllen ein `char`-Array, aber das ist leider gar nicht so einfach ;-)
@@ -3138,3 +3317,201 @@ Die Aufgaben laden Sie in [Moodle](https://moodle.htw-berlin.de/course/view.php?
 		Die Ausgabe erfolgte durch den Aufruf von `findWord("weihnachten");`. Ganz links in der Zeile steht immer das Zeichen des Strings, das gerade betrachtet wird. Dann kommen für jeden fehlgeschlagenen Versuch, durch `getMissingLetter()` das `'w' zurück zu bekommen, die Ausgabe eines Punktes. Sollte `getMissingLetter()` das `'w'` zurückgeben, wird es ausgegeben und außerdem noch in Klammern die Anzahl der Versuche. Der Cursor wechselt in die nächste Zeile und das nächste Zeichen des Strings ist dran. 
 
 	- Viel Spaß und viel Erfolg!
+
+
+??? "Aufgabe 5 - Triangle"
+	- Wir erstellen uns einen neuen Datentyp `Triangle`
+
+	- Erstellen Sie im package `aufgaben.aufgabe6` eine Klasse `Triangle` ohne `main()`-Methode und eine Klasse `Testklasse` mit `main()`-Methode. 
+
+	- In der Klasse `Triangle` erstellen Sie drei Objektvariablen `a`, `b` und `c` jeweils vom Typ `int` und alle `private`. Das sollen die Seiten unseres Dreiecks sein. 
+
+	- Erstellen Sie einen Konstruktor, dem drei Parameterwerte übergeben werden `pa`, `pb` und `pc` alle vom Typ `int`. Mit diesen Werten werden die Objektvariablen initialisiert. 
+
+	- Schreiben Sie eine Objektmethode `print()`, die die Seitenlängen des Dreiecks in der folgenden Form ausgibt:
+		```bash
+		Seiten          : a=3, b=4, c=5
+		```
+		für den Fall, dass die Seitenlängen `3`, `4` und `5` sind. 
+
+	- Wenn Sie jetzt in der `main()`-Methode der `Testklasse` folgende Anweisungen ausführen
+		```java 
+		Triangle t1 = new Triangle(3, 4, 5);
+		Triangle t2 = new Triangle(4, 4, 7);
+		Triangle t3 = new Triangle(5, 5, 5);
+		Triangle t4 = new Triangle(4, 5, 3);
+		Triangle t5 = new Triangle(4, 3, 5);
+		Triangle t6 = new Triangle(3, 4, 5);
+		
+		t1.print();
+		t2.print();
+		t3.print();
+		t4.print();
+		t5.print();
+		t6.print();
+		```
+		dann sollte die Ausgabe ungefähr so aussehen:
+		```bash
+		Seiten          : a=3, b=4, c=5
+		Seiten          : a=4, b=4, c=7
+		Seiten          : a=5, b=5, c=5
+		Seiten          : a=4, b=5, c=3
+		Seiten          : a=4, b=3, c=5
+		Seiten          : a=3, b=4, c=5
+		```
+
+	- Erstellen Sie in der Klasse `Triangle` eine Objektmethode `public int circumference()`, die den Umfang des Dreiecks zurückgibt (also die Summe der drei Seitenlängen).
+
+	- Erstellen Sie in der Klasse `Triangle` eine Objektmethode `public int area()`, die den Flaecheninhalt des Dreiecks zurückgibt.  Der Flächeninhalt `A` eines Dreiecks lässt sich nach der [Heron'schen Formel](https://de.wikipedia.org/wiki/Satz_des_Heron) wie folgt berechnen:
+		- `A` = Math.sqrt(s * (s-a) * (s-b) * (s-c))
+		- wobei `s = (a + b + c) / 2`
+		- Beachten Sie, dass in einem Dreieck keine Seite länger sein darf als die Summe der beiden anderen. Für die oben in der `main()`-Methode erstellten Objekte gilt das aber. Wir müssen deshalb nichts weiter beachten. 
+
+	- Erweitern Sie die Objektmethode `print()` nun so, dass auch der Umfang und der Flaecheninhalt in der folgenden Form ausgegeben werden (Sie können in die `print()`-methode auch die Leerzeile integrieren):
+		```bash
+		Seiten          : a=3, b=4, c=5
+		Umfang          : 12
+		Flaecheninhalt  : 6.0
+
+		Seiten          : a=4, b=4, c=7
+		Umfang          : 15
+		Flaecheninhalt  : 6.777720855862979
+
+		Seiten          : a=5, b=5, c=5
+		Umfang          : 15
+		Flaecheninhalt  : 10.825317547305483
+
+		Seiten          : a=4, b=5, c=3
+		Umfang          : 12
+		Flaecheninhalt  : 6.0
+
+		Seiten          : a=4, b=3, c=5
+		Umfang          : 12
+		Flaecheninhalt  : 6.0
+
+		Seiten          : a=3, b=4, c=5
+		Umfang          : 12
+		Flaecheninhalt  : 6.0
+		```
+
+	- Erstellen Sie in der Klasse `Triangle` eine Objektmethode `public boolean equilateral()`, die ein `true` zurückgibt, wenn das Dreieck gleichseitig ist (also alle Seiten des Dreiecks gleich lang sind) und `false` sonst.
+
+	- Erstellen Sie in der Klasse `Triangle` eine Objektmethode `public boolean isosceles()`, die ein `true` zurückgibt, wenn das Dreieck gleichschenklig ist (also zwei Seiten des Dreiecks gleich lang sind) und `false` sonst.
+
+	- Erweitern Sie die Objektmethode `print()` nun so, dass die Prüfungen, ob sich um ein gleichseitiges oder gleichschenkliges (oder unregelmäßiges) Dreieck handelt, in der folgenden Form ausgegeben werden:
+		```bash
+		Seiten          : a=3, b=4, c=5
+		Umfang          : 12
+		Flaecheninhalt  : 6.0
+		Das Dreieck ist unregelmaessig.
+
+		Seiten          : a=4, b=4, c=7
+		Umfang          : 15
+		Flaecheninhalt  : 6.777720855862979
+		Das Dreieck ist gleichschenklig.
+
+		Seiten          : a=5, b=5, c=5
+		Umfang          : 15
+		Flaecheninhalt  : 10.825317547305483
+		Das Dreieck ist gleichseitig.
+
+		Seiten          : a=4, b=5, c=3
+		Umfang          : 12
+		Flaecheninhalt  : 6.0
+		Das Dreieck ist unregelmaessig.
+
+		Seiten          : a=4, b=3, c=5
+		Umfang          : 12
+		Flaecheninhalt  : 6.0
+		Das Dreieck ist unregelmaessig.
+
+		Seiten          : a=3, b=4, c=5
+		Umfang          : 12
+		Flaecheninhalt  : 6.0
+		Das Dreieck ist unregelmaessig.
+		```
+
+	- Erstellen Sie in der Klasse `Triangle` eine Objektmethode `public boolean sameCircumference(Triangle t)`, die ein `true` zurückgibt, wenn das aufrufende Objekt den gleichen Umfang hat wie `t` und `false` sonst.
+
+	- Erstellen Sie in der Klasse `Triangle` eine Objektmethode `public boolean isSmaller(Triangle t)`, die ein `true` zurückgibt, wenn das aufrufende Objekt einen kleineren Flächeninhalt hat, als `t` und `false` sonst.
+
+	- Erstellen Sie in der Klasse `Triangle` eine Objektmethode `public boolean isBigger(Triangle t)`, die ein `true` zurückgibt, wenn das aufrufende Objekt einen größeren Flächeninhalt hat, als `t` und `false` sonst.
+
+	- Testen Sie in der `main()`-Methode der `Testklasse` die drei zuletztgeschriebenen Methoden, so dass folgende Ausgaben erzeugt werden:
+		```bash
+		t1 und t2 gleicher Umfang ? : false
+		t1 und t3 gleicher Umfang ? : false
+		t2 und t3 gleicher Umfang ? : true
+
+		t1 kleiner als t2 ? : true
+		t2 kleiner als t1 ? : false
+		t1 kleiner als t4 ? : false
+		t4 kleiner als t1 ? : false
+
+		t1 groesser als t2 ? : false
+		t2 groesser als t1 ? : true
+		t1 groesser als t4 ? : false
+		t4 groesser als t1 ? : false
+		```
+	- ---
+
+	- **Wenn Sie das geschafft haben, dann haben Sie die Aufgabe erfüllt! Herzlichen Glückwunsch! Die folgende(n) Aufgabe(n) sind optional :**
+
+	- ---
+
+	- Erstellen Sie in der Klasse `Triangle` eine Objektmethode `public boolean sidesAreEqual(Triangle t)`, die ein `true` zurückgibt, wenn das aufrufende Objekt die gleichen Seitenlängen hat wie `t` und `false` sonst.
+		- Beachten Sie, dass folgende Dreiecke mit z.B. dem Dreieck (`a=3, b=4, c=5`) gleich sein sollen: (`a=3, b=4, c=5`), aber auch (`a=4, b=5, c=3`), aber auch (`a=5, b=3, c=4`) --> die "Benennung" der Seiten ist also egal
+		- Jedoch soll z.B. (`a=4, b=3, c=5`) nicht gleich zu (`a=3, b=4, c=5`) sein
+		- für die obigen Objekte soll somit gelten:
+			```bash
+			t1 und t2 gleiche Seiten ? : false
+			t1 und t4 gleiche Seiten ? : true
+			t1 und t5 gleiche Seiten ? : false
+			t1 und t6 gleiche Seiten ? : true
+			```
+			Erzeugen Sie diese Ausgabe in `main()`.
+
+	- Erstellen Sie in der Klasse `Triangle` eine Objektmethode `public boolean isRightAngled()`, die ein `true` zurückgibt, wenn das Dreieck rechtwinklig ist und `false` sonst.
+		- der [Satz des Pythagoras](https://de.wikipedia.org/wiki/Satz_des_Pythagoras) besagt, dass in einem rechtwinkligen Dreieck gilt: `a^2 + b^2 = c^2`
+		- es gilt aber auch die Umkehrung, d.h. wenn von 2 Seiten die Summe der Quadrate dem Quadrat der dritten Seite entspricht, dann ist das Dreieck rechtwinklig 
+	- Erweitern Sie die Objektmethode `print()` nun so, dass die Prüfungen, ob sich um ein rechtwinkliges Dreieck handelt, in der folgenden Form ausgegeben werden:
+		```bash
+		Seiten          : a=3, b=4, c=5
+		Umfang          : 12
+		Flaecheninhalt  : 6.0
+		Das Dreieck ist unregelmaessig.
+		Das Dreieck ist rechtwinklig.
+
+		Seiten          : a=4, b=4, c=7
+		Umfang          : 15
+		Flaecheninhalt  : 6.777720855862979
+		Das Dreieck ist gleichschenklig.
+		Das Dreieck ist nicht rechtwinklig.
+
+		Seiten          : a=5, b=5, c=5
+		Umfang          : 15
+		Flaecheninhalt  : 10.825317547305483
+		Das Dreieck ist gleichseitig.
+		Das Dreieck ist nicht rechtwinklig.
+
+		Seiten          : a=4, b=5, c=3
+		Umfang          : 12
+		Flaecheninhalt  : 6.0
+		Das Dreieck ist unregelmaessig.
+		Das Dreieck ist rechtwinklig.
+
+		Seiten          : a=4, b=3, c=5
+		Umfang          : 12
+		Flaecheninhalt  : 6.0
+		Das Dreieck ist unregelmaessig.
+		Das Dreieck ist rechtwinklig.
+
+		Seiten          : a=3, b=4, c=5
+		Umfang          : 12
+		Flaecheninhalt  : 6.0
+		Das Dreieck ist unregelmaessig.
+		Das Dreieck ist rechtwinklig.
+		```
+
+	- Viel Spaß und viel Erfolg!
+

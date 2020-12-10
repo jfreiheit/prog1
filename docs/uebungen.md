@@ -1301,6 +1301,171 @@
 	- <iframe src="https://mediathek.htw-berlin.de/media/embed?key=399b328c0d82e698936e2df57c6d87d0&width=720&height=383&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="383" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>
 
 	
+??? note "Übung 6"
+	
+	1. Erstellen Sie ein package `uebungen.uebung6`. 
+	2. Erstellen Sie in diesem package eine Klasse `Konto` (ohne `main()`-Methode!)
+	3. Erstellen Sie in diesem package eine Klasse `Testklasse` mit `main()`-Methode	
+	4. Erstellen Sie in der Klasse `Konto` zwei Objektvariablen
+		- `guthaben` vom Typ `double` --> nur in der Klasse sichtbar!
+		- `pin` vom Typ `int`	--> ebenfalls nur in der Klasse sichtbar!
+	5. Erstellen Sie in der Klasse `Konto` einen Konstruktor für `Konto`
+		- diesem Konstruktor wird als Parameter `int pPin` übergeben
+		- mit dem Wert des Parameters wird innerhalb des Konstruktors der Wert von `pin` initialisiert
+		- Initialisieren Sie im Konstruktor auch die Objektvariable `guthaben`. Sie bekommt den Wert `0.0` (hierfür haben wir also keinen Parameter, wir setzen den initialen Wert einfach generell auf `0.0`)
+	6. Erstellen Sie in der Klasse `Konto` eine Objektmethode `einzahlen(double betrag)`
+		- diese Objektmethode ist `public` und gibt nichts zurück
+		- in dieser Methode wird der Wert der Objektvariablen `guthaben` um den Wert von `betrag` erhöht
+		- erzeugen Sie in dieser Methode außerdem eine Ausgabe in der Form:
+			```bash
+			Es wurden 100,00 Euro eingezahlt.
+			```
+			falls der `betrag` den Wert `100.0` hatte. Verwenden Sie am besten die `printf()`-Methode, um stets genau 2 Stellen nach dem Komma des Betrages auszugeben (siehe [hier](../hilfsklassen/#formatierung-von-gleikommazahlen)). 
+	7. Geben Sie in der `main()`-Methode der `Testklasse` ein:
+		```java
+		Konto k1 = new Konto(1234);
+		
+		k1.einzahlen(100.0);
+		k1.einzahlen(50.0);
+		k1.einzahlen(150.0);
+		```
+		und führen Sie die `Testklasse` aus. Es sollten folgende Ausgaben erzeugt werden:
+		```bash
+		Es wurden 100,00 Euro eingezahlt.
+		Es wurden 50,00 Euro eingezahlt.
+		Es wurden 150,00 Euro eingezahlt.
+		```
+	8. Erstellen Sie in der Klasse `Konto` eine Objektmethode `kontoauszug(int pPin)`
+		- diese Objektmethode ist `public` und gibt nichts zurück
+		- einen `kontoauszug(int pPin)` können Sie nur "ziehen", wenn der Parameterwert von `pPin` mit dem Wert der Objektvariablen `pin` übereinstimmt
+		- wird der richtige Wert für die `pin` übergeben, geben Sie das `guthaben` in der folgenden Form aus:
+			```bash
+			Ihr aktuelles Guthaben betraegt 300,00 Euro.
+			```
+			falls `guthaben` den Wert von `300.0` hat. 
+		- wird ein falscher Wert für die `pin` übergeben, geben Sie folgende Ausgabe aus:
+			```bash
+			Falsche PIN!
+			```
+	9. Erweitern Sie die `main()`-Methode der Testklasse um folgende Anweisungen:
+		```java
+		k1.kontoauszug(1235); 		// Falsche PIN!
+		k1.kontoauszug(1234); 	
+		``` 
+		und führen Sie die `Testklasse` aus. Es sollten folgende (weitere) Ausgaben erzeugt werden:
+		```bash
+		Falsche PIN!
+		Ihr aktuelles Guthaben betraegt 300,00 Euro.
+		```
+	10. Erstellen Sie in der Klasse `Konto` eine Objektmethode `auszahlen(int pPin, double betrag)`
+		- diese Objektmethode ist `public` und gibt nichts zurück
+		- es kann nur etwas ausgezahlt werden, wenn der Parameterwert von `pPin` mit dem Wert der Objektvariablen `pin` übereinstimmt
+		- stimmen die Werte nicht überein, geben Sie erneut 
+			```bash
+			Falsche PIN!
+			```
+			aus. 
+		- stimmt der `pin`-Wert, dann müssen Sie prüfen, ob das `guthaben` reicht, um `betrag` auszuzahlen. Ist nicht genug `guthaben` vorhanden, dann geben Sie aus
+			```bash
+			Ihr Guthaben reicht nicht, um 400,00 Euro auszuzahlen.
+			``` 
+			falls `betrag` den Wert `400.0` hatte. 
+		- wenn der `pin`-Wert stimmt und genug `guthaben` vorhanden ist, um den `betrag` auszuzahlen, dann reduzieren Sie `guthaben` um den entsprechenden `betrag` und geben aus
+			```bash
+			Es wurden 100,00 Euro ausgezahlt.
+			```
+			falls der `betrag` den Wert `100.0` hatte.
+	11. Erweitern Sie die `main()`-Methode der Testklasse um folgende Anweisungen:
+		```java
+		k1.auszahlen(1235, 100.0); 	// Falsche PIN!
+		k1.auszahlen(1234, 100.0); 	
+		k1.kontoauszug(1234); 		
+		k1.auszahlen(1234, 300.0);	// Guthaben reicht nicht
+		k1.auszahlen(1234, 200.0); 	
+		k1.kontoauszug(1234); 	
+		``` 
+		und führen Sie die `Testklasse` aus. Es sollten folgende (weitere) Ausgaben erzeugt werden:
+		```bash
+		Falsche PIN!
+		Es wurden 100,00 Euro ausgezahlt.
+		Ihr aktuelles Guthaben betraegt 200,00 Euro.
+		Ihr Guthaben reicht nicht, um 300,00 Euro auszuzahlen.
+		Es wurden 200,00 Euro ausgezahlt.
+		Ihr aktuelles Guthaben betraegt 0,00 Euro.
+		```
+	12. **Zusatz:** 
+		- Erweitern Sie die Klasse um eine weitere Objektvariable `private double dispogrenze`
+		- Initialisieren Sie diese Variable innerhalb des Konstruktors (ohne weiteren Parmeter) auf den Wert `-1000.0`. Sie dürfen somit Ihr Konto um `1000.00 Euro` überziehen.
+		- Passen Sie die `auszahlen()`-Methode entsprechend an, so dass es auch möglich ist, einen `betrag` auszuzahlen, so lange man nicht unter die `dispogrenze` fällt.
+		- Erstellen Sie eine Methode `public void zinsenZahlen()`.
+			- Erstellen Sie in dieser Methode zwei [Konstanten](../variablen/#konstanten)
+				- `DISPOZINSEN` vom Typ `double` bekommt den Wert `12.0` (soll `12%` entsprechen) und
+				- `GUTHABENZINSEN` vom Typ `double` bekommt den Wert `0.5` (soll `0.5%` entsprechen) 
+			- Berechnen Sie innerhalb der Methode die Zinsen für das Konto
+				- `DISPOZINSEN` werden fällig (werden von `guthaben` abgezogen), falls `guthaben` negativ ist
+				- `GUTHABENZINSEN` werden gewährt (werden zu `guthaben` addiert), falls `guthaben` positiv ist
+				- passen Sie den Wert von `guthaben` entsprechend an
+				- erzeugen Sie entsprechende Ausgaben, z.B. 
+					```bash
+					Ihnen wurden 18,00 Euro Zinsen abgebucht.
+					```
+					bzw.
+					```bash
+					Ihnen wurden 4,16 Euro Zinsen gutgeschrieben.
+					```
+		- Angenommen, die gesamte `main()`-Methode sieht jetzt so aus:
+			```java
+			public static void main(String[] args)
+			{
+				Konto k1 = new Konto(1234);
+				
+				k1.einzahlen(100.0);
+				k1.einzahlen(50.0);
+				k1.einzahlen(150.0);
+				
+				k1.kontoauszug(1235); 		// Falsche PIN!
+				k1.kontoauszug(1234); 		
+				
+				k1.auszahlen(1235, 100.0); 	// Falsche PIN!
+				k1.auszahlen(1234, 100.0); 	
+				k1.kontoauszug(1234); 		
+				k1.auszahlen(1234, 300.0);	
+				k1.auszahlen(1234, 200.0); 	
+				k1.kontoauszug(1234); 
+				
+				k1.einzahlen(150.0);
+				k1.kontoauszug(1234); 		
+				k1.zinsenZahlen();
+				k1.kontoauszug(1234); 		
+				k1.einzahlen(1000.0);
+				k1.kontoauszug(1234); 		
+				k1.zinsenZahlen();
+				k1.kontoauszug(1234); 
+			}
+			```
+			dann sollten Sie folgende Ausgabe erzeugen (gilt nur für **Zusatz**!):
+			```bash
+			Es wurden 100,00 Euro eingezahlt.
+			Es wurden 50,00 Euro eingezahlt.
+			Es wurden 150,00 Euro eingezahlt.
+			Falsche PIN!
+			Ihr aktuelles Guthaben betraegt 300,00 Euro.
+			Falsche PIN!
+			Es wurden 100,00 Euro ausgezahlt.
+			Ihr aktuelles Guthaben betraegt 200,00 Euro.
+			Es wurden 300,00 Euro ausgezahlt.
+			Es wurden 200,00 Euro ausgezahlt.
+			Ihr aktuelles Guthaben betraegt -300,00 Euro.
+			Es wurden 150,00 Euro eingezahlt.
+			Ihr aktuelles Guthaben betraegt -150,00 Euro.
+			Ihnen wurden 18,00 Euro Zinsen abgebucht.
+			Ihr aktuelles Guthaben betraegt -168,00 Euro.
+			Es wurden 1000,00 Euro eingezahlt.
+			Ihr aktuelles Guthaben betraegt 832,00 Euro.
+			Ihnen wurden 4,16 Euro Zinsen gutgeschrieben.
+			Ihr aktuelles Guthaben betraegt 836,16 Euro.
+			```
+
 
 ## Weitere Übungsaufgaben (selbständiges Üben)
 

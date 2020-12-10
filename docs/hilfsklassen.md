@@ -759,3 +759,32 @@ Nämlich so:
   10  20  30  40  50  60  70  80  90 100
 
 ```
+
+#### Formatierung von Gleikommazahlen
+
+Um Gleitkommazahlen in der Standardnotation (nicht wissenschaftliche Notation) formatiert auszugeben, wird der Platzhalter `%f` verwendet. Die allgemeine Syntax ist also
+
+```bash
+% [Schalter] [Breite] . [Genauigkeit] f
+```
+
+Der `Schalter` kann `-` sein, dann wird die Zahl linksbündig dargestellt. Ist kein `Schalter` angegeben, erfolgt die Ausgabe rechtsbündig. Die `Breite` beschreibt die gesamte Anzahl der Stellen für die Zahl. Die `Breite` enthält insbesondere auch eine Stelle für das Komma und die Anzahl der Stellen für die `Genauigkeit`. Die `Genauigkeit` gibt die Anzahl der Nachkommastellen an.  
+
+Angenommen, der Plathalter lautet `%7.2f`. Dann werden insgesamt sieben Stellen für die gesamte Zahl reserviert, inklusive dem Komma und den `2` Nachkommastellen, also
+
+```bash
+_ _ _ _ , _ _ 
+```
+
+Wenn die Gesamtlänge beliebig ist, Sie aber nur genau 2 Nachkommastellen haben möchten, dann können Sie auch `%.2f` als Platzhalter angeben. Für eine Nachkommastelle `%.1f`. Die Nachkommastellen werden sogar gerundet. 
+
+Hier nochmal einige Beispiele von oben nur für Gleikommazahlen:
+
+```java linenums="1"
+System.out.printf("|%10.2f|", 1234.567); 		// |   1234,57|
+System.out.printf("|%-10.2f|", 1234.567); 		// |1234,57   |
+System.out.printf("|%7.2f|", 1234.567); 		// |1234,57|
+System.out.printf("|%5.2f|", 1234.567); 		// |1234,57|
+```
+
+Beachten Sie auch das letzte Beispiel (Zeile `4`). Es wurden nur insgesamt `5` Stellen für die gesamte Zahl reserviert. Davon benötigen wir alleine `2` Stellen für die Nachkommastellen und `1` Stelle für das Komma. Die Vorkommastellen hätten also nur `2`Stellen Platz. Vorne wird die Zahl aber **nie** abgeschnitten. Sollte der reservierte Platz für die Vorkommastellen nicht ausreichen, wird der Vorkommabereich trotzdem vollständig dargestellt. Es kann also trotz der Formatierung zu Verzerrungen in der Ausgabe kommen!

@@ -44,7 +44,7 @@ Nachfolgend der vorläufige Wochenplan (wird eventuell angepasst). Die Vorlesung
 | 4. | 23.-27.11.2020 | Nützliche Klassen, Einführung Arrays | Aufgabe 3 | 06.12.2020 | 
 | 5. | 30.-04.12.2020 | Sortieren von Arrays | Aufgabe 4 | 13.12.2020 | 
 | 6. | 07.-11.12.2020 | Klassen und Objekte | Aufgabe 5  | 20.12.2020 | 
-| 7. | 14.-18.12.2020 | Getter, Setter, Konstruktoren, this, private | Aufgabe 6  | 10.01.2021 | 
+| 7. | 14.-18.12.2020 | Setter, Konstruktoren, this | Aufgabe 6  | 10.01.2021 | 
 | 8. | 21.-25.12.2020 | Klassen- und Objekt-Variablen und -Methoden  | Aufgabe 7  | 17.01.2021 |
 | | | | | | | |
 | 9. | 04.-08.01.2021 | Vererbung | Aufgabe 8  | 24.01.2021 |
@@ -729,3 +729,11 @@ Hier sind die Themen in chronologischer Folge aufgeführt, wie wir sie auch in d
 	- unter dem Abschnitt zu [Variablen](./variablen/#variablen-und-datentypen) habe ich einen Unterabschnitt [**Typkonvertierung**](./variablen/#typkonvertierung-type-cast) hinzugefügt. Der ist größtenteils zur Information. Sie müssen "nur" den Typkonvertierungsoperator kennen. 
 	- Ich hoffe, dass es dieses Mal nicht zu viel ist (es sieht, wie gesagt, zunächst mehr aus als es ist). Wenn aber doch, dann sagen Sie Bescheid!
 	- für die [**Aufgabe 2**](./aufgaben/#aufgaben_1) habe ich noch ein Video erstellt und die Lösung hochgeladen
+
+
+??? question "11.12. + 15.12.2020 - Klassen und Objekte (Einführung in die objektorientierte Programmierung)"
+	- siehe [**Aufgabe 5 - Triangle**](./aufgaben/#aufgaben_1)
+	- siehe [**Übung 6**](./uebungen/#ubungsblatter-wochenweise)
+	- siehe [**Klassen und Objekte**](./objekte/#klassen-und-objekte)
+	- Wir beginnen ein neues Thema, nämlich "objektorientierte Programmierung". Wir erstellen uns eigene Datentypen. Da gibt es leider am Anfang wieder recht viel Neues. Ich hoffe, ich konnte es halbwegs eingrenzen und das Ausmaß an Neuem ist nicht zu groß. In dem Skript zu [Klassen und Objekte](./objekte/#klassen-und-objekte) sind drei Beispiele eigener Datentypen, aber im zweiten (`Point`) und dritten (`Circle`) Beispiel wiederholt sich schon Vieles aus dem ersten (`Adresse`) . Wenn ich es schaffe, erstelle ich noch ein Video über das erste Beispiel (`Adresse`) - das wird dann aber "nur" ein Vorprogrammieren des Skriptes. Viel Spaß mit den neuen Sachen!
+	- für die [**Aufgabe 3**](./aufgaben/#aufgaben_1) habe ich die Lösung hochgeladen
