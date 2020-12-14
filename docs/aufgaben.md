@@ -3322,7 +3322,7 @@ Die Aufgaben laden Sie in [Moodle](https://moodle.htw-berlin.de/course/view.php?
 ??? "Aufgabe 5 - Triangle"
 	- Wir erstellen uns einen neuen Datentyp `Triangle`
 
-	- Erstellen Sie im package `aufgaben.aufgabe6` eine Klasse `Triangle` ohne `main()`-Methode und eine Klasse `Testklasse` mit `main()`-Methode. 
+	- Erstellen Sie im package `aufgaben.aufgabe5` eine Klasse `Triangle` ohne `main()`-Methode und eine Klasse `Testklasse` mit `main()`-Methode. 
 
 	- In der Klasse `Triangle` erstellen Sie drei Objektvariablen `a`, `b` und `c` jeweils vom Typ `int` und alle `private`. Das sollen die Seiten unseres Dreiecks sein. 
 
@@ -3362,9 +3362,10 @@ Die Aufgaben laden Sie in [Moodle](https://moodle.htw-berlin.de/course/view.php?
 
 	- Erstellen Sie in der Klasse `Triangle` eine Objektmethode `public int circumference()`, die den Umfang des Dreiecks zurückgibt (also die Summe der drei Seitenlängen).
 
-	- Erstellen Sie in der Klasse `Triangle` eine Objektmethode `public int area()`, die den Flaecheninhalt des Dreiecks zurückgibt.  Der Flächeninhalt `A` eines Dreiecks lässt sich nach der [Heron'schen Formel](https://de.wikipedia.org/wiki/Satz_des_Heron) wie folgt berechnen:
+	- Erstellen Sie in der Klasse `Triangle` eine Objektmethode `public double area()`, die den Flaecheninhalt des Dreiecks zurückgibt.  Der Flächeninhalt `A` eines Dreiecks lässt sich nach der [Heron'schen Formel](https://de.wikipedia.org/wiki/Satz_des_Heron) wie folgt berechnen:
 		- `A` = Math.sqrt(s * (s-a) * (s-b) * (s-c))
 		- wobei `s = (a + b + c) / 2`
+		- Achten Sie darauf, dass Sie stets mit `double` rechnen!
 		- Beachten Sie, dass in einem Dreieck keine Seite länger sein darf als die Summe der beiden anderen. Für die oben in der `main()`-Methode erstellten Objekte gilt das aber. Wir müssen deshalb nichts weiter beachten. 
 
 	- Erweitern Sie die Objektmethode `print()` nun so, dass auch der Umfang und der Flaecheninhalt in der folgenden Form ausgegeben werden (Sie können in die `print()`-methode auch die Leerzeile integrieren):

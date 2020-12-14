@@ -3870,7 +3870,7 @@ nn <span class="o">(</span><span class="m">1</span><span class="o">)</span>
 <p>Wir erstellen uns einen neuen Datentyp <code>Triangle</code></p>
 </li>
 <li>
-<p>Erstellen Sie im package <code>aufgaben.aufgabe6</code> eine Klasse <code>Triangle</code> ohne <code>main()</code>-Methode und eine Klasse <code>Testklasse</code> mit <code>main()</code>-Methode. </p>
+<p>Erstellen Sie im package <code>aufgaben.aufgabe5</code> eine Klasse <code>Triangle</code> ohne <code>main()</code>-Methode und eine Klasse <code>Testklasse</code> mit <code>main()</code>-Methode. </p>
 </li>
 <li>
 <p>In der Klasse <code>Triangle</code> erstellen Sie drei Objektvariablen <code>a</code>, <code>b</code> und <code>c</code> jeweils vom Typ <code>int</code> und alle <code>private</code>. Das sollen die Seiten unseres Dreiecks sein. </p>
@@ -3913,10 +3913,11 @@ Seiten          : <span class="nv">a</span><span class="o">=</span><span class="
 <p>Erstellen Sie in der Klasse <code>Triangle</code> eine Objektmethode <code>public int circumference()</code>, die den Umfang des Dreiecks zurückgibt (also die Summe der drei Seitenlängen).</p>
 </li>
 <li>
-<p>Erstellen Sie in der Klasse <code>Triangle</code> eine Objektmethode <code>public int area()</code>, die den Flaecheninhalt des Dreiecks zurückgibt.  Der Flächeninhalt <code>A</code> eines Dreiecks lässt sich nach der <a href="https://de.wikipedia.org/wiki/Satz_des_Heron">Heron'schen Formel</a> wie folgt berechnen:</p>
+<p>Erstellen Sie in der Klasse <code>Triangle</code> eine Objektmethode <code>public double area()</code>, die den Flaecheninhalt des Dreiecks zurückgibt.  Der Flächeninhalt <code>A</code> eines Dreiecks lässt sich nach der <a href="https://de.wikipedia.org/wiki/Satz_des_Heron">Heron'schen Formel</a> wie folgt berechnen:</p>
 <ul>
 <li><code>A</code> = Math.sqrt(s * (s-a) * (s-b) * (s-c))</li>
 <li>wobei <code>s = (a + b + c) / 2</code></li>
+<li>Achten Sie darauf, dass Sie stets mit <code>double</code> rechnen!</li>
 <li>Beachten Sie, dass in einem Dreieck keine Seite länger sein darf als die Summe der beiden anderen. Für die oben in der <code>main()</code>-Methode erstellten Objekte gilt das aber. Wir müssen deshalb nichts weiter beachten. </li>
 </ul>
 </li>
