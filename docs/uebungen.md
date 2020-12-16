@@ -1466,10 +1466,557 @@
 			Ihr aktuelles Guthaben betraegt 836,16 Euro.
 			```
 
+??? question "Eine mögliche Lösung für Übung 6"
+	=== "Konto.java"
+		```java 
+		package uebungen.uebung6;
+
+		public class Konto
+		{
+			private double guthaben;
+			private int pin;
+			private double dispogrenze;
+			
+			public Konto(int pPin)
+			{
+				guthaben = 0;
+				pin = pPin;
+				dispogrenze = -1000.0;
+			}
+			
+			public void einzahlen(double betrag)
+			{
+				guthaben = guthaben + betrag;
+				System.out.printf("Es wurden %.2f Euro eingezahlt.%n", betrag);
+			}
+			
+			public void auszahlen(int pPin, double betrag)
+			{
+				if(pin==pPin)
+				{
+					if(guthaben - dispogrenze >= betrag)
+					{
+						guthaben = guthaben - betrag;
+						System.out.printf("Es wurden %.2f Euro ausgezahlt.%n", betrag);
+					}
+					else
+					{
+						System.out.printf("Ihr Guthaben reicht nicht, um %.2f Euro auszuzahlen.%n", betrag);
+					}
+				}
+				else
+				{
+					System.out.println("Falsche PIN!");
+				}
+			}
+			
+			public void kontoauszug(int pPin)
+			{
+				if(pin==pPin)
+				{
+					System.out.printf("Ihr aktuelles Guthaben betraegt %.2f Euro.%n", guthaben);
+				}
+				else
+				{
+					System.out.println("Falsche PIN!");
+				}
+			}
+			
+			public void zinsenZahlen()
+			{
+				final double DISPOZINSEN = 12.0;
+				final double GUTHABENZINSEN = 0.5;
+				if(guthaben >0)
+				{
+					double zinsen = guthaben * GUTHABENZINSEN / 100.0;
+					guthaben = guthaben + zinsen;
+					System.out.printf("Ihnen wurden %.2f Euro Zinsen gutgeschrieben.%n", zinsen);
+				}
+				else
+				{
+					double zinsen = guthaben * DISPOZINSEN / 100.0;		// ist negativ!
+					guthaben = guthaben + zinsen;
+					System.out.printf("Ihnen wurden %.2f Euro Zinsen abgebucht.%n", -zinsen);
+				}
+			}
+		}
+		```
+	=== "Testklasse.java"
+		```java 
+		package uebungen.uebung6;
+
+		public class Testklasse
+		{
+
+			public static void main(String[] args)
+			{
+				Konto k1 = new Konto(1234);
+				
+				k1.einzahlen(100.0);
+				k1.einzahlen(50.0);
+				k1.einzahlen(150.0);
+				
+				k1.kontoauszug(1235); 		// Falsche PIN!
+				k1.kontoauszug(1234); 		
+				
+				k1.auszahlen(1235, 100.0); 	// Falsche PIN!
+				k1.auszahlen(1234, 100.0); 	
+				k1.kontoauszug(1234); 		
+				k1.auszahlen(1234, 300.0);	
+				k1.auszahlen(1234, 200.0); 	
+				k1.kontoauszug(1234); 
+				
+				k1.einzahlen(150.0);
+				k1.kontoauszug(1234); 		
+				k1.zinsenZahlen();
+				k1.kontoauszug(1234); 		
+				k1.einzahlen(1000.0);
+				k1.kontoauszug(1234); 		
+				k1.zinsenZahlen();
+				k1.kontoauszug(1234); 
+			}
+		}
+		```
+
+
+
+??? note "Übung 7"
+	
+	1. Erstellen Sie ein package `uebungen.uebung7`. 
+	2. Erstellen Sie in diesem package eine Klasse `Rectangle` (ohne `main()`-Methode!)
+	3. Erstellen Sie in diesem package eine Klasse `Testklasse` mit `main()`-Methode	
+	4. Erstellen Sie in der Klasse `Rectangle` zwei Objektvariablen
+		- `a` vom Typ `int` --> nur in der Klasse sichtbar!
+		- `b` vom Typ `int`	--> ebenfalls nur in der Klasse sichtbar!
+		`a` und `b` sollen die Seiten des Rechtecks sein. 
+	5. Implementieren Sie einen parameterlosen Konstruktor `Rectangle()`, der für die Seite `a` den Wert `10` und für die Seite `b` den Wert `20` setzt. 
+	6. Implementieren Sie einen parametrisierten Konstruktor `Rectangle(int a, int b)`, der die Parameterwerte zum Initialisieren der Seiten verwendet. 
+	7. Implementieren Sie eine Objektmethode `public int area()`, die den Flächeninhalt des Rechtecks zurückgibt. 
+	8. Implementieren Sie eine Objektmethode `public int perimeter()`, die den Umfang des Rechtecks zurückgibt. 
+	9. Implementieren Sie eine Objektmethode `public String toString()`, die einen `String` mit allen Informationen des Rechtecks in der folgenden Form
+		```bash
+		Rectangle : ( a=10, b=20, area=200, perimeter=60 )
+		```
+		zurückgibt. 
+	10. Implementieren Sie eine Objektmethode `public void print()`, die den durch `toString()` erzeugten `String` auf die Konsole ausgibt.
+	11. Geben Sie in der `main()`-Methode der `Testklasse` ein:
+		```java
+		// Objekte erzeugen
+		Rectangle r1 = new Rectangle();
+		Rectangle r2 = new Rectangle(12, 18);
+		Rectangle r3 = new Rectangle(40, 5);
+		Rectangle r4 = new Rectangle(20, 10);
+		Rectangle r5 = new Rectangle(11, 21);
+		
+		System.out.printf("%n%n--------------- print()-Methode -----------------%n%n");
+		r1.print();
+		r2.print();
+		r3.print();
+		r4.print();
+		r5.print();
+		```
+		und führen Sie die `Testklasse` aus. Es sollten folgende Ausgaben erzeugt werden:
+		```bash
+		--------------- print()-Methode -----------------
+
+		Rectangle : ( a=10, b=20, area=200, perimeter=60 )
+		Rectangle : ( a=12, b=18, area=216, perimeter=60 )
+		Rectangle : ( a=40, b= 5, area=200, perimeter=90 )
+		Rectangle : ( a=20, b=10, area=200, perimeter=60 )
+		Rectangle : ( a=11, b=21, area=231, perimeter=64 )
+		```
+	12. Implementieren Sie eine Objektmethode `public boolean sidesAreEqual(Rectangle r)`, die ein `true` zurückgibt, wenn die Seiten des aufrufenden Objektes gleich den Seiten des Rectangle `r` sind. Beachten Sie, dass das Rechteck auch gedreht noch gleiche Seiten haben soll, also `a=10, b=20` ist nicht nur mit `a=10, b=20` gleich, sondern auch mit `a=20, b=10`. Wenn die Seiten ungleich sind, gibt die Methode ein `false` zurück.
+	13. Implementieren Sie eine Objektmethode `public boolean areasAreEqual(Rectangle r)`, die ein `true` zurückgibt, wenn die Flächeninhalte des aufrufenden Objektes und des Rectangle `r` gleich sind. Ansonsten `false`.
+	14. Implementieren Sie eine Objektmethode `public boolean perimetersAreEqual(Rectangle r)`, die ein `true` zurückgibt, wenn die Umfänge des aufrufenden Objektes und des Rectangle `r` gleich sind. Ansonsten `false`.
+	15. Implementieren Sie eine Objektmethode `public void printComparison(Rectangle r)`, die die Vergleiche mit `r` in der unten dargestellten Form ausgibt. Rufen Sie in der Methode die Methoden `print()` (oder `toString()`), `sidesAreEqual()`, `areasAreEqual()` und `perimetersAreEqual()` auf. 
+	16. Fügen Sie in der `main()`-Methode der `Testklasse` folgende Anweisungen hinzu:
+		```java	
+		System.out.printf("%n%n---------- printComparison()-Methode ------------%n%n");
+		r1.printComparison(r2);
+		r1.printComparison(r3);
+		r1.printComparison(r4);
+		r1.printComparison(r5);
+		```
+		und führen Sie die `Testklasse` aus. Es sollten folgende zusätzliche Ausgaben erzeugt werden:
+		```bash
+		---------- printComparison()-Methode ------------
+
+		this      Rectangle : ( a=10, b=20, area=200, perimeter=60 ) 
+		the other Rectangle : ( a=12, b=18, area=216, perimeter=60 ) 
+		sides are not equal 
+		areas are not equal 
+		perimeters are equal 
+
+		this      Rectangle : ( a=10, b=20, area=200, perimeter=60 ) 
+		the other Rectangle : ( a=40, b= 5, area=200, perimeter=90 ) 
+		sides are not equal 
+		areas are equal 
+		perimeters are not equal 
+
+		this      Rectangle : ( a=10, b=20, area=200, perimeter=60 ) 
+		the other Rectangle : ( a=20, b=10, area=200, perimeter=60 ) 
+		sides are equal 
+		areas are equal 
+		perimeters are equal 
+
+		this      Rectangle : ( a=10, b=20, area=200, perimeter=60 ) 
+		the other Rectangle : ( a=11, b=21, area=231, perimeter=64 ) 
+		sides are not equal 
+		areas are not equal 
+		perimeters are not equal 
+		```
+	17. **Zusatz:** 
+		- Implementieren Sie eine Objektmethode `public double diagonal()`, die die Länge einer Diagonalen des Rechtecks zurückgibt. 
+		- Erweitern Sie die `toString()`-Methode um die Ausgabe dieser Länge wie folgt:
+			```bash
+			Rectangle : ( a=10, b=20, area=200, perimeter=60, diagonal=22,361 )
+			Rectangle : ( a=12, b=18, area=216, perimeter=60, diagonal=21,633 )
+			Rectangle : ( a=40, b= 5, area=200, perimeter=90, diagonal=40,311 )
+			Rectangle : ( a=20, b=10, area=200, perimeter=60, diagonal=22,361 )
+			Rectangle : ( a=11, b=21, area=231, perimeter=64, diagonal=23,707 )
+			``` 
+			Es sollen drei Nachkommastellen der Länge der Diagonalen ausgegeben werden.
+		- Implementieren Sie eine Objektmethode `public void scale(int factor)`. Diese Methode "skaliert" das Rechteck um den Faktor `factor`, genauer gesagt, wird der **Flächeninhalt** um diesen Faktor skaliert. Die neuen Seiten sollen das gleiche Verhältnis zueinander haben, wie die alten Seiten. Geben Sie die neuen Seitenlängen in der folgenden Form auf die Konsole aus (siehe nächsten Punkt `main()`).
+		- Fügen Sie in der `main()`-Methode der `Testklasse` folgende Anweisungen hinzu:
+		```java	
+		System.out.printf("%n%n--------------- sclae()-Methode -----------------%n%n");
+		r1.scale(2);
+		r2.scale(2);
+		r3.scale(2);
+		r4.scale(2);
+		r5.scale(2);
+		r1.scale(10);
+		r2.scale(10);
+		r3.scale(10);
+		r4.scale(10);
+		r5.scale(10);
+		```
+		und führen Sie die `Testklasse` aus. Es sollten folgende zusätzliche Ausgaben erzeugt werden:
+		```bash
+		--------------- sclae()-Methode -----------------
+
+		newArea=  400,00 newA= 14,14 newB= 28,28 check (newA*newB)= 400,00
+		newArea=  432,00 newA= 16,97 newB= 25,46 check (newA*newB)= 432,00
+		newArea=  400,00 newA= 56,57 newB=  7,07 check (newA*newB)= 400,00
+		newArea=  400,00 newA= 28,28 newB= 14,14 check (newA*newB)= 400,00
+		newArea=  462,00 newA= 15,56 newB= 29,70 check (newA*newB)= 462,00
+		newArea= 2000,00 newA= 31,62 newB= 63,25 check (newA*newB)=2000,00
+		newArea= 2160,00 newA= 37,95 newB= 56,92 check (newA*newB)=2160,00
+		newArea= 2000,00 newA=126,49 newB= 15,81 check (newA*newB)=2000,00
+		newArea= 2000,00 newA= 63,25 newB= 31,62 check (newA*newB)=2000,00
+		newArea= 2310,00 newA= 34,79 newB= 66,41 check (newA*newB)=2310,00
+		```
 
 ## Weitere Übungsaufgaben (selbständiges Üben)
 
-Hier werden lose und unregelmäßig Übungsaufgaben gesammelt. Am Ende des Semesters soll dann hier eine große Sammlung von Übungsaufgaben entstanden sein, die der eigenen Kontrolle dienen sollen. Die Übungen sind thematisch sortiert, allerdings überschneiden sich manche Themen in einigen Übungen.  
+Hier werden lose und unregelmäßig Übungsaufgaben gesammelt. Am Ende des Semesters soll dann hier eine große Sammlung von Übungsaufgaben entstanden sein, die der eigenen Kontrolle dienen sollen. Die Übungen sind thematisch sortiert, allerdings überschneiden sich manche Themen in einigen Übungen. 
+
+### Probeklausuren
+
+
+??? note "Power"
+	- Implementieren Sie eine Klasse `Power`. 
+
+	- **Idee :** Die Klasse `Power` implementiert die *Potenz*. Eine *Potenz* besteht aus einer Basis (`base`) und dem Exponenten (`exp`): base^exp, z.B. `8^4 = 8 ∙ 8 ∙ 8 ∙ 8`
+
+	- Objektvariablen sind `base` und `exp` vom Typ `int`. Beide Objektvariablen sind nur innerhalb der Klasse sichtbar!
+	- Implementieren Sie getter für die Basis (`getBase()`) und für den Exponenten (`getExp()`) (Sichtbarkeit `public`). 
+	- Implementieren Sie für die Klasse `Power` einen parametrisierten Konstruktor `Power(int base, int exp)`. Die Werte der Parameter werden verwendet, um den Objektvariablen Werte zuzuweisen.
+	- Implementieren Sie eine Objektmethode `getValue()`, die ein `double` zurückgibt. Die Methode gibt den Wert der Potenz zurück, also z.B. für `8^4` den Wert `4096.0`. Beachten Sie: <br/>
+		![formel](./files/73_formel.png) <br/>
+		Die Verwendung der `Math`-Klasse ist nicht erlaubt!
+	- Überschreiben Sie die Methode `toString()`, so dass eine Potenz in der Form `(base, exp)` als `String` zurückgegeben wird, wobei `base` und `exp` die Werte der jeweiligen Objektvariablen sein sollen, also z.B. `(8, 4)`. 
+	- Implementieren Sie eine Objektmethode `print()`, die mithilfe von `toString()` eine Potenz auf der Konsole ausgibt. 
+	- Erstellen Sie eine Klasse `PowerTest` mit `main()`-Methode. Erzeugen Sie in der `main()`-Methode folgende fünf Objekte der Klasse `Power`: `3^4`, `-3^4`, `3^0`, `3^(-4)`, `-3^(-4)`. Wenden Sie jeweils die Methode `print()` an und geben Sie außerdem jeweils den Wert der Potenz auf die Konsole aus. Es sollte eine Ausgabe in ungefähr der folgenden Form erfolgen:
+	```bash
+	(3,4)
+	(3,4) = 81.0
+	(-3,4)
+	(-3,4) = 81.0
+	(3,0)
+	(3,0) = 1.0
+	(3,-4)
+	(3,-4) = 0.012345679012345678
+	(-3,-4)
+	(-3,-4) = 0.012345679012345678
+	```
+	---
+	- Erstellen Sie eine Klasse `PowerOfTwo`. Diese Klasse erbt von `Power`. 
+	- **Idee :** Ein Objekt der Klasse `PowerOfTwo` ist eine Potenz zur Basis `2`, also z.B. `2^4`.
+	- Implementieren Sie einen parametrisierten Konstruktor `PowerOfTwo(int exp)`. Beachten Sie, dass der Basis der Wert `2` zugewiesen wird. 
+	- Implementieren Sie eine Objektmethode `printBinary()`. Diese Methode gibt die Potenz als Binärzahl (bestehend aus Einsen und Nullen) auf die Konsole aus, z.B. `2^4`: `1 0 0 0 0`. **Tipp :** es kommt vorne immer eine `1` und danach kommen so viele Nullen, wie der Exponent groß ist. Wenn der Exponent kliner als `0` ist, dann geben Sie `Zahl ist kleiner als 1` auf die Konsole aus. Die Binärzahl für eine Potenz kleiner als `0` muss also **nicht** ermittelt werden. 
+	- Erzeugen Sie in der `main()`-Methode der Klasse `PowerTest` folgende drei Objekte der Klasse `PowerOfTwo`: `2^4`, `2^(-4)`, `2^0` und rufen Sie jeweils die Methoden `print()` und `printBinary()` auf. Es sollte eine Ausgabe in ungefähr der folgenden Form erfolgen:
+	```bash
+	(2,4)
+	1 0 0 0 0
+	(2,-4)
+	Zahl ist kleiner als 1
+	(2,0)
+	1
+	```
+	---
+	- Erstellen Sie eine Klasse `PowerArray`. Objektvariable ist `p` vom Typ `Power[]`. `p` ist nur innerhalb der Klasse sichtbar!
+	- Implementieren Sie einen parametrisierten Konstruktor `PowerArray(int length)`. Darin wird das `p`-Array erzeugt. Die Länge von `p` entspricht dem Wert von `length`.
+	- Implementieren Sie eine Objektmethode `fillArray()`. Bei Aufruf der Methode soll das Array `p` mit Objekten der Klasse `Power` gefüllt werden. Die Werte der Objektvariablen der `Power`-Objekte werden zufällig mit Hilfe der `Random`-Klasse erzeugt (um die `Random`-Klasse verwenden zu können, müssen Sie diese aus dem `java.util`-Paket importieren). Beachten Sie folgende Anforderungen:
+		1. Sowohl die Basis als auch der Exponent können Werte aus dem Wertebereich `1..5` (jeweils inklusive) annehmen
+		2. Die Basis soll nie einen größeren Wert als der Exponent haben (aber es können beide gleich sein).
+	- Implementieren Sie eine Objektmethode `createArrayOfValues()`. Diese Methode liefert ein `double[]`-Array zurück, das alle Werte der Potenzen aus dem `p`-Array enthält. 
+	- Implementieren Sie eine Objektmethode `getIndexExponent(int exponent)`, die den Index des (ersten) Elementes zurückliefert, bei dem das `Power`-Objekt den Exponenten hat, der als Parameter der Methode übergeben wird. Existiert ein solches Objekt nicht im Array, wird `-1` zurückgegeben. 
+	- Überschreiben Sie die Methode `toString()`, so dass das `p`-Array in der Form (Beispiel)
+		```bash
+		[ (2,5), (2,3), (3,3), (1,5), (2,3), (1,3), (1,3), (1,2), (3,5), (2,3) ]
+		```
+		als `String` zurückgegeben wird. Implementieren Sie eine Methode `print()`, die mithilfe von `toString()` das `p`-Array auf die Konsole ausgibt.
+	- Implementieren Sie eine Methode `sort()`, die das `p`-Array nach den Größen der Werte der Potenzen ordnet – vom kleinsten Wert zum größten Wert. Die Verwendung der `Arrays`-Klasse aus dem `java.util`-Paket ist nicht gestattet. Sollten 2 Potenzen den gleichen Wert haben, z.B. `1^2` und `1^4`, dann soll die Potenz mit dem höheren Exponent größer sein als die Potenz mit dem kleineren Exponenten.
+	- Erzeugen Sie in der `main()`-Methode der Klasse `PowerTest` ein Objekt der Klasse `PowerArray`, so dass das `p`-Array die Länge `10` hat. Rufen Sie für dieses Objekt die Objektmethoden `fillArray()`, `print()`, `sort()` und wieder `print()` auf. Testen Sie außerdem (mindestens) einmal die `getIndexExponent()`- und die `createArrayOfValues()`- Methode (um das Array of Values auf der Konsole auszugeben, verwenden Sie die statische `toString()`-Methode der `Arrays`-Klasse (`import java.util.Arrays;`). Es sollte eine Ausgabe in ungefähr der folgenden Form erfolgen (Zufallswerte):
+	```bash
+	[ (1,5), (1,2), (3,5), (3,4), (4,4), (1,5), (1,2), (3,4), (2,3), (3,5) ]
+	[ (1,2), (1,2), (1,5), (1,5), (2,3), (3,4), (3,4), (3,5), (3,5), (4,4) ]
+	Index : 5
+	Index : -1
+	[1.0, 1.0, 1.0, 1.0, 8.0, 81.0, 81.0, 243.0, 243.0, 256.0]
+	```
+
+??? question "eine mögliche Lösung für Power"
+	=== "Power.java"
+		```java linenums="1"
+		public class Power
+		{
+			private int base;
+			private int exp;
+			
+			Power(int base, int exp)
+			{
+				this.base = base;
+				this.exp = exp;
+			}
+			
+			public int getBase()
+			{
+				return this.base;
+			}
+			
+			public int getExp()
+			{
+				return this.exp;
+			}
+			
+			public double getValue()
+			{
+				double value=1.0;
+				if(this.exp>=0)
+				{
+					for(int i=1; i<=this.exp; i++)
+					{
+						value *= this.base;
+					}
+				}
+				else
+				{
+					for(int i=1; i<=-this.exp; i++)
+					{
+						value *= this.base;
+					}
+					value = 1.0/value;
+				}
+				return value;
+			}
+			
+			@Override
+			public String toString()
+			{
+				return "("+this.base+","+this.exp+")";
+			}
+			
+			public void print()
+			{
+				System.out.println(this.toString());
+			}
+			
+		}
+		```
+
+	=== "PowerOfTwo.java"
+		```java linenums="1"
+		public class PowerOfTwo extends Power
+		{
+			public PowerOfTwo(int exp)
+			{
+				super(2, exp);
+			}
+			
+			public void printBinary()
+			{
+				if(this.getExp()<0)
+				{
+					System.out.println("Zahl ist kleiner als 1");
+				}
+				else
+				{
+					String s = "1";
+					for(int i=1; i<=this.getExp(); i++)
+					{
+						s += " 0";
+					}
+					System.out.println(s);
+				}
+			}
+		}
+		```
+
+	=== "PowerArray.java"
+		```java linenums="1"
+		import java.util.Random;
+
+		public class PowerArray
+		{
+			private Power[] p;
+			
+			public PowerArray(int length)
+			{
+				this.p = new Power[length];
+			}
+			
+			public void fillArray()
+			{
+				Random r = new Random();
+
+				for(int i=0; i<this.p.length; i++)
+				{
+					int nr1 = r.nextInt(5)+1;
+					int nr2 = r.nextInt(5)+1;
+					if(nr1>nr2)
+					{
+						this.p[i] = new Power(nr2, nr1);
+					}
+					else
+					{
+						this.p[i] = new Power(nr1, nr2);
+					}
+				}
+			}
+			
+			public double[] createArrayOfValues()
+			{
+				double[] values = new double[this.p.length];
+				for(int i=0; i<this.p.length; i++)
+				{
+					values[i] = this.p[i].getValue();
+				}
+				return values;
+			}
+			
+			public int getIndexExponent(int exponent)
+			{
+				final int NOT_FOUND = -1;
+				for(int i=0; i<this.p.length; i++)
+				{
+					if(this.p[i].getExp()==exponent)
+					{
+						return i;
+					}
+				}
+				return NOT_FOUND;
+			}
+			
+			@Override
+			public String toString()
+			{
+				String s = "[ ";
+				for(int i=0; i<this.p.length; i++)
+				{
+					if(i<this.p.length-1)
+					{
+						s += this.p[i].toString()+", ";
+					}
+					else
+					{
+						s += this.p[i].toString();
+					}
+				}
+				s += " ]";
+				return s;
+			}
+			
+			public void print()
+			{
+				System.out.println(this.toString());
+			}
+			
+			public void sort()
+			{
+				for(int bubble=0; bubble<this.p.length-1; bubble++)
+				{
+					for(int i=0; i<this.p.length-1-bubble; i++)
+					{
+						if((this.p[i].getValue()>this.p[i+1].getValue()) ||
+							((this.p[i].getValue()==this.p[i+1].getValue() && 
+							this.p[i].getExp()>this.p[i+1].getExp())))
+							{
+								Power temp = this.p[i];
+								this.p[i] = this.p[i+1];
+								this.p[i+1] = temp;
+							}
+					}
+				}
+			}
+		}
+		```
+
+	=== "PowerTest.java"
+		```java linenums="1"
+		import java.util.Arrays;
+
+		public class PowerTest
+		{
+
+			public static void main(String[] args)
+			{
+				// Objekte erzeugen
+				Power p1 = new Power(3,4);
+				Power p2 = new Power(-3,4);
+				Power p3 = new Power(3,0);
+				Power p4 = new Power(3,-4);
+				Power p5 = new Power(-3,-4);
+				
+				System.out.printf("%n%n---------------------- Ausgaben fuer Power ---------------------------%n%n");
+				p1.print();
+				System.out.println(p1.toString() + " = " + p1.getValue());
+				p2.print();
+				System.out.println(p2.toString() + " = " + p2.getValue());
+				p3.print();
+				System.out.println(p3.toString() + " = " + p3.getValue());
+				p4.print();
+				System.out.println(p4.toString() + " = " + p4.getValue());
+				p5.print();
+				System.out.println(p5.toString() + " = " + p5.getValue());
+				
+				System.out.printf("%n%n-------------------- Ausgaben fuer PowerOfTwo -------------------------%n%n");
+				PowerOfTwo p21 = new PowerOfTwo(4);
+				p21.print();
+				p21.printBinary();
+				PowerOfTwo p22 = new PowerOfTwo(-4);
+				p22.print();
+				p22.printBinary();
+				PowerOfTwo p23 = new PowerOfTwo(0);
+				p23.print();
+				p23.printBinary();
+				
+				System.out.printf("%n%n-------------------- Ausgaben fuer PowerArray -------------------------%n%n");
+				PowerArray pa = new PowerArray(10);
+				pa.fillArray();
+				pa.print();
+				pa.sort();
+				pa.print();
+				
+				System.out.println("Index : " +pa.getIndexExponent(4));
+				System.out.println("Index : " +pa.getIndexExponent(0));
+				
+				double[] values = pa.createArrayOfValues();
+				System.out.println(Arrays.toString(values));
+			}
+		}
+		```
 
 ### Ausdrücke
 

@@ -3039,7 +3039,7 @@ Die Aufgaben laden Sie in [Moodle](https://moodle.htw-berlin.de/course/view.php?
 
 ??? question "Eine mögliche Lösung für Aufgabe 3"
 	```java
-	package loesungen.aufgaben.aufgabe3;
+	package aufgaben.aufgabe3;
 
 	import java.util.Random;
 
@@ -3319,6 +3319,158 @@ Die Aufgaben laden Sie in [Moodle](https://moodle.htw-berlin.de/course/view.php?
 	- Viel Spaß und viel Erfolg!
 
 
+??? question "Eine mögliche Lösung für Aufgabe 4"
+	```java
+	package aufgaben.aufgabe4;
+
+	import java.util.Random;
+
+	public class Aufgabe4
+	{
+		public static char[] createAndFillCharArray()
+		{
+			char[] ca = new char[25];
+			Random r = new Random();
+			
+			for (int index = 0; index < ca.length; index++)
+			{
+				int randNr = r.nextInt(26)+ 97;
+				char c = (char) randNr;
+				while(contains(ca, c))
+				{
+					randNr = r.nextInt(26)+ 97;
+					c = (char) randNr;
+				}
+				ca[index] = c;
+			}
+			return ca;
+		}
+		
+		public static char[] sort(char[] a)
+		{
+			char[] b = copy(a);
+			
+			boolean swapped = true;
+			for(int bubble=1; bubble<=b.length-1 && swapped; bubble++)
+			{
+				swapped = false;
+				for(int index=0; index<b.length-bubble; index++)
+				{
+					if(b[index] > b[index+1])
+					{
+						char tmp = b[index+1];
+						b[index+1] = b[index];
+						b[index] = tmp;
+						swapped = true;
+					}
+				}
+			}
+			return b;
+		}
+		
+		public static void print(char[] a)
+		{
+			String s = "[ "; 
+			for(int index=0; index<a.length-1; index++)
+			{
+				s = s + a[index] + ", ";
+			}
+			if(a.length > 0)
+			{
+				s = s + a[a.length-1];
+			}
+			System.out.println(s + " ]");
+		}
+		
+		public static char[] copy(char[] a)
+		{
+			char[] b = new char[a.length];
+			for (int index = 0; index < b.length; index++)
+			{
+				b[index] = a[index];
+			}
+			return b;
+		}
+		
+		public static boolean contains(char[] ca, char c)
+		{
+			boolean contains = false;
+			for (int index = 0; index < ca.length && !contains; index++)
+			{
+				if(ca[index] == c)
+				{
+					contains = true;
+				}
+			}
+			return contains;
+		}
+		
+		public static char getMissingLetter(char[] a)
+		{
+			char missing = ' ';
+			char[] ca = sort(a);
+			for(int asciiValue=97; asciiValue < 122 && missing == ' '; asciiValue++)
+			{
+				char c = (char)asciiValue;
+				int index = asciiValue - 97;
+				if(ca[index] != c)
+				{
+					missing = c;
+				}
+			}
+			if(missing == ' ') 	// asciiValue fuer 'z' ist 122 (index=122-97=25 existiert aber nicht)
+			{
+				missing = 'z';
+			}
+				
+			return missing;
+		}
+		
+		public static void findWord(String word)
+		{
+			word = word.toLowerCase();
+			for (int index = 0; index < word.length(); index++)
+			{
+				System.out.print(word.charAt(index));
+				char[] ca = createAndFillCharArray();
+				char c = getMissingLetter(ca);
+				int nr = 1;
+				while(word.charAt(index) != c)
+				{
+					System.out.print(".");
+					ca = createAndFillCharArray();
+					c = getMissingLetter(ca);
+					nr++;
+				}
+				System.out.println(c + " (" + nr + ")");
+			}
+		}
+
+		public static void main(String[] args)
+		{
+			System.out.printf("%n%n----------------- Einleitung ------------------%n%n");
+			for(int asciiValue = 97; asciiValue<123; asciiValue++)
+			{
+				char c = (char)  asciiValue;
+				System.out.print(c + " ");
+			}
+			
+			System.out.printf("%n%n----------------- Erzeugen ------------------%n%n");
+			char[] ca1 = createAndFillCharArray();
+			print(ca1);
+			
+			System.out.printf("%n%n----------------- Sortieren ------------------%n%n");		
+			char[] ca2 = sort(ca1);
+			print(ca2);
+			
+			System.out.printf("%n%n----------------- FindWord ------------------%n%n");		
+			findWord("weihnachten");
+		}
+
+	}
+	```
+
+
 ??? "Aufgabe 5 - Triangle"
 	- Wir erstellen uns einen neuen Datentyp `Triangle`
 
@@ -3514,5 +3666,180 @@ Die Aufgaben laden Sie in [Moodle](https://moodle.htw-berlin.de/course/view.php?
 		Das Dreieck ist rechtwinklig.
 		```
 
+	- Viel Spaß und viel Erfolg!
+
+
+??? "Aufgabe 6 - Bruch"
+	- Wir erstellen uns einen neuen Datentyp `Bruch`
+
+	- Erstellen Sie im package `aufgaben.aufgabe6` eine Klasse `Bruch` ohne `main()`-Methode und eine Klasse `BruchTest` mit `main()`-Methode. 
+
+	- In der Klasse `Bruch` erstellen Sie zwei Objektvariablen `zaehler` und `nenner` jeweils vom Typ `int` und `private`. 
+
+	- Implementieren Sie für die Klasse `Bruch` zwei verschiedene Konstruktoren
+		- parameterlos --> `zaehler` und `nenner` erhalten jeweils den Wert `1`
+		- mit zwei Parametern (`int zaehler, int nenner`) --> entspr. Werte der Objektvariablen 
+
+	- Implementieren Sie folgende Objektmethoden
+		- `public Bruch plus(Bruch b)` --> gibt den gekürzten Bruch aus der Addition eines Bruchs mit `b` zurück
+		- `public Bruch minus(Bruch b)` --> gibt den gekürzten Bruch aus der Subtraktion eines Bruchs mit `b` zurück
+		- `public Bruch mal(Bruch b)` --> gibt den gekürzten Bruch aus der Multiplikation eines Bruchs mit `b` zurück
+		- `public Bruch geteilt(Bruch b)` --> gibt den gekürzten Bruch aus der Division eines Bruchs mit `b` zurück
+		- `public Bruch kuerzen()` --> gibt den gekürzten Bruch zurück (Sie brauchen dazu den `ggT`)
+		_ `public String toString()` --> gibt einen Bruch als `String` in der Form `zaehler / nenner` zurück
+		- `public int ggT(int zahl1, int zahl2)` --> gibt den größten gemeinsamen Teiler (ggT) der beiden Zahlen `zahl1` und `zahl2` als `int` zurück - siehe [Euklidischer Algorithmus](../start/#beispiel-euklidischer-algorithmus)
+
+	- Geben Sie in die `main()`-Methode der `BruchTest`-Klasse mindestens folgende Anweisungen ein:
+		```java 
+		Bruch b1 = new Bruch(3,7);
+		Bruch b2 = new Bruch(4,8);
+		Bruch b3 = new Bruch(2,5);
+		Bruch b4 = new Bruch(5,11);
+		Bruch b5 = new Bruch();
+		
+		System.out.printf("%n%n------------------------- Rechnen -----------------------------------%n%n");
+		System.out.printf("%5s + %5s = %5s %n", b1.toString(), b2.toString(), b1.plus(b2).toString());
+		System.out.printf("%5s - %5s = %5s %n", b3.toString(), b4.toString(), b3.minus(b4).toString());
+		System.out.printf("%5s * %5s = %5s %n", b1.toString(), b3.toString(), b1.mal(b3).toString());
+		System.out.printf("%5s / %5s = %5s %n", b2.toString(), b1.toString(), b2.geteilt(b1).toString());
+		System.out.printf("%5s + %5s = %5s %n", b5.toString(), b4.toString(), b5.plus(b4).toString());	
+		System.out.printf("%5s - %5s = %5s %n", b1.toString(), b1.toString(), b1.minus(b1).toString());		// nenner sollte ungleich 0 bleiben!	
+		``` 
+		und führen Sie die `BruchTest`-Klasse aus. Es sollten folgende Augaben entstehen:
+		```bash
+		------------------------- Rechnen -----------------------------------
+
+		  3/7 +   4/8 = 13/14 
+		  2/5 -  5/11 = -3/55 
+		  3/7 *   2/5 =  6/35 
+		  4/8 /   3/7 =   7/6 
+		  1/1 +  5/11 = 16/11
+		  3/7 -   3/7 =   0/1 
+		```
+	- ---
+
+	- **Wenn Sie das geschafft haben, dann haben Sie die Aufgabe erfüllt! Herzlichen Glückwunsch! Die folgende(n) Aufgabe(n) sind optional :**
+
+	- ---
+
+	- Implementieren Sie folgende Objektmethoden
+		- `public boolean istGroesser(Bruch b)` --> gibt `true` zurück, wenn der aufrufende Bruch größer als `b` ist, `false` sonst
+		- `public boolean istKleiner(Bruch b)` --> gibt `true` zurück, wenn der aufrufende Bruch kleiner als `b` ist, `false` sonst
+		- `public boolean istGleich(Bruch b)` --> gibt `true` zurück, wenn der aufrufende Bruch gleich `b` ist, `false` sonst
+
+	- Geben Sie in die `main()`-Methode der `BruchTest`-Klasse mindestens folgende weitere Anweisungen ein:
+		```java 
+		System.out.printf("%n%n------------------------- Vergleichen -----------------------------------%n%n");
+		System.out.printf("%5s  > %5s ? %b %n", b1.toString(), b2.toString(), b1.istGroesser(b2));
+		System.out.printf("%5s  < %5s ? %b %n", b1.toString(), b2.toString(), b1.istKleiner(b2));
+		System.out.printf("%5s == %5s ? %b %n", b1.toString(), b2.toString(), b1.istGleich(b2));
+		System.out.printf("%5s  > %5s ? %b %n", b3.toString(), b4.toString(), b3.istGroesser(b4));
+		System.out.printf("%5s  < %5s ? %b %n", b3.toString(), b4.toString(), b3.istKleiner(b4));
+		System.out.printf("%5s == %5s ? %b %n", b3.toString(), b4.toString(), b3.istGleich(b4));
+		System.out.printf("%5s  > %5s ? %b %n", b5.toString(), b5.toString(), b5.istGroesser(b5));
+		System.out.printf("%5s  < %5s ? %b %n", b5.toString(), b5.toString(), b5.istKleiner(b5));
+		System.out.printf("%5s == %5s ? %b %n", b5.toString(), b5.toString(), b5.istGleich(b5));
+		``` 
+		und führen Sie die `BruchTest`-Klasse aus. Es sollten folgende weitere Augaben entstehen:
+		```bash
+		------------------------- Vergleichen -----------------------------------
+
+		  3/7  >   4/8 ? false 
+		  3/7  <   4/8 ? true 
+		  3/7 ==   4/8 ? false 
+		  2/5  >  5/11 ? false 
+		  2/5  <  5/11 ? true 
+		  2/5 ==  5/11 ? false 
+		  1/1  >   1/1 ? false 
+		  1/1  <   1/1 ? false 
+		  1/1 ==   1/1 ? true 
+		```
+	- Viel Spaß und viel Erfolg!
+
+
+??? "Aufgabe 7 - SortedArray"
+	- Wir erstellen uns einen neuen Datentyp `SortedArray`
+
+	- **Idee**: Ein Objekt dieser Klasse beschreibt (enthält) ein `int`-Array, in dem 
+		- die Elemente aufsteigend sortiert sind und 
+		- kein Element doppelt vorkommt.
+
+		Das Array ist stets genau so groß, so viele Elemente es enthält!
+
+	- Erstellen Sie im package `aufgaben.aufgabe7` eine Klasse `SortedArray` ohne `main()`-Methode und eine Klasse `SortedArrayTest` mit `main()`-Methode. 
+
+	- In der Klasse `SortedArray` erstellen Sie eine Objektvariable `s` vom Typ `int[]` (`private`). 
+
+	- Implementieren Sie für die Klasse `SortedArray` zwei verschiedene Konstruktoren
+		- parameterlos --> der Konstruktor erzeugt ein leeres Array `s` (mit der Länge `0`)
+		- mit einem Parameter (`int element`) --> der Konstruktor erzeugt ein einelementiges Array `s` (mit der Länge `1`), wobei `s[0]` den Wert von `element` annimmt.
+
+	- Implementieren Sie eine Objektmethode `public boolean insert(int element)`. Diese Methode gibt ein `false` zurück, wenn `element` bereits in `s` enthalten ist. Dann wird das `element` **nicht** dem Array hinzugefügt. Die Methode gibt `true` zurück, wenn `element` in `s` eingefügt wurde. Um `element` einzufügen, wird ein neues Array für `s` erzeugt, in dem alle vorherigen Werte aus `s` und das neue `element` (an der richtigen Stelle einsortiert) enthalten sind.
+
+	- Implementieren Sie eine Objektmethode `public boolean delete(int element)`. Diese Methode gibt ein `false` zurück, wenn `element` nicht in `s` enthalten ist. Die Methode gibt `true` zurück, wenn `element` aus `s` gelöscht wurde. Beachten Sie, dass nach Löschen aus `s` die Länge von `s` um eins kleiner ist, als vor dem Löschen. Es muss also auch hier wieder ein neues Array erzeugt werden, welches nach dem Löschen dem "Wert" von `s` entspricht. 
+
+	- Implementieren Sie eine Objektmethode `public void print()`, die das Array `s` in der Form `[ 4, 5, 9 ]` (Beispielwerte) ausgibt. 
+
+	- **Tipp**: 
+		- Um zu überprüfen, ob ein `int element` in `s` enthalten ist, sollten Sie sich eine Methode `boolean contains(int element)` schreiben (diese kann `private` sein, wenn sie nur innerhalb der Klasse verwendet werden soll; sogenannte  *Servicemethode*). 
+		- Angenommen, Sie haben zwei Arrays: `s = [ 4, 9 ]` und `copy = [ 4, 5, 9]`, dann gilt nach `s = copy;`, dass `s == [ 4, 5, 9 ]`. 
+
+	- Geben Sie in die `main()`-Methode der `SortedArrayTest`-Klasse mindestens folgende Anweisungen ein:
+		```java 
+		System.out.printf("%n%n------------------------- Test a1 -----------------------------------%n%n");
+		SortedArray a1 = new SortedArray();
+		a1.print();
+		a1.delete(5);		a1.print();
+		a1.insert(5);		a1.print();
+		a1.insert(7);		a1.print();
+		a1.delete(5);		a1.print();
+		a1.insert(6);		a1.print();
+		a1.insert(4);		a1.print();
+		a1.insert(8);		a1.print();
+		a1.delete(8);		a1.print();
+		a1.delete(6);		a1.print();
+		
+		System.out.printf("%n%n------------------------- Test a2 -----------------------------------%n%n");
+		SortedArray a2 = new SortedArray(9);
+		a2.print();
+		a2.insert(5);		a2.print();
+		a2.insert(9);		a2.print();
+		a2.insert(5);		a2.print();
+		a2.insert(4);		a2.print();
+		a2.insert(4);		a2.print();
+		a2.delete(5);		a2.print();
+		a2.delete(9);		a2.print();
+		a2.delete(4);		a2.print();
+		a2.delete(4);		a2.print();	
+		``` 
+		und führen Sie die `SortedArrayTest`-Klasse aus. Es sollten folgende Augaben entstehen:
+		```bash
+		------------------------- Test a1 -----------------------------------
+
+		[ ]
+		[ ]
+		[ 5 ]
+		[ 5, 7 ]
+		[ 7 ]
+		[ 6, 7 ]
+		[ 4, 6, 7 ]
+		[ 4, 6, 7, 8 ]
+		[ 4, 6, 7 ]
+		[ 4, 7 ]
+
+
+		------------------------- Test a2 -----------------------------------
+
+		[ 9 ]
+		[ 5, 9 ]
+		[ 5, 9 ]
+		[ 5, 9 ]
+		[ 4, 5, 9 ]
+		[ 4, 5, 9 ]
+		[ 4, 9 ]
+		[ 4 ]
+		[ ]
+		[ ]
+		```
 	- Viel Spaß und viel Erfolg!
 

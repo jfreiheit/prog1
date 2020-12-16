@@ -44,7 +44,7 @@ Nachfolgend der vorläufige Wochenplan (wird eventuell angepasst). Die Vorlesung
 | 4. | 23.-27.11.2020 | Nützliche Klassen, Einführung Arrays | Aufgabe 3 | 06.12.2020 | 
 | 5. | 30.-04.12.2020 | Sortieren von Arrays | Aufgabe 4 | 13.12.2020 | 
 | 6. | 07.-11.12.2020 | Klassen und Objekte | Aufgabe 5  | 20.12.2020 | 
-| 7. | 14.-18.12.2020 | Setter, Konstruktoren, this | Aufgabe 6  | 10.01.2021 | 
+| 7. | 14.-18.12.2020 | Konstruktoren, this, eigene Datentypen, Rückgabe von Objekten | Aufgabe 6  | 10.01.2021 | 
 | 8. | 21.-25.12.2020 | Klassen- und Objekt-Variablen und -Methoden  | Aufgabe 7  | 17.01.2021 |
 | | | | | | | |
 | 9. | 04.-08.01.2021 | Vererbung | Aufgabe 8  | 24.01.2021 |
@@ -737,3 +737,11 @@ Hier sind die Themen in chronologischer Folge aufgeführt, wie wir sie auch in d
 	- siehe [**Klassen und Objekte**](./objekte/#klassen-und-objekte)
 	- Wir beginnen ein neues Thema, nämlich "objektorientierte Programmierung". Wir erstellen uns eigene Datentypen. Da gibt es leider am Anfang wieder recht viel Neues. Ich hoffe, ich konnte es halbwegs eingrenzen und das Ausmaß an Neuem ist nicht zu groß. In dem Skript zu [Klassen und Objekte](./objekte/#klassen-und-objekte) sind drei Beispiele eigener Datentypen, aber im zweiten (`Point`) und dritten (`Circle`) Beispiel wiederholt sich schon Vieles aus dem ersten (`Adresse`) . Wenn ich es schaffe, erstelle ich noch ein Video über das erste Beispiel (`Adresse`) - das wird dann aber "nur" ein Vorprogrammieren des Skriptes. Viel Spaß mit den neuen Sachen!
 	- für die [**Aufgabe 3**](./aufgaben/#aufgaben_1) habe ich die Lösung hochgeladen
+
+
+??? question "18.12. + 22.12.2020 - Klassen und Objekte II (Konstruktoren, this, Rückgabe von Objekten)"
+	- siehe [**Aufgabe 6 - Bruch**](./aufgaben/#aufgaben_1)
+	- siehe [**Übung 7**](./uebungen/#ubungsblatter-wochenweise)
+	- siehe [**Klassen und Objekte II**](./objekte/#klassen-und-objekte-ii)
+	- Wir machen weiter mit eigenen Datentypen und erstellen uns Objekte, die von diesen Typen sind. Wir verwenden eigene Datentypen in neuen Datentypen, definieren mehrere Konstruktoren in der Klasse, erzeugen in Methoden Objekte und geben diese auch zurück und lernen das Schlüsselwort `this` kennen.
+	- für die [**Aufgabe 4**](./aufgaben/#aufgaben_1) habe ich die Lösung hochgeladen
