@@ -3469,7 +3469,7 @@ Die Aufgaben laden Sie in [Moodle](https://moodle.htw-berlin.de/course/view.php?
 
 	}
 	```
-
+	
 
 ??? "Aufgabe 5 - Triangle"
 	- Wir erstellen uns einen neuen Datentyp `Triangle`
