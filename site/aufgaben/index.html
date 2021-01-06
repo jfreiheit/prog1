@@ -197,6 +197,8 @@
       
         
       
+        
+      
     </ul>
   </div>
 </nav>
@@ -374,6 +376,18 @@
   <li class="md-nav__item">
     <a href="../objekte/" title="Klassen und Objekte" class="md-nav__link">
       Klassen und Objekte
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../vererbung/" title="Vererbung" class="md-nav__link">
+      Vererbung
     </a>
   </li>
 
@@ -4234,6 +4248,159 @@ Das Dreieck ist rechtwinklig.
 <p>Viel Spaß und viel Erfolg!</p>
 </li>
 </ul>
+</details>
+<details class="question"><summary>Eine mögliche Lösung für Aufgabe 5</summary><div class="tabbed-set" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Triangle.java</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">aufgaben.aufgabe5</span><span class="p">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Triangle</span>
+<span class="p">{</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">a</span><span class="p">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">b</span><span class="p">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">c</span><span class="p">;</span>
+
+    <span class="kd">public</span> <span class="nf">Triangle</span><span class="p">(</span><span class="kt">int</span> <span class="n">pa</span><span class="p">,</span> <span class="kt">int</span> <span class="n">pb</span><span class="p">,</span> <span class="kt">int</span> <span class="n">pc</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">a</span> <span class="o">=</span> <span class="n">pa</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">b</span> <span class="o">=</span> <span class="n">pb</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">c</span> <span class="o">=</span> <span class="n">pc</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">circumference</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="na">a</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="na">b</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="na">c</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kt">double</span> <span class="nf">area</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="kt">double</span> <span class="n">area</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+        <span class="kt">double</span> <span class="n">s</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">a</span><span class="o">+</span><span class="k">this</span><span class="p">.</span><span class="na">b</span><span class="o">+</span><span class="k">this</span><span class="p">.</span><span class="na">c</span><span class="p">);</span>
+        <span class="n">area</span> <span class="o">=</span> <span class="n">Math</span><span class="p">.</span><span class="na">sqrt</span><span class="p">(</span><span class="n">s</span> <span class="o">*</span> <span class="p">(</span><span class="n">s</span><span class="o">-</span><span class="k">this</span><span class="p">.</span><span class="na">a</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">s</span><span class="o">-</span><span class="k">this</span><span class="p">.</span><span class="na">b</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">s</span><span class="o">-</span><span class="k">this</span><span class="p">.</span><span class="na">c</span><span class="p">));</span>
+        <span class="k">return</span> <span class="n">area</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equilateral</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="na">a</span><span class="o">==</span><span class="k">this</span><span class="p">.</span><span class="na">b</span> <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="p">.</span><span class="na">b</span><span class="o">==</span><span class="k">this</span><span class="p">.</span><span class="na">c</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isosceles</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="na">a</span><span class="o">==</span><span class="k">this</span><span class="p">.</span><span class="na">b</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="na">b</span><span class="o">==</span><span class="k">this</span><span class="p">.</span><span class="na">c</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="na">c</span><span class="o">==</span><span class="k">this</span><span class="p">.</span><span class="na">a</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">print</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Seiten          : a=&quot;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="na">a</span> <span class="o">+</span> <span class="s">&quot;, b=&quot;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="na">b</span> <span class="o">+</span> <span class="s">&quot;, c=&quot;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="na">c</span><span class="p">);</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Umfang          : &quot;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="na">circumference</span><span class="p">());</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Flaecheninhalt  : &quot;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="na">area</span><span class="p">());</span>
+        <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">equilateral</span><span class="p">())</span>
+        <span class="p">{</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Das Dreieck ist gleichseitig.&quot;</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">else</span>
+        <span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">isosceles</span><span class="p">())</span>
+            <span class="p">{</span>
+                <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Das Dreieck ist gleichschenklig.&quot;</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="k">else</span>
+            <span class="p">{</span>
+                <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Das Dreieck ist unregelmaessig.&quot;</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">isRightAngled</span><span class="p">())</span>
+        <span class="p">{</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Das Dreieck ist rechtwinklig.&quot;</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">else</span>
+        <span class="p">{</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Das Dreieck ist nicht rechtwinklig.&quot;</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">sameCircumference</span><span class="p">(</span><span class="n">Triangle</span> <span class="n">t</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="na">circumference</span><span class="p">()</span><span class="o">==</span><span class="n">t</span><span class="p">.</span><span class="na">circumference</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">sidesAreEqual</span><span class="p">(</span><span class="n">Triangle</span> <span class="n">t</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">a</span><span class="o">==</span><span class="n">t</span><span class="p">.</span><span class="na">a</span> <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="p">.</span><span class="na">b</span><span class="o">==</span><span class="n">t</span><span class="p">.</span><span class="na">b</span> <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="p">.</span><span class="na">c</span><span class="o">==</span><span class="n">t</span><span class="p">.</span><span class="na">c</span><span class="p">)</span> <span class="o">||</span>
+                <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">a</span><span class="o">==</span><span class="n">t</span><span class="p">.</span><span class="na">b</span> <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="p">.</span><span class="na">b</span><span class="o">==</span><span class="n">t</span><span class="p">.</span><span class="na">c</span> <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="p">.</span><span class="na">c</span><span class="o">==</span><span class="n">t</span><span class="p">.</span><span class="na">a</span><span class="p">)</span> <span class="o">||</span>
+                <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">a</span><span class="o">==</span><span class="n">t</span><span class="p">.</span><span class="na">c</span> <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="p">.</span><span class="na">b</span><span class="o">==</span><span class="n">t</span><span class="p">.</span><span class="na">a</span> <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="p">.</span><span class="na">c</span><span class="o">==</span><span class="n">t</span><span class="p">.</span><span class="na">b</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isRightAngled</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">((</span><span class="k">this</span><span class="p">.</span><span class="na">a</span><span class="o">*</span><span class="k">this</span><span class="p">.</span><span class="na">a</span> <span class="o">==</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">b</span><span class="o">*</span><span class="k">this</span><span class="p">.</span><span class="na">b</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="na">c</span><span class="o">*</span><span class="k">this</span><span class="p">.</span><span class="na">c</span><span class="p">))</span> <span class="o">||</span>
+                <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">b</span><span class="o">*</span><span class="k">this</span><span class="p">.</span><span class="na">b</span> <span class="o">==</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">a</span><span class="o">*</span><span class="k">this</span><span class="p">.</span><span class="na">a</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="na">c</span><span class="o">*</span><span class="k">this</span><span class="p">.</span><span class="na">c</span><span class="p">))</span> <span class="o">||</span>
+                <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">c</span><span class="o">*</span><span class="k">this</span><span class="p">.</span><span class="na">c</span> <span class="o">==</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">b</span><span class="o">*</span><span class="k">this</span><span class="p">.</span><span class="na">b</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="na">a</span><span class="o">*</span><span class="k">this</span><span class="p">.</span><span class="na">a</span><span class="p">)));</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isSmaller</span><span class="p">(</span><span class="n">Triangle</span> <span class="n">t</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="na">area</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">t</span><span class="p">.</span><span class="na">area</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isBigger</span><span class="p">(</span><span class="n">Triangle</span> <span class="n">t</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="na">area</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">t</span><span class="p">.</span><span class="na">area</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+</div>
+<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Testklasse.java</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">aufgaben.aufgabe5</span><span class="p">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Testklasse</span>
+<span class="p">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">Triangle</span> <span class="n">t1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Triangle</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+        <span class="n">Triangle</span> <span class="n">t2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Triangle</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">);</span>
+        <span class="n">Triangle</span> <span class="n">t3</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Triangle</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+        <span class="n">Triangle</span> <span class="n">t4</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Triangle</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+        <span class="n">Triangle</span> <span class="n">t5</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Triangle</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+        <span class="n">Triangle</span> <span class="n">t6</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Triangle</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+
+        <span class="n">t1</span><span class="p">.</span><span class="na">print</span><span class="p">();</span>
+        <span class="n">t2</span><span class="p">.</span><span class="na">print</span><span class="p">();</span>
+        <span class="n">t3</span><span class="p">.</span><span class="na">print</span><span class="p">();</span>
+        <span class="n">t4</span><span class="p">.</span><span class="na">print</span><span class="p">();</span>
+        <span class="n">t5</span><span class="p">.</span><span class="na">print</span><span class="p">();</span>
+        <span class="n">t6</span><span class="p">.</span><span class="na">print</span><span class="p">();</span>
+
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;t1 und t2 gleicher Umfang ? : &quot;</span> <span class="o">+</span> <span class="n">t1</span><span class="p">.</span><span class="na">sameCircumference</span><span class="p">(</span><span class="n">t2</span><span class="p">));</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;t1 und t3 gleicher Umfang ? : &quot;</span> <span class="o">+</span> <span class="n">t1</span><span class="p">.</span><span class="na">sameCircumference</span><span class="p">(</span><span class="n">t3</span><span class="p">));</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;t2 und t3 gleicher Umfang ? : &quot;</span> <span class="o">+</span> <span class="n">t2</span><span class="p">.</span><span class="na">sameCircumference</span><span class="p">(</span><span class="n">t3</span><span class="p">));</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">();</span>
+
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;t1 kleiner als t2 ? : &quot;</span> <span class="o">+</span> <span class="n">t1</span><span class="p">.</span><span class="na">isSmaller</span><span class="p">(</span><span class="n">t2</span><span class="p">));</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;t2 kleiner als t1 ? : &quot;</span> <span class="o">+</span> <span class="n">t2</span><span class="p">.</span><span class="na">isSmaller</span><span class="p">(</span><span class="n">t1</span><span class="p">));</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;t1 kleiner als t4 ? : &quot;</span> <span class="o">+</span> <span class="n">t1</span><span class="p">.</span><span class="na">isSmaller</span><span class="p">(</span><span class="n">t4</span><span class="p">));</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;t4 kleiner als t1 ? : &quot;</span> <span class="o">+</span> <span class="n">t4</span><span class="p">.</span><span class="na">isSmaller</span><span class="p">(</span><span class="n">t1</span><span class="p">));</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">();</span>
+
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;t1 groesser als t2 ? : &quot;</span> <span class="o">+</span> <span class="n">t1</span><span class="p">.</span><span class="na">isBigger</span><span class="p">(</span><span class="n">t2</span><span class="p">));</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;t2 groesser als t1 ? : &quot;</span> <span class="o">+</span> <span class="n">t2</span><span class="p">.</span><span class="na">isBigger</span><span class="p">(</span><span class="n">t1</span><span class="p">));</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;t1 groesser als t4 ? : &quot;</span> <span class="o">+</span> <span class="n">t1</span><span class="p">.</span><span class="na">isBigger</span><span class="p">(</span><span class="n">t4</span><span class="p">));</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;t4 groesser als t1 ? : &quot;</span> <span class="o">+</span> <span class="n">t4</span><span class="p">.</span><span class="na">isBigger</span><span class="p">(</span><span class="n">t1</span><span class="p">));</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">();</span>
+
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;t1 und t2 gleiche Seiten ? : &quot;</span> <span class="o">+</span> <span class="n">t1</span><span class="p">.</span><span class="na">sidesAreEqual</span><span class="p">(</span><span class="n">t2</span><span class="p">));</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;t1 und t4 gleiche Seiten ? : &quot;</span> <span class="o">+</span> <span class="n">t1</span><span class="p">.</span><span class="na">sidesAreEqual</span><span class="p">(</span><span class="n">t4</span><span class="p">));</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;t1 und t5 gleiche Seiten ? : &quot;</span> <span class="o">+</span> <span class="n">t1</span><span class="p">.</span><span class="na">sidesAreEqual</span><span class="p">(</span><span class="n">t5</span><span class="p">));</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;t1 und t6 gleiche Seiten ? : &quot;</span> <span class="o">+</span> <span class="n">t1</span><span class="p">.</span><span class="na">sidesAreEqual</span><span class="p">(</span><span class="n">t6</span><span class="p">));</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+
+</div>
+</div>
 </details>
 <details><summary>Aufgabe 6 - Bruch</summary><ul>
 <li>

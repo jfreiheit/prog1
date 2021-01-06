@@ -3669,6 +3669,158 @@ Die Aufgaben laden Sie in [Moodle](https://moodle.htw-berlin.de/course/view.php?
 	- Viel Spaß und viel Erfolg!
 
 
+??? question "Eine mögliche Lösung für Aufgabe 5"
+	=== "Triangle.java"
+		```java
+		package aufgaben.aufgabe5;
+
+		public class Triangle
+		{
+			private int a;
+			private int b;
+			private int c;
+			
+			public Triangle(int pa, int pb, int pc)
+			{
+				this.a = pa;
+				this.b = pb;
+				this.c = pc;
+			}
+			
+			public int circumference()
+			{
+				return this.a + this.b + this.c;
+			}
+			
+			public double area()
+			{
+				double area = 0.0;
+				double s = 0.5 * (this.a+this.b+this.c);
+				area = Math.sqrt(s * (s-this.a) * (s-this.b) * (s-this.c));
+				return area;
+			}
+			
+			public boolean equilateral()
+			{
+				return this.a==this.b && this.b==this.c;
+			}
+			
+			public boolean isosceles()
+			{
+				return this.a==this.b || this.b==this.c || this.c==this.a;
+			}
+			
+			public void print()
+			{
+				System.out.println("Seiten          : a=" + this.a + ", b=" + this.b + ", c=" + this.c);
+				System.out.println("Umfang          : " + this.circumference());
+				System.out.println("Flaecheninhalt  : " + this.area());
+				if(this.equilateral())
+				{
+					System.out.println("Das Dreieck ist gleichseitig.");
+				}
+				else
+				{
+					if(this.isosceles())
+					{
+						System.out.println("Das Dreieck ist gleichschenklig.");
+					}
+					else
+					{
+						System.out.println("Das Dreieck ist unregelmaessig.");
+					}
+				}
+				if(this.isRightAngled())
+				{
+					System.out.println("Das Dreieck ist rechtwinklig.");
+				}
+				else
+				{
+					System.out.println("Das Dreieck ist nicht rechtwinklig.");
+				}
+				System.out.println();
+			}
+			
+			public boolean sameCircumference(Triangle t)
+			{
+				return this.circumference()==t.circumference();
+			}
+			
+			public boolean sidesAreEqual(Triangle t)
+			{
+				return (this.a==t.a && this.b==t.b && this.c==t.c) ||
+						(this.a==t.b && this.b==t.c && this.c==t.a) ||
+						(this.a==t.c && this.b==t.a && this.c==t.b);
+			}
+			
+			public boolean isRightAngled()
+			{
+				return ((this.a*this.a == (this.b*this.b + this.c*this.c)) ||
+						(this.b*this.b == (this.a*this.a + this.c*this.c)) ||
+						(this.c*this.c == (this.b*this.b + this.a*this.a)));
+			}
+			
+			public boolean isSmaller(Triangle t)
+			{
+				return this.area() < t.area();
+			}
+			
+			public boolean isBigger(Triangle t)
+			{
+				return this.area() > t.area();
+			}
+		}
+		```
+	=== "Testklasse.java"
+		```java
+		package aufgaben.aufgabe5;
+
+		public class Testklasse
+		{
+
+			public static void main(String[] args)
+			{
+				Triangle t1 = new Triangle(3, 4, 5);
+				Triangle t2 = new Triangle(4, 4, 7);
+				Triangle t3 = new Triangle(5, 5, 5);
+				Triangle t4 = new Triangle(4, 5, 3);
+				Triangle t5 = new Triangle(4, 3, 5);
+				Triangle t6 = new Triangle(3, 4, 5);
+				
+				t1.print();
+				t2.print();
+				t3.print();
+				t4.print();
+				t5.print();
+				t6.print();
+				
+				System.out.println("t1 und t2 gleicher Umfang ? : " + t1.sameCircumference(t2));
+				System.out.println("t1 und t3 gleicher Umfang ? : " + t1.sameCircumference(t3));
+				System.out.println("t2 und t3 gleicher Umfang ? : " + t2.sameCircumference(t3));
+				System.out.println();
+				
+				System.out.println("t1 kleiner als t2 ? : " + t1.isSmaller(t2));
+				System.out.println("t2 kleiner als t1 ? : " + t2.isSmaller(t1));
+				System.out.println("t1 kleiner als t4 ? : " + t1.isSmaller(t4));
+				System.out.println("t4 kleiner als t1 ? : " + t4.isSmaller(t1));
+				System.out.println();
+				
+				System.out.println("t1 groesser als t2 ? : " + t1.isBigger(t2));
+				System.out.println("t2 groesser als t1 ? : " + t2.isBigger(t1));
+				System.out.println("t1 groesser als t4 ? : " + t1.isBigger(t4));
+				System.out.println("t4 groesser als t1 ? : " + t4.isBigger(t1));
+				System.out.println();
+				
+				System.out.println("t1 und t2 gleiche Seiten ? : " + t1.sidesAreEqual(t2));
+				System.out.println("t1 und t4 gleiche Seiten ? : " + t1.sidesAreEqual(t4));
+				System.out.println("t1 und t5 gleiche Seiten ? : " + t1.sidesAreEqual(t5));
+				System.out.println("t1 und t6 gleiche Seiten ? : " + t1.sidesAreEqual(t6));
+			}
+
+		}
+		```
+
+
 ??? "Aufgabe 6 - Bruch"
 	- Wir erstellen uns einen neuen Datentyp `Bruch`
 

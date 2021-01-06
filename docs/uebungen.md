@@ -1679,7 +1679,7 @@
 		- Implementieren Sie eine Objektmethode `public void scale(int factor)`. Diese Methode "skaliert" das Rechteck um den Faktor `factor`, genauer gesagt, wird der **Flächeninhalt** um diesen Faktor skaliert. Die neuen Seiten sollen das gleiche Verhältnis zueinander haben, wie die alten Seiten. Geben Sie die neuen Seitenlängen in der folgenden Form auf die Konsole aus (siehe nächsten Punkt `main()`).
 		- Fügen Sie in der `main()`-Methode der `Testklasse` folgende Anweisungen hinzu:
 		```java	
-		System.out.printf("%n%n--------------- sclae()-Methode -----------------%n%n");
+		System.out.printf("%n%n--------------- scale()-Methode -----------------%n%n");
 		r1.scale(2);
 		r2.scale(2);
 		r3.scale(2);
@@ -1693,7 +1693,7 @@
 		```
 		und führen Sie die `Testklasse` aus. Es sollten folgende zusätzliche Ausgaben erzeugt werden:
 		```bash
-		--------------- sclae()-Methode -----------------
+		--------------- scale()-Methode -----------------
 
 		newArea=  400,00 newA= 14,14 newB= 28,28 check (newA*newB)= 400,00
 		newArea=  432,00 newA= 16,97 newB= 25,46 check (newA*newB)= 432,00
@@ -1707,9 +1707,706 @@
 		newArea= 2310,00 newA= 34,79 newB= 66,41 check (newA*newB)=2310,00
 		```
 
+??? question "Eine mögliche Lösung für Übung 7"
+	=== "Rectangle.java"
+		```java 
+		package uebungen.uebung7;
+
+		public class Rectangle
+		{
+			private int a;
+			private int b;
+			
+			public Rectangle()
+			{
+				this.a = 10;
+				this.b = 20;
+			}
+			
+			public Rectangle(int a, int b)
+			{
+				this.a = a;
+				this.b = b;
+			}
+			
+			public int area() 
+			{
+				return this.a * this.b;
+			}
+			
+			public int perimeter()
+			{
+				return 2 * (this.a + this.b);
+			}
+			
+			public String toString()
+			{
+				String s = String.format("Rectangle : ( a=%2d, b=%2d, area=%3d, perimeter=%2d, diagonal=%6.3f )", 
+						this.a, this.b, this.area(), this.perimeter(), this.diagonal());
+				return s;	
+			}
+			
+			public void scale(int factor)
+			{
+				double newArea = factor * this.area();
+				double aNew = Math.sqrt(factor * this.a * this.a);
+				double bNew = Math.sqrt(factor * this.b * this.b);
+				System.out.printf("newArea=%8.2f newA=%6.2f newB=%6.2f check (newA*newB)=%7.2f%n", newArea, aNew, bNew, (aNew*bNew));	
+			}
+			
+			public boolean sidesAreEqual(Rectangle r)
+			{
+				return (this.a==r.a && this.b==r.b) ||
+						(this.a==r.b && this.b==r.a);
+			}
+			
+			public boolean areasAreEqual(Rectangle r)
+			{
+				return (this.area()==r.area());
+			}
+			
+			public boolean perimetersAreEqual(Rectangle r)
+			{
+				return (this.perimeter()==r.perimeter());
+			}
+			
+			public void print()
+			{
+				System.out.println(this.toString());
+			}
+			
+			public void printComparison(Rectangle r)
+			{
+				String s = 	String.format("this      %50s %n", this.toString());
+				s += 		String.format("the other %50s %n", r.toString());
+				if(this.sidesAreEqual(r))
+				{
+					s += String.format("sides are equal %n");
+				}
+				else
+				{
+					s += String.format("sides are not equal %n");
+				}
+				if(this.areasAreEqual(r))
+				{
+					s += String.format("areas are equal %n");
+				}
+				else
+				{
+					s += String.format("areas are not equal %n");
+				}
+				if(this.perimetersAreEqual(r))
+				{
+					s += String.format("perimeters are equal %n");
+				}
+				else
+				{
+					s += String.format("perimeters are not equal %n");
+				}
+				System.out.println(s);
+			}
+			
+			public double diagonal()
+			{
+				return Math.sqrt(this.a * this.a + this.b * this.b);
+			}
+
+			/*
+			 * Zusatz aus Uebungsvideo
+			 */
+			public Rectangle doubleSides()
+			{
+				int newA = this.a * 2;
+				int newB = this.b * 2;
+				Rectangle newRec = new Rectangle(newA, newB);
+				return newRec;
+			}
+			
+		}
+		```
+
+	=== "Testklasse.java"
+		```java 
+		package uebungen.uebung7;
+
+		public class Testklasse
+		{
+
+			public static void main(String[] args)
+			{
+				// Objekte erzeugen
+				Rectangle r1 = new Rectangle();
+				Rectangle r2 = new Rectangle(12, 18);
+				Rectangle r3 = new Rectangle(40, 5);
+				Rectangle r4 = new Rectangle(20, 10);
+				Rectangle r5 = new Rectangle(11, 21);
+				
+				System.out.printf("%n%n--------------- print()-Methode -----------------%n%n");
+				r1.print();
+				r2.print();
+				r3.print();
+				r4.print();
+				r5.print();
+				
+				System.out.printf("%n%n---------- printComparison()-Methode ------------%n%n");
+				r1.printComparison(r2);
+				r1.printComparison(r3);
+				r1.printComparison(r4);
+				r1.printComparison(r5);
+				
+				System.out.printf("%n%n--------------- scale()-Methode -----------------%n%n");
+				r1.scale(2);
+				r2.scale(2);
+				r3.scale(2);
+				r4.scale(2);
+				r5.scale(2);
+				r1.scale(10);
+				r2.scale(10);
+				r3.scale(10);
+				r4.scale(10);
+				r5.scale(10);
+
+				/*
+				 * Zusatz aus Uebungsvideo
+				 */
+				System.out.printf("%n%n---------- doubleSides()-Methode ------------%n%n");
+				Rectangle r6 = r1.doubleSides();	// Referenz auf neues Objekt wird gespeichert
+				r1.print();
+				r6.print();
+				
+				r2.print();
+				r2.doubleSides().print();			// Referenz auf neues Objekt wird NICHT gespeichert
+				
+				r6.print();
+			}
+
+		}
+		```
+
+??? question "Video zu Übung 7"
+	- <iframe src="https://mediathek.htw-berlin.de/media/embed?key=cf305eacfeab0b166b710bd1cdc9d7d1&width=720&height=450&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="450" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>
+
+??? note "Übung 8"
+	
+	1. Erstellen Sie ein package `uebungen.uebung8`. 
+	2. Erstellen Sie in diesem package eine Klasse `Wohnung` mit
+
+		- den privaten Objektvariablen 
+			- `qm` vom Typ `int`, (entspricht der Größe der Wohnung in m^2)
+			- `anzZimmer` vom Typ `int`,
+			- `etage` vom Typ `int` und 
+			- `qmMiete` vom Typ `double` (entspricht dem Mietpreis pro m^2). 
+		- einem parametrisierten Konstruktor Wohnung(int qm, int anzZimmer, int etage, double qmMiete). Die Werte der Parameter werden verwendet, um den Objektvariablen Werte zuzuweisen.
+		- Gettern für alle Objektvariablen (`getQm()`, `getAnzZimmer()`, `getEtage()`, `getQmMiete()`)
+		- einer Objektmethode `gesamtMiete()`, die die Gesamtmiete der Wohnung berechnet (`qm` * `qmMiete`) und diesen `double`-Wert zurückgibt. 
+		- einer Objektmethode `billiger(Wohnung w)`, die ein `true` zurückgibt, wenn die Gesamtmiete des aufrufenden Objektes kleiner ist als die Gesamtmiete von `w`; `false` sonst.
+		- einer Objektmethode `teurer(Wohnung w)`, die ein `true` zurückgibt, wenn die Gesamtmiete des aufrufenden Objektes größer ist als die Gesamtmiete von `w`; `false` sonst.
+		- einer Objektmethode `toString()` die Details der Wohnung in folgender Form (ab inkl. 1. Etage aufwärts) als `String` zurückgibt (Beispielwerte):
+			```bash
+			2-Zimmer Wohnung mit 40 qm in der 4. Etage. Monatliche Miete: 360.00 Euro
+			```
+			Achtung! Sollte sich die Wohnung in der 0.Etage befinden, geben Sie die Details bitte wie folgt zurück (Beispielwerte):
+			```bash
+			1-Zimmer Wohnung mit 60 qm im Erdgeschoss. Monatliche Miete: 750.00 Euro`
+			```
+
+		- und einer Objektmethode `print()`, die den von `toString()`zurückgegebenen `String` auf der Konsole ausgibt
+
+	2. Erstellen Sie im gleichen package eine Klasse `Testklasse` mit `main()`-Methode. Geben Sie in der `main()`-Methode Folgendes ein:
+		```java
+		System.out.printf("%n%n--------------------- Test Wohnung -------------------------%n%n");
+		Wohnung w1 = new Wohnung(70, 3, 4, 12.50);
+		Wohnung w2 = new Wohnung(40, 1, 0, 9.50);
+		Wohnung w3 = new Wohnung(90, 4, 2, 11.10);
+		Wohnung w4 = new Wohnung(60, 2, 0, 9.00);
+		
+		w1.print();
+		w2.print();
+		w3.print();
+		w4.print();
+		```	
+		und führen Sie die `Testklasse` aus. Es sollten folgende zusätzliche Ausgaben erzeugt werden:
+		```bash
+		--------------------- Test Wohnung -------------------------
+
+		3-Zimmer Wohnung mit 70qm in der 4. Etage. Monatliche Miete: 875,00 Euro
+		1-Zimmer Wohnung mit 40qm im Erdgeschoss. Monatliche Miete: 380,00 Euro
+		4-Zimmer Wohnung mit 90qm in der 2. Etage. Monatliche Miete: 999,00 Euro
+		2-Zimmer Wohnung mit 60qm im Erdgeschoss. Monatliche Miete: 540,00 Euro
+		```
+
+	2. Erstellen Sie im gleichen package eine Klasse `Dacheschosswohnung`. Diese erbt von `Wohnung`. 
+
+		- Implementieren Sie einen parametrisierten Konstruktor `Dachgeschosswohnung(int qm, int anzZimmer, double qmMiete)`. Bei Aufruf des Konstruktors werden die entsprechenden Objektvariablen mit den Parameterwerten initialisiert. Die Objektvariable `etage` bekommt stets den Wert `5`. 
+		- Überschreiben Sie die Methode `toString()`, so dass eine Zeichenkette der Form (Beispielwerte)
+			```bash
+			4-Zimmer DG-Wohnung mit 100 qm in der 5. Etage. Monatliche Miete: 1250.00 Euro
+			```
+			zurückgegeben wird.  
+
+	3. Fügen Sie in der `main()`-Methode der `Testklasse` folgende Anweisungen hinzu:
+		```java	
+		System.out.printf("%n%n--------------- Test Dachgeschosswohnung -------------------%n%n");
+		Dachgeschosswohnung dg1 = new Dachgeschosswohnung(70, 3, 15.50);
+		Dachgeschosswohnung dg2 = new Dachgeschosswohnung(100, 4, 17.25);
+		
+		dg1.print();
+		dg2.print();
+		```
+		und führen Sie die `Testklasse` aus. Es sollten folgende zusätzliche Ausgaben erzeugt werden:
+		```bash
+		--------------- Test Dachgeschosswohnung -------------------
+
+		3-Zimmer DG-Wohnung mit 70qm in der 5. Etage. Monatliche Miete: 1085,00 Euro
+		4-Zimmer DG-Wohnung mit 100qm in der 5. Etage. Monatliche Miete: 1725,00 Euro
+		```
+
+	4. Erstellen Sie im gleichen package eine Klasse `Haus`.  
+
+		- Objektvariable ist `wohnungen` vom Typ `Wohnung[]` und nur in der Klasse sichtbar. 
+		- Implementieren Sie eine Objektmethode `neueWohnung()`. Diese Methode gibt ein Objekt vom Typ `Wohnung` zurück. In dieser Methode wird zunächst ein `Random`-Objekt erzeugt. Mithilfe dieses `Random`-Objektes und der Objektmethode `nextInt(int bound)` der Klasse `Random` sollen zunächst nacheinander folgende Werte zufällig erzeugt werden:
+			- Ein Wert für eine Quadratmeteranzahl `qm` aus dem Wertebereich `[20, 40, 60, 80, 100]` ( --> also zufällig eine dieser 5 Zahlen),
+			- Ein Wert für die Anzahl der Zimmer `anzZimmer` aus dem Wertebereich `[1, 2, 3, 4, 5]` ( --> also zufällig eine dieser 5 Zahlen),
+			- Ein Wert für die Etage `etage` aus dem Wertebereich `[0, 1, 2, 3, 4, 5]` ( --> also zufällig eine dieser 6 Zahlen),
+			- Ein Wert für den Mietpreis pro Quadratmeter `qmMiete` aus dem Wertebereich `[8.0, 8.5, 9.0, 9.5, 10.0, 10.5, 11.0, 11.5, 12.0, 12.5]` ( --> also zufällig eine dieser 10 Zahlen – Achtung hier `double`, Sie können aber trotzdem `nextInt(int bound)` verwenden, müssen dann aber geeignet multiplizieren und addieren).
+		Erzeugen Sie mit diesen Werten ein neues `Wohnung`-Objekt und geben Sie dieses Objekt zurück.
+
+		- Implementieren Sie einen parametrisierten Konstruktor `Haus(int anzWohnungen)`. Darin wird das `wohnungen`-Array erzeugt. Die Länge von `wohnungen` entspricht dem Wert von `anzWohnungen`.
+		Befüllen Sie das `wohnungen`-Array vollständig mit Objekten vom Typ `Wohnungen`. Rufen Sie dazu für jedes Element des `wohnungen`-Arrays die Objektmethode `neueWohnung()` auf.<br/>
+		**Tipp :** Jedes Element des `wohnungen`-Arrays ist nach dem Befüllen mit Objekten vom Typ `Wohnung` eine Referenzvariable auf ein `Wohnung`-Objekt, d.h. z.B. ist `this.wohnungen[0]` vom Typ `Wohnung` und zeigt auf ein `Wohnung`-Objekt. Die folgende Abbildung verdeutlicht das für den Fall, dass das `wohnungen`-Array die Länge `10` hat:
+			![wohnungen](./files/85_wohnungen.png)	
+
+		- Implementieren Sie eine Objektmethode `print()`. Bei Aufruf der Methode soll das `wohnungen`-Array wie folgt ausgegeben werden (Beispielwerte für Array-Länge `5`:)
+			```bash 
+			Das Haus besteht aus : 
+			  5-Zimmer Wohnung mit 80qm im Erdgeschoss. Monatliche Miete: 1000,00 Euro
+			  4-Zimmer Wohnung mit 60qm in der 5. Etage. Monatliche Miete: 480,00 Euro
+			  2-Zimmer Wohnung mit 80qm in der 5. Etage. Monatliche Miete: 880,00 Euro
+			  5-Zimmer Wohnung mit 100qm in der 2. Etage. Monatliche Miete: 1100,00 Euro
+			  3-Zimmer Wohnung mit 80qm im Erdgeschoss. Monatliche Miete: 920,00 Euro
+			```
+
+
+	5. Fügen Sie in der `main()`-Methode der `Testklasse` folgende Anweisungen hinzu:
+		```java	
+		System.out.printf("%n%n---------------------- Test Haus ---------------------------%n%n");
+		Haus h1 = new Haus(10);
+		h1.print();
+		```
+		und führen Sie die `Testklasse` aus. Es sollten folgende zusätzliche Ausgaben erzeugt werden (Zufallswerte!):
+		```bash
+		---------------------- Test Haus ---------------------------
+
+		Das Haus besteht aus : 
+		  1-Zimmer Wohnung mit 80qm in der 4. Etage. Monatliche Miete: 840,00 Euro
+		  3-Zimmer Wohnung mit 60qm in der 3. Etage. Monatliche Miete: 540,00 Euro
+		  4-Zimmer Wohnung mit 80qm in der 3. Etage. Monatliche Miete: 1000,00 Euro
+		  5-Zimmer Wohnung mit 60qm in der 3. Etage. Monatliche Miete: 540,00 Euro
+		  2-Zimmer Wohnung mit 60qm im Erdgeschoss. Monatliche Miete: 510,00 Euro
+		  3-Zimmer Wohnung mit 60qm in der 4. Etage. Monatliche Miete: 600,00 Euro
+		  4-Zimmer Wohnung mit 20qm in der 3. Etage. Monatliche Miete: 250,00 Euro
+		  4-Zimmer Wohnung mit 100qm in der 5. Etage. Monatliche Miete: 850,00 Euro
+		  5-Zimmer Wohnung mit 20qm in der 2. Etage. Monatliche Miete: 160,00 Euro
+		  2-Zimmer Wohnung mit 40qm in der 2. Etage. Monatliche Miete: 400,00 Euro
+		```
+
+	6. **Zusatz:** Erweitern Sie die Klasse `Haus` um folgende Objektmethoden:
+
+		- eine Objektmethode `wohnungenInEtage(int etage)`. Diese Methode gibt ein `Wohnung[]`-Array zurück. Das zurückgegebene `Wohnung[]`-Array soll alle Wohnungen aus dem `wohnungen`-Array enthalten, die in der Etage liegen, die der Methode als Parameter übergeben wird (`etage`). Befindet sich keine Wohnung in der als Parameter übergeben Etage, so wird ein `Wohnung[]`-Array der Länge `0` zurückgegeben.
+		- eine Objektmethode `print(Wohnung[] warr)`. Diese Methode gibt das als Parameter übergebene `warr`-Array auf der Konsole aus, in der Form (Bsp.:):
+			```bash
+			2-Zimmer Wohnung mit 100 qm in der 2. Etage. Monatliche Miete: 1250.00 Euro
+			5-Zimmer Wohnung mit 100 qm in der 2. Etage. Monatliche Miete: 1000.00 Euro
+			```
+		- Testen der beiden Methoden in `main()`:
+			```java
+			System.out.printf("%n%n----- Test wohnungenInEtage() und print(Wohnung[]) ---------%n%n");
+			for(int etage=0; etage<6; etage++)
+			{
+				System.out.println("Etage " + etage + " ---------------------------------------");
+				h1.print(h1.wohnungenInEtage(etage));
+				System.out.println();
+			}
+			```
+			sollte folgende Ausgbabe erzeugen (Zufallswerte):
+			```bash
+			----- Test wohnungenInEtage() und print(Wohnung[]) ---------
+
+			Etage 0 ---------------------------------------
+			2-Zimmer Wohnung mit 60qm im Erdgeschoss. Monatliche Miete: 510,00 Euro
+
+			Etage 1 ---------------------------------------
+
+			Etage 2 ---------------------------------------
+			5-Zimmer Wohnung mit 20qm in der 2. Etage. Monatliche Miete: 160,00 Euro
+			2-Zimmer Wohnung mit 40qm in der 2. Etage. Monatliche Miete: 400,00 Euro
+
+			Etage 3 ---------------------------------------
+			3-Zimmer Wohnung mit 60qm in der 3. Etage. Monatliche Miete: 540,00 Euro
+			4-Zimmer Wohnung mit 80qm in der 3. Etage. Monatliche Miete: 1000,00 Euro
+			5-Zimmer Wohnung mit 60qm in der 3. Etage. Monatliche Miete: 540,00 Euro
+			4-Zimmer Wohnung mit 20qm in der 3. Etage. Monatliche Miete: 250,00 Euro
+
+			Etage 4 ---------------------------------------
+			1-Zimmer Wohnung mit 80qm in der 4. Etage. Monatliche Miete: 840,00 Euro
+			3-Zimmer Wohnung mit 60qm in der 4. Etage. Monatliche Miete: 600,00 Euro
+
+			Etage 5 ---------------------------------------
+			4-Zimmer Wohnung mit 100qm in der 5. Etage. Monatliche Miete: 850,00 Euro
+			```
+
+		- eine Objektmethode `teuersteWohnung()`. Diese Methode gibt die Wohnung aus dem `wohnungen`-Array zurück, die die höchste Gesamtmiete von allen Wohnungen aus dem `wohnungen`-Array hat.
+		- Testen der Methode in `main()`:
+			```java
+			System.out.printf("%n%n---------------- Test gesamtMieteHaus() --------------------%n%n");
+			System.out.printf("Die Gesamtmiete fuer das Haus betraegt %.2f Euro.%n", h1.gesamtMieteHaus());
+			```
+			sollte folgende Ausgbabe erzeugen (Zufallswerte):
+			```bash
+			---------------- Test gesamtMieteHaus() --------------------
+
+			Die Gesamtmiete fuer das Haus betraegt 5690,00 Euro.
+			```
+
+		- eine Objektmethode `sortieren()`. Diese Methode sortiert das `wohnungen`-Array nach Gesamtmieten aufsteigend (beginnend mit der billigsten Wohnung und endend mit der teuersten).
+		- Testen der Methode in `main()`:
+			```java
+			System.out.printf("%n%n------------------- Test sortieren() -----------------------%n%n");
+			h1.sortieren();
+			h1.print();
+			```
+			sollte folgende Ausgbabe erzeugen (Zufallswerte):
+			```bash
+			------------------- Test sortieren() -----------------------
+
+			Das Haus besteht aus : 
+			  5-Zimmer Wohnung mit 20qm in der 2. Etage. Monatliche Miete: 160,00 Euro
+			  4-Zimmer Wohnung mit 20qm in der 3. Etage. Monatliche Miete: 250,00 Euro
+			  2-Zimmer Wohnung mit 40qm in der 2. Etage. Monatliche Miete: 400,00 Euro
+			  2-Zimmer Wohnung mit 60qm im Erdgeschoss. Monatliche Miete: 510,00 Euro
+			  3-Zimmer Wohnung mit 60qm in der 3. Etage. Monatliche Miete: 540,00 Euro
+			  5-Zimmer Wohnung mit 60qm in der 3. Etage. Monatliche Miete: 540,00 Euro
+			  3-Zimmer Wohnung mit 60qm in der 4. Etage. Monatliche Miete: 600,00 Euro
+			  1-Zimmer Wohnung mit 80qm in der 4. Etage. Monatliche Miete: 840,00 Euro
+			  4-Zimmer Wohnung mit 100qm in der 5. Etage. Monatliche Miete: 850,00 Euro
+			  4-Zimmer Wohnung mit 80qm in der 3. Etage. Monatliche Miete: 1000,00 Euro
+			```
+
+
+
+
+
 ## Weitere Übungsaufgaben (selbständiges Üben)
 
 Hier werden lose und unregelmäßig Übungsaufgaben gesammelt. Am Ende des Semesters soll dann hier eine große Sammlung von Übungsaufgaben entstanden sein, die der eigenen Kontrolle dienen sollen. Die Übungen sind thematisch sortiert, allerdings überschneiden sich manche Themen in einigen Übungen. 
+
+### Probeklausuren
+
+
+??? note "Power"
+	- Implementieren Sie eine Klasse `Power`. 
+
+	- **Idee :** Die Klasse `Power` implementiert die *Potenz*. Eine *Potenz* besteht aus einer Basis (`base`) und dem Exponenten (`exp`): base^exp, z.B. `8^4 = 8 ∙ 8 ∙ 8 ∙ 8`
+
+	- Objektvariablen sind `base` und `exp` vom Typ `int`. Beide Objektvariablen sind nur innerhalb der Klasse sichtbar!
+	- Implementieren Sie getter für die Basis (`getBase()`) und für den Exponenten (`getExp()`) (Sichtbarkeit `public`). 
+	- Implementieren Sie für die Klasse `Power` einen parametrisierten Konstruktor `Power(int base, int exp)`. Die Werte der Parameter werden verwendet, um den Objektvariablen Werte zuzuweisen.
+	- Implementieren Sie eine Objektmethode `getValue()`, die ein `double` zurückgibt. Die Methode gibt den Wert der Potenz zurück, also z.B. für `8^4` den Wert `4096.0`. Beachten Sie: <br/>
+		![formel](./files/73_formel.png) <br/>
+		Die Verwendung der `Math`-Klasse ist nicht erlaubt!
+	- Überschreiben Sie die Methode `toString()`, so dass eine Potenz in der Form `(base, exp)` als `String` zurückgegeben wird, wobei `base` und `exp` die Werte der jeweiligen Objektvariablen sein sollen, also z.B. `(8, 4)`. 
+	- Implementieren Sie eine Objektmethode `print()`, die mithilfe von `toString()` eine Potenz auf der Konsole ausgibt. 
+	- Erstellen Sie eine Klasse `PowerTest` mit `main()`-Methode. Erzeugen Sie in der `main()`-Methode folgende fünf Objekte der Klasse `Power`: `3^4`, `-3^4`, `3^0`, `3^(-4)`, `-3^(-4)`. Wenden Sie jeweils die Methode `print()` an und geben Sie außerdem jeweils den Wert der Potenz auf die Konsole aus. Es sollte eine Ausgabe in ungefähr der folgenden Form erfolgen:
+	```bash
+	(3,4)
+	(3,4) = 81.0
+	(-3,4)
+	(-3,4) = 81.0
+	(3,0)
+	(3,0) = 1.0
+	(3,-4)
+	(3,-4) = 0.012345679012345678
+	(-3,-4)
+	(-3,-4) = 0.012345679012345678
+	```
+	---
+	- Erstellen Sie eine Klasse `PowerOfTwo`. Diese Klasse erbt von `Power`. 
+	- **Idee :** Ein Objekt der Klasse `PowerOfTwo` ist eine Potenz zur Basis `2`, also z.B. `2^4`.
+	- Implementieren Sie einen parametrisierten Konstruktor `PowerOfTwo(int exp)`. Beachten Sie, dass der Basis der Wert `2` zugewiesen wird. 
+	- Implementieren Sie eine Objektmethode `printBinary()`. Diese Methode gibt die Potenz als Binärzahl (bestehend aus Einsen und Nullen) auf die Konsole aus, z.B. `2^4`: `1 0 0 0 0`. **Tipp :** es kommt vorne immer eine `1` und danach kommen so viele Nullen, wie der Exponent groß ist. Wenn der Exponent kliner als `0` ist, dann geben Sie `Zahl ist kleiner als 1` auf die Konsole aus. Die Binärzahl für eine Potenz kleiner als `0` muss also **nicht** ermittelt werden. 
+	- Erzeugen Sie in der `main()`-Methode der Klasse `PowerTest` folgende drei Objekte der Klasse `PowerOfTwo`: `2^4`, `2^(-4)`, `2^0` und rufen Sie jeweils die Methoden `print()` und `printBinary()` auf. Es sollte eine Ausgabe in ungefähr der folgenden Form erfolgen:
+	```bash
+	(2,4)
+	1 0 0 0 0
+	(2,-4)
+	Zahl ist kleiner als 1
+	(2,0)
+	1
+	```
+	---
+	- Erstellen Sie eine Klasse `PowerArray`. Objektvariable ist `p` vom Typ `Power[]`. `p` ist nur innerhalb der Klasse sichtbar!
+	- Implementieren Sie einen parametrisierten Konstruktor `PowerArray(int length)`. Darin wird das `p`-Array erzeugt. Die Länge von `p` entspricht dem Wert von `length`.
+	- Implementieren Sie eine Objektmethode `fillArray()`. Bei Aufruf der Methode soll das Array `p` mit Objekten der Klasse `Power` gefüllt werden. Die Werte der Objektvariablen der `Power`-Objekte werden zufällig mit Hilfe der `Random`-Klasse erzeugt (um die `Random`-Klasse verwenden zu können, müssen Sie diese aus dem `java.util`-Paket importieren). Beachten Sie folgende Anforderungen:
+		1. Sowohl die Basis als auch der Exponent können Werte aus dem Wertebereich `1..5` (jeweils inklusive) annehmen
+		2. Die Basis soll nie einen größeren Wert als der Exponent haben (aber es können beide gleich sein).
+	- Implementieren Sie eine Objektmethode `createArrayOfValues()`. Diese Methode liefert ein `double[]`-Array zurück, das alle Werte der Potenzen aus dem `p`-Array enthält. 
+	- Implementieren Sie eine Objektmethode `getIndexExponent(int exponent)`, die den Index des (ersten) Elementes zurückliefert, bei dem das `Power`-Objekt den Exponenten hat, der als Parameter der Methode übergeben wird. Existiert ein solches Objekt nicht im Array, wird `-1` zurückgegeben. 
+	- Überschreiben Sie die Methode `toString()`, so dass das `p`-Array in der Form (Beispiel)
+		```bash
+		[ (2,5), (2,3), (3,3), (1,5), (2,3), (1,3), (1,3), (1,2), (3,5), (2,3) ]
+		```
+		als `String` zurückgegeben wird. Implementieren Sie eine Methode `print()`, die mithilfe von `toString()` das `p`-Array auf die Konsole ausgibt.
+	- Implementieren Sie eine Methode `sort()`, die das `p`-Array nach den Größen der Werte der Potenzen ordnet – vom kleinsten Wert zum größten Wert. Die Verwendung der `Arrays`-Klasse aus dem `java.util`-Paket ist nicht gestattet. Sollten 2 Potenzen den gleichen Wert haben, z.B. `1^2` und `1^4`, dann soll die Potenz mit dem höheren Exponent größer sein als die Potenz mit dem kleineren Exponenten.
+	- Erzeugen Sie in der `main()`-Methode der Klasse `PowerTest` ein Objekt der Klasse `PowerArray`, so dass das `p`-Array die Länge `10` hat. Rufen Sie für dieses Objekt die Objektmethoden `fillArray()`, `print()`, `sort()` und wieder `print()` auf. Testen Sie außerdem (mindestens) einmal die `getIndexExponent()`- und die `createArrayOfValues()`- Methode (um das Array of Values auf der Konsole auszugeben, verwenden Sie die statische `toString()`-Methode der `Arrays`-Klasse (`import java.util.Arrays;`). Es sollte eine Ausgabe in ungefähr der folgenden Form erfolgen (Zufallswerte):
+	```bash
+	[ (1,5), (1,2), (3,5), (3,4), (4,4), (1,5), (1,2), (3,4), (2,3), (3,5) ]
+	[ (1,2), (1,2), (1,5), (1,5), (2,3), (3,4), (3,4), (3,5), (3,5), (4,4) ]
+	Index : 5
+	Index : -1
+	[1.0, 1.0, 1.0, 1.0, 8.0, 81.0, 81.0, 243.0, 243.0, 256.0]
+	```
+
+??? question "eine mögliche Lösung für Power"
+	=== "Power.java"
+		```java linenums="1"
+		public class Power
+		{
+			private int base;
+			private int exp;
+			
+			Power(int base, int exp)
+			{
+				this.base = base;
+				this.exp = exp;
+			}
+			
+			public int getBase()
+			{
+				return this.base;
+			}
+			
+			public int getExp()
+			{
+				return this.exp;
+			}
+			
+			public double getValue()
+			{
+				double value=1.0;
+				if(this.exp>=0)
+				{
+					for(int i=1; i<=this.exp; i++)
+					{
+						value *= this.base;
+					}
+				}
+				else
+				{
+					for(int i=1; i<=-this.exp; i++)
+					{
+						value *= this.base;
+					}
+					value = 1.0/value;
+				}
+				return value;
+			}
+			
+			@Override
+			public String toString()
+			{
+				return "("+this.base+","+this.exp+")";
+			}
+			
+			public void print()
+			{
+				System.out.println(this.toString());
+			}
+			
+		}
+		```
+
+	=== "PowerOfTwo.java"
+		```java linenums="1"
+		public class PowerOfTwo extends Power
+		{
+			public PowerOfTwo(int exp)
+			{
+				super(2, exp);
+			}
+			
+			public void printBinary()
+			{
+				if(this.getExp()<0)
+				{
+					System.out.println("Zahl ist kleiner als 1");
+				}
+				else
+				{
+					String s = "1";
+					for(int i=1; i<=this.getExp(); i++)
+					{
+						s += " 0";
+					}
+					System.out.println(s);
+				}
+			}
+		}
+		```
+
+	=== "PowerArray.java"
+		```java linenums="1"
+		import java.util.Random;
+
+		public class PowerArray
+		{
+			private Power[] p;
+			
+			public PowerArray(int length)
+			{
+				this.p = new Power[length];
+			}
+			
+			public void fillArray()
+			{
+				Random r = new Random();
+
+				for(int i=0; i<this.p.length; i++)
+				{
+					int nr1 = r.nextInt(5)+1;
+					int nr2 = r.nextInt(5)+1;
+					if(nr1>nr2)
+					{
+						this.p[i] = new Power(nr2, nr1);
+					}
+					else
+					{
+						this.p[i] = new Power(nr1, nr2);
+					}
+				}
+			}
+			
+			public double[] createArrayOfValues()
+			{
+				double[] values = new double[this.p.length];
+				for(int i=0; i<this.p.length; i++)
+				{
+					values[i] = this.p[i].getValue();
+				}
+				return values;
+			}
+			
+			public int getIndexExponent(int exponent)
+			{
+				final int NOT_FOUND = -1;
+				for(int i=0; i<this.p.length; i++)
+				{
+					if(this.p[i].getExp()==exponent)
+					{
+						return i;
+					}
+				}
+				return NOT_FOUND;
+			}
+			
+			@Override
+			public String toString()
+			{
+				String s = "[ ";
+				for(int i=0; i<this.p.length; i++)
+				{
+					if(i<this.p.length-1)
+					{
+						s += this.p[i].toString()+", ";
+					}
+					else
+					{
+						s += this.p[i].toString();
+					}
+				}
+				s += " ]";
+				return s;
+			}
+			
+			public void print()
+			{
+				System.out.println(this.toString());
+			}
+			
+			public void sort()
+			{
+				for(int bubble=0; bubble<this.p.length-1; bubble++)
+				{
+					for(int i=0; i<this.p.length-1-bubble; i++)
+					{
+						if((this.p[i].getValue()>this.p[i+1].getValue()) ||
+							((this.p[i].getValue()==this.p[i+1].getValue() && 
+							this.p[i].getExp()>this.p[i+1].getExp())))
+							{
+								Power temp = this.p[i];
+								this.p[i] = this.p[i+1];
+								this.p[i+1] = temp;
+							}
+					}
+				}
+			}
+		}
+		```
+
+	=== "PowerTest.java"
+		```java linenums="1"
+		import java.util.Arrays;
+
+		public class PowerTest
+		{
+
+			public static void main(String[] args)
+			{
+				// Objekte erzeugen
+				Power p1 = new Power(3,4);
+				Power p2 = new Power(-3,4);
+				Power p3 = new Power(3,0);
+				Power p4 = new Power(3,-4);
+				Power p5 = new Power(-3,-4);
+				
+				System.out.printf("%n%n---------------------- Ausgaben fuer Power ---------------------------%n%n");
+				p1.print();
+				System.out.println(p1.toString() + " = " + p1.getValue());
+				p2.print();
+				System.out.println(p2.toString() + " = " + p2.getValue());
+				p3.print();
+				System.out.println(p3.toString() + " = " + p3.getValue());
+				p4.print();
+				System.out.println(p4.toString() + " = " + p4.getValue());
+				p5.print();
+				System.out.println(p5.toString() + " = " + p5.getValue());
+				
+				System.out.printf("%n%n-------------------- Ausgaben fuer PowerOfTwo -------------------------%n%n");
+				PowerOfTwo p21 = new PowerOfTwo(4);
+				p21.print();
+				p21.printBinary();
+				PowerOfTwo p22 = new PowerOfTwo(-4);
+				p22.print();
+				p22.printBinary();
+				PowerOfTwo p23 = new PowerOfTwo(0);
+				p23.print();
+				p23.printBinary();
+				
+				System.out.printf("%n%n-------------------- Ausgaben fuer PowerArray -------------------------%n%n");
+				PowerArray pa = new PowerArray(10);
+				pa.fillArray();
+				pa.print();
+				pa.sort();
+				pa.print();
+				
+				System.out.println("Index : " +pa.getIndexExponent(4));
+				System.out.println("Index : " +pa.getIndexExponent(0));
+				
+				double[] values = pa.createArrayOfValues();
+				System.out.println(Arrays.toString(values));
+			}
+		}
+		```
+
 
 ### Ausdrücke
 

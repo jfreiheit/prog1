@@ -745,3 +745,14 @@ Hier sind die Themen in chronologischer Folge aufgeführt, wie wir sie auch in d
 	- siehe [**Klassen und Objekte II**](./objekte/#klassen-und-objekte-ii)
 	- Wir machen weiter mit eigenen Datentypen und erstellen uns Objekte, die von diesen Typen sind. Wir verwenden eigene Datentypen in neuen Datentypen, definieren mehrere Konstruktoren in der Klasse, erzeugen in Methoden Objekte und geben diese auch zurück und lernen das Schlüsselwort `this` kennen.
 	- für die [**Aufgabe 4**](./aufgaben/#aufgaben_1) habe ich die Lösung hochgeladen
+
+
+??? question "08.01. + 12.01.2021 - Vererbung"
+	- siehe [**Vererbung**](./vererbung/#vererbung)
+	- Video zu [**Vererbung**](./vererbung/#vererbung)
+		<iframe src="https://mediathek.htw-berlin.de/media/embed?key=cb7315a524c6c6a51e2c38a13ac0fb9b&width=720&height=450&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="450" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>
+	- Wir lernen ein wichtiges Konzept der objektorientierten Programmierung kennen, nämlich Vererbung. Um von einer Klasse zu erben, verwenden wir das Schlüsselwort `extends`. Eine Kindklasse erbt von ihrer Elternklasse alle Eigenschaften, also alle Objektvariablen und Objektmethoden. Eine geerbte Methode kann in der Kindklasse überschrieben werden. Wird eine Methode überschrieben, verwenden wir die Annotation `@Override`. Im Konstruktor der Kindklasse wird der Konstruktor der Elternklasse aufgerufen. Dies kann implizit erfolgen, wenn der implizite Konstruktor der Elternklasse existiert, oder es erfolgt explizit durch die Verwendung des Schlüsselwortes `super`. Mithilfe von Vererbung erhöhen wir die Wiederverwendbarkeit von Code und vermeiden doppelte Implementierungen. Außerdem sorgen wir für eine bessere Strukturierung des Codes. 
+	- siehe [**Übung 8**](./uebungen/#ubungsblatter-wochenweise)
+	- für die [**Übung 7**](./uebungen/#ubungsblatter-wochenweise) habe ich ein Video und die Lösung hochgeladen
+	- für die [**Aufgabe 5**](./aufgaben/#aufgaben_1) habe ich die Lösung hochgeladen
+	- außerdem werden jetzt nach und nach [**Probeklausuren**](./uebungen/#probeklausuren) hochgeladen - eine ist schon da.
