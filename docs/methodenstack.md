@@ -455,6 +455,51 @@ In der `main()`-Methode wird die `createPoint()`-Methode aufgerufen. Darin wird 
 
 ??? "Erweitern Sie obiges Programm so, dass eine Referenz auf das `Point`-Objekt nicht verloren geht"
 
+### Der `null`-Wert
+
+Zeigt eine Referenzvariable auf **kein** Objekt, so ist ihr Wert `null`. Beispiel:
+
+```java
+public static void main (String[] args)
+{
+	Point p1;	// p1 hat den Wert null
+}
+```
+
+Die Referenzvariable `p1` vom Typ `Point` existiert bereits, aber es existiert (noch) kein `Point`-Objekt, auf das sie zeigt. Somit ist der "Wert" der Referenzvariable `p1` `null`. Referenzvariablen können auch explizit auf `null` gesetzt werden:
+
+```java
+public static void main (String[] args)
+{
+	Point p1 = new Point(3,4);	// Point-Objekt existiert, p1 zeigt auf das Point-Objekt
+	p1 = null;					// p1 zeigt auf kein Objekt (mehr) - das Point-Objekt wird von der GC entsorgt
+}
+```
+
+Im oberen Beispiel wurde die `p1`-referenzvariable vom Typ `Point` deklariert und ein `Point`-Objekt. Die `p1`-variable referenziert (zeigt auf) das `Point`-Objekt. Danach wird `p1` explizit der "Wert" `null` zugeordnet. Die `p1`-Variable zeigt auf *kein* `Point`-Objekt mehr. Da das `Point`-Objekt nun keine Referenz mehr auf sich hat (und somit nicht mehr verwendet werden kann), wird es durch die Garbage Collection entsorgt. 
+
+### Referenzvergleiche mit `==`
+
+Wir kennen den Operator `==` als logischen Vergleichsoperator von Werten, z.B. können wir `int`-Werte damit vergleichen oder `char`-Werte oder `boolean`-Werte usw. Der Vergleichsoperator `==` kann auch für Referenzvergleiche verwendet werden, aber **Achtung!**, es handelt sich dann ausschließlich um Referenzvergleiche und nicht um eine **Gleichheit** von Objekten (dazu verwenden wir später `equals()`). Beispiele:
+
+```java
+public static void main (String[] args)
+{
+	Point p1 = new Point(3,4);
+	Point p2 = new Point(3,4);
+	Point p3 = p1;
+	System.out.println(p1 == p2); 	// false - nicht die gleiche Referenz (zwei verschiedene Objekte)
+	System.out.println(p1 == p3); 	// true - die gleiche Referenz (ein Objekt)
+	Point p4;
+	System.out.println(p4 == null); // true - keine Referenz auf ein Objekt
+	System.out.println(p1 != null); // true - Referenz auf ein Objekt, deshalb ungleich null
+
+}
+```
+
+Es ist eigentlich ungünstig, den Gleichheitsoperator `==` von Werten auch für Referenzen zu verwenden, da dies am Anfang verwirrend sein kann. Wichtig ist, dass der "Wert" einer Referenz die Referenz(-adresse) auf ein Objekt ist. Haben zwei Referenzvariablen den gleichen "Wert", dann zeigen sie auf dasselbe Objekt (und somit ist `==` `true`). Der Gleichheitsoperator `==` prüft **nicht** die Gleichheit von Objekten (z.B. beide `x`-variablen `3` und beide `y`-Variablen `4` - das erledigen wir später, indem wir die `equals()`-Methode überschreiben)!
+
+> Wird der Vergleichsoperator `==` für Referenztypen verwendet, so wird nur die Gleichheit von Referenzen verglichen, nicht aber die Gleichheit von Objekten!
 
 !!! success
 	Wir haben zwei Aspekte diskutiert, die beide sehr wichtig für das Verständnis der objektorientierten Programmierung sind. Einerseits den Unterschied zwischen Werte- und Referenztypen und andererseits, dass ein Objekt aufhört, zu existieren, sobald es keine Referenz mehr gibt, die auf dieses Objekt zeigt. Insbesondere das Verständnis über den Unterschied zwischen Werte- und Referenztypen ist wirklich wichtig, um die Konzepte der objektorientierten Programmierung gut verstehen zu können!

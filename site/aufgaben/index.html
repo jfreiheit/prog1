@@ -4604,6 +4604,153 @@ _ <code>public String toString()</code> &rarr; gibt einen Bruch als <code>String
 <li>Viel Spaß und viel Erfolg!</li>
 </ul>
 </details>
+<details><summary>Aufgabe 8 - Mensch, Studentin, Studiengaenge</summary><ul>
+<li>
+<p>Erstellen Sie eine Klasse <code>Mensch</code> mit folgenden Eigenschaften:</p>
+<ul>
+<li>Objektvariablen sind <code>name</code> vom Typ <code>String</code> und <code>alter</code> vom Typ <code>int</code>. Beide Objektvariablen sind nur innerhalb der Klasse sichtbar!</li>
+<li>Implementieren Sie für die Klasse <code>Mensch</code> einen parametrisierten Konstruktor <code>Mensch(String name, int alter)</code>. Die Werte der Parameter werden verwendet, um den Objektvariablen Werte zuzuweisen.</li>
+<li>Schreiben Sie getter für den Namen (<code>getName()</code>) und für das Alter (<code>getAlter()</code>) - (Sichtbarkeit <code>public</code>). </li>
+<li>Schreiben Sie eine Objektmethode <code>geburtstag()</code>, die bei Aufruf den Wert der Objektvariablen <code>alter</code> um <code>1</code> erhöht. </li>
+<li>(Über)schreiben Sie die Methode <code>toString()</code>, so dass der Name des Menschen (z.B. <code>Max</code>) und sein Alter (z.B. <code>20</code>) in folgender Form zurückgegeben wird (Beispielwerte):
+    <div class="highlight"><pre><span></span><code>Max ist <span class="m">20</span> Jahre alt.
+</code></pre></div></li>
+<li>Schreiben Sie eine Objektmethode <code>print()</code>, die mit Hilfe von <code>toString()</code> eine Ausgabe auf der Konsole erzeugt.</li>
+</ul>
+</li>
+<li>
+<p>Erstellen Sie eine <code>Testklasse</code> mit <code>main()</code>-Methode und fügen Sie darin folgende Anweisungen ein:
+    <div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%n%n--------------------- Test Mensch --------------------%n%n&quot;</span><span class="p">);</span>
+    <span class="n">Mensch</span> <span class="n">m1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Mensch</span><span class="p">(</span><span class="s">&quot;A&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
+    <span class="n">m1</span><span class="p">.</span><span class="na">print</span><span class="p">();</span>
+    <span class="n">m1</span><span class="p">.</span><span class="na">geburtstag</span><span class="p">();</span>
+    <span class="n">m1</span><span class="p">.</span><span class="na">print</span><span class="p">();</span>
+
+    <span class="n">Mensch</span> <span class="n">m2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Mensch</span><span class="p">(</span><span class="s">&quot;B&quot;</span><span class="p">,</span> <span class="mi">25</span><span class="p">);</span>
+    <span class="n">m1</span><span class="p">.</span><span class="na">print</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+    Führen Sie die <code>Testaklasse</code> aus. Es sollten folgende Ausgaben auf der Konsole erscheinen:
+    <div class="highlight"><pre><span></span><code>--------------------- Test Mensch --------------------
+
+A ist <span class="m">20</span> Jahre alt.
+A ist <span class="m">21</span> Jahre alt.
+A ist <span class="m">21</span> Jahre alt.
+</code></pre></div></p>
+</li>
+<li>
+<p>Erstellen Sie eine Klasse <code>Studentin</code>. Diese Klasse erbt von der Klasse <code>Mensch</code>. </p>
+<ul>
+<li>Zusätzliche Objektvariablen der Klasse <code>Studentin</code> sind <code>semester</code> vom Typ <code>int</code> und <code>studiengang</code> vom Typ <code>String</code>. Die Objektvariablen sind nur in der Klasse sichtbar!</li>
+<li>Schreiben Sie einen parametrisierten Konstruktor <code>Studentin(String name, int alter, String studiengang)</code>. Bei Aufruf des Konstruktors werden die entsprechenden Objektvariablen mit den Parameterwerten initialisiert. Die Objektvariable <code>semester</code> bekommt stets den Wert <code>1</code>.</li>
+<li>Überschreiben Sie die Methode <code>toString()</code>, so dass eine Zeichenkette der Form <code>(Name, Alter, Studiengang, Semester)</code> (die entsprechenden Werte sollen erscheinen - siehe unten <code>main()</code>) zurückgegeben wird.  </li>
+</ul>
+</li>
+<li>
+<p>Fügen Sie der <code>main()</code>-Methode folgende Anweisungen hinzu:
+        <div class="highlight"><pre><span></span><code><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%n%n------------------- Test Studentin -------------------%n%n&quot;</span><span class="p">);</span>
+<span class="n">Studentin</span> <span class="n">s1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Studentin</span><span class="p">(</span><span class="s">&quot;C&quot;</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="s">&quot;FIW&quot;</span><span class="p">);</span>
+<span class="n">s1</span><span class="p">.</span><span class="na">print</span><span class="p">();</span>
+
+<span class="n">Studentin</span> <span class="n">s2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Studentin</span><span class="p">(</span><span class="s">&quot;D&quot;</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="s">&quot;FIW&quot;</span><span class="p">);</span>
+<span class="n">s1</span><span class="p">.</span><span class="na">print</span><span class="p">();</span>
+</code></pre></div>
+        und führen Sie die <code>Testaklasse</code> aus. Es sollten folgende weitere Ausgaben auf der Konsole erscheinen:
+        <div class="highlight"><pre><span></span><code>------------------- Test Studentin -------------------
+
+<span class="o">(</span>C, <span class="m">22</span>, FIW, <span class="m">1</span><span class="o">)</span>
+<span class="o">(</span>C, <span class="m">22</span>, FIW, <span class="m">1</span><span class="o">)</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>Erstellen Sie eine Klasse <code>Studiengaenge</code> mit folgenden Eigenschaften:  </p>
+<ul>
+<li>Objektvariablen sind <code>fiw</code> vom Typ <code>Studentin[]</code> und <code>ai</code> vom Typ <code>Studentin[]</code>. Beide Objektvariablen sind nur innerhalb der Klasse sichtbar!</li>
+<li>Implementieren Sie einen parametrisierten Konstruktor <code>Studiengaenge(int fiwAnzahl, int aiAnzahl)</code>. Darin wird sowohl das <code>fiw</code>-Array als auch das <code>ai</code>-Array erzeugt. Die Länge von <code>fiw</code> entspricht dem Wert von <code>fiwAnzahl</code>, die Länge von <code>ai</code> entspricht dem Wert von <code>aiAnzahl</code>.</li>
+<li>
+<p>Schreiben Sie eine Objektmethode <code>immatrikulieren(int anzahl)</code>. Bei Aufruf der Methode soll sowohl das Array <code>fiw</code> mit Objekten der Klasse <code>Studentin</code> als auch das Array <code>ai</code> mit Objekten der Klasse <code>Studentin</code> befüllt werden. <br/>
+Beachten Sie folgende Anforderungen:</p>
+<ol>
+<li>Insgesamt wird versucht, <code>anzahl</code> (Parameterwert) viele Studentinnen zu immatrikulieren</li>
+<li>Die Auswahl, in welchen Studiengang (<code>fiw</code> oder <code>ai</code>) eine Studentin immatrikuliert werden soll, erfolgt per Zufall. Erzeugen Sie mit Hilfe der <code>Random</code>-Klasse Zahlen aus dem Wertebereich <code>[0, 1, 2]</code> – also <code>0</code> oder <code>1</code> oder <code>2</code> (um die <code>Random</code>-Klasse verwenden zu können, müssen Sie diese aus dem <code>java.util</code>-Paket importieren). Wird eine <code>0</code> erzeugt, wird die Studentin in den Studiengang <code>fiw</code> immatrikuliert (also im <code>fiw</code>-Array gespeichert). Wird eine <code>1</code> oder eine <code>2</code> erzeugt, wird die Studentin in den Studiengang <code>ai</code> immatrikuliert (also im <code>ai</code>-Array gespeichert). Für jede zu immatrikulierende Studentin wird eine neue Zufallszahl erzeugt.</li>
+<li>Alle Studentinnen sollen fortlaufend nummeriert werden (von <code>1</code> bis <code>anzahl</code>). Der Name der Studentin ergibt sich dann aus <code>S</code> und der Nummer (also z.B. <code>S1</code>, <code>S2</code>, <code>S3</code>, ...). Das Alter der Studentin wird aus <code>20+Nummer</code> berechnet (also z.B. <code>21</code>, <code>22</code>, <code>23</code>, ...). </li>
+</ol>
+<p><strong>Beachten Sie:</strong> </p>
+<ol>
+<li>Es kann passieren, dass eine Studentin z.B. in den Studiengang AI immatrikuliert werden soll, das <code>ai</code>-Array aber bereits voll ist. Geben Sie dann auf die Konsole aus: 
+    <div class="highlight"><pre><span></span><code>AI ist bereits voll. 
+</code></pre></div></li>
+<li>Ebenso für FIW.</li>
+</ol>
+<p>Nach dem Aufruf der Methode <code>immatrikulieren()</code>, könnten die Arrays <code>fiw</code> und <code>ai</code> wie folgt aussehen (es wurden <code>10</code> Studentinnen versucht, zu immatrikulieren und die Länge der Arrays ist jeweils <code>5</code>):</p>
+<p><img alt="mensch" src="../files/86_mensch.png" /></p>
+</li>
+<li>
+<p>Schreiben Sie eine Objektmethode <code>printFIW()</code>. Diese Methode gibt das <code>fiw</code>-Array auf der Konsole aus, in der Form (Bsp.:):
+    <div class="highlight"><pre><span></span><code>FIW: <span class="o">[(</span>S3, <span class="m">23</span>, FIW, <span class="m">1</span><span class="o">)</span> <span class="o">(</span>S5, <span class="m">25</span>, FIW, <span class="m">1</span><span class="o">)</span> <span class="o">(</span>S6, <span class="m">26</span>, FIW, <span class="m">1</span><span class="o">)</span> <span class="o">(</span>S9, <span class="m">29</span>, FIW, <span class="m">1</span><span class="o">)]</span>
+</code></pre></div></p>
+<p><strong>Beachten Sie:</strong> </p>
+<ol>
+<li>Eventuell zeigen nicht alle Elemente auf ein Objekt (siehe z.B. Abbildung oben – das letzte Element ist leer)</li>
+<li>Mit z.B. (<code>this.fiw[i]==null</code>) kann geprüft werden, ob die Referenz auf ein Objekt zeigt oder nicht (<code>null</code> steht für die Referenz auf <strong>kein</strong> Objekt)</li>
+</ol>
+</li>
+<li>
+<p>Schreiben Sie eine Objektmethode <code>printAI()</code>. Diese Methode gibt das <code>ai</code>-Array auf der Konsole aus, in der Form (Bsp.:):
+    <div class="highlight"><pre><span></span><code>AI: <span class="o">[(</span>S1, <span class="m">21</span>, AI, <span class="m">1</span><span class="o">)</span> <span class="o">(</span>S2, <span class="m">22</span>, AI, <span class="m">1</span><span class="o">)</span> <span class="o">(</span>S4, <span class="m">24</span>, AI, <span class="m">1</span><span class="o">)</span> <span class="o">(</span>S7, <span class="m">27</span>, AI, <span class="m">1</span><span class="o">)</span> <span class="o">(</span>S8, <span class="m">28</span>, AI, <span class="m">1</span><span class="o">)]</span>
+</code></pre></div></p>
+<p><strong>Beachten Sie:</strong> </p>
+<ol>
+<li>Eventuell zeigen nicht alle Elemente auf ein Objekt (siehe z.B. Abbildung oben – das letzte Element ist leer)</li>
+<li>Mit z.B. (<code>this.ai[i]==null</code>) kann geprüft werden, ob die Referenz auf ein Objekt zeigt oder nicht (<code>null</code> steht für die Referenz auf <strong>kein</strong> Objekt)</li>
+</ol>
+</li>
+<li>
+<p>Schreiben Sie eine Objektmethode <code>durchschnittsalterFIW()</code>. Diese Methode gibt das Durchschnittsalter aller im <code>fiw</code>-Array gespeicherten Studentinnen als <code>double</code> zurück.</p>
+</li>
+<li>
+<p>Schreiben Sie eine Objektmethode <code>durchschnittsalterAI()</code>. Diese Methode gibt das Durchschnittsalter aller im <code>ai</code>-Array gespeicherten Studentinnen als <code>double</code> zurück.</p>
+</li>
+<li>
+<p>Schreiben Sie eine Objektmethode <code>printDurchschnittsalter()</code>. Diese Methode soll folgende Ausgabe auf die Konsole erstellen (Beispielwerte):
+    <div class="highlight"><pre><span></span><code>Durchschnittsalter FIW : <span class="m">30</span>.555555555555557
+Durchschnittsalter AI  : <span class="m">29</span>.5
+AI ist im Durchschnitt jünger
+</code></pre></div>
+    Ist das Durchschnittsalter von FIW kleiner als das von AI, soll die Ausgabe <code>FIW ist im Durchschnitt jünger</code> erscheinen.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Fügen Sie der <code>main()</code>-Methode folgende Anweisungen hinzu:
+        <div class="highlight"><pre><span></span><code><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%n%n----------------- Test Studiengaenge -----------------%n%n&quot;</span><span class="p">);</span>
+<span class="n">Studiengaenge</span> <span class="n">sg</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Studiengaenge</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">);</span>
+<span class="n">sg</span><span class="p">.</span><span class="na">immatrikulieren</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span>
+<span class="n">sg</span><span class="p">.</span><span class="na">printFIW</span><span class="p">();</span>
+<span class="n">sg</span><span class="p">.</span><span class="na">printAI</span><span class="p">();</span>
+<span class="n">sg</span><span class="p">.</span><span class="na">printDurchschnittsalter</span><span class="p">();</span>
+</code></pre></div>
+        und führen Sie die <code>Testaklasse</code> aus. Es sollten folgende weitere Ausgaben auf der Konsole erscheinen (Zufallswerte):
+        <div class="highlight"><pre><span></span><code>----------------- Test Studiengaenge -----------------
+
+AI ist bereits voll.
+AI ist bereits voll.
+AI ist bereits voll.
+AI ist bereits voll.
+FIW : <span class="o">[(</span>S1, <span class="m">21</span>, FIW, <span class="m">1</span><span class="o">)</span> <span class="o">(</span>S3, <span class="m">23</span>, FIW, <span class="m">1</span><span class="o">)</span> <span class="o">(</span>S7, <span class="m">27</span>, FIW, <span class="m">1</span><span class="o">)</span> <span class="o">(</span>S12, <span class="m">32</span>, FIW, <span class="m">1</span><span class="o">)</span> <span class="o">(</span>S19, <span class="m">39</span>, FIW, <span class="m">1</span><span class="o">)</span> <span class="o">(</span>S20, <span class="m">40</span>, FIW, <span class="m">1</span><span class="o">)</span> <span class="o">]</span>
+AI  : <span class="o">[(</span>S2, <span class="m">22</span>, AI, <span class="m">1</span><span class="o">)</span> <span class="o">(</span>S4, <span class="m">24</span>, AI, <span class="m">1</span><span class="o">)</span> <span class="o">(</span>S5, <span class="m">25</span>, AI, <span class="m">1</span><span class="o">)</span> <span class="o">(</span>S6, <span class="m">26</span>, AI, <span class="m">1</span><span class="o">)</span> <span class="o">(</span>S8, <span class="m">28</span>, AI, <span class="m">1</span><span class="o">)</span> <span class="o">(</span>S9, <span class="m">29</span>, AI, <span class="m">1</span><span class="o">)</span> <span class="o">(</span>S10, <span class="m">30</span>, AI, <span class="m">1</span><span class="o">)</span> <span class="o">(</span>S11, <span class="m">31</span>, AI, <span class="m">1</span><span class="o">)</span> <span class="o">(</span>S13, <span class="m">33</span>, AI, <span class="m">1</span><span class="o">)</span> <span class="o">(</span>S14, <span class="m">34</span>, AI, <span class="m">1</span><span class="o">)</span> <span class="o">]</span>
+Durchschnittsalter FIW : <span class="m">30</span>.333333333333332
+Durchschnittsalter AI  : <span class="m">28</span>.2
+AI ist im Durchschnitt jünger.
+</code></pre></div></p>
+</li>
+<li>
+<p>Viel Spaß und viel Erfolg!</p>
+</li>
+</ul>
+</details>
                 
               
               

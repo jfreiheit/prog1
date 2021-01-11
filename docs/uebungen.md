@@ -2407,6 +2407,358 @@ Hier werden lose und unregelmäßig Übungsaufgaben gesammelt. Am Ende des Semes
 		}
 		```
 
+??? note "Computer"
+	- Implementieren Sie eine Klasse `Computer`. 
+
+		- Objektvariablen sind `hersteller` vom Typ `String`, `ram` vom Typ `int` und `platte` vom Typ `int`. Die Objektvariablen sind in der Klasse und allen abgeleiteten Klassen sichtbar!
+		- Schreiben Sie einen parametrisierten Konstruktor `Computer(String hersteller, int ram, int platte)`. Die Parameterwerte werden genutzt, um den Objektvariablen die entsprechenden Werte zuzuweisen.
+		- Schreiben Sie eine Objektmethode `gleicherHersteller(Computer c)`, die ein `true` zurückgibt, wenn `c` vom gleichen Hersteller ist, wie das aufrufende Objekt. Ansonsten wird ein `false` zurückgegeben. 
+		- Schreiben Sie eine Objektmethode `gleicherHersteller(String hersteller)`, die ein `true` zurückgibt, wenn das aufrufende Objekt den Hersteller hat, der als Parameterwert der Methode übergeben wird. Ansonsten wird ein `false` zurückgegeben.
+		- Überschreiben Sie die Methode `toString()`, so dass der Computer in folgender Form angezeigt wird (Beispielwerte):
+			```bash
+			lenovo mit 8 RAM und 256 SSD
+			```
+		- Schreiben Sie eine Methode `print()`, die mit Hilfe von `toString()` eine Ausgabe auf der Konsole erzeugt.
+
+	- Erstellen Sie eine Klasse `Testklasse` mit `main()`-Methode. Erzeugen Sie in der `main()`-Methode fünf Objekte der Klasse `Computer`:
+
+		- lenovo mit 8 RAM und 256 SSD 
+		- lenovo mit 16 RAM und 512 SSD 
+		- apple mit 4 RAM und 256 SSD 
+		- apple mit 8 RAM und 512 SSD 
+		- dell mit 8 RAM und 256 SSD
+
+		Wenden Sie jeweils die Methode `print()` an, wenden Sie die Methode `gleicherHersteller(Computer c)` für den ersten Computer an und vergleichen ihn mit dem zweiten und dem dritten. Geben Sie jeweils den Wert des Vergleiches aus. <br/>
+		Es sollten folgende Ausgaben auf der Konsole erzeugt werden:
+		```bash
+		--------------------- Test Computer --------------------
+
+		lenovo mit 8 RAM und 256 SSD
+		lenovo mit 16 RAM und 512 SSD
+		apple mit 4 RAM und 256 SSD
+		apple mit 8 RAM und 512 SSD
+		dell mit 8 RAM und 256 SSD
+		c1 und c2 gleicher Hersteller ? : true
+		c1 und c3 gleicher Hersteller ? : false
+		```
+
+	- Erstellen Sie eine Klasse `Notebook`. Diese Klasse erbt von der Klasse `Computer`. 
+	
+		- Zusätzliche Objektvariable der Klasse `Notebook` ist `monitor` vom Typ `int`. Die Objektvariablen sind in der Klasse und allen abgeleiteten Klassen sichtbar!	
+		- Implementieren Sie einen parametrisierten Konstruktor `Notebook(String hersteller, int ram, int platte, int monitor)`. Die Parameterwerte werden genutzt, um den Objektvariablen des zurückgegebenen Objektes die entsprechenden Werte zuzuweisen.
+		- Überschreiben Sie die Methode `toString()`, so dass eine Zeichenkette der Form
+			```bash
+			(hersteller, ram, platte, monitor)
+			```
+			zurückgegeben wird (die entsprechenden Werte werden eingesetzt - siehe Ausgabe der `main()`-Methode unten).  
+
+	- Erzeugen Sie in der `main()`-Methode der `Testklasse` zwei Objekte der Klasse `Notebook` (Beispielwerte siehe nächste Zeile) und rufen Sie jeweils die `print()`-Methode auf. <br/>
+		Es sollten folgende Ausgaben auf der Konsole erzeugt werden:
+		```bash
+		--------------------- Test Notebook --------------------
+
+		(lenovo, 8, 256, 13)
+		(lenovo, 16, 512, 15)
+		```
+
+	- Erstellen Sie eine Klasse `NotebookArray`.  
+
+		- Objektvariable ist `notebooks` vom Typ `Notebook[]`. Die Objektvariable ist nur innerhalb der Klasse sichtbar!
+		- Schreiben Sie einen parametrisierten Konstruktor `NotebookArray(int anzahl)`. Darin wird das `notebooks`-Array mit der Länge `anzahl` erzeugt (es wird noch nicht mit `Notebook`-Objekten befüllt - das macht die nächste Methode).
+		- Schreiben Sie eine Objektmethode `konfigurieren()`. Bei Aufruf der Methode wird das Array `notebooks` mit Objekten der Klasse `Notebook` befüllt. <br/>
+		**Beachten Sie folgende Anforderungen:**
+
+			1. das `notebooks`-Array wird vollständig befüllt
+			2. für das Erzeugen der Objekte wird eine Zufallszahl aus dem Bereich `[0, 1, 2, 3, 4]` (`4` inklusive) erzeugt. Nutzen Sie dazu die Klasse `Random` aus dem `java.util`-Paket. Mithilfe von `nextInt(int exclusiveBorder)` wird eine Zufallszahl erzeugt. Je nach Wert der Zufallszahl wird ein anderes Notebook erzeugt:
+
+				Wert `0` -> zu erzeugendes Objekt: `("lenovo", 8, 256, 13)` <br/>
+				Wert `1` -> zu erzeugendes Objekt: `("lenovo", 16, 512, 15)` <br/>
+				Wert `2` -> zu erzeugendes Objekt: `("apple", 4, 256, 13)` <br/>
+				Wert `3` -> zu erzeugendes Objekt: `("apple", 8, 512, 13)` <br/>
+				Wert `4` -> zu erzeugendes Objekt: `("dell", 8, 512, 15)` <br/>
+
+		- Überschreiben Sie die Objektmethode `toString()`. Diese Methode gibt einen String in der Form (Beispielwerte):
+			```bash
+			[ 5 : (lenovo, 8, 256, 13 ), (apple, 8, 512, 13 ), (lenovo, 16, 512, 15 ), (lenovo, 8, 256, 13 ), (apple, 8, 512, 13 )]
+			```
+			zurück. <br/>
+			**Beachten Sie:**
+	
+			1. die eckigen Klammern zu Beginn und Ende des Strings
+			2. die Angabe der Anzahl der Elemente am Anfang (im obigen Beispiel `5 : `) 
+			3. das Komma zwischen den Elementen (aber nicht nach dem letzten Element)
+
+		- Schreiben Sie eine Methode `print()`, die den in `toString()` erzeugten `String` auf die Konsole ausgibt.
+
+		- Schreiben Sie eine Objektmethode `getHersteller(String hersteller)`. Diese Methode gibt ein Objekt vom Typ `NotebookArray` zurück. Das `notebooks`-Array des erzeugten Objektes enthält genau alle Notebooks aus dem `notebooks`-Array des aufrufenden Objektes, die von dem Hersteller sind, der als Parameterwert übergeben wird.  <br/>
+		**Beispiel:** Angenommen, das `notebooks`-Array des aufrufenden Objektes sieht so aus:
+			```bash
+			[ 10 : (lenovo, 16, 512, 15 ), (apple, 8, 512, 13 ), (apple, 4, 256, 13 ), (apple, 8, 512, 13 ), (lenovo, 8, 256, 13 ), 
+				   (lenovo, 16, 512, 15 ), (lenovo, 16, 512, 15 ), (lenovo, 16, 512, 15 ), (apple, 4, 256, 13 ), (apple, 4, 256, 13 ) ]
+			```
+		Dann würde bei Aufruf der Methode `getHersteller("apple")` das zurückgegebene `NotebookArray`-Objekt folgendes `notebooks`-Array haben:
+			```bash
+			[ (apple, 8, 512, 13 ), (apple, 4, 256, 13 ), (apple, 8, 512, 13 ), (apple, 4, 256, 13 ), (apple, 4, 256, 13 ) ]
+			```
+			, bei Aufruf der Methode `getHersteller("lenovo")` das zurückgegebene `NotebookArray`-Objekt folgendes `notebooks`-Array:
+			```bash
+			[ (lenovo, 16, 512, 15 ), (lenovo, 8, 256, 13 ), (lenovo, 16, 512, 15 ), (lenovo, 16, 512, 15 ), (lenovo, 16, 512, 15 ) ]
+			```
+			und bei Aufruf der Methode `getHersteller("dell")` das zurückgegebene `NotebookArray`-Objekt ein leeres `notebooks`-Array:
+			```bash
+			[ ]
+			```
+
+		- Schreiben Sie eine Objektmethode `sortRamPlatte()`. Diese Methode sortiert das `notebooks`-Array wie folgt:
+
+			1. aufsteigend nach RAM-Größe (kleinste RAM-Größe zuerst)
+			2. ist die RAM-Größer zweier Notebooks gleich, entscheidet die Plattengröße (kleinste Plattengröße zuerst)
+
+	- Erzeugen Sie in der `main()`-Methode der `Testklasse` ein Objekt der Klasse `NotebookArray`, so dass das `notebooks`-Array die Länge `10` hat. Rufen Sie für dieses Objekt die Objektmethoden `konfigurieren()`, `print()`, `sortRamPlatte()` und `print()` auf. Testen Sie außerdem die `getHersteller()`-Methode für alle drei Hersteller und geben Sie jeweils das erzeugte Array aus.  <br/>
+		Es sollten folgende Ausgaben auf der Konsole erzeugt werden (**Zufallswerte!**):
+		```bash
+		------------------ Test NotebookArray ------------------
+
+		[ 10 : (apple, 8, 512, 13), (lenovo, 16, 512, 15), (apple, 4, 256, 13), (lenovo, 8, 256, 13), (apple, 4, 256, 13), (dell, 8, 512, 15), (apple, 4, 256, 13), (apple, 8, 512, 13), (lenovo, 8, 256, 13), (apple, 8, 512, 13)]
+		[ 10 : (apple, 4, 256, 13), (apple, 4, 256, 13), (apple, 4, 256, 13), (lenovo, 8, 256, 13), (lenovo, 8, 256, 13), (apple, 8, 512, 13), (dell, 8, 512, 15), (apple, 8, 512, 13), (apple, 8, 512, 13), (lenovo, 16, 512, 15)]
+		[ 3 : (lenovo, 8, 256, 13), (lenovo, 8, 256, 13), (lenovo, 16, 512, 15)]
+		[ 6 : (apple, 4, 256, 13), (apple, 4, 256, 13), (apple, 4, 256, 13), (apple, 8, 512, 13), (apple, 8, 512, 13), (apple, 8, 512, 13)]
+		[ 1 : (dell, 8, 512, 15)]
+		```
+
+
+??? question "eine mögliche Lösung für Computer"
+	=== "Computer.java"
+		```java linenums="1"
+		package loesungen.probeklausuren.probeklausur2;
+
+		public class Computer
+		{
+			protected String hersteller;
+			protected int ram;
+			protected int platte;
+			
+			public String getHersteller()
+			{
+				return this.hersteller;
+			}
+			public int getRam()
+			{
+				return this.ram;
+			}
+			public int getPlatte()
+			{
+				return this.platte;
+			}
+			
+			public Computer(String hersteller, int ram, int platte)
+			{
+				this.hersteller = hersteller;
+				this.ram = ram;
+				this.platte = platte;
+			}
+			
+			public boolean gleicherHersteller(Computer c)
+			{
+				return this.hersteller.equals(c.hersteller);
+				// es geht auch: return this.hersteller == c.hersteller;
+			}
+			
+			public boolean gleicherHersteller(String hersteller)
+			{
+				return this.hersteller.equals(hersteller);
+				// es geht auch: return this.hersteller == hersteller;
+			}
+			
+			@Override
+			public String toString()
+			{
+				return this.hersteller + " mit " + this.ram + " RAM und " + this.platte + " SSD";
+			}
+			
+			public void print()
+			{
+				System.out.println(this.toString());
+			}
+			
+			
+		}
+		```
+
+	=== "Notebook.java"
+		```java linenums="1"
+		package loesungen.probeklausuren.probeklausur2;
+
+		public class Notebook extends Computer
+		{
+			protected int monitor;
+			
+			public Notebook(String hersteller, int ram, int platte, int monitor)
+			{
+				super(hersteller, ram, platte);
+				this.monitor = monitor;
+			}
+			
+			@Override
+			public String toString()
+			{
+				return "(" + this.hersteller + ", " + this.ram + ", " + this.platte + ", " + this.monitor +")";
+			}
+			
+		}
+		```
+
+	=== "NotebookArray.java"
+		```java linenums="1"
+		package loesungen.probeklausuren.probeklausur2;
+
+		import java.util.Random;
+
+		public class NotebookArray
+		{
+			private Notebook[] notebooks;
+			
+			public NotebookArray(int anzahl)
+			{
+				this.notebooks = new Notebook[anzahl];
+			}
+			
+			public void konfigurieren()
+			{
+				Random r = new Random();
+				for (int i = 0; i < this.notebooks.length; i++)
+				{
+					int auswahl = r.nextInt(5);
+					// folgendes kann natuerlich auch mit if..else geloest werden
+					this.notebooks[i] = switch(auswahl)
+					{
+						case 0 -> new Notebook("lenovo", 8, 256, 13); 
+						case 1 ->  new Notebook("lenovo", 16, 512, 15); 
+						case 2 ->  new Notebook("apple", 4, 256, 13); 
+						case 3 ->  new Notebook("apple", 8, 512, 13); 
+						case 4 ->  new Notebook("dell", 8, 512, 15); 
+						default -> null;
+					};
+				}
+			}
+			
+			@Override
+			public String toString()
+			{
+				String s = "[ " + this.notebooks.length + " : ";
+				for (int i = 0; i < this.notebooks.length; i++)
+				{
+					if(i<this.notebooks.length-1)
+					{
+						s += this.notebooks[i].toString() + ", ";
+					}
+					else
+					{
+						s += this.notebooks[i].toString();
+					}
+				}
+				s += "]";
+				return s;
+			}
+			
+			public void print()
+			{
+				System.out.println(this.toString());
+			}
+			
+			public NotebookArray getHersteller(String hersteller)
+			{
+				int anzahl = 0;
+				for (int i = 0; i < this.notebooks.length; i++)
+				{
+					if(this.notebooks[i].gleicherHersteller(hersteller))
+					{
+						anzahl++;
+					}
+				}
+				NotebookArray na = new NotebookArray(anzahl);
+				int indexNA = 0;
+				for (int i = 0; i < this.notebooks.length; i++)
+				{
+					if(this.notebooks[i].gleicherHersteller(hersteller))
+					{
+						na.notebooks[indexNA++] = this.notebooks[i];
+					}
+				}
+				return na;
+			}
+			
+			public void sortRamPlatte()
+			{
+				for(int bubble=0; bubble<this.notebooks.length-1; bubble++)
+				{
+					for(int i=0; i<this.notebooks.length-1-bubble; i++)
+					{
+						if((this.notebooks[i].getRam()>this.notebooks[i+1].getRam()) ||
+							(this.notebooks[i].getRam()==this.notebooks[i+1].getRam() && 
+							this.notebooks[i].getPlatte()>this.notebooks[i+1].getPlatte()))
+						{
+							Notebook temp = this.notebooks[i];
+							this.notebooks[i] = this.notebooks[i+1];
+							this.notebooks[i+1] = temp;
+						}
+					}
+				}
+			}
+		}
+		```
+
+	=== "Testklasse.java"
+		```java linenums="1"
+		package loesungen.probeklausuren.probeklausur2;
+
+		public class Testklasse
+		{
+
+			public static void main(String[] args)
+			{
+				
+				System.out.printf("%n%n--------------------- Test Computer --------------------%n%n");
+				Computer c1 = new Computer("lenovo", 8, 256);
+				Computer c2 = new Computer("lenovo", 16, 512);
+				Computer c3 = new Computer("apple", 4, 256);
+				Computer c4 = new Computer("apple", 8, 512);
+				Computer c5 = new Computer("dell", 8, 256);
+				
+				c1.print();
+				c2.print();
+				c3.print();
+				c4.print();
+				c5.print();
+				
+				System.out.println("c1 und c2 gleicher Hersteller ? : " + c1.gleicherHersteller(c2));
+				System.out.println("c1 und c3 gleicher Hersteller ? : " + c1.gleicherHersteller(c3));
+				
+				System.out.printf("%n%n--------------------- Test Notebook --------------------%n%n");
+				Notebook n1 = new Notebook("lenovo", 8, 256, 13);
+				Notebook n2 = new Notebook("lenovo", 16, 512, 15);
+				
+				n1.print();
+				n2.print();
+				
+				System.out.printf("%n%n------------------ Test NotebookArray ------------------%n%n");		
+				NotebookArray na = new NotebookArray(10);
+				na.konfigurieren();
+				na.print();
+				na.sortRamPlatte();
+				na.print();
+				NotebookArray lenovo = na.getHersteller("lenovo");
+				lenovo.print();
+				NotebookArray apple = na.getHersteller("apple");
+				apple.print();
+				NotebookArray dell = na.getHersteller("dell");
+				dell.print();
+				
+			}
+
+		}
+		```
+
 
 ### Ausdrücke
 

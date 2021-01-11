@@ -3995,3 +3995,142 @@ Die Aufgaben laden Sie in [Moodle](https://moodle.htw-berlin.de/course/view.php?
 		```
 	- Viel Spaß und viel Erfolg!
 
+
+??? "Aufgabe 8 - Mensch, Studentin, Studiengaenge"
+	- Erstellen Sie eine Klasse `Mensch` mit folgenden Eigenschaften:
+
+		- Objektvariablen sind `name` vom Typ `String` und `alter` vom Typ `int`. Beide Objektvariablen sind nur innerhalb der Klasse sichtbar!
+		- Implementieren Sie für die Klasse `Mensch` einen parametrisierten Konstruktor `Mensch(String name, int alter)`. Die Werte der Parameter werden verwendet, um den Objektvariablen Werte zuzuweisen.
+		- Schreiben Sie getter für den Namen (`getName()`) und für das Alter (`getAlter()`) - (Sichtbarkeit `public`). 
+		- Schreiben Sie eine Objektmethode `geburtstag()`, die bei Aufruf den Wert der Objektvariablen `alter` um `1` erhöht. 
+		- (Über)schreiben Sie die Methode `toString()`, so dass der Name des Menschen (z.B. `Max`) und sein Alter (z.B. `20`) in folgender Form zurückgegeben wird (Beispielwerte):
+			```bash
+			Max ist 20 Jahre alt.
+			```
+		- Schreiben Sie eine Objektmethode `print()`, die mit Hilfe von `toString()` eine Ausgabe auf der Konsole erzeugt.
+
+	- Erstellen Sie eine `Testklasse` mit `main()`-Methode und fügen Sie darin folgende Anweisungen ein:
+		```java
+		public static void main(String[] args)
+		{
+			System.out.printf("%n%n--------------------- Test Mensch --------------------%n%n");
+			Mensch m1 = new Mensch("A", 20);
+			m1.print();
+			m1.geburtstag();
+			m1.print();
+			
+			Mensch m2 = new Mensch("B", 25);
+			m1.print();
+		}
+		```
+		Führen Sie die `Testaklasse` aus. Es sollten folgende Ausgaben auf der Konsole erscheinen:
+		```bash	
+		--------------------- Test Mensch --------------------
+
+		A ist 20 Jahre alt.
+		A ist 21 Jahre alt.
+		A ist 21 Jahre alt.
+		```
+
+	- Erstellen Sie eine Klasse `Studentin`. Diese Klasse erbt von der Klasse `Mensch`. 
+
+		- Zusätzliche Objektvariablen der Klasse `Studentin` sind `semester` vom Typ `int` und `studiengang` vom Typ `String`. Die Objektvariablen sind nur in der Klasse sichtbar!
+		- Schreiben Sie einen parametrisierten Konstruktor `Studentin(String name, int alter, String studiengang)`. Bei Aufruf des Konstruktors werden die entsprechenden Objektvariablen mit den Parameterwerten initialisiert. Die Objektvariable `semester` bekommt stets den Wert `1`.
+		- Überschreiben Sie die Methode `toString()`, so dass eine Zeichenkette der Form `(Name, Alter, Studiengang, Semester)` (die entsprechenden Werte sollen erscheinen - siehe unten `main()`) zurückgegeben wird.  
+
+	- Fügen Sie der `main()`-Methode folgende Anweisungen hinzu:
+			```java
+			System.out.printf("%n%n------------------- Test Studentin -------------------%n%n");
+			Studentin s1 = new Studentin("C", 22, "FIW");
+			s1.print();
+			
+			Studentin s2 = new Studentin("D", 23, "FIW");
+			s1.print();
+			```
+			und führen Sie die `Testaklasse` aus. Es sollten folgende weitere Ausgaben auf der Konsole erscheinen:
+			```bash	
+			------------------- Test Studentin -------------------
+
+			(C, 22, FIW, 1)
+			(C, 22, FIW, 1)
+			```
+ 
+	- Erstellen Sie eine Klasse `Studiengaenge` mit folgenden Eigenschaften:  
+
+		- Objektvariablen sind `fiw` vom Typ `Studentin[]` und `ai` vom Typ `Studentin[]`. Beide Objektvariablen sind nur innerhalb der Klasse sichtbar!
+		- Implementieren Sie einen parametrisierten Konstruktor `Studiengaenge(int fiwAnzahl, int aiAnzahl)`. Darin wird sowohl das `fiw`-Array als auch das `ai`-Array erzeugt. Die Länge von `fiw` entspricht dem Wert von `fiwAnzahl`, die Länge von `ai` entspricht dem Wert von `aiAnzahl`.
+		- Schreiben Sie eine Objektmethode `immatrikulieren(int anzahl)`. Bei Aufruf der Methode soll sowohl das Array `fiw` mit Objekten der Klasse `Studentin` als auch das Array `ai` mit Objekten der Klasse `Studentin` befüllt werden. <br/>
+		Beachten Sie folgende Anforderungen:
+			1.	Insgesamt wird versucht, `anzahl` (Parameterwert) viele Studentinnen zu immatrikulieren
+			2.	Die Auswahl, in welchen Studiengang (`fiw` oder `ai`) eine Studentin immatrikuliert werden soll, erfolgt per Zufall. Erzeugen Sie mit Hilfe der `Random`-Klasse Zahlen aus dem Wertebereich `[0, 1, 2]` – also `0` oder `1` oder `2` (um die `Random`-Klasse verwenden zu können, müssen Sie diese aus dem `java.util`-Paket importieren). Wird eine `0` erzeugt, wird die Studentin in den Studiengang `fiw` immatrikuliert (also im `fiw`-Array gespeichert). Wird eine `1` oder eine `2` erzeugt, wird die Studentin in den Studiengang `ai` immatrikuliert (also im `ai`-Array gespeichert). Für jede zu immatrikulierende Studentin wird eine neue Zufallszahl erzeugt.
+			3. Alle Studentinnen sollen fortlaufend nummeriert werden (von `1` bis `anzahl`). Der Name der Studentin ergibt sich dann aus `S` und der Nummer (also z.B. `S1`, `S2`, `S3`, ...). Das Alter der Studentin wird aus `20+Nummer` berechnet (also z.B. `21`, `22`, `23`, ...). 
+
+			**Beachten Sie:** 
+
+			1. Es kann passieren, dass eine Studentin z.B. in den Studiengang AI immatrikuliert werden soll, das `ai`-Array aber bereits voll ist. Geben Sie dann auf die Konsole aus: 
+				```bash
+				AI ist bereits voll. 
+				```
+			2. Ebenso für FIW.
+			
+			Nach dem Aufruf der Methode `immatrikulieren()`, könnten die Arrays `fiw` und `ai` wie folgt aussehen (es wurden `10` Studentinnen versucht, zu immatrikulieren und die Länge der Arrays ist jeweils `5`):
+
+			![mensch](./files/86_mensch.png)
+
+		- Schreiben Sie eine Objektmethode `printFIW()`. Diese Methode gibt das `fiw`-Array auf der Konsole aus, in der Form (Bsp.:):
+			```bash
+			FIW: [(S3, 23, FIW, 1) (S5, 25, FIW, 1) (S6, 26, FIW, 1) (S9, 29, FIW, 1)]
+			```
+
+			**Beachten Sie:** 
+
+			1. Eventuell zeigen nicht alle Elemente auf ein Objekt (siehe z.B. Abbildung oben – das letzte Element ist leer)
+			2. Mit z.B. (`this.fiw[i]==null`) kann geprüft werden, ob die Referenz auf ein Objekt zeigt oder nicht (`null` steht für die Referenz auf **kein** Objekt)
+
+		- Schreiben Sie eine Objektmethode `printAI()`. Diese Methode gibt das `ai`-Array auf der Konsole aus, in der Form (Bsp.:):
+			```bash
+			AI: [(S1, 21, AI, 1) (S2, 22, AI, 1) (S4, 24, AI, 1) (S7, 27, AI, 1) (S8, 28, AI, 1)]
+			```
+
+			**Beachten Sie:** 
+
+			1. Eventuell zeigen nicht alle Elemente auf ein Objekt (siehe z.B. Abbildung oben – das letzte Element ist leer)
+			2. Mit z.B. (`this.ai[i]==null`) kann geprüft werden, ob die Referenz auf ein Objekt zeigt oder nicht (`null` steht für die Referenz auf **kein** Objekt)
+
+		- Schreiben Sie eine Objektmethode `durchschnittsalterFIW()`. Diese Methode gibt das Durchschnittsalter aller im `fiw`-Array gespeicherten Studentinnen als `double` zurück.
+
+		- Schreiben Sie eine Objektmethode `durchschnittsalterAI()`. Diese Methode gibt das Durchschnittsalter aller im `ai`-Array gespeicherten Studentinnen als `double` zurück.
+
+		- Schreiben Sie eine Objektmethode `printDurchschnittsalter()`. Diese Methode soll folgende Ausgabe auf die Konsole erstellen (Beispielwerte):
+			```bash
+			Durchschnittsalter FIW : 30.555555555555557
+			Durchschnittsalter AI  : 29.5
+			AI ist im Durchschnitt jünger
+			```
+			Ist das Durchschnittsalter von FIW kleiner als das von AI, soll die Ausgabe `FIW ist im Durchschnitt jünger` erscheinen.
+
+	- Fügen Sie der `main()`-Methode folgende Anweisungen hinzu:
+			```java
+			System.out.printf("%n%n----------------- Test Studiengaenge -----------------%n%n");
+			Studiengaenge sg = new Studiengaenge(10,10);
+			sg.immatrikulieren(20);
+			sg.printFIW();
+			sg.printAI();
+			sg.printDurchschnittsalter();
+			```
+			und führen Sie die `Testaklasse` aus. Es sollten folgende weitere Ausgaben auf der Konsole erscheinen (Zufallswerte):
+			```bash	
+			----------------- Test Studiengaenge -----------------
+
+			AI ist bereits voll.
+			AI ist bereits voll.
+			AI ist bereits voll.
+			AI ist bereits voll.
+			FIW : [(S1, 21, FIW, 1) (S3, 23, FIW, 1) (S7, 27, FIW, 1) (S12, 32, FIW, 1) (S19, 39, FIW, 1) (S20, 40, FIW, 1) ]
+			AI  : [(S2, 22, AI, 1) (S4, 24, AI, 1) (S5, 25, AI, 1) (S6, 26, AI, 1) (S8, 28, AI, 1) (S9, 29, AI, 1) (S10, 30, AI, 1) (S11, 31, AI, 1) (S13, 33, AI, 1) (S14, 34, AI, 1) ]
+			Durchschnittsalter FIW : 30.333333333333332
+			Durchschnittsalter AI  : 28.2
+			AI ist im Durchschnitt jünger.
+			```
+ 
+	- Viel Spaß und viel Erfolg!

@@ -3291,6 +3291,584 @@ Index : -1
 </div>
 </div>
 </details>
+<details class="note"><summary>Computer</summary><ul>
+<li>
+<p>Implementieren Sie eine Klasse <code>Computer</code>. </p>
+<ul>
+<li>Objektvariablen sind <code>hersteller</code> vom Typ <code>String</code>, <code>ram</code> vom Typ <code>int</code> und <code>platte</code> vom Typ <code>int</code>. Die Objektvariablen sind in der Klasse und allen abgeleiteten Klassen sichtbar!</li>
+<li>Schreiben Sie einen parametrisierten Konstruktor <code>Computer(String hersteller, int ram, int platte)</code>. Die Parameterwerte werden genutzt, um den Objektvariablen die entsprechenden Werte zuzuweisen.</li>
+<li>Schreiben Sie eine Objektmethode <code>gleicherHersteller(Computer c)</code>, die ein <code>true</code> zurückgibt, wenn <code>c</code> vom gleichen Hersteller ist, wie das aufrufende Objekt. Ansonsten wird ein <code>false</code> zurückgegeben. </li>
+<li>Schreiben Sie eine Objektmethode <code>gleicherHersteller(String hersteller)</code>, die ein <code>true</code> zurückgibt, wenn das aufrufende Objekt den Hersteller hat, der als Parameterwert der Methode übergeben wird. Ansonsten wird ein <code>false</code> zurückgegeben.</li>
+<li>Überschreiben Sie die Methode <code>toString()</code>, so dass der Computer in folgender Form angezeigt wird (Beispielwerte):
+    <div class="highlight"><pre><span></span><code>lenovo mit <span class="m">8</span> RAM und <span class="m">256</span> SSD
+</code></pre></div></li>
+<li>Schreiben Sie eine Methode <code>print()</code>, die mit Hilfe von <code>toString()</code> eine Ausgabe auf der Konsole erzeugt.</li>
+</ul>
+</li>
+<li>
+<p>Erstellen Sie eine Klasse <code>Testklasse</code> mit <code>main()</code>-Methode. Erzeugen Sie in der <code>main()</code>-Methode fünf Objekte der Klasse <code>Computer</code>:</p>
+<ul>
+<li>lenovo mit 8 RAM und 256 SSD </li>
+<li>lenovo mit 16 RAM und 512 SSD </li>
+<li>apple mit 4 RAM und 256 SSD </li>
+<li>apple mit 8 RAM und 512 SSD </li>
+<li>dell mit 8 RAM und 256 SSD</li>
+</ul>
+<p>Wenden Sie jeweils die Methode <code>print()</code> an, wenden Sie die Methode <code>gleicherHersteller(Computer c)</code> für den ersten Computer an und vergleichen ihn mit dem zweiten und dem dritten. Geben Sie jeweils den Wert des Vergleiches aus. <br/>
+Es sollten folgende Ausgaben auf der Konsole erzeugt werden:
+<div class="highlight"><pre><span></span><code>--------------------- Test Computer --------------------
+
+lenovo mit <span class="m">8</span> RAM und <span class="m">256</span> SSD
+lenovo mit <span class="m">16</span> RAM und <span class="m">512</span> SSD
+apple mit <span class="m">4</span> RAM und <span class="m">256</span> SSD
+apple mit <span class="m">8</span> RAM und <span class="m">512</span> SSD
+dell mit <span class="m">8</span> RAM und <span class="m">256</span> SSD
+c1 und c2 gleicher Hersteller ? : <span class="nb">true</span>
+c1 und c3 gleicher Hersteller ? : <span class="nb">false</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>Erstellen Sie eine Klasse <code>Notebook</code>. Diese Klasse erbt von der Klasse <code>Computer</code>. </p>
+<ul>
+<li>Zusätzliche Objektvariable der Klasse <code>Notebook</code> ist <code>monitor</code> vom Typ <code>int</code>. Die Objektvariablen sind in der Klasse und allen abgeleiteten Klassen sichtbar! </li>
+<li>Implementieren Sie einen parametrisierten Konstruktor <code>Notebook(String hersteller, int ram, int platte, int monitor)</code>. Die Parameterwerte werden genutzt, um den Objektvariablen des zurückgegebenen Objektes die entsprechenden Werte zuzuweisen.</li>
+<li>Überschreiben Sie die Methode <code>toString()</code>, so dass eine Zeichenkette der Form
+    <div class="highlight"><pre><span></span><code><span class="o">(</span>hersteller, ram, platte, monitor<span class="o">)</span>
+</code></pre></div>
+    zurückgegeben wird (die entsprechenden Werte werden eingesetzt - siehe Ausgabe der <code>main()</code>-Methode unten).  </li>
+</ul>
+</li>
+<li>
+<p>Erzeugen Sie in der <code>main()</code>-Methode der <code>Testklasse</code> zwei Objekte der Klasse <code>Notebook</code> (Beispielwerte siehe nächste Zeile) und rufen Sie jeweils die <code>print()</code>-Methode auf. <br/>
+    Es sollten folgende Ausgaben auf der Konsole erzeugt werden:
+    <div class="highlight"><pre><span></span><code>--------------------- Test Notebook --------------------
+
+<span class="o">(</span>lenovo, <span class="m">8</span>, <span class="m">256</span>, <span class="m">13</span><span class="o">)</span>
+<span class="o">(</span>lenovo, <span class="m">16</span>, <span class="m">512</span>, <span class="m">15</span><span class="o">)</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>Erstellen Sie eine Klasse <code>NotebookArray</code>.  </p>
+<ul>
+<li>Objektvariable ist <code>notebooks</code> vom Typ <code>Notebook[]</code>. Die Objektvariable ist nur innerhalb der Klasse sichtbar!</li>
+<li>Schreiben Sie einen parametrisierten Konstruktor <code>NotebookArray(int anzahl)</code>. Darin wird das <code>notebooks</code>-Array mit der Länge <code>anzahl</code> erzeugt (es wird noch nicht mit <code>Notebook</code>-Objekten befüllt - das macht die nächste Methode).</li>
+<li>
+<p>Schreiben Sie eine Objektmethode <code>konfigurieren()</code>. Bei Aufruf der Methode wird das Array <code>notebooks</code> mit Objekten der Klasse <code>Notebook</code> befüllt. <br/>
+<strong>Beachten Sie folgende Anforderungen:</strong></p>
+<ol>
+<li>das <code>notebooks</code>-Array wird vollständig befüllt</li>
+<li>
+<p>für das Erzeugen der Objekte wird eine Zufallszahl aus dem Bereich <code>[0, 1, 2, 3, 4]</code> (<code>4</code> inklusive) erzeugt. Nutzen Sie dazu die Klasse <code>Random</code> aus dem <code>java.util</code>-Paket. Mithilfe von <code>nextInt(int exclusiveBorder)</code> wird eine Zufallszahl erzeugt. Je nach Wert der Zufallszahl wird ein anderes Notebook erzeugt:</p>
+<p>Wert <code>0</code> -&gt; zu erzeugendes Objekt: <code>("lenovo", 8, 256, 13)</code> <br/>
+Wert <code>1</code> -&gt; zu erzeugendes Objekt: <code>("lenovo", 16, 512, 15)</code> <br/>
+Wert <code>2</code> -&gt; zu erzeugendes Objekt: <code>("apple", 4, 256, 13)</code> <br/>
+Wert <code>3</code> -&gt; zu erzeugendes Objekt: <code>("apple", 8, 512, 13)</code> <br/>
+Wert <code>4</code> -&gt; zu erzeugendes Objekt: <code>("dell", 8, 512, 15)</code> <br/></p>
+</li>
+</ol>
+</li>
+<li>
+<p>Überschreiben Sie die Objektmethode <code>toString()</code>. Diese Methode gibt einen String in der Form (Beispielwerte):
+    <div class="highlight"><pre><span></span><code><span class="o">[</span> <span class="m">5</span> : <span class="o">(</span>lenovo, <span class="m">8</span>, <span class="m">256</span>, <span class="m">13</span> <span class="o">)</span>, <span class="o">(</span>apple, <span class="m">8</span>, <span class="m">512</span>, <span class="m">13</span> <span class="o">)</span>, <span class="o">(</span>lenovo, <span class="m">16</span>, <span class="m">512</span>, <span class="m">15</span> <span class="o">)</span>, <span class="o">(</span>lenovo, <span class="m">8</span>, <span class="m">256</span>, <span class="m">13</span> <span class="o">)</span>, <span class="o">(</span>apple, <span class="m">8</span>, <span class="m">512</span>, <span class="m">13</span> <span class="o">)]</span>
+</code></pre></div>
+    zurück. <br/>
+    <strong>Beachten Sie:</strong></p>
+<ol>
+<li>die eckigen Klammern zu Beginn und Ende des Strings</li>
+<li>die Angabe der Anzahl der Elemente am Anfang (im obigen Beispiel <code>5 :</code>) </li>
+<li>das Komma zwischen den Elementen (aber nicht nach dem letzten Element)</li>
+</ol>
+</li>
+<li>
+<p>Schreiben Sie eine Methode <code>print()</code>, die den in <code>toString()</code> erzeugten <code>String</code> auf die Konsole ausgibt.</p>
+</li>
+<li>
+<p>Schreiben Sie eine Objektmethode <code>getHersteller(String hersteller)</code>. Diese Methode gibt ein Objekt vom Typ <code>NotebookArray</code> zurück. Das <code>notebooks</code>-Array des erzeugten Objektes enthält genau alle Notebooks aus dem <code>notebooks</code>-Array des aufrufenden Objektes, die von dem Hersteller sind, der als Parameterwert übergeben wird.  <br/>
+<strong>Beispiel:</strong> Angenommen, das <code>notebooks</code>-Array des aufrufenden Objektes sieht so aus:
+    <div class="highlight"><pre><span></span><code><span class="o">[</span> <span class="m">10</span> : <span class="o">(</span>lenovo, <span class="m">16</span>, <span class="m">512</span>, <span class="m">15</span> <span class="o">)</span>, <span class="o">(</span>apple, <span class="m">8</span>, <span class="m">512</span>, <span class="m">13</span> <span class="o">)</span>, <span class="o">(</span>apple, <span class="m">4</span>, <span class="m">256</span>, <span class="m">13</span> <span class="o">)</span>, <span class="o">(</span>apple, <span class="m">8</span>, <span class="m">512</span>, <span class="m">13</span> <span class="o">)</span>, <span class="o">(</span>lenovo, <span class="m">8</span>, <span class="m">256</span>, <span class="m">13</span> <span class="o">)</span>, 
+       <span class="o">(</span>lenovo, <span class="m">16</span>, <span class="m">512</span>, <span class="m">15</span> <span class="o">)</span>, <span class="o">(</span>lenovo, <span class="m">16</span>, <span class="m">512</span>, <span class="m">15</span> <span class="o">)</span>, <span class="o">(</span>lenovo, <span class="m">16</span>, <span class="m">512</span>, <span class="m">15</span> <span class="o">)</span>, <span class="o">(</span>apple, <span class="m">4</span>, <span class="m">256</span>, <span class="m">13</span> <span class="o">)</span>, <span class="o">(</span>apple, <span class="m">4</span>, <span class="m">256</span>, <span class="m">13</span> <span class="o">)</span> <span class="o">]</span>
+</code></pre></div>
+Dann würde bei Aufruf der Methode <code>getHersteller("apple")</code> das zurückgegebene <code>NotebookArray</code>-Objekt folgendes <code>notebooks</code>-Array haben:
+    <div class="highlight"><pre><span></span><code><span class="o">[</span> <span class="o">(</span>apple, <span class="m">8</span>, <span class="m">512</span>, <span class="m">13</span> <span class="o">)</span>, <span class="o">(</span>apple, <span class="m">4</span>, <span class="m">256</span>, <span class="m">13</span> <span class="o">)</span>, <span class="o">(</span>apple, <span class="m">8</span>, <span class="m">512</span>, <span class="m">13</span> <span class="o">)</span>, <span class="o">(</span>apple, <span class="m">4</span>, <span class="m">256</span>, <span class="m">13</span> <span class="o">)</span>, <span class="o">(</span>apple, <span class="m">4</span>, <span class="m">256</span>, <span class="m">13</span> <span class="o">)</span> <span class="o">]</span>
+</code></pre></div>
+    , bei Aufruf der Methode <code>getHersteller("lenovo")</code> das zurückgegebene <code>NotebookArray</code>-Objekt folgendes <code>notebooks</code>-Array:
+    <div class="highlight"><pre><span></span><code><span class="o">[</span> <span class="o">(</span>lenovo, <span class="m">16</span>, <span class="m">512</span>, <span class="m">15</span> <span class="o">)</span>, <span class="o">(</span>lenovo, <span class="m">8</span>, <span class="m">256</span>, <span class="m">13</span> <span class="o">)</span>, <span class="o">(</span>lenovo, <span class="m">16</span>, <span class="m">512</span>, <span class="m">15</span> <span class="o">)</span>, <span class="o">(</span>lenovo, <span class="m">16</span>, <span class="m">512</span>, <span class="m">15</span> <span class="o">)</span>, <span class="o">(</span>lenovo, <span class="m">16</span>, <span class="m">512</span>, <span class="m">15</span> <span class="o">)</span> <span class="o">]</span>
+</code></pre></div>
+    und bei Aufruf der Methode <code>getHersteller("dell")</code> das zurückgegebene <code>NotebookArray</code>-Objekt ein leeres <code>notebooks</code>-Array:
+    <div class="highlight"><pre><span></span><code><span class="o">[</span> <span class="o">]</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>Schreiben Sie eine Objektmethode <code>sortRamPlatte()</code>. Diese Methode sortiert das <code>notebooks</code>-Array wie folgt:</p>
+<ol>
+<li>aufsteigend nach RAM-Größe (kleinste RAM-Größe zuerst)</li>
+<li>ist die RAM-Größer zweier Notebooks gleich, entscheidet die Plattengröße (kleinste Plattengröße zuerst)</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p>Erzeugen Sie in der <code>main()</code>-Methode der <code>Testklasse</code> ein Objekt der Klasse <code>NotebookArray</code>, so dass das <code>notebooks</code>-Array die Länge <code>10</code> hat. Rufen Sie für dieses Objekt die Objektmethoden <code>konfigurieren()</code>, <code>print()</code>, <code>sortRamPlatte()</code> und <code>print()</code> auf. Testen Sie außerdem die <code>getHersteller()</code>-Methode für alle drei Hersteller und geben Sie jeweils das erzeugte Array aus.  <br/>
+    Es sollten folgende Ausgaben auf der Konsole erzeugt werden (<strong>Zufallswerte!</strong>):
+    <div class="highlight"><pre><span></span><code>------------------ Test NotebookArray ------------------
+
+<span class="o">[</span> <span class="m">10</span> : <span class="o">(</span>apple, <span class="m">8</span>, <span class="m">512</span>, <span class="m">13</span><span class="o">)</span>, <span class="o">(</span>lenovo, <span class="m">16</span>, <span class="m">512</span>, <span class="m">15</span><span class="o">)</span>, <span class="o">(</span>apple, <span class="m">4</span>, <span class="m">256</span>, <span class="m">13</span><span class="o">)</span>, <span class="o">(</span>lenovo, <span class="m">8</span>, <span class="m">256</span>, <span class="m">13</span><span class="o">)</span>, <span class="o">(</span>apple, <span class="m">4</span>, <span class="m">256</span>, <span class="m">13</span><span class="o">)</span>, <span class="o">(</span>dell, <span class="m">8</span>, <span class="m">512</span>, <span class="m">15</span><span class="o">)</span>, <span class="o">(</span>apple, <span class="m">4</span>, <span class="m">256</span>, <span class="m">13</span><span class="o">)</span>, <span class="o">(</span>apple, <span class="m">8</span>, <span class="m">512</span>, <span class="m">13</span><span class="o">)</span>, <span class="o">(</span>lenovo, <span class="m">8</span>, <span class="m">256</span>, <span class="m">13</span><span class="o">)</span>, <span class="o">(</span>apple, <span class="m">8</span>, <span class="m">512</span>, <span class="m">13</span><span class="o">)]</span>
+<span class="o">[</span> <span class="m">10</span> : <span class="o">(</span>apple, <span class="m">4</span>, <span class="m">256</span>, <span class="m">13</span><span class="o">)</span>, <span class="o">(</span>apple, <span class="m">4</span>, <span class="m">256</span>, <span class="m">13</span><span class="o">)</span>, <span class="o">(</span>apple, <span class="m">4</span>, <span class="m">256</span>, <span class="m">13</span><span class="o">)</span>, <span class="o">(</span>lenovo, <span class="m">8</span>, <span class="m">256</span>, <span class="m">13</span><span class="o">)</span>, <span class="o">(</span>lenovo, <span class="m">8</span>, <span class="m">256</span>, <span class="m">13</span><span class="o">)</span>, <span class="o">(</span>apple, <span class="m">8</span>, <span class="m">512</span>, <span class="m">13</span><span class="o">)</span>, <span class="o">(</span>dell, <span class="m">8</span>, <span class="m">512</span>, <span class="m">15</span><span class="o">)</span>, <span class="o">(</span>apple, <span class="m">8</span>, <span class="m">512</span>, <span class="m">13</span><span class="o">)</span>, <span class="o">(</span>apple, <span class="m">8</span>, <span class="m">512</span>, <span class="m">13</span><span class="o">)</span>, <span class="o">(</span>lenovo, <span class="m">16</span>, <span class="m">512</span>, <span class="m">15</span><span class="o">)]</span>
+<span class="o">[</span> <span class="m">3</span> : <span class="o">(</span>lenovo, <span class="m">8</span>, <span class="m">256</span>, <span class="m">13</span><span class="o">)</span>, <span class="o">(</span>lenovo, <span class="m">8</span>, <span class="m">256</span>, <span class="m">13</span><span class="o">)</span>, <span class="o">(</span>lenovo, <span class="m">16</span>, <span class="m">512</span>, <span class="m">15</span><span class="o">)]</span>
+<span class="o">[</span> <span class="m">6</span> : <span class="o">(</span>apple, <span class="m">4</span>, <span class="m">256</span>, <span class="m">13</span><span class="o">)</span>, <span class="o">(</span>apple, <span class="m">4</span>, <span class="m">256</span>, <span class="m">13</span><span class="o">)</span>, <span class="o">(</span>apple, <span class="m">4</span>, <span class="m">256</span>, <span class="m">13</span><span class="o">)</span>, <span class="o">(</span>apple, <span class="m">8</span>, <span class="m">512</span>, <span class="m">13</span><span class="o">)</span>, <span class="o">(</span>apple, <span class="m">8</span>, <span class="m">512</span>, <span class="m">13</span><span class="o">)</span>, <span class="o">(</span>apple, <span class="m">8</span>, <span class="m">512</span>, <span class="m">13</span><span class="o">)]</span>
+<span class="o">[</span> <span class="m">1</span> : <span class="o">(</span>dell, <span class="m">8</span>, <span class="m">512</span>, <span class="m">15</span><span class="o">)]</span>
+</code></pre></div></p>
+</li>
+</ul>
+</details>
+<details class="question"><summary>eine mögliche Lösung für Computer</summary><div class="tabbed-set" data-tabs="5:4"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><label for="__tabbed_5_1">Computer.java</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">loesungen.probeklausuren.probeklausur2</span><span class="p">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Computer</span>
+<span class="p">{</span>
+    <span class="kd">protected</span> <span class="n">String</span> <span class="n">hersteller</span><span class="p">;</span>
+    <span class="kd">protected</span> <span class="kt">int</span> <span class="n">ram</span><span class="p">;</span>
+    <span class="kd">protected</span> <span class="kt">int</span> <span class="n">platte</span><span class="p">;</span>
+
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getHersteller</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="na">hersteller</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getRam</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="na">ram</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getPlatte</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="na">platte</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="nf">Computer</span><span class="p">(</span><span class="n">String</span> <span class="n">hersteller</span><span class="p">,</span> <span class="kt">int</span> <span class="n">ram</span><span class="p">,</span> <span class="kt">int</span> <span class="n">platte</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">hersteller</span> <span class="o">=</span> <span class="n">hersteller</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">ram</span> <span class="o">=</span> <span class="n">ram</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">platte</span> <span class="o">=</span> <span class="n">platte</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">gleicherHersteller</span><span class="p">(</span><span class="n">Computer</span> <span class="n">c</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="na">hersteller</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">c</span><span class="p">.</span><span class="na">hersteller</span><span class="p">);</span>
+        <span class="c1">// es geht auch: return this.hersteller == c.hersteller;</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">gleicherHersteller</span><span class="p">(</span><span class="n">String</span> <span class="n">hersteller</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="na">hersteller</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">hersteller</span><span class="p">);</span>
+        <span class="c1">// es geht auch: return this.hersteller == hersteller;</span>
+    <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="na">hersteller</span> <span class="o">+</span> <span class="s">&quot; mit &quot;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="na">ram</span> <span class="o">+</span> <span class="s">&quot; RAM und &quot;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="na">platte</span> <span class="o">+</span> <span class="s">&quot; SSD&quot;</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">print</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">toString</span><span class="p">());</span>
+    <span class="p">}</span>
+
+
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+
+</div>
+<input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><label for="__tabbed_5_2">Notebook.java</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">loesungen.probeklausuren.probeklausur2</span><span class="p">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Notebook</span> <span class="kd">extends</span> <span class="n">Computer</span>
+<span class="p">{</span>
+    <span class="kd">protected</span> <span class="kt">int</span> <span class="n">monitor</span><span class="p">;</span>
+
+    <span class="kd">public</span> <span class="nf">Notebook</span><span class="p">(</span><span class="n">String</span> <span class="n">hersteller</span><span class="p">,</span> <span class="kt">int</span> <span class="n">ram</span><span class="p">,</span> <span class="kt">int</span> <span class="n">platte</span><span class="p">,</span> <span class="kt">int</span> <span class="n">monitor</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kd">super</span><span class="p">(</span><span class="n">hersteller</span><span class="p">,</span> <span class="n">ram</span><span class="p">,</span> <span class="n">platte</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">monitor</span> <span class="o">=</span> <span class="n">monitor</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="s">&quot;(&quot;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="na">hersteller</span> <span class="o">+</span> <span class="s">&quot;, &quot;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="na">ram</span> <span class="o">+</span> <span class="s">&quot;, &quot;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="na">platte</span> <span class="o">+</span> <span class="s">&quot;, &quot;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="na">monitor</span> <span class="o">+</span><span class="s">&quot;)&quot;</span><span class="p">;</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+
+</div>
+<input id="__tabbed_5_3" name="__tabbed_5" type="radio" /><label for="__tabbed_5_3">NotebookArray.java</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">loesungen.probeklausuren.probeklausur2</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.Random</span><span class="p">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">NotebookArray</span>
+<span class="p">{</span>
+    <span class="kd">private</span> <span class="n">Notebook</span><span class="o">[]</span> <span class="n">notebooks</span><span class="p">;</span>
+
+    <span class="kd">public</span> <span class="nf">NotebookArray</span><span class="p">(</span><span class="kt">int</span> <span class="n">anzahl</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">notebooks</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Notebook</span><span class="o">[</span><span class="n">anzahl</span><span class="o">]</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">konfigurieren</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">Random</span> <span class="n">r</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Random</span><span class="p">();</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="na">notebooks</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">auswahl</span> <span class="o">=</span> <span class="n">r</span><span class="p">.</span><span class="na">nextInt</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+            <span class="c1">// folgendes kann natuerlich auch mit if..else geloest werden</span>
+            <span class="k">this</span><span class="p">.</span><span class="na">notebooks</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="k">switch</span><span class="p">(</span><span class="n">auswahl</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="k">case</span> <span class="mi">0</span> <span class="o">-&gt;</span> <span class="k">new</span> <span class="n">Notebook</span><span class="p">(</span><span class="s">&quot;lenovo&quot;</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">13</span><span class="p">);</span> 
+                <span class="k">case</span> <span class="mi">1</span> <span class="o">-&gt;</span>  <span class="k">new</span> <span class="n">Notebook</span><span class="p">(</span><span class="s">&quot;lenovo&quot;</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">512</span><span class="p">,</span> <span class="mi">15</span><span class="p">);</span> 
+                <span class="k">case</span> <span class="mi">2</span> <span class="o">-&gt;</span>  <span class="k">new</span> <span class="n">Notebook</span><span class="p">(</span><span class="s">&quot;apple&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">13</span><span class="p">);</span> 
+                <span class="k">case</span> <span class="mi">3</span> <span class="o">-&gt;</span>  <span class="k">new</span> <span class="n">Notebook</span><span class="p">(</span><span class="s">&quot;apple&quot;</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">512</span><span class="p">,</span> <span class="mi">13</span><span class="p">);</span> 
+                <span class="k">case</span> <span class="mi">4</span> <span class="o">-&gt;</span>  <span class="k">new</span> <span class="n">Notebook</span><span class="p">(</span><span class="s">&quot;dell&quot;</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">512</span><span class="p">,</span> <span class="mi">15</span><span class="p">);</span> 
+                <span class="k">default</span> <span class="o">-&gt;</span> <span class="kc">null</span><span class="p">;</span>
+            <span class="p">};</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">String</span> <span class="n">s</span> <span class="o">=</span> <span class="s">&quot;[ &quot;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="na">notebooks</span><span class="p">.</span><span class="na">length</span> <span class="o">+</span> <span class="s">&quot; : &quot;</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="na">notebooks</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">&lt;</span><span class="k">this</span><span class="p">.</span><span class="na">notebooks</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">s</span> <span class="o">+=</span> <span class="k">this</span><span class="p">.</span><span class="na">notebooks</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">.</span><span class="na">toString</span><span class="p">()</span> <span class="o">+</span> <span class="s">&quot;, &quot;</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">else</span>
+            <span class="p">{</span>
+                <span class="n">s</span> <span class="o">+=</span> <span class="k">this</span><span class="p">.</span><span class="na">notebooks</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">.</span><span class="na">toString</span><span class="p">();</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="s">&quot;]&quot;</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">s</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">print</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">toString</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="n">NotebookArray</span> <span class="nf">getHersteller</span><span class="p">(</span><span class="n">String</span> <span class="n">hersteller</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">anzahl</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="na">notebooks</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">notebooks</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">.</span><span class="na">gleicherHersteller</span><span class="p">(</span><span class="n">hersteller</span><span class="p">))</span>
+            <span class="p">{</span>
+                <span class="n">anzahl</span><span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">NotebookArray</span> <span class="n">na</span> <span class="o">=</span> <span class="k">new</span> <span class="n">NotebookArray</span><span class="p">(</span><span class="n">anzahl</span><span class="p">);</span>
+        <span class="kt">int</span> <span class="n">indexNA</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="na">notebooks</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">notebooks</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">.</span><span class="na">gleicherHersteller</span><span class="p">(</span><span class="n">hersteller</span><span class="p">))</span>
+            <span class="p">{</span>
+                <span class="n">na</span><span class="p">.</span><span class="na">notebooks</span><span class="o">[</span><span class="n">indexNA</span><span class="o">++]</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="na">notebooks</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">na</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">sortRamPlatte</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">bubble</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">bubble</span><span class="o">&lt;</span><span class="k">this</span><span class="p">.</span><span class="na">notebooks</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">bubble</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="k">this</span><span class="p">.</span><span class="na">notebooks</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">bubble</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="k">if</span><span class="p">((</span><span class="k">this</span><span class="p">.</span><span class="na">notebooks</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">.</span><span class="na">getRam</span><span class="p">()</span><span class="o">&gt;</span><span class="k">this</span><span class="p">.</span><span class="na">notebooks</span><span class="o">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">.</span><span class="na">getRam</span><span class="p">())</span> <span class="o">||</span>
+                    <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">notebooks</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">.</span><span class="na">getRam</span><span class="p">()</span><span class="o">==</span><span class="k">this</span><span class="p">.</span><span class="na">notebooks</span><span class="o">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">.</span><span class="na">getRam</span><span class="p">()</span> <span class="o">&amp;&amp;</span> 
+                    <span class="k">this</span><span class="p">.</span><span class="na">notebooks</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">.</span><span class="na">getPlatte</span><span class="p">()</span><span class="o">&gt;</span><span class="k">this</span><span class="p">.</span><span class="na">notebooks</span><span class="o">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">.</span><span class="na">getPlatte</span><span class="p">()))</span>
+                <span class="p">{</span>
+                    <span class="n">Notebook</span> <span class="n">temp</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="na">notebooks</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">;</span>
+                    <span class="k">this</span><span class="p">.</span><span class="na">notebooks</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="na">notebooks</span><span class="o">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">;</span>
+                    <span class="k">this</span><span class="p">.</span><span class="na">notebooks</span><span class="o">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">temp</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+
+</div>
+<input id="__tabbed_5_4" name="__tabbed_5" type="radio" /><label for="__tabbed_5_4">Testklasse.java</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">loesungen.probeklausuren.probeklausur2</span><span class="p">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Testklasse</span>
+<span class="p">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="p">)</span>
+    <span class="p">{</span>
+
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%n%n--------------------- Test Computer --------------------%n%n&quot;</span><span class="p">);</span>
+        <span class="n">Computer</span> <span class="n">c1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Computer</span><span class="p">(</span><span class="s">&quot;lenovo&quot;</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">256</span><span class="p">);</span>
+        <span class="n">Computer</span> <span class="n">c2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Computer</span><span class="p">(</span><span class="s">&quot;lenovo&quot;</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">512</span><span class="p">);</span>
+        <span class="n">Computer</span> <span class="n">c3</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Computer</span><span class="p">(</span><span class="s">&quot;apple&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">256</span><span class="p">);</span>
+        <span class="n">Computer</span> <span class="n">c4</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Computer</span><span class="p">(</span><span class="s">&quot;apple&quot;</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">512</span><span class="p">);</span>
+        <span class="n">Computer</span> <span class="n">c5</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Computer</span><span class="p">(</span><span class="s">&quot;dell&quot;</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">256</span><span class="p">);</span>
+
+        <span class="n">c1</span><span class="p">.</span><span class="na">print</span><span class="p">();</span>
+        <span class="n">c2</span><span class="p">.</span><span class="na">print</span><span class="p">();</span>
+        <span class="n">c3</span><span class="p">.</span><span class="na">print</span><span class="p">();</span>
+        <span class="n">c4</span><span class="p">.</span><span class="na">print</span><span class="p">();</span>
+        <span class="n">c5</span><span class="p">.</span><span class="na">print</span><span class="p">();</span>
+
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;c1 und c2 gleicher Hersteller ? : &quot;</span> <span class="o">+</span> <span class="n">c1</span><span class="p">.</span><span class="na">gleicherHersteller</span><span class="p">(</span><span class="n">c2</span><span class="p">));</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;c1 und c3 gleicher Hersteller ? : &quot;</span> <span class="o">+</span> <span class="n">c1</span><span class="p">.</span><span class="na">gleicherHersteller</span><span class="p">(</span><span class="n">c3</span><span class="p">));</span>
+
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%n%n--------------------- Test Notebook --------------------%n%n&quot;</span><span class="p">);</span>
+        <span class="n">Notebook</span> <span class="n">n1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Notebook</span><span class="p">(</span><span class="s">&quot;lenovo&quot;</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">13</span><span class="p">);</span>
+        <span class="n">Notebook</span> <span class="n">n2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Notebook</span><span class="p">(</span><span class="s">&quot;lenovo&quot;</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">512</span><span class="p">,</span> <span class="mi">15</span><span class="p">);</span>
+
+        <span class="n">n1</span><span class="p">.</span><span class="na">print</span><span class="p">();</span>
+        <span class="n">n2</span><span class="p">.</span><span class="na">print</span><span class="p">();</span>
+
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%n%n------------------ Test NotebookArray ------------------%n%n&quot;</span><span class="p">);</span>      
+        <span class="n">NotebookArray</span> <span class="n">na</span> <span class="o">=</span> <span class="k">new</span> <span class="n">NotebookArray</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+        <span class="n">na</span><span class="p">.</span><span class="na">konfigurieren</span><span class="p">();</span>
+        <span class="n">na</span><span class="p">.</span><span class="na">print</span><span class="p">();</span>
+        <span class="n">na</span><span class="p">.</span><span class="na">sortRamPlatte</span><span class="p">();</span>
+        <span class="n">na</span><span class="p">.</span><span class="na">print</span><span class="p">();</span>
+        <span class="n">NotebookArray</span> <span class="n">lenovo</span> <span class="o">=</span> <span class="n">na</span><span class="p">.</span><span class="na">getHersteller</span><span class="p">(</span><span class="s">&quot;lenovo&quot;</span><span class="p">);</span>
+        <span class="n">lenovo</span><span class="p">.</span><span class="na">print</span><span class="p">();</span>
+        <span class="n">NotebookArray</span> <span class="n">apple</span> <span class="o">=</span> <span class="n">na</span><span class="p">.</span><span class="na">getHersteller</span><span class="p">(</span><span class="s">&quot;apple&quot;</span><span class="p">);</span>
+        <span class="n">apple</span><span class="p">.</span><span class="na">print</span><span class="p">();</span>
+        <span class="n">NotebookArray</span> <span class="n">dell</span> <span class="o">=</span> <span class="n">na</span><span class="p">.</span><span class="na">getHersteller</span><span class="p">(</span><span class="s">&quot;dell&quot;</span><span class="p">);</span>
+        <span class="n">dell</span><span class="p">.</span><span class="na">print</span><span class="p">();</span>
+
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+
+</div>
+</div>
+</details>
 <h3 id="ausdrucke">Ausdrücke<a class="headerlink" href="#ausdrucke" title="Permanent link">&para;</a></h3>
 <details class="note"><summary>gleich 12</summary><p>Welche der folgenden Ausdrücke haben den Wert 12?
 <div class="highlight"><pre><span></span><code>a<span class="o">)</span> <span class="m">12</span> % <span class="m">13</span>
