@@ -1935,7 +1935,7 @@
 		2-Zimmer Wohnung mit 60qm im Erdgeschoss. Monatliche Miete: 540,00 Euro
 		```
 
-	2. Erstellen Sie im gleichen package eine Klasse `Dacheschosswohnung`. Diese erbt von `Wohnung`. 
+	2. Erstellen Sie im gleichen package eine Klasse `Dachgeschosswohnung`. Diese erbt von `Wohnung`. 
 
 		- Implementieren Sie einen parametrisierten Konstruktor `Dachgeschosswohnung(int qm, int anzZimmer, double qmMiete)`. Bei Aufruf des Konstruktors werden die entsprechenden Objektvariablen mit den Parameterwerten initialisiert. Die Objektvariable `etage` bekommt stets den Wert `5`. 
 		- Überschreiben Sie die Methode `toString()`, so dass eine Zeichenkette der Form (Beispielwerte)
@@ -2058,6 +2058,20 @@
 		- eine Objektmethode `teuersteWohnung()`. Diese Methode gibt die Wohnung aus dem `wohnungen`-Array zurück, die die höchste Gesamtmiete von allen Wohnungen aus dem `wohnungen`-Array hat.
 		- Testen der Methode in `main()`:
 			```java
+			System.out.printf("%n%n--------------- Test teuersteWohnung() ---------------------%n%n");
+			Wohnung teuerste = h1.teuersteWohnung();
+			teuerste.print();
+			```
+			sollte folgende Ausgbabe erzeugen (Zufallswerte):
+			```bash
+			--------------- Test teuersteWohnung() ---------------------
+
+			4-Zimmer Wohnung mit 80qm in der 3. Etage. Monatliche Miete: 1000,00 Euro
+			```
+
+		- eine Objektmethode `gesamtMieteHaus()`. Diese Methode gibt die Summe der Mieten aller Wohnungen im `wohnungen`-Array als `double` zurück. 
+		- Testen der Methode in `main()`:
+			```java
 			System.out.printf("%n%n---------------- Test gesamtMieteHaus() --------------------%n%n");
 			System.out.printf("Die Gesamtmiete fuer das Haus betraegt %.2f Euro.%n", h1.gesamtMieteHaus());
 			```
@@ -2092,7 +2106,479 @@
 			  4-Zimmer Wohnung mit 80qm in der 3. Etage. Monatliche Miete: 1000,00 Euro
 			```
 
+??? question "Eine mögliche Lösung für Übung 8"
+	=== "Wohnung.java"
+		```java 
+		package uebungen.uebung8;
 
+		public class Wohnung
+		{
+			private int qm;
+			private int anzZimmer;
+			private int etage;
+			private double qmMiete;
+			
+			public Wohnung(int qm, int anzZimmer, int etage, double qmMiete)
+			{
+				this.qm = qm;
+				this.anzZimmer = anzZimmer;
+				this.etage = etage;
+				this.qmMiete = qmMiete;
+			}
+			
+			public int getQm()
+			{
+				return this.qm;
+			}
+
+			public int getAnzZimmer()
+			{
+				return this.anzZimmer;
+			}
+
+			public int getEtage()
+			{
+				return this.etage;
+			}
+
+			public double getQmMiete()
+			{
+				return this.qmMiete;
+			}
+
+			public double gesamtMiete()
+			{
+				return this.qm * this.qmMiete;
+			}
+			
+			public boolean billiger(Wohnung w)
+			{
+				return this.gesamtMiete() < w.gesamtMiete();
+			}
+			
+			public boolean teurer(Wohnung w)
+			{
+				return this.gesamtMiete() > w.gesamtMiete();
+			}
+			
+			public String toString()
+			{
+				String s = "";
+				if(this.etage == 0)
+				{
+					s = String.format("%d-Zimmer Wohnung mit %d qm im Erdgeschoss. Monatliche Miete: %.2f Euro", 
+							this.anzZimmer, this.qm, this.gesamtMiete() );
+				}
+				else
+				{
+					s = String.format("%d-Zimmer Wohnung mit %d qm in der %d. Etage. Monatliche Miete: %.2f Euro", 
+							this.anzZimmer, this.qm, this.etage, this.gesamtMiete() );
+				}
+				return s;
+			}
+			
+			public void print()
+			{
+				System.out.println(this.toString());
+			}
+			
+		}
+		```
+
+	=== "Dachgeschoss.java"
+		```java 
+		package uebungen.uebung8;
+
+		public class Dachgeschosswohnung extends Wohnung
+		{
+			// alle Objektvariablen von Wohnung geerbt
+			// qm, anzZimmer, etage, qmMiete
+			// alle Objektmethoden von Wohnung geerbt
+			
+			public Dachgeschosswohnung(int qm, int anzZimmer, double qmMiete)
+			{
+				super(qm, anzZimmer, 5, qmMiete);	// Konstruktor Wohnung
+			}
+			
+			@Override
+			public String toString()
+			{
+				String s= "";
+				s = String.format("%d-Zimmer Wohnung mit %d qm in der %d. Etage. Monatliche Miete: %.2f Euro", 
+						this.getAnzZimmer(), this.getQm(), this.getEtage(), this.gesamtMiete() );
+				return s;
+			}
+		}
+		```
+
+	=== "Haus.java"
+		```java 
+		package uebungen.uebung8;
+
+		import java.util.Random;
+
+		public class Haus
+		{
+			private Wohnung[] wohnungen;
+			
+			public Wohnung neueWohnung()
+			{
+				Random r = new Random();
+				int qm = r.nextInt(5) * 20 + 20;
+				int anzZimmer = r.nextInt(5) + 1;
+				int etage = r.nextInt(6);
+				double qmMiete = r.nextInt(10) * 0.5 + 8.0;
+				
+				return new Wohnung(qm, anzZimmer, etage, qmMiete);
+			}
+			
+			public Haus(int anzWohnungen)
+			{
+				this.wohnungen = new Wohnung[anzWohnungen];
+				for (int index = 0; index < this.wohnungen.length; index++)
+				{
+					this.wohnungen[index] = this.neueWohnung();
+				}
+			}
+			
+			public void print()
+			{
+				System.out.println("Das Haus besteht aus :");
+				for (int index = 0; index < this.wohnungen.length; index++)
+				{
+					this.wohnungen[index].print(); 	// print()-Methode von Wohnung
+				}
+			}
+			
+			public Wohnung[] wohnungenInEtage(int etage)
+			{
+				int anzWohnungenInEtage = 0;
+				for (int index = 0; index < this.wohnungen.length; index++)
+				{
+					if(this.wohnungen[index].getEtage()==etage)
+					{
+						anzWohnungenInEtage++;
+					}
+				}
+				
+				Wohnung[] wohnungenInEtage = new Wohnung[anzWohnungenInEtage];
+				int indexWIE = 0;
+				for (int index = 0; index < this.wohnungen.length; index++)
+				{
+					if(this.wohnungen[index].getEtage()==etage)
+					{
+						wohnungenInEtage[indexWIE] = this.wohnungen[index];
+						indexWIE++;
+					}
+				}
+				return wohnungenInEtage;
+			}
+			
+			public void print(Wohnung[] warr)
+			{
+				for (int index = 0; index < warr.length; index++)
+				{
+					warr[index].print(); 	// print()-Methode von Wohnung
+				}
+			}
+			
+			public Wohnung teuersteWohnung()
+			{
+				int indexMax = 0;
+				
+				for (int index = 0; index < this.wohnungen.length; index++)
+				{
+					if(this.wohnungen[index].teurer(this.wohnungen[indexMax]))
+					{
+						indexMax = index;
+					}
+				}
+				
+				return this.wohnungen[indexMax];
+			}
+			
+			public double gesamtMieteHaus()
+			{
+				double gesamtMieteHaus = 0.0;
+				for (int index = 0; index < this.wohnungen.length; index++)
+				{
+					gesamtMieteHaus = gesamtMieteHaus + this.wohnungen[index].gesamtMiete();
+				}
+				return gesamtMieteHaus;
+			}
+			
+			public void sortieren()
+			{
+				for(int bubble = 1; bubble < this.wohnungen.length; bubble++)
+				{
+					for(int index = 0; index < this.wohnungen.length - bubble; index++)
+					{
+						if(this.wohnungen[index].teurer(this.wohnungen[index + 1]))
+						{
+							Wohnung tmp = this.wohnungen[index];
+							this.wohnungen[index] = this.wohnungen[index + 1];
+							this.wohnungen[index + 1] = tmp;
+						}
+					}
+				}
+			}
+		}
+		```
+
+	=== "Testklasse.java"
+		```java 
+		package uebungen.uebung8;
+
+		public class Testklasse
+		{
+
+			public static void main(String[] args)
+			{
+				System.out.printf("%n%n--------------------- Test Wohnung -------------------------%n%n");
+				Wohnung w1 = new Wohnung(70, 3, 4, 12.50);
+				Wohnung w2 = new Wohnung(40, 1, 0, 9.50);
+				Wohnung w3 = new Wohnung(90, 4, 2, 11.10);
+				Wohnung w4 = new Wohnung(60, 2, 0, 9.00);
+
+				w1.print();
+				w2.print();
+				w3.print();
+				w4.print();
+				
+				System.out.printf("%n%n--------------- Test Dachgeschosswohnung -------------------%n%n");
+				Dachgeschosswohnung dg1 = new Dachgeschosswohnung(70, 3, 15.50);
+				Dachgeschosswohnung dg2 = new Dachgeschosswohnung(100, 4, 17.25);
+
+				dg1.print();
+				dg2.print();
+				
+				System.out.printf("%n%n---------------------- Test Haus ---------------------------%n%n");
+				Haus h1 = new Haus(10);
+				h1.print();
+
+				System.out.printf("%n%n----- Test wohnungenInEtage() und print(Wohnung[]) ---------%n%n");
+				for(int etage=0; etage<6; etage++)
+				{
+				    System.out.println("Etage " + etage + " ---------------------------------------");
+				    h1.print(h1.wohnungenInEtage(etage));
+				    System.out.println();
+				}
+				
+				System.out.printf("%n%n--------------- Test teuersteWohnung() ---------------------%n%n");
+				Wohnung teuerste = h1.teuersteWohnung();
+				teuerste.print();
+				
+				System.out.printf("%n%n---------------- Test gesamtMieteHaus() --------------------%n%n");
+				System.out.printf("Die Gesamtmiete fuer das Haus betraegt %.2f Euro.%n", h1.gesamtMieteHaus());
+			
+				System.out.printf("%n%n------------------- Test sortieren() -----------------------%n%n");
+				h1.sortieren();
+				h1.print();
+			}
+
+		}
+		```
+
+??? question "Video zu Übung 8"
+	- <iframe src="https://mediathek.htw-berlin.de/media/embed?key=6576514d74c8203d934640551f153b64&width=720&height=385&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="385" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>
+
+
+??? note "Übung 9"
+	
+	1. Erstellen Sie ein package `uebungen.uebung9`. 
+	2. Erstellen Sie in diesem package eine Klasse `Pizza` mit
+
+		- den privaten Objektvariablen 
+			- `name` vom Typ `String` und
+			- `preis` vom Typ `float`. 
+		- einem parametrisierten Konstruktor `Pizza(String name, float preis)`. Die Werte der Parameter werden verwendet, um den Objektvariablen Werte zuzuweisen.
+		- Gettern für die Objektvariablen (`getName()`, `getPreis()`)
+		- Überschreiben Sie die Objektmethode `toString()`, die Details der Pizza in folgender Form als `String` zurückgibt (Beispielwerte):
+			```bash
+			Die Pizza Salami kostet 6.90 Euro.
+			```
+		- und einer Objektmethode `print()`, die den von `toString()`zurückgegebenen `String` auf der Konsole ausgibt.
+		- Überschreiben Sie die Objektmethode `equals(Object o)`. Diese Methode gibt `true` zurück, wenn der Name `name` des aufrufenden Objektes gleich dem Namen `name` des als Parameter übergebenen Objektes ist; `false` sonst. **Tipp :** Die Gleichheit von zwei Strings `s1` und `s2` können Sie mithilfe von `s1.equals(s2)` ermitteln. (`hashCode()` muss nicht überschrieben werden).
+
+	3. Erstellen Sie im gleichen package eine Klasse `Testklasse` mit `main()`-Methode. Geben Sie in der `main()`-Methode Folgendes ein:
+		```java
+		System.out.printf("%n%n------------------------- Test Pizza ---------------------------%n%n");
+		Pizza p1 = new Pizza("Salami", 6.9f);
+		Pizza p2 = new Pizza("Margheritha", 5.9f);
+		Pizza p3 = new Pizza("Tonno", 6.9f);
+		Pizza p4 = new Pizza("Hawaii", 6.9f);
+		Pizza p5 = new Pizza("Calzone", 7.9f);
+		Pizza p6 = new Pizza("Salami", 6.9f);
+		
+		p1.print();
+		p2.print();
+		p3.print();
+		p4.print();
+		p5.print();
+		
+		System.out.println("p1 gleich p2 ? : " + p1.equals(p2));
+		System.out.println("p1 gleich p1 ? : " + p1.equals(p1));
+		System.out.println("p1 gleich p6 ? : " + p1.equals(p6));
+		p1 gleich p2 ? : false
+		p1 gleich p1 ? : true
+		p1 gleich p6 ? : true
+		```	
+		und führen Sie die `Testklasse` aus. Es sollten folgende zusätzliche Ausgaben erzeugt werden:
+		```bash
+		------------------------- Test Pizza ---------------------------
+
+		Die Pizza Salami kostet 6,90 Euro.
+		Die Pizza Margheritha kostet 5,90 Euro.
+		Die Pizza Tonno kostet 6,90 Euro.
+		Die Pizza Hawaii kostet 6,90 Euro.
+		Die Pizza Calzone kostet 7,90 Euro.
+		```
+	4. Erstellen Sie im gleichen package eine Klasse `Pizzaverkauf` mit
+
+		- den privaten Objektvariablen 
+			- `pizza` vom Typ `Pizza` und
+			- `anzVerkaeufe` vom Typ `int`. 
+		- einem parametrisierten Konstruktor `Pizzaverkauf(Pizza pizza)`. Mit dem Parameterwert `pizza` wird die Objektvariable `pizza` initialisiert. Der Wert der Objektvariablen `anzVerkaeufe` wird auf `0` gesetzt. 
+		- einer Objektmethode `verkaufen()`. Darin wird der Wert der Objektvariablen `anzVerkaeufe` um `1` erhöht.
+		- Gettern für die Objektvariablen, also `getAnzVerkaeufe()` und `getPizza()`.
+		- einer Objektmethode `umsatz()`. Diese Methode gibt ein `double` zurück. Der Wert berechnet sich aus der Anzahl der Verkäufe der Pizza (`anzVerkaeufe`) mal dem Preis der Pizza. 
+		- einer Objektmethode `toString()` die Details der Pizzaverkaeufe in folgender Form als `String` zurückgibt (Beispielwerte):
+			```bash
+			Pizza Salami wurde 0 mal zum Preis von 6.90 Euro verkauft.
+			```
+
+		- und einer Objektmethode `print()`, die den von `toString()`zurückgegebenen `String` auf der Konsole ausgibt
+
+	5. Fügen Sie in der `main()`-Methode der `Testklasse` folgende Anweisungen hinzu:
+		```java	
+		System.out.printf("%n%n--------------------- Test Pizzaverkauf ------------------------%n%n");
+		Pizzaverkauf pv1 = new Pizzaverkauf(p1);
+		pv1.print();
+		pv1.verkaufen();
+		pv1.print();
+		```
+		und führen Sie die `Testklasse` aus. Es sollten folgende zusätzliche Ausgaben erzeugt werden:
+		```bash
+		--------------------- Test Pizzaverkauf ------------------------
+
+		Pizza Salami wurde 0 mal zum Preis von 6,90 Euro verkauft.
+		Pizza Salami wurde 1 mal zum Preis von 6,90 Euro verkauft.
+		```
+
+	6. Erstellen Sie im gleichen package eine Klasse `Speisekarte` mit
+
+		- der privaten Objektvariablen 
+			- `angebot` vom Typ `Pizza[]`. 
+		- einem parameterlosen Konstruktor `Speisekarte()`. In diesem Konstruktor wird für `angebot` ein `Pizza`-Array der Länge `0` erzeugt. 
+		- einer Objektmethode `pizzaHinzufuegen(Pizza pizza)`. Diese Methode fügt die als Parameter übergebene `pizza` dem angebot-Array hinzu. <br/>
+		**Beachten Sie:**
+
+			- Um dem `angebot`-Array eine neue Pizza hinzuzufügen, muss die Länge des Arrays um 1 erhöht werden.
+			- Kopieren Sie sich dazu das alte `angebot`-Array.
+			- Erzeugen Sie dann ein neues `angebot`-Array, das um 1 länger ist als das alte.
+			- Kopieren Sie das bisherige Angebot zurück in das neue `angebot`-Array.
+			- Fügen Sie die neue Pizza (Parameter `pizza`) als letztes Element im neuen `angebot`-Array hinzu.
+
+		- einer Objektmethode `pizzaIstImAngebot(Pizza pizza)`. Diese Methode gibt ein `true` zurück, wenn die als Parameter übergebene `pizza` im `angebot`-Array enthalten ist. Prüfen Sie die Gleichheit mithilfe der `equals()`-Methode von `Pizza`. 
+		- einer Objektmethode `pizzaLoeschen(Pizza pizza)`. Diese Methode löscht die als Parameter übergebene `pizza` aus dem `angebot`-Array (wenn Sie darin enthalten ist). <br/>
+		**Beachten Sie:**
+ 
+			- Nach dem Löschen der Pizza aus dem `angebot`-Array soll das `angebot`-Array wieder um 1 kleiner sein als vorher (falls die zu löschende Pizza überhaupt im `angebot`-Array enthalten war).
+			- Kopieren Sie also das alte `angebot`-Array außer die zu löschende Pizza. 
+			- Ihre Kopie ist dann das neue `angebot`-Array. 
+ 
+ 		- einer Objektmethode `getPizzaAtIndex(int index)`. Diese Methode gibt die Pizza zurück, die im `angebot`-Array beim Index `index` eingetragen ist. Prüfen Sie, ob der übergebene Parameter ein gültiger Index aus dem `angebot`-Array ist. Wenn nicht, geben Sie `null` zurück.
+
+		- Überschreiben Sie die Objektmethode `toString()`, die die Details der Speisekarte in folgender Form als `String` zurückgibt (Beispielwerte):
+			```bash
+			====== Speisekarte ======
+			Salami          6,90 Euro 
+			Margheritha     5,90 Euro 
+			Tonno           6,90 Euro 
+			Hawaii          6,90 Euro 
+			Calzone         7,90 Euro
+			```
+
+		- und einer Objektmethode `print()`, die den von `toString()`zurückgegebenen `String` auf der Konsole ausgibt
+
+	7. Fügen Sie in der `main()`-Methode der `Testklasse` folgende Anweisungen hinzu:
+		```java	
+		System.out.printf("%n%n--------------------- Test Speisekarte -------------------------%n%n");
+		Speisekarte s1 = new Speisekarte();
+		s1.pizzaHinzufuegen(p1);
+		s1.pizzaHinzufuegen(p2);
+		s1.pizzaHinzufuegen(p3);
+		s1.pizzaHinzufuegen(p4);
+		s1.pizzaHinzufuegen(p5);
+		s1.print();
+		
+		s1.pizzaLoeschen(p3);
+		s1.print();
+		```
+		und führen Sie die `Testklasse` aus. Es sollten folgende zusätzliche Ausgaben erzeugt werden:
+		```bash
+		--------------------- Test Speisekarte -------------------------
+
+		====== Speisekarte ======
+		Salami          6,90 Euro 
+		Margheritha     5,90 Euro 
+		Tonno           6,90 Euro 
+		Hawaii          6,90 Euro 
+		Calzone         7,90 Euro 
+
+		====== Speisekarte ======
+		Salami          6,90 Euro 
+		Margheritha     5,90 Euro 
+		Hawaii          6,90 Euro 
+		Calzone         7,90 Euro 
+		```
+
+	8. **Zusatz** Erstellen Sie im gleichen package eine Klasse `Pizzaria` mit
+
+		- der privaten Objektvariablen 
+			- `verkaeufe` vom Typ `Pizzaverkauf[]`. 
+		- einem parametrisierten Konstruktor `Pizzeria(Speisekarte karte)`. In diesem Konstruktor wird 
+
+			- das `verkaeufe`-Array erzeugt und hat die gleiche Länge wie das `angebot`-Array der Speisekarte `karte`.
+			- jedes Element des `verkaeufe`-Arrays zeigt auf ein `Pizzaverkauf`-Objekt. Erzeugen Sie alle `Pizzaverkauf`-Objekte. Übergeben Sie dem `Pizzaverkauf`-Konstruktor dazu die jeweiligen `Pizza`-Objekte aus der Speisekarte `karte`.
+
+		- einer Objektmethode `bestellen()`. Diese Methode gibt ein `int` zurück. In dieser Methode soll zufällig ein Index aus dem `verkaeufe`-Array erzeugt werden. Nutzen Sie dazu die Klasse `Random` aus dem `java.util`-Paket. Verwenden Sie die Objektmethode `nextInt(int bound)` der Klasse `Random`. Wenden Sie `nextInt()` so an, dass auch tatsächlich ein gültiger Index des `verkaeufe`-Arrays erzeugt wird. 
+		- einer Objektmethode `verkaufen(int index)`. Durch den Aufruf der Methode wird die Pizza verkauft, die im `verkaeufe`-Array am Index `index` steht. Nutzen Sie für den Verkauf die `verkaufen()`-Methode der Klasse Pizzaverkauf. Überprüfen Sie, ob der als Parameter übergebene Wert für `index` tatsächlich einem Index im `verkaeufe`-Array entspricht. 
+		- einer Objektmethode `tagesVerkauf(int anzVerkaeufe)`. In dieser Methode wird `anzVerkaeufe` oft eine Pizza verkauft (`verkaufen(int index)`). Welche Pizza verkauft wird (also welcher `index`), wird durch die Methode `bestellen()` jeweils zufällig ermittelt. 
+		- einer Objektmethode `print()`. Diese Methode erzeugt folgende Ausgabe (Beispielwerte):
+			```bash
+			Salami          : ***********************************
+			Margheritha     : ************************************
+			Hawaii          : *****************************************
+			Calzone         : ************************************** 
+			```
+			Das heißt, es wird am Anfang der Zeile der Name der Pizza aus dem `verkaeufe`-Array ausgegeben und danach für die Anzahl der Verkäufe jeweils ein `*`.
+		- einer Objektmethode `meistverkauftePizza()`. Diese Methode gibt die Pizza aus dem `verkaeufe`-Array zurück, die am meisten verkauft wurde.
+		- einer Objektmethode `gesamtEinnahmen()`. Diese Methode gibt die Summe aller Einnahmen als `double` zurück. Die Einnahmen ergeben sich aus der Summe der Umsätze aller Pizzen (Methode `umsatz()` von `Pizzaverkauf`) aus dem `verkaeufe`-Array.
+
+	9. Fügen Sie in der `main()`-Methode der `Testklasse` folgende Anweisungen hinzu:
+		```java	
+		System.out.printf("%n%n------------------------ Test Pizzaria -------------------------%n%n");
+		Pizzeria pz1 = new Pizzeria(s1);
+		pz1.tagesVerkauf(150);
+		pz1.print();
+		System.out.println();
+		System.out.print("Meistverkaufte Pizza : ");
+		pz1.meistverkauftePizza().print();
+		System.out.printf("Die Gesamteinnahmen betragen %.2f Euro", pz1.gesamtEinnahmen());
+		```
+		und führen Sie die `Testklasse` aus. Es sollten folgende zusätzliche Ausgaben erzeugt werden (Zufallswerte):
+		```bash
+		------------------------ Test Pizzaria -------------------------
+
+		Salami          : ******************************
+		Margheritha     : *******************************************
+		Hawaii          : *******************************************
+		Calzone         : **********************************
+
+		Meistverkaufte Pizza : Die Pizza Margheritha kostet 5,90 Euro.
+		Die Gesamteinnahmen betragen 1026,00 Euro
+		```
 
 
 
@@ -2758,6 +3244,392 @@ Hier werden lose und unregelmäßig Übungsaufgaben gesammelt. Am Ende des Semes
 
 		}
 		```
+
+??? note "Uhrzeit"
+	- Implementieren Sie eine Klasse `Uhrzeit`. 
+
+		- Objektvariablen sind `stunden` vom Typ `int`, `minuten` vom Typ `int` und `sekunden` vom Typ `int`. Die Objektvariablen sind nur in der Klasse sichtbar!
+		- Schreiben Sie einen parametrisierten Konstruktor `Uhrzeit(int sekunden)`. Übergeben wird eine beliebige Anzahl von Sekunden. Aus diesem Wert wird die Uhrzeit berechnet. 
+
+			- Beispiel 1: Angenommen, es wird der Wert `83` übergeben, dann sind das `0` Stunden, `1` Minute (`60` Sekunden) und `23` Sekunden.
+			- Beispiel 2: Angenommen, es wird der Wert `3662` übergeben, dann sind das `1` Stunde (`3600` Sekunden), `1` Minute (`60` Sekunden) und `2` Sekunden. 
+			- Beispiel 3: Angenommen, es wird der Wert `86399` übergeben, dann sind das `23` Stunden (`23x3600` Sekunden), `59` Minuten (`59x60` Sekunden) und `59` Sekunden. 
+			- Die Stunden sollen immer im Bereich `0..23` sein, d.h. für einen Stunden-Wert größer als `24` nehmen Sie einfach den `Modulo-24`-Wert.
+			- Initialisieren Sie die Objektvariablen mit den berechneten Werten.  
+
+		- Schreiben Sie eine Objektmethode `uhrzeitInSekunden()`. Diese Methode gibt die Uhrzeit in Sekunden als `int` zurück. Der Wert der zurückgegebenen Sekunden berechnet sich aus den Stunden multipliziert mit `3600` plus den Minuten multipliziert mit `60` plus den Sekunden des aufrufenden `Uhrzeit`-Objektes.  
+		- Schreiben Sie eine Objektmethode `frueher(Uhrzeit u)`, die ein `true` zurückgibt, wenn die Uhrzeit des aufrufenden Objektes früher liegt als der Wert von `u`; `false` sonst. 
+		- Schreiben Sie eine Objektmethode `jetztPlusXSekunden(int sekunden)`, die ein neues `Uhrzeit`-Objekt zurückgibt. Die Uhrzeit des neuen Objektes ergibt sich aus der Uhrzeit des aufrufenden Objektes plus der Anzahl der Sekunden, die als Parameter übergeben werden.
+		- Schreiben Sie eine Objektmethode `differenzInSekunden(Uhrzeit u)`, die die Anzahl in Sekunden (`int`) zurückgibt, die zwischen der Uhrzeit des aufrufenden Objektes und `u` liegen. Geben Sie die Anzahl stets als positiven Wert zurück! Sie können dazu die Methode `Math.abs(int wert)` verwenden, die den absoluten Betrag von `wert` zurückgibt. 
+		- Überschreiben Sie die Methode `toString()`, so dass der Wert des aufrufenden Objektes in der Form `hh:mm:ss` als `String` zurückgegeben wird, z.B. `23:59:59`. Achten Sie darauf, dass die Stunden, Minuten und Sekunden führende Nullen enthalten können, also z.B. `01:02:03`!
+
+	- Erstellen Sie eine Klasse `Testklasse` mit `main()`-Methode. Erzeugen Sie in der `main()`-Methode vier Objekte der Klasse `Uhrzeit`. Verwenden Sie als Parameterwerte: `83`, `3662`, `86399` und `172799`. Wenden Sie jeweils die Methoden `System.out.print()` und `print()` aus `Uhrzeit` so an, dass folgende Ausgabe entsteht:  
+		```bash
+		z1 : 00:01:23
+		z2 : 01:01:02
+		z3 : 23:59:59
+		z4 : 23:59:59
+		```
+	- Wenden Sie außerdem jeweils die Methoden `System.out.println()` sowie `frueher()`, `jetztPlusXSekunden()`, `differenzInSekunden()` (und evtl. `toString()`) aus `Uhrzeit` so an, dass folgende Ausgabe entsteht:  
+		```bash
+		z1 frueher als z2 ? true
+		z3 frueher als z4 ? false
+
+		z1 plus   40 Sekunden : 00:02:03
+		z2 plus 3598 Sekunden : 02:01:00
+
+		z3-z2 in Sekunden : 82737
+		```
+
+	- Erstellen Sie eine Klasse `UhrzeitArray`. Objektvariable `uhren` ist ein Array, das Elemente von `Uhrzeit` aufnimmt. Die Variable ist nur innerhalb der Klasse sichtbar.
+
+		- Schreiben Sie einen parametrisierten Konstruktor `UhrzeitArray(int laenge)`. Innerhalb des Konstruktors wird das Array erzeugt, auf das die Objektvariable `uhren` referenziert. Das Array hat die Länge `laenge` (Parameterwert).
+		- Schreiben Sie eine Objektmethode `fill()`, die das `uhren`-Array vollständig mit `Uhrzeit`-Objekten befüllt. Die Parameterwerte der `Uhrzeit`-Objekte werden zufällig erzeugt. Erzeugen Sie ein Objekt der Klasse `Random` (dafür muss `java.util.Random` importiert werden) und erzeugen Sie die Parameter-Werte für die `Uhrzeit`-Objekte zufällig (unter Verwendung des `Random`-Objektes) aus dem Bereich `[0, ..., 86399]` (`0` und `86399` jeweils inklusive)
+		- Überschreiben Sie die Objektmethode `toString()`, so dass das `uhren`-Array wie folgt als Zeichenkette zurückgegeben wird (Beispielwerte): 
+			```bash
+			((06:38:30), (01:59:32), (07:16:48), (01:37:58), (18:16:06), (07:50:33), (01:41:47), (05:07:41), (12:38:08), (02:00:04)) 
+			```
+			Also die Uhrzeit jeweils in runden Klammern und durch Komma getrennt sowie das ganze Array in runden Klammern. 
+		- Schreiben Sie eine Objektmethode `print()`, so dass auf der Konsole die durch `toString()` erzeugte eine Zeichenkette ausgegeben wird.  
+		- Schreiben Sie eine Objektmethode `spaeteste()`. Diese Methode gibt die kleinste (früheste) `Uhrzeit` aus dem Array `uhren` zurück. 
+		- Schreiben Sie eine Objektmethode `zwischen(Uhrzeit frueh, Uhrzeit spaet)`. Diese Methode gibt ein `UhrzeitArray`-Objekt zurück. Das zurückgegebene `UhrzeitArray`-Objekt enthält alle `Uhrzeit`-Objekte aus dem Array `uhren`, welche zwischen den beiden Uhrzeiten `frueh` und `spaet` liegen.
+		- Schreiben Sie eine Objektmethode `sortieren()`. Diese Methode sortiert das `uhren`-Array aufsteigend beginnend mit der kleinsten Uhrzeit.
+		- Schreiben Sie eine Objektmethode `kleinsterAbstand()`. Diese Methode gibt ein `UhrzeitArray` der Länge `2` zurück. Es enthält die beiden `Uhrzeit`en aus dem Array `uhren`, welche den kleinsten Abstand (Differenz in Sekunden) haben. Sie können beim Schreiben der Methode davon ausgehen, dass das `uhren`-Array bereits sortiert ist! 
+
+	- Erzeugen Sie in der `main()`-Methode ein Objekt der Klasse `UhrzeitArray`. Das Array soll die Länge `10` haben. 
+
+		- Rufen Sie die `fill()`- und dann die `print()`-Methode auf. Es entsteht folgende Ausgabe (Zufallswerte):
+			```bash
+			((06:38:30), (01:59:32), (07:16:48), (01:37:58), (18:16:06), (07:50:33), (01:41:47), (05:07:41), (12:38:08), (02:00:04))
+			```
+
+		- Wenden Sie jeweils die Methoden `System.out.print()` sowie `spaeteste()` so an, dass folgende Ausgabe entsteht (Zufallswerte):  
+			```bash
+			spaeteste : 18:16:06
+			```
+
+		- Wenden Sie jeweils die Methoden `System.out.print()` sowie `sortieren()` und `print()` so an, dass folgende Ausgabe entsteht (Zufallswerte):
+			```bash  
+			sortiert  : ((01:37:58), (01:41:47), (01:59:32), (02:00:04), (05:07:41), (06:38:30), (07:16:48), (07:50:33), (12:38:08), (18:16:06))
+			```
+
+		- Erzeugen Sie zwei weitere `Uhrzeit`-Objekte `frueh` (Parameterwert `36000`) und `spaet` (Parameterwert `72000`) und rufen Sie damit die Objektmethoden `zwischen(frueh, spaet)` und `print()` auf, so dass folgende Ausgabe entsteht (Zufallswerte):
+			```bash
+			frueh    : 10:00:00
+			spaet    : 20:00:00
+			zwischen : ((12:38:08), (18:16:06))
+			```
+
+		- Wenden Sie jeweils die Methoden `System.out.print()` sowie `kleinsterAbstand()` und `print()` so an, dass folgende Ausgabe entsteht (Zufallswerte):  
+			```bash
+			kleinster Abstand : ((01:59:32), (02:00:04))
+			```
+
+	- **Zur Kontrolle:** ungefähre Ausgabe auf der Konsole (in Teil 2 Zufallswerte):
+		```bash
+		--------------- Teil 1 ---------------
+
+		z1 : 00:01:23
+		z2 : 01:01:02
+		z3 : 23:59:59
+		z4 : 23:59:59
+
+		z1 frueher als z2 ? true
+		z3 frueher als z4 ? false
+
+		z1 plus   40 Sekunden : 00:02:03
+		z2 plus 3598 Sekunden : 02:01:00
+
+		z3-z2 in Sekunden : 82737
+
+		--------------- Teil 2 ---------------
+
+		((06:38:30), (01:59:32), (07:16:48), (01:37:58), (18:16:06), (07:50:33), (01:41:47), (05:07:41), (12:38:08), (02:00:04))
+
+		spaeteste : 18:16:06
+
+		sortiert  : ((01:37:58), (01:41:47), (01:59:32), (02:00:04), (05:07:41), (06:38:30), (07:16:48), (07:50:33), (12:38:08), (18:16:06))
+
+		frueh    : 10:00:00
+		spaet    : 20:00:00
+		zwischen : ((12:38:08), (18:16:06))
+
+		kleinster Abstand : ((01:59:32), (02:00:04))
+		```
+
+??? question "eine mögliche Lösung für Uhrzeit"
+	=== "Uhrzeit.java"
+		```java linenums="1"
+		package loesungen.probeklausuren.probeklausur3;
+
+		public class Uhrzeit
+		{
+			private int stunden;
+			private int minuten;
+			private int sekunden;
+			
+			public Uhrzeit(int sekunden)
+			{
+				final int STUNDE = 3600;
+				final int MINUTE = 60;
+
+				this.stunden = (sekunden/STUNDE)%24;
+				int rest = sekunden%STUNDE;	
+				this.minuten = rest/MINUTE;
+				rest = rest%MINUTE;
+				this.sekunden = rest;
+			}
+			
+			public int uhrZeitInSekunden()
+			{
+				final int STUNDE = 3600;
+				final int MINUTE = 60;
+				
+				int sekunden = this.stunden*STUNDE 
+						+ this.minuten*MINUTE 
+						+ this.sekunden;
+				return sekunden;
+			}
+			
+			public boolean frueher(Uhrzeit u)
+			{
+				return this.uhrZeitInSekunden() < u.uhrZeitInSekunden();
+			}
+			
+			public boolean spaeter(Uhrzeit u)
+			{
+				return this.uhrZeitInSekunden() > u.uhrZeitInSekunden();
+			}
+			
+			public Uhrzeit jetztPlusXSekunden(int sekunden)
+			{
+				int jetzt = this.uhrZeitInSekunden();
+				int neu = jetzt + sekunden;
+				
+				return new Uhrzeit(neu);
+			}
+			
+			public int differenzInSekunden(Uhrzeit u)
+			{
+				int uhrzeit1 = this.uhrZeitInSekunden();
+				int uhrzeit2 = u.uhrZeitInSekunden();
+				int diff	= Math.abs(uhrzeit1-uhrzeit2);
+				return diff;
+			}
+			
+			@Override
+			public String toString()
+			{
+				String s = "";
+				if(this.stunden<10)
+				{
+					s = s + "0";
+				}
+				s = s + this.stunden +":";
+				if(this.minuten<10)
+				{
+					s = s + "0";
+				}
+				s = s + this.minuten +":";
+				if(this.sekunden<10)
+				{
+					s = s + "0";
+				}
+				s = s + this.sekunden;
+				
+				return s;
+			}
+			
+			public void print()
+			{
+				System.out.println(this.toString());
+			}
+		}
+		```
+
+	=== "UhrzeitArray.java"
+		```java linenums="1"
+		package loesungen.probeklausuren.probeklausur3;
+
+		import java.util.Random;
+
+		public class UhrzeitArray
+		{
+			private Uhrzeit[] uhren;
+			
+			public UhrzeitArray(int laenge)
+			{
+				this.uhren = new Uhrzeit[laenge];
+			}
+			
+			public void fill()
+			{
+				Random r = new Random();
+				for(int i=0; i<this.uhren.length; i++)
+				{
+					int zufSekunden = r.nextInt(86400);
+					this.uhren[i] = new Uhrzeit(zufSekunden);
+				}
+			}
+			
+			public void print()
+			{
+				String s = "(";
+				for(int i=0; i<this.uhren.length; i++)
+				{
+					if(i<this.uhren.length-1)
+					{
+						s = s + "(" + this.uhren[i].toString() + "), ";
+					}
+					else
+					{
+						s = s + "(" + this.uhren[i].toString() + ")";
+					}
+				}
+				s = s +")";
+				System.out.println(s);
+			}
+			
+			public Uhrzeit frueheste()
+			{
+				Uhrzeit frueheste = this.uhren[0];
+				for(int i=1; i<this.uhren.length; i++)
+				{
+					if(this.uhren[i].frueher(frueheste))
+					{
+						frueheste = this.uhren[i];
+					}
+				}
+				return frueheste;
+			}
+			
+			public UhrzeitArray zwischen(Uhrzeit frueh, Uhrzeit spaet)
+			{
+				int anzZwischen = 0;
+				for(Uhrzeit u : this.uhren)
+				{
+					if(frueh.frueher(u) && u.frueher(spaet))
+					{
+						anzZwischen++;
+					}
+				}
+				UhrzeitArray ua = new UhrzeitArray(anzZwischen);
+				int uaIndex = 0;
+				for(int i=0; i<this.uhren.length; i++)
+				{
+					if(frueh.frueher(this.uhren[i]) 
+							&& this.uhren[i].frueher(spaet))
+					{
+						ua.uhren[uaIndex] = this.uhren[i];
+						uaIndex++;
+					}
+				}
+				return ua;
+			}
+			
+			public void sortieren()
+			{
+				for(int bubble=0; bubble<this.uhren.length-1; bubble++)
+				{
+					for(int i=0; i<this.uhren.length-1-bubble; i++)
+					{
+						if(this.uhren[i+1].frueher(this.uhren[i]))
+						{
+							Uhrzeit temp = this.uhren[i];
+							this.uhren[i] = this.uhren[i+1];
+							this.uhren[i+1] = temp;
+						}
+					}
+				}
+			}
+			
+			public UhrzeitArray kleinsterAbstand()
+			{
+				this.sortieren();
+				Uhrzeit u1 = this.uhren[0];
+				Uhrzeit u2 = this.uhren[1];
+				int kleinsterAbstand = u1.differenzInSekunden(u2);
+				for(int i=1; i<this.uhren.length-1; i++)
+				{
+					if(this.uhren[i].differenzInSekunden(this.uhren[i+1]) 
+							< kleinsterAbstand)
+					{
+						u1 = this.uhren[i];
+						u2 = this.uhren[i+1];
+						kleinsterAbstand = u1.differenzInSekunden(u2);
+					}
+				}
+				UhrzeitArray ua = new UhrzeitArray(2);
+				ua.uhren[0] = u1;
+				ua.uhren[1] = u2;
+				return ua;
+					
+			}
+		}
+		```
+
+	=== "Testklasse.java"
+		```java linenums="1"
+		package loesungen.probeklausuren.probeklausur3;
+
+		public class Testklasse
+		{
+
+			public static void main(String[] args)
+			{
+				System.out.printf("%n%n---------------------- Test Uhrzeit --------------------------%n%n");
+				Uhrzeit z1 = new Uhrzeit(83);
+				Uhrzeit z2 = new Uhrzeit(3662);
+				Uhrzeit z3 = new Uhrzeit(86399);
+				Uhrzeit z4 = new Uhrzeit(172799);
+				
+				System.out.print("z1 : "); 
+				z1.print();
+				System.out.print("z2 : "); 
+				z2.print();
+				System.out.print("z3 : "); 
+				z3.print();
+				System.out.print("z4 : "); 
+				z4.print();
+				
+				System.out.println("z1 frueher als z2 ? " + z1.frueher(z2));
+				System.out.println("z3 frueher als z4 ? " + z3.frueher(z4));
+				
+				System.out.println("z1 plus   40 Sekunden : " 
+				+ z1.jetztPlusXSekunden(40));
+				System.out.println("z2 plus 3598 Sekunden : " 
+				+ z2.jetztPlusXSekunden(3598));
+				
+				System.out.println("z3-z2 in Sekunden : " 
+				+ z3.differenzInSekunden(z2));
+				
+				System.out.printf("%n%n------------------- Test UhrzeitArray ------------------------%n%n");
+				UhrzeitArray ua = new UhrzeitArray(10);
+				ua.fill();
+				ua.print();
+				System.out.println("frueheste : " + ua.frueheste());
+				
+				Uhrzeit frueh = new Uhrzeit(36000);
+				Uhrzeit spaet = new Uhrzeit(72000);
+				UhrzeitArray zwischen = ua.zwischen(frueh, spaet);
+				
+				System.out.print("frueh    : "); frueh.print();
+				System.out.print("spaet    : "); spaet.print();
+				System.out.print("zwischen : "); zwischen.print();
+				
+				ua.sortieren();
+				ua.print();
+				
+				UhrzeitArray kleinsterAbstand = ua.kleinsterAbstand();
+				System.out.print("kleinster Abstand : ");
+				kleinsterAbstand.print();	
+			}
+		}
+		```
+
+
+
+
 
 
 ### Ausdrücke

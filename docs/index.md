@@ -48,9 +48,9 @@ Nachfolgend der vorläufige Wochenplan (wird eventuell angepasst). Die Vorlesung
 | 8. | 21.-25.12.2020 | Klassen- und Objekt-Variablen und -Methoden  | Aufgabe 7  | 17.01.2021 |
 | | | | | | | |
 | 9. | 04.-08.01.2021 | Vererbung | Aufgabe 8  | 24.01.2021 |
-| 10. | 11.-15.01.2021 | Polymorphie | Aufgabe 9 | 31.01.2021 |
-| 11. | 18.-22.01.2021 | Object | -  | - |
-| 12. | 25.-29.01.2021 | Sichtbarkeitsmodifizierer | Fragen  | - |
+| 10. | 11.-15.01.2021 | Object und Polymorphie | - | - |
+| 11. | 18.-22.01.2021 | Wiederholung, Klausurvorbereitung  | -  | - |
+| 12. | 25.-29.01.2021 | Wiederholung, Klausurvorbereitung  | Fragen  | - |
 | 13. | 01.-05.02.2021 | Wiederholung, Klausurvorbereitung |   | - |
 
 ## Themen
@@ -756,3 +756,14 @@ Hier sind die Themen in chronologischer Folge aufgeführt, wie wir sie auch in d
 	- für die [**Übung 7**](./uebungen/#ubungsblatter-wochenweise) habe ich ein Video und die Lösung hochgeladen
 	- für die [**Aufgabe 5**](./aufgaben/#aufgaben_1) habe ich die Lösung hochgeladen
 	- außerdem werden jetzt nach und nach [**Probeklausuren**](./uebungen/#probeklausuren) hochgeladen - eine ist schon da.
+
+
+??? question "15.01. + 19.01.2021 - Object und Polymorphie"
+	- siehe [**Object**](./object/#die-klasse-object)
+	- Video zu [**Object**](./object/#die-klasse-object) *kommt noch*		
+	- Die Klasse `java.lang.Object` ist die Basisklasse (Elternklasse) aller in Java existierenden Klassen. `Object` wird häufig auch als die "Mutter aller Klassen" in Java bezeichnet. Eine Klasse kann entweder *explizit* von einer anderen Klasse erben (mithilfe von `extends`) oder sie erbt *implizit* von der Klasse `Object`. Das bedeutet, dass jede Klasse von der Klasse `Object` erbt. Jede Referenzvariable ist somit (auch) vom *Laufzeittyp* `Object`. Wir lernen den Unterschied zwischen *Compilertyp* und *Laufzeittyp* kennen. Für alle Klassen, die wir in Zukunft schreiben, werden wir die Objektmethoden `toString()` und `equals()` (und also auch `hashCode()`) überschreiben. Wir betrachten außerdem die Objektmethoden `getClass()` und `clone()` genauer und lernen ein wichtiges weiteres Konzept der objektorientierten Programmierung kennen, nämlich *Polymorphie*. 
+	- siehe [**Übung 9**](./uebungen/#ubungsblatter-wochenweise)
+	- siehe [**Aufgabe 8 - Mensch, Studentin, Studiengaenge**](./aufgaben/#aufgaben_1)
+	- für die [**Übung 8**](./uebungen/#ubungsblatter-wochenweise) habe ich ein Video und die Lösung hochgeladen
+	- für die [**Aufgabe 6**](./aufgaben/#aufgaben_1) habe ich die Lösung hochgeladen
+	- außerdem sind weitere [**Probeklausuren**](./uebungen/#probeklausuren) (`Computer` und `Uhrzeit` - jeweils mit Lösung) hochgeladen.

@@ -3909,6 +3909,141 @@ Die Aufgaben laden Sie in [Moodle](https://moodle.htw-berlin.de/course/view.php?
 	- Viel Spaß und viel Erfolg!
 
 
+??? question "Eine mögliche Lösung für Aufgabe 6"
+	=== "Bruch.java"
+		```java linenums="1"
+		package aufgaben.aufgabe6;
+
+		public class Bruch
+		{
+			private int zaehler;
+			private int nenner;
+			
+			public Bruch()
+			{
+				this.zaehler = 1;
+				this.nenner = 1;
+			}
+
+			public Bruch(int zaehler, int nenner) 
+			{
+				this.zaehler = zaehler;
+				this.nenner = nenner;
+			}
+			
+			private int ggT()
+			{
+				int a = this.zaehler;
+				int b = this.nenner;
+				int merke = b;
+				while(b!=0)
+				{
+					merke = a % b;
+					a = b;
+					b = merke;
+				}
+				return a;
+			}
+			
+			public Bruch kuerzen()
+			{
+				int ggT = this.ggT();
+				int zaehler = this.zaehler/ggT;
+				int nenner = this.nenner/ggT;
+				return new Bruch(zaehler,nenner);
+			}
+			
+			public Bruch plus(Bruch b)
+			{
+				int zaehler = this.zaehler*b.nenner + b.zaehler*this.nenner;
+				int nenner = this.nenner*b.nenner;
+				return (new Bruch(zaehler,nenner)).kuerzen();
+			}
+			
+			public Bruch minus(Bruch b)
+			{
+				int zaehler = this.zaehler*b.nenner - b.zaehler*this.nenner;
+				int nenner = this.nenner*b.nenner;
+				return (new Bruch(zaehler,nenner)).kuerzen();
+			}
+			
+			public Bruch mal(Bruch b)
+			{
+				int zaehler = this.zaehler*b.zaehler;
+				int nenner = this.nenner*b.nenner;
+				return (new Bruch(zaehler,nenner)).kuerzen();
+			}	
+			
+			public Bruch geteilt(Bruch b)
+			{
+				int zaehler = this.zaehler*b.nenner;
+				int nenner = this.nenner*b.zaehler;
+				return (new Bruch(zaehler,nenner)).kuerzen();
+			}	
+			
+			public String toString()
+			{
+				return this.zaehler + "/" + this.nenner;
+			}
+			
+			public boolean istGroesser(Bruch b)
+			{
+				return this.zaehler * b.nenner > b.zaehler * this.nenner;
+			}
+			
+			
+			public boolean istKleiner(Bruch b)
+			{
+				return this.zaehler * b.nenner < b.zaehler * this.nenner;
+			}
+			
+			
+			public boolean istGleich(Bruch b)
+			{
+				return !this.istGroesser(b) && !istKleiner(b);
+			}
+		}
+		```
+
+	=== "BruchTest.java"
+		```java linenums="1"
+		package aufgaben.aufgabe6;
+
+		public class BruchTest
+		{
+
+			public static void main(String[] args)
+			{
+				Bruch b1 = new Bruch(3,7);
+				Bruch b2 = new Bruch(4,8);
+				Bruch b3 = new Bruch(2,5);
+				Bruch b4 = new Bruch(5,11);
+				Bruch b5 = new Bruch();
+				
+				System.out.printf("%n%n------------------------- Rechnen -----------------------------------%n%n");
+				System.out.printf("%5s + %5s = %5s %n", b1.toString(), b2.toString(), b1.plus(b2).toString());
+				System.out.printf("%5s - %5s = %5s %n", b3.toString(), b4.toString(), b3.minus(b4).toString());
+				System.out.printf("%5s * %5s = %5s %n", b1.toString(), b3.toString(), b1.mal(b3).toString());
+				System.out.printf("%5s / %5s = %5s %n", b2.toString(), b1.toString(), b2.geteilt(b1).toString());
+				System.out.printf("%5s + %5s = %5s %n", b5.toString(), b4.toString(), b5.plus(b4).toString());	
+				System.out.printf("%5s - %5s = %5s %n", b1.toString(), b1.toString(), b1.minus(b1).toString());		// nenner sollte ungleich 0 bleiben!	
+				
+				System.out.printf("%n%n------------------------- Vergleichen -----------------------------------%n%n");
+				System.out.printf("%5s  > %5s ? %b %n", b1.toString(), b2.toString(), b1.istGroesser(b2));
+				System.out.printf("%5s  < %5s ? %b %n", b1.toString(), b2.toString(), b1.istKleiner(b2));
+				System.out.printf("%5s == %5s ? %b %n", b1.toString(), b2.toString(), b1.istGleich(b2));
+				System.out.printf("%5s  > %5s ? %b %n", b3.toString(), b4.toString(), b3.istGroesser(b4));
+				System.out.printf("%5s  < %5s ? %b %n", b3.toString(), b4.toString(), b3.istKleiner(b4));
+				System.out.printf("%5s == %5s ? %b %n", b3.toString(), b4.toString(), b3.istGleich(b4));
+				System.out.printf("%5s  > %5s ? %b %n", b5.toString(), b5.toString(), b5.istGroesser(b5));
+				System.out.printf("%5s  < %5s ? %b %n", b5.toString(), b5.toString(), b5.istKleiner(b5));
+				System.out.printf("%5s == %5s ? %b %n", b5.toString(), b5.toString(), b5.istGleich(b5));
+			}
+
+		}
+		```
+
+
 ??? "Aufgabe 7 - SortedArray"
 	- Wir erstellen uns einen neuen Datentyp `SortedArray`
 
