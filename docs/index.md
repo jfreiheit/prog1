@@ -89,7 +89,7 @@ Hier sind die Themen in chronologischer Folge aufgeführt, wie wir sie auch in d
 ??? question "06.11. + 10.11.2020 - Variablen, Datentypen, Methoden, Selektion"
 	- siehe [**Übung 1**](./uebungen/#ubungsblatter-wochenweise)
 	- Variablen (siehe [**Skript Variablen**](./variablen/#variablen-und-datentypen))
-	<iframe src="https://mediathek.htw-berlin.de/media/embed?key=b3870001ae182f91756188a54e70481b&width=720&height=437&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="437" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>
+		<iframe src="https://mediathek.htw-berlin.de/media/embed?key=b3870001ae182f91756188a54e70481b&width=720&height=437&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="437" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>
 	- ??? "Variablen.java"
 		  ```java
 		  	package themen.variablen;
@@ -760,7 +760,8 @@ Hier sind die Themen in chronologischer Folge aufgeführt, wie wir sie auch in d
 
 ??? question "15.01. + 19.01.2021 - Object und Polymorphie"
 	- siehe [**Object**](./object/#die-klasse-object)
-	- Video zu [**Object**](./object/#die-klasse-object) *kommt noch*		
+	- Video zu [**Object**](./object/#die-klasse-object)	
+		<iframe src="https://mediathek.htw-berlin.de/media/embed?key=881826da08aad8fffce83b364cd1e378&width=720&height=450&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="450" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>	
 	- Die Klasse `java.lang.Object` ist die Basisklasse (Elternklasse) aller in Java existierenden Klassen. `Object` wird häufig auch als die "Mutter aller Klassen" in Java bezeichnet. Eine Klasse kann entweder *explizit* von einer anderen Klasse erben (mithilfe von `extends`) oder sie erbt *implizit* von der Klasse `Object`. Das bedeutet, dass jede Klasse von der Klasse `Object` erbt. Jede Referenzvariable ist somit (auch) vom *Laufzeittyp* `Object`. Wir lernen den Unterschied zwischen *Compilertyp* und *Laufzeittyp* kennen. Für alle Klassen, die wir in Zukunft schreiben, werden wir die Objektmethoden `toString()` und `equals()` (und also auch `hashCode()`) überschreiben. Wir betrachten außerdem die Objektmethoden `getClass()` und `clone()` genauer und lernen ein wichtiges weiteres Konzept der objektorientierten Programmierung kennen, nämlich *Polymorphie*. 
 	- siehe [**Übung 9**](./uebungen/#ubungsblatter-wochenweise)
 	- siehe [**Aufgabe 8 - Mensch, Studentin, Studiengaenge**](./aufgaben/#aufgaben_1)
