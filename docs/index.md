@@ -49,7 +49,7 @@ Nachfolgend der vorläufige Wochenplan (wird eventuell angepasst). Die Vorlesung
 | | | | | | | |
 | 9. | 04.-08.01.2021 | Vererbung | Aufgabe 8  | 24.01.2021 |
 | 10. | 11.-15.01.2021 | Object und Polymorphie | - | - |
-| 11. | 18.-22.01.2021 | Wiederholung, Klausurvorbereitung  | -  | - |
+| 11. | 18.-22.01.2021 | return  | -  | - |
 | 12. | 25.-29.01.2021 | Wiederholung, Klausurvorbereitung  | Fragen  | - |
 | 13. | 01.-05.02.2021 | Wiederholung, Klausurvorbereitung |   | - |
 
@@ -768,3 +768,11 @@ Hier sind die Themen in chronologischer Folge aufgeführt, wie wir sie auch in d
 	- für die [**Übung 8**](./uebungen/#ubungsblatter-wochenweise) habe ich ein Video und die Lösung hochgeladen
 	- für die [**Aufgabe 6**](./aufgaben/#aufgaben_1) habe ich die Lösung hochgeladen
 	- außerdem sind weitere [**Probeklausuren**](./uebungen/#probeklausuren) (`Computer` und `Uhrzeit` - jeweils mit Lösung) hochgeladen.
+
+
+??? question "22.01. + 26.01.2021 - return"
+	- siehe [**return**](./return/#return) 
+	- siehe [**Übung 10**](./uebungen/#ubungsblatter-wochenweise)
+	- für die [**Übung 9**](./uebungen/#ubungsblatter-wochenweise) habe ich ein Video und die Lösung hochgeladen
+	- für die [**Aufgabe 7**](./aufgaben/#aufgaben_1) habe ich die Lösung hochgeladen
+	- Überlegen Sie sich gerne Fragen, die wir in den Übungen beantworten und diskutieren können! Wir wiederholen ab jetzt alles, was wir hatten. Sollte Bedarf bestehen, können wir auch noch einen weiteren Wochentermin einschieben. Viel Erfolg bei der Klausurvorbereitung! 

@@ -4131,6 +4131,140 @@ Die Aufgaben laden Sie in [Moodle](https://moodle.htw-berlin.de/course/view.php?
 	- Viel Spaß und viel Erfolg!
 
 
+??? question "Eine mögliche Lösung für Aufgabe 7"
+	=== "SortedArray.java"
+		```java linenums="1"
+		package aufgaben.aufgabe7;
+
+		public class SortedArray
+		{
+			private int[] s;
+
+			SortedArray()
+			{
+				this.s = new int[0];
+			}
+
+			SortedArray(int element)
+			{
+				this.s = new int[1];
+				this.s[0] = element;
+			}
+
+			public boolean insert(int element)
+			{
+				for(int i=0; i<this.s.length; i++)
+				{
+					if(s[i]==element) return false;
+				}
+				int[] copy = new int[this.s.length+1];
+				if(s.length==0) copy[0]=element;
+				else
+				{
+					boolean inserted = false;
+					for(int i=0; i<copy.length; i++)
+					{
+						if(i<this.s.length && this.s[i]<element){
+							copy[i]=s[i];
+						}
+						else if(!inserted)
+						{
+							copy[i]=element;
+							inserted = true;
+						}
+						else
+						{
+							copy[i]=this.s[i-1];
+						}
+					}
+				}
+				this.s=copy;
+				return true;
+			}
+			
+			public boolean delete(int element)
+			{
+				boolean contains = false;
+				for(int i=0; i<this.s.length && !contains; i++)
+				{
+					if(s[i]==element) contains=true;
+				}
+				if(!contains) return false;
+				int i=0;
+				int[] copy = new int[this.s.length-1];
+				while(this.s[i]<element)
+				{
+					copy[i] = this.s[i];
+					i++;
+				}
+				while(i<copy.length)
+				{
+					copy[i] = this.s[i+1];
+					i++;
+				}
+				this.s = copy;
+				return true;
+			}
+
+			public void print()
+			{
+				if(s.length==0)
+				{
+					System.out.println("[ ]");
+				}
+				else
+				{
+					System.out.print("[ ");
+					for(int i=0; i<s.length-1; i++)
+						System.out.print(s[i] + ", ");
+					System.out.println(s[s.length-1] + " ]");
+				}
+			}
+		}
+		```
+
+	=== "SortedArrayTest.java"
+		```java linenums="1"
+		package aufgaben.aufgabe7;
+	
+		public class SortedArrayTest
+		{
+
+			public static void main(String[] args)
+			{
+				
+				System.out.printf("%n%n------------------------- Test a1 -----------------------------------%n%n");
+				SortedArray a1 = new SortedArray();
+				a1.print();
+				a1.delete(5);		a1.print();
+				a1.insert(5);		a1.print();
+				a1.insert(7);		a1.print();
+				a1.delete(5);		a1.print();
+				a1.insert(6);		a1.print();
+				a1.insert(4);		a1.print();
+				a1.insert(8);		a1.print();
+				a1.delete(8);		a1.print();
+				a1.delete(6);		a1.print();
+				
+				System.out.printf("%n%n------------------------- Test a2 -----------------------------------%n%n");
+				SortedArray a2 = new SortedArray(9);
+				a2.print();
+				a2.insert(5);		a2.print();
+				a2.insert(9);		a2.print();
+				a2.insert(5);		a2.print();
+				a2.insert(4);		a2.print();
+				a2.insert(4);		a2.print();
+				a2.delete(5);		a2.print();
+				a2.delete(9);		a2.print();
+				a2.delete(4);		a2.print();
+				a2.delete(4);		a2.print();
+
+			}
+		}
+		```
+
+
+
 ??? "Aufgabe 8 - Mensch, Studentin, Studiengaenge"
 	- Erstellen Sie eine Klasse `Mensch` mit folgenden Eigenschaften:
 

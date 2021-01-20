@@ -2419,9 +2419,6 @@
 		System.out.println("p1 gleich p2 ? : " + p1.equals(p2));
 		System.out.println("p1 gleich p1 ? : " + p1.equals(p1));
 		System.out.println("p1 gleich p6 ? : " + p1.equals(p6));
-		p1 gleich p2 ? : false
-		p1 gleich p1 ? : true
-		p1 gleich p6 ? : true
 		```	
 		und führen Sie die `Testklasse` aus. Es sollten folgende zusätzliche Ausgaben erzeugt werden:
 		```bash
@@ -2432,6 +2429,10 @@
 		Die Pizza Tonno kostet 6,90 Euro.
 		Die Pizza Hawaii kostet 6,90 Euro.
 		Die Pizza Calzone kostet 7,90 Euro.
+
+		p1 gleich p2 ? : false
+		p1 gleich p1 ? : true
+		p1 gleich p6 ? : true
 		```
 	4. Erstellen Sie im gleichen package eine Klasse `Pizzaverkauf` mit
 
@@ -2479,6 +2480,7 @@
 			- Kopieren Sie das bisherige Angebot zurück in das neue `angebot`-Array.
 			- Fügen Sie die neue Pizza (Parameter `pizza`) als letztes Element im neuen `angebot`-Array hinzu.
 
+		- einer Objektmethode `getLength()`. Diese Methode gibt die Länge des `angebot`-Arrays zurück. 
 		- einer Objektmethode `pizzaIstImAngebot(Pizza pizza)`. Diese Methode gibt ein `true` zurück, wenn die als Parameter übergebene `pizza` im `angebot`-Array enthalten ist. Prüfen Sie die Gleichheit mithilfe der `equals()`-Methode von `Pizza`. 
 		- einer Objektmethode `pizzaLoeschen(Pizza pizza)`. Diese Methode löscht die als Parameter übergebene `pizza` aus dem `angebot`-Array (wenn Sie darin enthalten ist). <br/>
 		**Beachten Sie:**
@@ -2539,10 +2541,10 @@
 			- `verkaeufe` vom Typ `Pizzaverkauf[]`. 
 		- einem parametrisierten Konstruktor `Pizzeria(Speisekarte karte)`. In diesem Konstruktor wird 
 
-			- das `verkaeufe`-Array erzeugt und hat die gleiche Länge wie das `angebot`-Array der Speisekarte `karte`.
+			- das `verkaeufe`-Array erzeugt und hat die gleiche Länge wie das `angebot`-Array der Speisekarte `karte` (siehe `getLength()`-Methode aus `Speisekarte`).
 			- jedes Element des `verkaeufe`-Arrays zeigt auf ein `Pizzaverkauf`-Objekt. Erzeugen Sie alle `Pizzaverkauf`-Objekte. Übergeben Sie dem `Pizzaverkauf`-Konstruktor dazu die jeweiligen `Pizza`-Objekte aus der Speisekarte `karte`.
 
-		- einer Objektmethode `bestellen()`. Diese Methode gibt ein `int` zurück. In dieser Methode soll zufällig ein Index aus dem `verkaeufe`-Array erzeugt werden. Nutzen Sie dazu die Klasse `Random` aus dem `java.util`-Paket. Verwenden Sie die Objektmethode `nextInt(int bound)` der Klasse `Random`. Wenden Sie `nextInt()` so an, dass auch tatsächlich ein gültiger Index des `verkaeufe`-Arrays erzeugt wird. 
+		- einer Objektmethode `bestellen()`. Diese Methode gibt ein `int` zurück. In dieser Methode soll zufällig ein Index aus dem `verkaeufe`-Array erzeugt werden. Nutzen Sie dazu die Klasse `Random` aus dem `java.util`-Paket. Verwenden Sie die Objektmethode `nextInt(int bound)` der Klasse `Random`. Wenden Sie `nextInt()` so an, dass auch tatsächlich ein gültiger Index des `verkaeufe`-Arrays erzeugt wird. Geben Sie diesen zufällig erzeugten Index zurück (das Bestellen entspricht also dem Nennen einer Nummer aus der Speisekarte). 
 		- einer Objektmethode `verkaufen(int index)`. Durch den Aufruf der Methode wird die Pizza verkauft, die im `verkaeufe`-Array am Index `index` steht. Nutzen Sie für den Verkauf die `verkaufen()`-Methode der Klasse Pizzaverkauf. Überprüfen Sie, ob der als Parameter übergebene Wert für `index` tatsächlich einem Index im `verkaeufe`-Array entspricht. 
 		- einer Objektmethode `tagesVerkauf(int anzVerkaeufe)`. In dieser Methode wird `anzVerkaeufe` oft eine Pizza verkauft (`verkaufen(int index)`). Welche Pizza verkauft wird (also welcher `index`), wird durch die Methode `bestellen()` jeweils zufällig ermittelt. 
 		- einer Objektmethode `print()`. Diese Methode erzeugt folgende Ausgabe (Beispielwerte):
@@ -2579,6 +2581,659 @@
 		Meistverkaufte Pizza : Die Pizza Margheritha kostet 5,90 Euro.
 		Die Gesamteinnahmen betragen 1026,00 Euro
 		```
+
+
+??? question "Testklasse aus der Dienstag-Übung - Diskussion über insert() und delete()"
+	=== "Testklasse.java"
+		```java
+		public class Testklasse
+		{
+			
+			public static int[] insert(int[] original, int element)
+			{
+				if(!contains(original, element))
+				{
+					int[] copy = new int[original.length + 1];
+					int indexOriginal = 0;
+					int indexCopy = 0;
+					
+					// 1. alle Werte kopieren, die kleiner sind als element
+					while(indexOriginal < original.length && original[indexOriginal] < element)
+					{
+						copy[indexCopy] = original[indexOriginal];
+						indexCopy++;
+						indexOriginal++;
+					}
+					
+					// 2. element hinzufuegen
+					copy[indexCopy] = element;
+					indexCopy++;
+					
+					// 3. Rest kopieren
+					while(indexOriginal < original.length)
+					{
+						copy[indexCopy] = original[indexOriginal];
+						indexCopy++;
+						indexOriginal++;
+					}
+					return copy;
+				}
+				else
+				{
+					return original;
+				}
+			}
+			
+			public static int[] delete(int[] original, int element)
+			{
+				if(contains(original, element))
+				{
+					int[] copy = new int[original.length - 1];
+					int indexOriginal = 0;
+					int indexCopy = 0;
+					
+					// 1. alle Werte kopieren, die kleiner sind als element
+					while(original[indexOriginal] < element)
+					{
+						copy[indexCopy] = original[indexOriginal];
+						indexCopy++;
+						indexOriginal++;
+					}
+					
+					// 2. element wird nicht kopiert 
+					indexOriginal++;	
+					// ab jetzt: indexCopy ist um 1 kleiner als indexOriginal
+					
+					// 3. rest kopieren (alles groesser als element)
+					while(indexCopy < copy.length)
+					{
+						copy[indexCopy] = original[indexOriginal];
+						indexCopy++;
+						indexOriginal++;
+					}
+					return copy;	
+				}
+				else
+				{
+					return original;
+				}
+					
+			}
+			
+			public static boolean contains(int[] ia, int element)
+			{
+				for (int index = 0; index < ia.length; index++)
+				{
+					if(ia[index] == element)
+					{
+						return true;
+					}
+				}
+				return false;
+			}
+			
+			public static void print(int[] ia)
+			{
+				for (int i = 0; i < ia.length; i++)
+				{
+					System.out.print(ia[i] + " ");
+				}
+				System.out.println();
+			}
+
+			public static void main(String[] args)
+			{
+				int[] ia = {3, 6, 9};
+				int[] ia1 = insert(ia, 7);
+				print(ia1);
+				ia1 = insert(ia1, 4);
+				print(ia1);
+				ia1 = insert(ia1, 10);
+				print(ia1);
+				ia1 = insert(ia1, 1);
+				print(ia1);
+				ia1 = insert(ia1, 1);
+				print(ia1);
+				
+				ia1 = delete(ia1, 7);
+				print(ia1);
+				ia1 = delete(ia1, 1);
+				print(ia1);
+				ia1 = delete(ia1, 10);
+				print(ia1);
+				ia1 = delete(ia1, 10);
+				print(ia1);
+				
+				String s1 = "Hallo";
+				String s2 = "Ballo";
+				String s3 = "Hallo";
+				String s4 = "hallo";
+				System.out.println(s1.equals(s2));
+				System.out.println(s1.equals(s3));
+				System.out.println(s1.compareTo(s2));
+				System.out.println(s1.compareTo(s3));
+				System.out.println(s2.compareTo(s1));
+				System.out.println(s4.compareTo(s3));
+				char c1 = s3.charAt(0);
+				System.out.println(c1);
+				char c2 = s4.charAt(0);
+				System.out.println(c2);
+				int diff = c2 - c1;
+				System.out.println(diff);
+				
+			}
+
+		}
+		```
+
+
+??? question "Eine mögliche Lösung für Übung 9"
+	=== "Pizza.java"
+		```java 
+		package uebungen.uebung9;
+
+		public class Pizza
+		{
+			private String name;
+			private float preis;
+			
+			public Pizza(String name, float preis)
+			{
+				this.name = name;
+				this.preis = preis;
+			}
+
+			public String getName()
+			{
+				return this.name;
+			}
+
+			public float getPreis()
+			{
+				return this.preis;
+			}
+			
+			@Override
+			public String toString()
+			{
+				return String.format("Die Pizza %s kostet %.2f Euro.", this.name, this.preis);
+			}
+			
+			public void print()
+			{
+				System.out.println(this.toString());
+			}
+			
+			@Override
+			public boolean equals(Object o)
+			{
+				if(o == null) return false;
+				if(this == o) return true;
+				if(this.getClass() != o.getClass()) return false;
+				
+				Pizza po = (Pizza)o;
+				return (this.name.equals(po.name));
+			}
+		}
+		```
+
+	=== "Pizzaverkauf.java"
+		```java 
+		package uebungen.uebung9;
+
+		public class Pizzaverkauf
+		{
+			private Pizza pizza;
+			private int anzVerkaeufe;
+			
+			public Pizzaverkauf(Pizza pizza)
+			{
+				this.pizza = pizza;
+				this.anzVerkaeufe = 0;
+			}
+			
+			public void verkaufen()
+			{
+				this.anzVerkaeufe++;
+			}
+
+			public Pizza getPizza()
+			{
+				return this.pizza;
+			}
+
+			public int getAnzVerkaeufe()
+			{
+				return this.anzVerkaeufe;
+			}
+			
+			public double umsatz()
+			{
+				return this.anzVerkaeufe * this.pizza.getPreis();
+			}
+			
+			@Override
+			public String toString()
+			{
+				return String.format("Pizza %s wurde %d mal zum Preis von %.2f Euro verkauft.", 
+						this.pizza.getName(), this.anzVerkaeufe, this.pizza.getPreis());
+			}
+			
+			public void print()
+			{
+				System.out.println(this.toString());
+			}
+		}
+		```
+
+	=== "Speisekarte.java"
+		```java 
+		package uebungen.uebung9;
+
+		public class Speisekarte
+		{
+			private Pizza[] angebot;
+			
+			public Speisekarte()
+			{
+				this.angebot = new Pizza[0];
+			}
+			
+			public int getLength()
+			{
+				return this.angebot.length;
+			}
+			
+			public void pizzaHinzufuegen(Pizza pizza)
+			{
+				Pizza[] kopie = new Pizza[this.angebot.length + 1];
+				for (int index = 0; index < this.angebot.length; index++)
+				{
+					kopie[index] = this.angebot[index];
+				}
+				kopie[kopie.length - 1] = pizza;
+				this.angebot = kopie;
+			}
+			
+			public boolean pizzaIstImAngebot(Pizza pizza)
+			{
+				for (int index = 0; index < this.angebot.length; index++)
+				{
+					if(this.angebot[index].equals(pizza))
+					{
+						return true;
+					}
+				}
+				return false;
+				// System.out.println("dead code");
+			}
+			
+			public void pizzaLoeschen(Pizza pizza)
+			{
+				if(this.pizzaIstImAngebot(pizza))
+				{
+					Pizza[] kopie = new Pizza[this.angebot.length - 1];
+					int indexKopie = 0;
+					for (int indexAngebot = 0; indexAngebot < this.angebot.length; indexAngebot++)
+					{
+						if(!this.angebot[indexAngebot].equals(pizza))
+						{
+							kopie[indexKopie] = this.angebot[indexAngebot];
+							indexKopie++;
+						}
+					}
+					this.angebot = kopie;
+				}
+			}
+			
+			public Pizza getPizzaAtIndex(int index)
+			{
+				if(index>=0 && index<this.angebot.length)
+				{
+					return this.angebot[index];
+				}
+				else
+				{
+					return null;
+				}
+			}
+			
+			@Override
+			public String toString()
+			{
+				String s = String.format("====== Speisekarte ======%n");
+				for (int index = 0; index < this.angebot.length; index++)
+				{
+					s = s + String.format("%-15s %.2f Euro %n", 
+							this.angebot[index].getName(), this.angebot[index].getPreis());
+				}
+				return s;
+			}
+			
+			public void print()
+			{
+				System.out.println(this.toString());
+			}
+		}
+		```
+
+	=== "Pizzeria.java"
+		```java 
+		package uebungen.uebung9;
+
+		import java.util.Random;
+
+		public class Pizzeria
+		{
+			private Pizzaverkauf[] verkaeufe;
+			
+			public Pizzeria(Speisekarte karte)
+			{
+				this.verkaeufe = new Pizzaverkauf[karte.getLength()];
+				for (int index = 0; index < this.verkaeufe.length; index++)
+				{
+					this.verkaeufe[index] = new Pizzaverkauf(karte.getPizzaAtIndex(index));
+				}
+			}
+			
+			public int bestellen()
+			{
+				Random r = new Random();
+				int index = r.nextInt(this.verkaeufe.length);
+				return index;	
+			}
+			
+			public void verkaufen(int index)
+			{
+				if(index>=0 && index<this.verkaeufe.length)
+				{
+					this.verkaeufe[index].verkaufen();
+				}
+			}
+			
+			public void tagesVerkauf(int anzVerkaeufe)
+			{
+				for(int i=0; i<anzVerkaeufe; i++)
+				{
+					int index = this.bestellen();
+					this.verkaufen(index);
+				}
+			}
+			
+			public void print()
+			{
+				for (int index = 0; index < this.verkaeufe.length; index++)
+				{
+					Pizza p = this.verkaeufe[index].getPizza();
+					int anzVerkaeufe = this.verkaeufe[index].getAnzVerkaeufe();
+					String s = String.format("%-13s : ", p.getName());
+					for(int stars = 0; stars < anzVerkaeufe; stars++)
+					{
+						s = s + "*";
+					}
+					System.out.println(s);
+				}
+			}
+			
+			public Pizza meistverkauftePizza()
+			{
+				int maxIndex = 0;
+				for (int index = 0; index < this.verkaeufe.length; index++)
+				{
+					if(this.verkaeufe[index].getAnzVerkaeufe() > this.verkaeufe[maxIndex].getAnzVerkaeufe())
+					{
+						maxIndex = index;
+					}
+				}
+				return this.verkaeufe[maxIndex].getPizza();
+			}
+			
+			
+			public double gesamtEinnahmen()
+			{
+				double gesamtEinnahmen = 0.0;
+				for (int index = 0; index < this.verkaeufe.length; index++)
+				{
+					gesamtEinnahmen += this.verkaeufe[index].umsatz();
+				}
+				return gesamtEinnahmen;
+			}
+		}
+		```	
+
+	=== "Testklasse.java"
+		```java 
+		package uebungen.uebung9;
+
+		public class Testklasse
+		{
+
+			public static void main(String[] args)
+			{
+				System.out.printf("%n%n------------------------- Test Pizza ---------------------------%n%n");
+				Pizza p1 = new Pizza("Salami", 6.9f);
+				Pizza p2 = new Pizza("Margheritha", 5.9f);
+				Pizza p3 = new Pizza("Tonno", 6.9f);
+				Pizza p4 = new Pizza("Hawaii", 6.9f);
+				Pizza p5 = new Pizza("Calzone", 7.9f);
+				Pizza p6 = new Pizza("Salami", 6.9f);
+
+				p1.print();
+				p2.print();
+				p3.print();
+				p4.print();
+				p5.print();
+
+				System.out.println("p1 gleich p2 ? : " + p1.equals(p2));
+				System.out.println("p1 gleich p1 ? : " + p1.equals(p1));
+				System.out.println("p1 gleich p6 ? : " + p1.equals(p6));
+
+				System.out.printf("%n%n--------------------- Test Pizzaverkauf ------------------------%n%n");
+				Pizzaverkauf pv1 = new Pizzaverkauf(p1);
+				pv1.print();
+				pv1.verkaufen();
+				pv1.print();
+				
+				System.out.printf("%n%n--------------------- Test Speisekarte -------------------------%n%n");
+				Speisekarte s1 = new Speisekarte();
+				s1.pizzaHinzufuegen(p1);
+				s1.pizzaHinzufuegen(p2);
+				s1.pizzaHinzufuegen(p3);
+				s1.pizzaHinzufuegen(p4);
+				s1.pizzaHinzufuegen(p5);
+				s1.print();
+
+				s1.pizzaLoeschen(p3);
+				s1.print();
+				
+				System.out.printf("%n%n------------------------ Test Pizzaria -------------------------%n%n");
+				Pizzeria pz1 = new Pizzeria(s1);
+				pz1.tagesVerkauf(150);
+				pz1.print();
+				System.out.println();
+
+				System.out.print("Meistverkaufte Pizza : ");
+				pz1.meistverkauftePizza().print();
+				System.out.printf("Die Gesamteinnahmen betragen %.2f Euro", pz1.gesamtEinnahmen());
+
+			}
+
+		}
+		```	
+
+??? question "Video zu Übung 9"
+	- <iframe src="https://mediathek.htw-berlin.de/media/embed?key=d010f9295001a2710d3c409aa244324a&width=720&height=359&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="359" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>
+
+??? note "Übung 10"
+	
+	1. Erstellen Sie ein package `uebungen.uebung10`. 
+	2. Erstellen Sie in diesem package eine Klasse `Lottery` mit 
+
+		- der privaten Objektvariablen `drawingResults` vom Typ `int[]`. 
+		- **Information**: *Lottery steht für eine Lotterie, bei der aus 9 Zahlen (1..9) 5 Zahlen zufällig gelost werden (5 aus 9). Das Array `drawingResults` dient zum Speichern der gezogenen 5 Zahlen.*
+			
+		- Schreiben Sie für die Klasse `Lottery` einen parameterlosen Konstruktor. In diesem Konstruktor wird das Array `drawingResults` mit der Länge 5 erzeugt. 
+		- Schreiben Sie eine Objektmethode `contains(int number)`. Diese Methode gibt ein `true` zurück, wenn `number` in `drawingResults` enthalten ist und `false` sonst. 
+		- Schreiben Sie eine Objektmethode `drawing()`. In dieser Methode werden die 5 Zufallszahlen gezogen (5 aus 9). Sie benötigen dafür ein Objekt der Klasse `Random` (`Random` muss aus `java.util` importiert werden). „Ziehen“ Sie nun zufällig 5 Zufallszahlen aus dem Bereich `1..9` (1 und 9 inklusive) und speichern Sie diese im Array `drawingResults`. <br/>
+		**Achtung**: *Die gleiche Zahl darf nicht doppelt gezogen (gespeichert) werden! D.h. die 5 im Array gespeicherten Zufallszahlen müssen sich voneinander unterscheiden!*
+		- Schreiben Sie eine Objektmethode `sort()`. Diese Methode sortiert das Array `drawingResults` aufsteigend (von klein nach groß).
+
+		- Überschreiben Sie die Objektmethode `toString()`, die das `drawingResult`-Array als `String` in folgender Form zurückgibt (Beispielwerte für den Fall, dass `1, 3, 5, 6, 7` gezogen wurden):
+			```bash
+			( 1 - 3 - 5 6 7 - - )
+			```
+
+			1. das `dawingResult`-Array wird zunächst sortiert
+			2. ist die Zahl im Array enthalten, wird sie als Wert angezeigt
+			3. ist die Zahl nicht enthalten, wird ein `-` angezeigt
+			4. d.h. es werden immer die 5 gezogenen Zahlen ausgegeben und 4 Striche.
+
+		- Schreiben Sie eine Objektmethode `print()`, die den von `toString()`zurückgegebenen `String` auf der Konsole ausgibt.
+		- Überschreiben Sie die Objektmethode `equals(Object o)`. Diese Methode gibt `true` zurück, wenn wenn bei dem aufrufenden Objekt die gleichen Zahlen gezogen wurden, wie bei `o`. Sonst `false` (`hashCode()` muss nicht überschrieben werden). <br/>
+		**Tipp**: *Implementieren Sie die Methode am einfachsten so, dass Sie die beiden `drawingResult`-Arrays erst sortieren und dann die sortierten Arrays elementweise miteinander vergleichen.*     
+
+	3. Erstellen Sie im gleichen package eine Klasse `Testklasse` mit `main()`-Methode. 
+
+		- Erzeugen Sie in der `main()`-Methode in einer Schleife `10` Objekte der Klasse `Lottery` und rufen (auch in der Schleife) jeweils die `drawing()` und die `print()`-Methode auf. Es entsteht folgende Ausgabe (Beispielwerte sind zufällig und unterscheiden sich!):
+			```bash
+			( 1 - 3 - 5 6 7 - - )
+			( 1 2 3 - 5 - 7 - - )
+			( 1 - 3 - - 6 7 8 - )
+			( - - 3 4 5 6 - - 9 )
+			( 1 2 3 4 - - - - 9 )
+			( 1 2 - 4 - 6 - 8 - )
+			( - 2 3 - - - 7 8 9 )
+			( 1 2 3 - - 6 - - 9 )
+			( 1 - - 4 5 - 7 8 - )
+			( - 2 3 - 5 - - 8 9 )
+			```
+		- Erzeugen Sie ein Objekt von `Lottery` und rufen für dieses Objekt die `drawing()`-Methode auf. Erzeugen Sie in einer Schleife so lange ein weiteres Objekt von `Lottery` und rufen dafür die `drawing()`-Methode auf, bis die beiden Objekte die gleichen gezogenen Zahlen enthalten, d.h. laut `equals()`-Methode gleich sind. Geben Sie dann beide Objekte mithilfe der `print()`-Methode aus. Es entsteht folgende Ausgabe (zufällige Beispielwerte):
+			```bash
+			( 1 - 3 - - 6 - 8 9 )
+			( 1 - 3 - - 6 - 8 9 )
+			```
+
+	4. Erstellen Sie im gleichen package eine Klasse `LotteryYear` mit
+
+		- der privaten Objektvariablen `lotteryYear` vom Typ `Lottery[]`. (*Das Array speichert alle 52 Lotto-Ziehungen eines Jahres.*) 
+		- Schreiben Sie einen parameterlosen Konstruktor `LotteryYear()`. Innerhalb des Konstruktors werden:
+
+			- das Array erzeugt, auf das die Objektvariable `lotteryYear` referenziert. Das Array hat die Länge `52` sowie
+			- `52` `Lottery`-Objekte, für die jeweils `drawing()` und `sort()` aufgerufen werden. Mit diesen Objekten wird das Array befüllt.
+
+		- Schreiben Sie eine Objektmethode `nrOfNumber(int number)`. Diese Methode gibt ein `int` zurück. Diese Methode ermittelt, wie oft die Zahl `number` im Jahr gezogen wurde, d.h. wie oft `number` im `lotteryYear`-Array vorkommt. Kommt `number` gar nicht vor (nicht aus dem Bereich `1..9`), dann wird `0` zurückgegeben.
+
+		- Schreiben Sie eine Objektmethode `frequency()`. Diese Methode gibt ein `int`-Array der Länge `9` zurück. In diesem Array wird für jede der Zahlen `1` bis `9` gespeichert, wie oft sie im `lotteryArray` vorkommt, d.h. wie oft sie im Jahr gezogen wurde. Verwenden Sie für jede der Zahlen `1` bis `9` die `nrOfNumber()`-Methode. (*Frequency steht für die Häufigkeit des Vorkommens jeder einzelnen Zahl 1 bis 9 im Jahr.*) <br/> 
+		Beispiel-Belegung des zu erzeugenden Arrays (Werte sind zufällig erzeugt):
+			![frequency](./files/87_frequency.png)
+
+		- Schreiben Sie eine Objektmethode `printFrequencyString()`. Erzeugen Sie innerhalb dieser Methode mithilfe der `frequency()`-Methode das entsprechende Array und geben es in der folgenden Form auf die Konsole aus (Beispielwerte zufällig erzeugt):
+			```bash
+			[ 28, 34, 27, 26, 35, 24, 31, 27, 28 ]  --> 260
+			```
+			*Es werden also alle Einträge des Arrays durch Komma getrennt ausgegeben und am Ende (nach „-->“ ) noch die Summe aller Einträge (`260`).* 
+
+		- Schreiben Sie eine Objektmethode `printFrequencyDiagram()`. Erzeugen Sie innerhalb dieser Methode mithilfe der `frequency()`-Methode das entsprechende Array und geben es in der folgenden Form aus (Beispielwerte zufällig erzeugt):
+			```bash
+			1 : ****************************
+			2 : **********************************
+			3 : ***************************
+			4 : **************************
+			5 : ***********************************
+			6 : ************************
+			7 : *******************************
+			8 : ***************************
+			9 : ****************************
+			```
+			*Es werden also für jede Zahl so viele Sterne ausgegeben, wie ihr entsprechender Eintrag im Array.* 
+
+		- Schreiben Sie eine Objektmethode `containsEquals()`. Diese Methode gibt ein `true` zurück, wenn im `lotteryArray` zwei `Lottery`-Objekte die gleichen Zahlen gezogen haben, d.h. laut `equals()`-Methode gleich sind; `false` sonst. 
+
+		- Überschreiben Sie die `toString()`-Methode, so dass alle Ziehungen des Jahres (das `lotterYear`-Array) in folgender Form ausgegeben werden (Beispielwerte zufällig erzeugt):
+			```bash
+			 1 : ( 1 - - 4 - - 7 8 9 )
+			 2 : ( 1 - - 4 - 6 7 8 - )
+			 3 : ( 1 - 3 4 5 6 - - - )
+			 4 : ( - 2 3 4 5 - - 8 - )
+			 5 : ( 1 2 - - 5 - - 8 9 )
+			 6 : ( 1 - 3 4 - 6 7 - - )
+			 7 : ( - - 3 4 5 6 7 - - )
+			 8 : ( 1 - - - - 6 7 8 9 )
+			 9 : ( - 2 3 - 5 - - 8 9 )
+			10 : ( 1 2 - - - 6 7 - 9 )
+			11 : ( - - - 4 5 - 7 8 9 )
+			12 : ( 1 2 3 - - - 7 8 - )
+			13 : ( - - 3 4 - 6 - 8 9 )
+			14 : ( - 2 3 4 5 - - 8 - )
+			15 : ( - - 3 4 5 - 7 8 - )
+			16 : ( - 2 3 - - - 7 8 9 )
+			17 : ( - 2 - 4 5 - 7 - 9 )
+			18 : ( - - - - 5 6 7 8 9 )
+			19 : ( 1 - - 4 5 - 7 8 - )
+			20 : ( - 2 3 - 5 - 7 - 9 )
+			21 : ( 1 2 - - - 6 7 8 - )
+			22 : ( 1 - 3 4 - 6 - 8 - )
+			23 : ( - - 3 4 5 - 7 8 - )
+			24 : ( - 2 - 4 5 6 - 8 - )
+			25 : ( 1 - 3 4 - 6 - 8 - )
+			26 : ( 1 - 3 - 5 6 - 8 - )
+			27 : ( 1 2 - 4 - 6 - 8 - )
+			28 : ( 1 - - 4 - 6 - 8 9 )
+			29 : ( 1 - - 4 - - 7 8 9 )
+			30 : ( 1 - - - 5 - 7 8 9 )
+			31 : ( - 2 3 - 5 6 7 - - )
+			32 : ( - 2 3 4 - - 7 8 - )
+			33 : ( - - 3 4 5 - 7 8 - )
+			34 : ( 1 2 - - 5 - 7 8 - )
+			35 : ( - - 3 4 - 6 - 8 9 )
+			36 : ( 1 - - 4 - 6 - 8 9 )
+			37 : ( - - - 4 5 6 7 - 9 )
+			38 : ( 1 - 3 4 - - 7 - 9 )
+			39 : ( - 2 3 - - 6 - 8 9 )
+			40 : ( 1 2 - 4 - 6 - 8 - )
+			41 : ( - 2 - 4 - 6 - 8 9 )
+			42 : ( 1 - 3 - - 6 7 - 9 )
+			43 : ( - 2 3 - 5 - 7 8 - )
+			44 : ( - 2 - - 5 6 7 - 9 )
+			45 : ( 1 - - 4 5 6 7 - - )
+			46 : ( 1 2 3 - - - 7 - 9 )
+			47 : ( 1 2 - 4 - 6 - - 9 )
+			48 : ( - 2 - - 5 6 7 8 - )
+			49 : ( 1 - 3 4 - 6 7 - - )
+			50 : ( 1 - 3 - - 6 7 8 - )
+			51 : ( - 2 3 - 5 6 - 8 - )
+			52 : ( - 2 3 4 - 6 - - 9 )
+			```
+			*Es kommt also zunächst die Woche (fortlaufend von `1` bis `52`, dann ` : ` und dann das jeweilige `Lottery`-Objekt aus dem `lotteryYear`-Array.*
+
+		- Schreiben Sie eine `print()`-Methode, die den von `toString()`zurückgegebenen `String` auf der Konsole ausgibt.
+
+		- Schreiben Sie eine Objektmethode `getArrayOfDoublets()`. Diese Methode gibt ein `Lottery`-Array der Länge 2 zurück. Dieses Array enthält 2 `Lottery`-Objekte aus dem `lotteryArray`, die die gleichen gezogenen Zahlen beinhalten, also laut `equals()`-Methode gleich sind. Sollten solche `Lottery`-Objekte nicht im `lotteryArray` existieren, soll das zurückgegebene Array die Länge `0` haben.
+
+	5. Erzeugen Sie in der `main()`-Methode ein Objekt der Klasse `LotteryYear`. 
+
+		- Rufen Sie dafür die `printFrequencyString()`- und `printFrequencyDiagram()`-Methoden auf. Es entsteht folgende Ausgabe (zufällige Beispielwerte):
+			```bash
+			[ 27, 27, 30, 33, 34, 29, 25, 24, 31 ]  --> 260
+
+			1 : ***************************
+			2 : ***************************
+			3 : ******************************
+			4 : *********************************
+			5 : **********************************
+			6 : *****************************
+			7 : *************************
+			8 : ************************
+			9 : *******************************
+			```
+
+		- Prüfen Sie außerdem, ob das erzeugte Objekt `Lottery`-Dopplungen enthält (`containsEquals()`). Wenn ja, dann sollen diese ermittelt (`getArrayOfDoublets()`) und ausgegeben (`print()`) werden. Es entsteht folgende Ausgabe (zufällige Beispielwerte):
+			```bash
+			( 1 - - 4 5 - 7 - 9 )
+			( 1 - - 4 5 - 7 - 9 )
+			```
+
+
 
 
 
