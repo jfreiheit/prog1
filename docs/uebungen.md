@@ -3233,6 +3233,484 @@
 			( 1 - - 4 5 - 7 - 9 )
 			```
 
+??? question "Eine mögliche Lösung für Übung 10"
+	=== "Lottery.java"
+		```java 
+		package uebungen.uebung10;
+
+		import java.util.Random;
+
+		public class Lottery
+		{
+			private int[] drawingResults;
+			
+			public Lottery()
+			{
+				this.drawingResults = new int[5];
+			}
+			
+			public boolean contains(int number)
+			{
+				for (int index = 0; index < this.drawingResults.length; index++)
+				{
+					if(this.drawingResults[index] == number)
+					{
+						return true;
+					}
+				}
+				return false;
+			}
+			
+			public void drawing()
+			{
+				Random r = new Random();
+				for (int index = 0; index < this.drawingResults.length; index++)
+				{
+					int zufZahl = r.nextInt(9) + 1;
+					while(this.contains(zufZahl))
+					{
+						zufZahl = r.nextInt(9) + 1;
+					}
+					this.drawingResults[index] = zufZahl;
+				}
+			}
+			
+			public void sort()
+			{
+				for(int bubble=1; bubble<this.drawingResults.length; bubble++)
+				{
+					for(int index=0; index<this.drawingResults.length-bubble; index++)
+					{
+						if(this.drawingResults[index] > this.drawingResults[index+1])
+						{
+							int tmp = this.drawingResults[index];
+							this.drawingResults[index] = this.drawingResults[index+1];
+							this.drawingResults[index+1] = tmp;
+						}
+					}
+				}
+			}
+			
+			@Override
+			public String toString()
+			{
+				this.sort();
+				String s = "( ";
+				int index = 0;
+				for(int number = 1; number <10; number++)
+				{
+					if(index<5 && this.drawingResults[index] == number)
+					{
+						s += this.drawingResults[index] + " ";
+						index++;
+					}
+					else
+					{
+						s += "- ";
+					}
+				}
+				s += ")";
+				return s;
+			}
+			
+			public void print()
+			{
+				System.out.println(this.toString());
+			}
+			
+			@Override
+			public boolean equals(Object o)
+			{
+				if(o == null) 
+				{
+					return false;
+				}
+				if(this == o)
+				{
+					return true;
+				}
+				if(this.getClass() != o.getClass())
+				{
+					return false;
+				}
+				
+				Lottery lo = (Lottery)o;
+				lo.sort();
+				this.sort();
+				for (int index = 0; index < this.drawingResults.length; index++)
+				{
+					if(this.drawingResults[index] != lo.drawingResults[index])
+					{
+						return false;
+					}
+				}
+				return true;
+			}
+		}
+		```
+
+	=== "LotteryYear.java"
+		```java 
+		package uebungen.uebung10;
+
+		public class LotteryYear
+		{
+			private Lottery[] lotteryYear;
+			
+			public LotteryYear()
+			{
+				final int WEEKS = 52;
+				this.lotteryYear = new Lottery[WEEKS];
+				for (int index = 0; index < this.lotteryYear.length; index++)
+				{
+					this.lotteryYear[index] = new Lottery();
+					this.lotteryYear[index].drawing();
+					this.lotteryYear[index].sort();
+				}
+			}
+			
+			public int nrOfNumber(int number)
+			{
+				int nrOfNumber = 0;
+				for (int index = 0; index < this.lotteryYear.length; index++)
+				{
+					if(this.lotteryYear[index].contains(number))
+					{
+						nrOfNumber++;
+					}
+				}
+				return nrOfNumber;
+			}
+			
+			public int[] frequency()
+			{
+				int[] frequency = new int[9];
+				for(int index=0; index<9; index++)
+				{
+					int number = index +1;
+					frequency[index] = this.nrOfNumber(number);
+				}
+				return frequency;
+			}
+			
+			public void printFrequencyString()
+			{
+				int[] frequency = this.frequency();
+				int summe = 0;
+				System.out.print("[ ");
+				for (int index = 0; index < frequency.length; index++)
+				{
+					summe += frequency[index];
+					if(index<frequency.length-1)
+					{
+						System.out.print(frequency[index] +", ");
+					}
+					else
+					{
+						System.out.print(frequency[index]);
+					}
+				}
+				System.out.println(" ]  --> " + summe);
+			}
+			
+			
+			public void printFrequencyDiagram()
+			{
+				int[] frequency = this.frequency();
+				for (int index = 0; index < frequency.length; index++)
+				{
+					System.out.print((index +1) + " : ");
+					for(int stars = 0; stars < frequency[index]; stars++)
+					{
+						System.out.print("*");
+					}
+					System.out.println();
+				}
+			}
+			
+			public boolean containsEquals()
+			{
+				for (int index1 = 0; index1 < this.lotteryYear.length; index1++)
+				{
+					for (int index2 = index1+1; index2 < this.lotteryYear.length; index2++)
+					{
+						if(this.lotteryYear[index1].equals(this.lotteryYear[index2]))
+						{
+							return true;
+						}			
+					}
+				}
+				return false;
+			}
+			
+			@Override
+			public String toString()
+			{
+				String s = "";
+				for (int index = 0; index < lotteryYear.length; index++)
+				{
+					s += String.format("%2d : %s %n", (index+1), this.lotteryYear[index].toString());
+				}
+				return s;
+			}
+
+			public void print()
+			{
+				System.out.println(this.toString());
+			}
+			
+			
+			public Lottery[] getArrayOfDoublets()
+			{
+				Lottery[] loa = new Lottery[2];
+				for (int index1 = 0; index1 < this.lotteryYear.length; index1++)
+				{
+					for (int index2 = index1+1; index2 < this.lotteryYear.length; index2++)
+					{
+						if(this.lotteryYear[index1].equals(this.lotteryYear[index2]))
+						{
+							loa[0] = this.lotteryYear[index1];
+							loa[1] = this.lotteryYear[index2];
+							return loa;
+						}			
+					}
+				}
+				return loa;
+			}
+		}
+		```
+
+	=== "Testklasse.java"
+		```java 
+		package uebungen.uebung10;
+
+		public class Testklasse
+		{
+
+			public static void main(String[] args)
+			{
+				System.out.printf("%n%n------------------- Lottery in Schleife --------------%n%n");
+				for (int index = 0; index < 10; index++)
+				{
+					Lottery lo = new Lottery();
+					lo.drawing();
+					lo.print();
+				}
+				
+				System.out.printf("%n%n------------------- Lottery equals --------------%n%n");		
+				Lottery lo1 = new Lottery();
+				lo1.drawing();
+				Lottery lo2 = new Lottery();
+				lo2.drawing();
+				while(!lo1.equals(lo2))
+				{
+					lo2.drawing();
+				}
+				lo1.print();
+				lo2.print();
+				
+				System.out.printf("%n%n------------------- LotteryYear --------------%n%n");		
+				LotteryYear ly = new LotteryYear();
+				ly.printFrequencyString();
+				ly.printFrequencyDiagram();
+				
+				ly.print();
+				
+				if(ly.containsEquals())
+				{
+					Lottery[] loa = ly.getArrayOfDoublets();
+					loa[0].print();
+					loa[1].print();
+				}
+				else
+				{
+					System.out.println("keine gleichen Ziehungen im Jahr");
+				}
+			}
+
+		}
+		```	
+
+??? question "Video zu Übung 10"
+	- <iframe src="https://mediathek.htw-berlin.de/media/embed?key=67d8d5a08c9dc1916c23bab1e21fc6f8&width=720&height=385&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="385" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>
+
+
+??? note "Übung 11"
+	
+	1. Erstellen Sie ein package `uebungen.uebung11`. 
+	2. Erstellen Sie in diesem package eine Klasse `Punkt3D` mit 
+
+		- drei privaten Objektvariablen `x`, `y` und `z`, jeweils vom Typ `int`,
+		- einem parametrisierten Konstruktor `Punkt3D(int x, int y, int z)`. Mit den Parameterwerten werden die Objektvariablen initialisiert. 
+		- Getter für die drei Objektvariablen (`getX()`, `getY()` und `getZ()`). 
+		- Überschreiben Sie die Methode `toString()`, so dass folgende textuelle Reräsentation als `String` erzeugt wird (Beispielwerte):
+			```bash
+			(5,2,3)
+			```
+			also in runden Klammern die Werte von `x`, `y` und `z` durch Komma getrennt.
+		- Schreiben Sie eine Objektmethode `print()`, die den durch `toString()` erzeugten `String` auf die Konsole ausgibt.
+		- Überschreiben Sie die Methode `equals(Object o)` so, dass zwei `Punkt3D`-Objekte gleich sind, wenn ihre Objektvariablen `x`, `y` und `z` jeweils paarweise den gleichen Wert besitzen. 
+		- Schreiben Sie eine Objektmethode `xIsSmaller(Punkt3D p)`, die ein `true` zurückgibt, wenn das aufrufende Objekt einen kleineren `x`-Wert hat als `p`; `false` sonst.
+		- Schreiben Sie eine Objektmethode `yIsSmaller(Punkt3D p)`, die ein `true` zurückgibt, wenn das aufrufende Objekt einen kleineren `y`-Wert hat als `p`; `false` sonst.
+		- Schreiben Sie eine Objektmethode `zIsSmaller(Punkt3D p)`, die ein `true` zurückgibt, wenn das aufrufende Objekt einen kleineren `z`-Wert hat als `p`; `false` sonst.
+
+	3. Erstellen Sie im gleichen package eine Klasse `Punkt2D`. Diese Klasse erbt von `Punkt3D`. Bei einem Objekt vom Typ `Punkt2D` ist der Wert von `z` stets `0`! 
+
+		- Schreiben Sie einen parametrisierten Konstruktor `Punkt2D(int x, int y)`. Verwenden Sie die Parameterwerte, um den entsprechenden Objektvariablen Werte zuzuweisen und setzen Sie den Wert von `z` auf `0`.
+		- Überschreiben Sie die Methode `toString()`, so dass folgende textuelle Reräsentation als `String` erzeugt wird (Beispielwerte):
+			```bash
+			(5,2)
+			```
+			also in runden Klammern die Werte von `x` und `y` durch Komma getrennt. ( der Wert von `z` wird nicht mehr ausgewertet, er ist ja immer `0`). 
+
+	4. Testen Sie die Klassen `Punkt3D` und `Punkt2D` in einer `Testklasse` mit `main()`-Methode wie folgt:
+
+		- Erstellen Sie ein Array vom Typ `Punkt2D`. Es hat die Länge `3`. 
+		- Erzeugen Sie ein `Random`-Objekt. Sie müssen dazu die Klasse `Random` aus dem `java.util`-Paket importieren. 
+		- innerhalb einer Schleife soll nun Folgendes passieren:
+
+			- Sie erzeugen sich für `x`, `y` und `z` jeweils Zufallszahlen aus dem Bereich `[0, ... ,9]` (`0` und `9` inklusive, also `10` mögliche Zufallszahlen). 
+			- wenn `z` den Wert `0` hat, dann erzeugen Sie mit den zufällig erzeugten Werten von `x` und `y` ein Objekt vom Typ `Punkt2D` und speichern dieses im Array. Rufen Sie dafür die `print()`-Methode auf. 
+			- wenn `z` einen Wert ungleich `0` hat, dann erzeugen Sie mit den zufällig erzeugten Werten von `x`, `y` und `z` ein Objekt vom Typ `Punkt3D` und rufen dafür die `print()`-Methode auf. Ein solches Objekt wird nicht weiter gespeichert. 
+			- diesen Prozess wiederholen Sie so lange, bis das `Punkt2D[]`-Array befüllt ist, bis Sie also *drei*  `Punkt2D`-Objekte erzeugt und im Array gespeichert haben.  
+
+		- Eine mögliche Ausgabe könnte so sein (Zufallswerte):
+			```bash
+			---------------- Punkt2D und Punkt3D ---------------
+
+			(3,8,9)
+			(3,3,4)
+			(1,2,3)
+			(7,6,7)
+			(0,4,7)
+			(9,0,8)
+			(0,3,8)
+			(3,3,9)
+			(7,2,1)
+			(2,4)
+			(1,8)
+			(6,4,7)
+			(2,1,2)
+			(7,4,1)
+			(7,1,1)
+			(0,2,2)
+			(6,4,9)
+			(1,2,7)
+			(3,9,8)
+			(2,3)
+			```
+			das letzte Objekt ist immer ein `Punkt2D`-Objekt, denn nach dem dritten `Punkt2D`-Objekt hören Sie ja auf, Objekte zu erzeugen (Schleifenende).
+
+	5. Erstellen Sie im gleichen package eine Klasse `Strecke` mit 
+
+		- den privaten Objektvariablen `start` und `ende`, jeweils vom Typ `Punkt2D`,
+		- einem parametrisierten Konstruktor `Strecke(Punkt2D start, Punkt2D ende)`. Mit den Parameterwerten werden die Objektvariablen initialisiert. 
+		- einem weiteren parametrisierten Konstruktor `Strecke(int x1, int y1, int x2, int y2)`. Mit den Parameterwerten `x1` und `y1` erzeugen Sie sich ein `Punkt2D`-Objekt, das den `start`-Punkt bildet und mit den Parameterwerten `x2` und `y2` erzeugen Sie sich ein `Punkt2D`-Objekt, das den `ende`-Punkt bildet. 
+		- Schreiben Sie eine Objektmethode `laenge()`, die die Länge der `Strecke` als `double` zurückgibt. Sie können dazu die Methoden `Math.abs(number)` für den absoluten Betrag von `number` und `Math.sqrt(number)` für die Quadratwurzel von `number` (als `double`) verwenden. **Tipp:**
+			![strecke](./files/88_strecke.png)
+
+		- Überschreiben Sie die Methode `toString()`, so dass folgende textuelle Reräsentation der `Strecke` als `String` erzeugt wird (Beispielwerte):
+			```bash
+			Strecke [start=(2,4), ende=(1,8), Laenge= 4,1231cm]
+			```
+			also die Start- und Endpunkte ausgegeben werden und die Länge der Strecke in eckigen Klammern nach dem Wort `Strecke`.  
+		- Schreiben Sie eine Objektmethode `print()`, die den durch `toString()` erzeugten `String` auf die Konsole ausgibt.
+
+	6. Testen Sie die Klasse `Strecke` in der `Testklasse` mit `main()`-Methode wie folgt:
+
+		- Erzeugen Sie `3` Objekte der Klasse `Strecke`. Wählen Sie 
+
+			- als `start`-Punkt der *ersten* Strecke, den *ersten* Punkt aus dem `Punkt2D`-Array aus dem ersten Teil der Aufgabe, als `ende`-Punkt den *zweiten* Punkt aus dem `Punkt2D`-Array aus dem ersten Teil, 
+			- als `start`-Punkt der *zweiten* Strecke, den *zweiten* Punkt aus dem `Punkt2D`-Array aus dem ersten Teil der Aufgabe, als `ende`-Punkt den *dritten* Punkt aus dem `Punkt2D`-Array aus dem ersten Teil, 
+			- als `start`-Punkt der *dritten* Strecke, den *dritten* Punkt aus dem `Punkt2D`-Array aus dem ersten Teil der Aufgabe, als `ende`-Punkt den *ersten* Punkt aus dem `Punkt2D`-Array aus dem ersten Teil.
+		- Wenden Sie für alle drei `Strecke`-Objekte die `print()`-Methode an. Es sollte folgende Ausgabe erzeugt werden (Beispielwerte):
+			```bash
+			-------------------- Strecke -----------------------
+
+			Strecke [start=(7,1), ende=(6,4), Laenge= 3,1623cm]
+			Strecke [start=(6,4), ende=(4,6), Laenge= 2,8284cm]
+			Strecke [start=(4,6), ende=(7,1), Laenge= 5,8310cm]
+			```
+
+	7. Erstellen Sie im gleichen package eine Klasse `PunkteArray` mit 
+
+		- der privaten Objektvariablen `punkte` vom Typ `Punkt2D[]`,
+		- dem parametrisierten Konstruktor `PunkteArray(int anzahl)`, dem die Anzahl der Punkte, also die Länge des `punkte`-Arrays übergeben wird. Erzeugen Sie unter Verwendung dieser `anzahl` das `punkte`-Array.
+		- Schreiben Sie eine Objektmethode `contains(Punkt2D p)`. Diese Methode gibt ein `true` zurück, wenn `p` im `punkte`-Array enthalten ist und `false` sonst. **Tipp:** Beachten Sie, dass es sein kann, dass nicht alle Elemente im `punkte`-Array tatsächlich ein Objekt enthalten. Es kann also sein, dass manche Referenzvariablen `this.punkte[index]` den Wert `null` haben. Mithilfe von `this.punkte[index] != null` können Sie prüfen, ob `this.punkte[index]` **nicht** auf `null` zeigt. 
+		- Schreiben Sie eine Objektmethode `fillArray()`. Diese Methode befüllt das `punkte`-Array vollständig mit `Punkte2D`-Objekten. Beachten Sie:
+
+			- die Werte für `x` und `y` aller Objekte sollen jeweils zufällig mithilfe von `Random` erzeugt werden. Der Wertebereich ist dabei jeweils `[0, ... ,9]` (also `0` und `9` inklusive, insgesamt `10` verschiedene Zufallszahlen),
+			- `Punkt2D`-Objekte dürfen nicht doppelt im `punkte`-Array vorkommen, d.h. es gibt keine zwei Punkte `p1` und `p2` im `punkte`-Array für die `p1.equals(p2)` den Wert `true` hat. 
+
+		- Überschreiben Sie die Methode `toString()`, so dass folgende textuelle Reräsentation des `PunkteArray` als `String` erzeugt wird (Beispielwerte):
+			```bash
+			[ (6,7), (3,2), (1,4), (5,0), (4,6), (9,5), (1,5), (0,3), (4,9), (6,9), (5,2), (1,9), (7,6), (2,3), (4,4) ]
+			```
+			also alle Punkte in eckigen Klammern durch Komma getrennt.  
+		- Schreiben Sie eine Objektmethode `print()`, die den durch `toString()` erzeugten `String` auf die Konsole ausgibt.
+
+		- **Hinweis:** (für die folgenden Methoden) Ein *Polygon* ist ein geschlossener Linienezug aus Strecken. Die folgende Abbildung zeigt ein Polygon, das aus den Strecken `(p1, p2)`, `(p2, p3)`, `(p3, p4)`, `(p4, p5)` und `(p5, p1)` besteht. Es gibt darin also `5` Punkte und `5`Strecken:
+			![strecke](./files/91_polygon.png)
+
+		- Schreiben Sie eine Objektmethode `createPolygon()`, die ein `Strecke[]` zurückgibt. Das `Strecke[]` ist genau so lang wie das `punkte`-Array. Das `Strecke[]` wird mit Objekten vom Typ `Strecke` vollständig befüllt. Dabei sind die `start`- und `ende`-Punkte immer die Nachbarpunkte aus dem `punkte`-Array. Jeder Punkt aus dem `punkte`-Array wird also zwei Mal verwendet, einmal als `ende`-Punkt einer Strecke und einmal als `start`-Punkt der nächsten Strecke im `Strecke[]`. Beachten Sie, dass der `start`-Punkt der letzten Strecke im `Strecke[]` der letzte Punkte im `punkte`-Array und der `ende`-Punkt dieser Strecke der erste Punkt im `punkte`-Array ist - siehe Skizze:
+			![strecke](./files/90_punktearray.png)
+
+		- Schreiben Sie eine Objektmethode `gesamtLaenge()`, die die Gesamtlänge aller Strecken im Polygon ermittelt und diese als `double` zurückgibt. **Tipp:** Sie müssen sich in der Methode erst mithilfe der `createPolygon()`-Methode das Polygon erzeugen. 
+		- Schreiben Sie eine Objektmethode `amWeitestenLinks()`, die den `Punkt2D` aus dem `punkte`-Array zurückgibt, der am weitesten links von allen ist (den kleinsten `x`-Wert von allen hat). Geben Sie diesen Punkt zurück.  
+		- Schreiben Sie eine Objektmethode `amWeitestenOben()`, die den `Punkt2D` aus dem `punkte`-Array zurückgibt, der am weitesten oben von allen ist (den kleinsten `y`-Wert von allen hat). Geben Sie diesen Punkt zurück. 
+		- Schreiben Sie eine Objektmethode `laengsteStrecke()`, die die längste `Strecke` aller Strecken im Polygon ermittelt und diese zurückgibt. **Tipp:** Sie müssen sich in der Methode erst mithilfe der `createPolygon()`-Methode das Polygon erzeugen.  
+		- Schreiben Sie eine Objektmethode `printStrecken()`. Diese Methode gibt alle Strecken aus dem Polygon auf die Konsole aus. Außerdem wird die Gesamtlänge aller Strecken aus dem Polygon, der am weitesten links stehende Punkt aus dem `punkte`-Array und der am weitesten oben stehende Punkt aus dem `punkte`-Array ausgegeben. **Tipp:** Sie müssen sich in der Methode erst mithilfe der `createPolygon()`-Methode das Polygon erzeugen. Es sollte folgende Ausgabe erfolgen (Beispielwerte):
+			```bash
+			Strecke [start=(0,1), ende=(2,1), Laenge= 2,0000cm]
+			Strecke [start=(2,1), ende=(5,7), Laenge= 6,7082cm]
+			Strecke [start=(5,7), ende=(8,7), Laenge= 3,0000cm]
+			Strecke [start=(8,7), ende=(7,4), Laenge= 3,1623cm]
+			Strecke [start=(7,4), ende=(8,1), Laenge= 3,1623cm]
+			Strecke [start=(8,1), ende=(1,1), Laenge= 7,0000cm]
+			Strecke [start=(1,1), ende=(4,6), Laenge= 5,8310cm]
+			Strecke [start=(4,6), ende=(2,9), Laenge= 3,6056cm]
+			Strecke [start=(2,9), ende=(9,4), Laenge= 8,6023cm]
+			Strecke [start=(9,4), ende=(6,8), Laenge= 5,0000cm]
+			Strecke [start=(6,8), ende=(9,8), Laenge= 3,0000cm]
+			Strecke [start=(9,8), ende=(5,6), Laenge= 4,4721cm]
+			Strecke [start=(5,6), ende=(8,4), Laenge= 3,6056cm]
+			Strecke [start=(8,4), ende=(6,5), Laenge= 2,2361cm]
+			Strecke [start=(6,5), ende=(0,1), Laenge= 7,2111cm]
+			Gesamtlaenge der Strecken : 68,5964cm 
+			am weitesten links        : (0,1) 
+			am weitesten oben         : (0,1) 
+			laengste                  : Strecke [start=(2,9), ende=(9,4), Laenge= 8,6023cm] 
+			```
+
+	8. Testen Sie die Klasse `PunkteArray` in der `Testklasse` mit `main()`-Methode wie folgt:
+
+		- Erzeugen Sie ein Objekt der Klasse `PunkteArray` und übergeben Sie als Anzahl der `punkte` den Wert `15`.
+		- Rufen Sie für diese Objekt die Methoden `fillArray()`, `print()` und `printStrecken()` auf. 
+		- Es sollten folgende Ausgaben erzeugt werden (Beispielwerte):
+			```bash
+			------------------ PunkteArray ---------------------
+
+			[ (0,1), (2,1), (5,7), (8,7), (7,4), (8,1), (1,1), (4,6), (2,9), (9,4), (6,8), (9,8), (5,6), (8,4), (6,5) ]
+			Strecke [start=(0,1), ende=(2,1), Laenge= 2,0000cm]
+			Strecke [start=(2,1), ende=(5,7), Laenge= 6,7082cm]
+			Strecke [start=(5,7), ende=(8,7), Laenge= 3,0000cm]
+			Strecke [start=(8,7), ende=(7,4), Laenge= 3,1623cm]
+			Strecke [start=(7,4), ende=(8,1), Laenge= 3,1623cm]
+			Strecke [start=(8,1), ende=(1,1), Laenge= 7,0000cm]
+			Strecke [start=(1,1), ende=(4,6), Laenge= 5,8310cm]
+			Strecke [start=(4,6), ende=(2,9), Laenge= 3,6056cm]
+			Strecke [start=(2,9), ende=(9,4), Laenge= 8,6023cm]
+			Strecke [start=(9,4), ende=(6,8), Laenge= 5,0000cm]
+			Strecke [start=(6,8), ende=(9,8), Laenge= 3,0000cm]
+			Strecke [start=(9,8), ende=(5,6), Laenge= 4,4721cm]
+			Strecke [start=(5,6), ende=(8,4), Laenge= 3,6056cm]
+			Strecke [start=(8,4), ende=(6,5), Laenge= 2,2361cm]
+			Strecke [start=(6,5), ende=(0,1), Laenge= 7,2111cm]
+			Gesamtlaenge der Strecken : 68,5964cm 
+			am weitesten links        : (0,1) 
+			am weitesten oben         : (0,1) 
+			laengste                  : Strecke [start=(2,9), ende=(9,4), Laenge= 8,6023cm] 
+			```
 
 
 

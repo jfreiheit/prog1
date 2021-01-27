@@ -3974,6 +3974,514 @@ Beispiel-Belegung des zu erzeugenden Arrays (Werte sind zufällig erzeugt):
 </li>
 </ol>
 </details>
+<details class="question"><summary>Eine mögliche Lösung für Übung 10</summary><div class="tabbed-set" data-tabs="7:3"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><label for="__tabbed_7_1">Lottery.java</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">uebungen.uebung10</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.Random</span><span class="p">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Lottery</span>
+<span class="p">{</span>
+    <span class="kd">private</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">drawingResults</span><span class="p">;</span>
+
+    <span class="kd">public</span> <span class="nf">Lottery</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">drawingResults</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">5</span><span class="o">]</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">contains</span><span class="p">(</span><span class="kt">int</span> <span class="n">number</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="na">drawingResults</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">index</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">drawingResults</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">==</span> <span class="n">number</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">drawing</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">Random</span> <span class="n">r</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Random</span><span class="p">();</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="na">drawingResults</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">index</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">zufZahl</span> <span class="o">=</span> <span class="n">r</span><span class="p">.</span><span class="na">nextInt</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="k">while</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="n">zufZahl</span><span class="p">))</span>
+            <span class="p">{</span>
+                <span class="n">zufZahl</span> <span class="o">=</span> <span class="n">r</span><span class="p">.</span><span class="na">nextInt</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">this</span><span class="p">.</span><span class="na">drawingResults</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">=</span> <span class="n">zufZahl</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">sort</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">bubble</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">bubble</span><span class="o">&lt;</span><span class="k">this</span><span class="p">.</span><span class="na">drawingResults</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">bubble</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">index</span><span class="o">&lt;</span><span class="k">this</span><span class="p">.</span><span class="na">drawingResults</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="n">bubble</span><span class="p">;</span> <span class="n">index</span><span class="o">++</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">drawingResults</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">&gt;</span> <span class="k">this</span><span class="p">.</span><span class="na">drawingResults</span><span class="o">[</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="kt">int</span> <span class="n">tmp</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="na">drawingResults</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="p">;</span>
+                    <span class="k">this</span><span class="p">.</span><span class="na">drawingResults</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="na">drawingResults</span><span class="o">[</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">;</span>
+                    <span class="k">this</span><span class="p">.</span><span class="na">drawingResults</span><span class="o">[</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">sort</span><span class="p">();</span>
+        <span class="n">String</span> <span class="n">s</span> <span class="o">=</span> <span class="s">&quot;( &quot;</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">number</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">number</span> <span class="o">&lt;</span><span class="mi">10</span><span class="p">;</span> <span class="n">number</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">index</span><span class="o">&lt;</span><span class="mi">5</span> <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="p">.</span><span class="na">drawingResults</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">==</span> <span class="n">number</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">s</span> <span class="o">+=</span> <span class="k">this</span><span class="p">.</span><span class="na">drawingResults</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">+</span> <span class="s">&quot; &quot;</span><span class="p">;</span>
+                <span class="n">index</span><span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">else</span>
+            <span class="p">{</span>
+                <span class="n">s</span> <span class="o">+=</span> <span class="s">&quot;- &quot;</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="s">&quot;)&quot;</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">s</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">print</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">toString</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="p">(</span><span class="n">Object</span> <span class="n">o</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">o</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> 
+        <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="k">this</span> <span class="o">==</span> <span class="n">o</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">getClass</span><span class="p">()</span> <span class="o">!=</span> <span class="n">o</span><span class="p">.</span><span class="na">getClass</span><span class="p">())</span>
+        <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="n">Lottery</span> <span class="n">lo</span> <span class="o">=</span> <span class="p">(</span><span class="n">Lottery</span><span class="p">)</span><span class="n">o</span><span class="p">;</span>
+        <span class="n">lo</span><span class="p">.</span><span class="na">sort</span><span class="p">();</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">sort</span><span class="p">();</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="na">drawingResults</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">index</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">drawingResults</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">!=</span> <span class="n">lo</span><span class="p">.</span><span class="na">drawingResults</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+</div>
+<input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><label for="__tabbed_7_2">LotteryYear.java</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">uebungen.uebung10</span><span class="p">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">LotteryYear</span>
+<span class="p">{</span>
+    <span class="kd">private</span> <span class="n">Lottery</span><span class="o">[]</span> <span class="n">lotteryYear</span><span class="p">;</span>
+
+    <span class="kd">public</span> <span class="nf">LotteryYear</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="kd">final</span> <span class="kt">int</span> <span class="n">WEEKS</span> <span class="o">=</span> <span class="mi">52</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">lotteryYear</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Lottery</span><span class="o">[</span><span class="n">WEEKS</span><span class="o">]</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="na">lotteryYear</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">index</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="na">lotteryYear</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Lottery</span><span class="p">();</span>
+            <span class="k">this</span><span class="p">.</span><span class="na">lotteryYear</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="p">.</span><span class="na">drawing</span><span class="p">();</span>
+            <span class="k">this</span><span class="p">.</span><span class="na">lotteryYear</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="p">.</span><span class="na">sort</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">nrOfNumber</span><span class="p">(</span><span class="kt">int</span> <span class="n">number</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">nrOfNumber</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="na">lotteryYear</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">index</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">lotteryYear</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="n">number</span><span class="p">))</span>
+            <span class="p">{</span>
+                <span class="n">nrOfNumber</span><span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">nrOfNumber</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">frequency</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">frequency</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">9</span><span class="o">]</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">index</span><span class="o">&lt;</span><span class="mi">9</span><span class="p">;</span> <span class="n">index</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">number</span> <span class="o">=</span> <span class="n">index</span> <span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+            <span class="n">frequency</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="na">nrOfNumber</span><span class="p">(</span><span class="n">number</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">frequency</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">printFrequencyString</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">frequency</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="na">frequency</span><span class="p">();</span>
+        <span class="kt">int</span> <span class="n">summe</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">&quot;[ &quot;</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">frequency</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">index</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">summe</span> <span class="o">+=</span> <span class="n">frequency</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="p">;</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">index</span><span class="o">&lt;</span><span class="n">frequency</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="n">frequency</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">+</span><span class="s">&quot;, &quot;</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="k">else</span>
+            <span class="p">{</span>
+                <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="n">frequency</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot; ]  --&gt; &quot;</span> <span class="o">+</span> <span class="n">summe</span><span class="p">);</span>
+    <span class="p">}</span>
+
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">printFrequencyDiagram</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">frequency</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="na">frequency</span><span class="p">();</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">frequency</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">index</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">((</span><span class="n">index</span> <span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot; : &quot;</span><span class="p">);</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">stars</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">stars</span> <span class="o">&lt;</span> <span class="n">frequency</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="p">;</span> <span class="n">stars</span><span class="o">++</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">&quot;*&quot;</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">containsEquals</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">index1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">index1</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="na">lotteryYear</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">index1</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">index2</span> <span class="o">=</span> <span class="n">index1</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="n">index2</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="na">lotteryYear</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">index2</span><span class="o">++</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">lotteryYear</span><span class="o">[</span><span class="n">index1</span><span class="o">]</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">lotteryYear</span><span class="o">[</span><span class="n">index2</span><span class="o">]</span><span class="p">))</span>
+                <span class="p">{</span>
+                    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+                <span class="p">}</span>           
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">String</span> <span class="n">s</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">lotteryYear</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">index</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">s</span> <span class="o">+=</span> <span class="n">String</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="s">&quot;%2d : %s %n&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="k">this</span><span class="p">.</span><span class="na">lotteryYear</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="p">.</span><span class="na">toString</span><span class="p">());</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">s</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">print</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">toString</span><span class="p">());</span>
+    <span class="p">}</span>
+
+
+    <span class="kd">public</span> <span class="n">Lottery</span><span class="o">[]</span> <span class="nf">getArrayOfDoublets</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">Lottery</span><span class="o">[]</span> <span class="n">loa</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Lottery</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">index1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">index1</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="na">lotteryYear</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">index1</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">index2</span> <span class="o">=</span> <span class="n">index1</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="n">index2</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="na">lotteryYear</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">index2</span><span class="o">++</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">lotteryYear</span><span class="o">[</span><span class="n">index1</span><span class="o">]</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">lotteryYear</span><span class="o">[</span><span class="n">index2</span><span class="o">]</span><span class="p">))</span>
+                <span class="p">{</span>
+                    <span class="n">loa</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="na">lotteryYear</span><span class="o">[</span><span class="n">index1</span><span class="o">]</span><span class="p">;</span>
+                    <span class="n">loa</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="na">lotteryYear</span><span class="o">[</span><span class="n">index2</span><span class="o">]</span><span class="p">;</span>
+                    <span class="k">return</span> <span class="n">loa</span><span class="p">;</span>
+                <span class="p">}</span>           
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">loa</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+</div>
+<input id="__tabbed_7_3" name="__tabbed_7" type="radio" /><label for="__tabbed_7_3">Testklasse.java</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">uebungen.uebung10</span><span class="p">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Testklasse</span>
+<span class="p">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%n%n------------------- Lottery in Schleife --------------%n%n&quot;</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="n">index</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">Lottery</span> <span class="n">lo</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Lottery</span><span class="p">();</span>
+            <span class="n">lo</span><span class="p">.</span><span class="na">drawing</span><span class="p">();</span>
+            <span class="n">lo</span><span class="p">.</span><span class="na">print</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%n%n------------------- Lottery equals --------------%n%n&quot;</span><span class="p">);</span>     
+        <span class="n">Lottery</span> <span class="n">lo1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Lottery</span><span class="p">();</span>
+        <span class="n">lo1</span><span class="p">.</span><span class="na">drawing</span><span class="p">();</span>
+        <span class="n">Lottery</span> <span class="n">lo2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Lottery</span><span class="p">();</span>
+        <span class="n">lo2</span><span class="p">.</span><span class="na">drawing</span><span class="p">();</span>
+        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">lo1</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">lo2</span><span class="p">))</span>
+        <span class="p">{</span>
+            <span class="n">lo2</span><span class="p">.</span><span class="na">drawing</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="n">lo1</span><span class="p">.</span><span class="na">print</span><span class="p">();</span>
+        <span class="n">lo2</span><span class="p">.</span><span class="na">print</span><span class="p">();</span>
+
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%n%n------------------- LotteryYear --------------%n%n&quot;</span><span class="p">);</span>        
+        <span class="n">LotteryYear</span> <span class="n">ly</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LotteryYear</span><span class="p">();</span>
+        <span class="n">ly</span><span class="p">.</span><span class="na">printFrequencyString</span><span class="p">();</span>
+        <span class="n">ly</span><span class="p">.</span><span class="na">printFrequencyDiagram</span><span class="p">();</span>
+
+        <span class="n">ly</span><span class="p">.</span><span class="na">print</span><span class="p">();</span>
+
+        <span class="k">if</span><span class="p">(</span><span class="n">ly</span><span class="p">.</span><span class="na">containsEquals</span><span class="p">())</span>
+        <span class="p">{</span>
+            <span class="n">Lottery</span><span class="o">[]</span> <span class="n">loa</span> <span class="o">=</span> <span class="n">ly</span><span class="p">.</span><span class="na">getArrayOfDoublets</span><span class="p">();</span>
+            <span class="n">loa</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">.</span><span class="na">print</span><span class="p">();</span>
+            <span class="n">loa</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="p">.</span><span class="na">print</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="k">else</span>
+        <span class="p">{</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;keine gleichen Ziehungen im Jahr&quot;</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+
+</div>
+</div>
+</details>
+<details class="question"><summary>Video zu Übung 10</summary><ul>
+<li><iframe src="https://mediathek.htw-berlin.de/media/embed?key=67d8d5a08c9dc1916c23bab1e21fc6f8&width=720&height=385&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="385" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe></li>
+</ul>
+</details>
+<details class="note"><summary>Übung 11</summary><ol>
+<li>Erstellen Sie ein package <code>uebungen.uebung11</code>. </li>
+<li>
+<p>Erstellen Sie in diesem package eine Klasse <code>Punkt3D</code> mit </p>
+<ul>
+<li>drei privaten Objektvariablen <code>x</code>, <code>y</code> und <code>z</code>, jeweils vom Typ <code>int</code>,</li>
+<li>einem parametrisierten Konstruktor <code>Punkt3D(int x, int y, int z)</code>. Mit den Parameterwerten werden die Objektvariablen initialisiert. </li>
+<li>Getter für die drei Objektvariablen (<code>getX()</code>, <code>getY()</code> und <code>getZ()</code>). </li>
+<li>Überschreiben Sie die Methode <code>toString()</code>, so dass folgende textuelle Reräsentation als <code>String</code> erzeugt wird (Beispielwerte):
+    <div class="highlight"><pre><span></span><code><span class="o">(</span><span class="m">5</span>,2,3<span class="o">)</span>
+</code></pre></div>
+    also in runden Klammern die Werte von <code>x</code>, <code>y</code> und <code>z</code> durch Komma getrennt.</li>
+<li>Schreiben Sie eine Objektmethode <code>print()</code>, die den durch <code>toString()</code> erzeugten <code>String</code> auf die Konsole ausgibt.</li>
+<li>Überschreiben Sie die Methode <code>equals(Object o)</code> so, dass zwei <code>Punkt3D</code>-Objekte gleich sind, wenn ihre Objektvariablen <code>x</code>, <code>y</code> und <code>z</code> jeweils paarweise den gleichen Wert besitzen. </li>
+<li>Schreiben Sie eine Objektmethode <code>xIsSmaller(Punkt3D p)</code>, die ein <code>true</code> zurückgibt, wenn das aufrufende Objekt einen kleineren <code>x</code>-Wert hat als <code>p</code>; <code>false</code> sonst.</li>
+<li>Schreiben Sie eine Objektmethode <code>yIsSmaller(Punkt3D p)</code>, die ein <code>true</code> zurückgibt, wenn das aufrufende Objekt einen kleineren <code>y</code>-Wert hat als <code>p</code>; <code>false</code> sonst.</li>
+<li>Schreiben Sie eine Objektmethode <code>zIsSmaller(Punkt3D p)</code>, die ein <code>true</code> zurückgibt, wenn das aufrufende Objekt einen kleineren <code>z</code>-Wert hat als <code>p</code>; <code>false</code> sonst.</li>
+</ul>
+</li>
+<li>
+<p>Erstellen Sie im gleichen package eine Klasse <code>Punkt2D</code>. Diese Klasse erbt von <code>Punkt3D</code>. Bei einem Objekt vom Typ <code>Punkt2D</code> ist der Wert von <code>z</code> stets <code>0</code>! </p>
+<ul>
+<li>Schreiben Sie einen parametrisierten Konstruktor <code>Punkt2D(int x, int y)</code>. Verwenden Sie die Parameterwerte, um den entsprechenden Objektvariablen Werte zuzuweisen und setzen Sie den Wert von <code>z</code> auf <code>0</code>.</li>
+<li>Überschreiben Sie die Methode <code>toString()</code>, so dass folgende textuelle Reräsentation als <code>String</code> erzeugt wird (Beispielwerte):
+    <div class="highlight"><pre><span></span><code><span class="o">(</span><span class="m">5</span>,2<span class="o">)</span>
+</code></pre></div>
+    also in runden Klammern die Werte von <code>x</code> und <code>y</code> durch Komma getrennt. ( der Wert von <code>z</code> wird nicht mehr ausgewertet, er ist ja immer <code>0</code>). </li>
+</ul>
+</li>
+<li>
+<p>Testen Sie die Klassen <code>Punkt3D</code> und <code>Punkt2D</code> in einer <code>Testklasse</code> mit <code>main()</code>-Methode wie folgt:</p>
+<ul>
+<li>Erstellen Sie ein Array vom Typ <code>Punkt2D</code>. Es hat die Länge <code>3</code>. </li>
+<li>Erzeugen Sie ein <code>Random</code>-Objekt. Sie müssen dazu die Klasse <code>Random</code> aus dem <code>java.util</code>-Paket importieren. </li>
+<li>
+<p>innerhalb einer Schleife soll nun Folgendes passieren:</p>
+<ul>
+<li>Sie erzeugen sich für <code>x</code>, <code>y</code> und <code>z</code> jeweils Zufallszahlen aus dem Bereich <code>[0, ... ,9]</code> (<code>0</code> und <code>9</code> inklusive, also <code>10</code> mögliche Zufallszahlen). </li>
+<li>wenn <code>z</code> den Wert <code>0</code> hat, dann erzeugen Sie mit den zufällig erzeugten Werten von <code>x</code> und <code>y</code> ein Objekt vom Typ <code>Punkt2D</code> und speichern dieses im Array. Rufen Sie dafür die <code>print()</code>-Methode auf. </li>
+<li>wenn <code>z</code> einen Wert ungleich <code>0</code> hat, dann erzeugen Sie mit den zufällig erzeugten Werten von <code>x</code>, <code>y</code> und <code>z</code> ein Objekt vom Typ <code>Punkt3D</code> und rufen dafür die <code>print()</code>-Methode auf. Ein solches Objekt wird nicht weiter gespeichert. </li>
+<li>diesen Prozess wiederholen Sie so lange, bis das <code>Punkt2D[]</code>-Array befüllt ist, bis Sie also <em>drei</em>  <code>Punkt2D</code>-Objekte erzeugt und im Array gespeichert haben.  </li>
+</ul>
+</li>
+<li>
+<p>Eine mögliche Ausgabe könnte so sein (Zufallswerte):
+    <div class="highlight"><pre><span></span><code>---------------- Punkt2D und Punkt3D ---------------
+
+<span class="o">(</span><span class="m">3</span>,8,9<span class="o">)</span>
+<span class="o">(</span><span class="m">3</span>,3,4<span class="o">)</span>
+<span class="o">(</span><span class="m">1</span>,2,3<span class="o">)</span>
+<span class="o">(</span><span class="m">7</span>,6,7<span class="o">)</span>
+<span class="o">(</span><span class="m">0</span>,4,7<span class="o">)</span>
+<span class="o">(</span><span class="m">9</span>,0,8<span class="o">)</span>
+<span class="o">(</span><span class="m">0</span>,3,8<span class="o">)</span>
+<span class="o">(</span><span class="m">3</span>,3,9<span class="o">)</span>
+<span class="o">(</span><span class="m">7</span>,2,1<span class="o">)</span>
+<span class="o">(</span><span class="m">2</span>,4<span class="o">)</span>
+<span class="o">(</span><span class="m">1</span>,8<span class="o">)</span>
+<span class="o">(</span><span class="m">6</span>,4,7<span class="o">)</span>
+<span class="o">(</span><span class="m">2</span>,1,2<span class="o">)</span>
+<span class="o">(</span><span class="m">7</span>,4,1<span class="o">)</span>
+<span class="o">(</span><span class="m">7</span>,1,1<span class="o">)</span>
+<span class="o">(</span><span class="m">0</span>,2,2<span class="o">)</span>
+<span class="o">(</span><span class="m">6</span>,4,9<span class="o">)</span>
+<span class="o">(</span><span class="m">1</span>,2,7<span class="o">)</span>
+<span class="o">(</span><span class="m">3</span>,9,8<span class="o">)</span>
+<span class="o">(</span><span class="m">2</span>,3<span class="o">)</span>
+</code></pre></div>
+    das letzte Objekt ist immer ein <code>Punkt2D</code>-Objekt, denn nach dem dritten <code>Punkt2D</code>-Objekt hören Sie ja auf, Objekte zu erzeugen (Schleifenende).</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Erstellen Sie im gleichen package eine Klasse <code>Strecke</code> mit </p>
+<ul>
+<li>den privaten Objektvariablen <code>start</code> und <code>ende</code>, jeweils vom Typ <code>Punkt2D</code>,</li>
+<li>einem parametrisierten Konstruktor <code>Strecke(Punkt2D start, Punkt2D ende)</code>. Mit den Parameterwerten werden die Objektvariablen initialisiert. </li>
+<li>einem weiteren parametrisierten Konstruktor <code>Strecke(int x1, int y1, int x2, int y2)</code>. Mit den Parameterwerten <code>x1</code> und <code>y1</code> erzeugen Sie sich ein <code>Punkt2D</code>-Objekt, das den <code>start</code>-Punkt bildet und mit den Parameterwerten <code>x2</code> und <code>y2</code> erzeugen Sie sich ein <code>Punkt2D</code>-Objekt, das den <code>ende</code>-Punkt bildet. </li>
+<li>
+<p>Schreiben Sie eine Objektmethode <code>laenge()</code>, die die Länge der <code>Strecke</code> als <code>double</code> zurückgibt. Sie können dazu die Methoden <code>Math.abs(number)</code> für den absoluten Betrag von <code>number</code> und <code>Math.sqrt(number)</code> für die Quadratwurzel von <code>number</code> (als <code>double</code>) verwenden. <strong>Tipp:</strong>
+    <img alt="strecke" src="../files/88_strecke.png" /></p>
+</li>
+<li>
+<p>Überschreiben Sie die Methode <code>toString()</code>, so dass folgende textuelle Reräsentation der <code>Strecke</code> als <code>String</code> erzeugt wird (Beispielwerte):
+    <div class="highlight"><pre><span></span><code>Strecke <span class="o">[</span><span class="nv">start</span><span class="o">=(</span><span class="m">2</span>,4<span class="o">)</span>, <span class="nv">ende</span><span class="o">=(</span><span class="m">1</span>,8<span class="o">)</span>, <span class="nv">Laenge</span><span class="o">=</span> <span class="m">4</span>,1231cm<span class="o">]</span>
+</code></pre></div>
+    also die Start- und Endpunkte ausgegeben werden und die Länge der Strecke in eckigen Klammern nach dem Wort <code>Strecke</code>.  </p>
+</li>
+<li>Schreiben Sie eine Objektmethode <code>print()</code>, die den durch <code>toString()</code> erzeugten <code>String</code> auf die Konsole ausgibt.</li>
+</ul>
+</li>
+<li>
+<p>Testen Sie die Klasse <code>Strecke</code> in der <code>Testklasse</code> mit <code>main()</code>-Methode wie folgt:</p>
+<ul>
+<li>
+<p>Erzeugen Sie <code>3</code> Objekte der Klasse <code>Strecke</code>. Wählen Sie </p>
+<ul>
+<li>als <code>start</code>-Punkt der <em>ersten</em> Strecke, den <em>ersten</em> Punkt aus dem <code>Punkt2D</code>-Array aus dem ersten Teil der Aufgabe, als <code>ende</code>-Punkt den <em>zweiten</em> Punkt aus dem <code>Punkt2D</code>-Array aus dem ersten Teil, </li>
+<li>als <code>start</code>-Punkt der <em>zweiten</em> Strecke, den <em>zweiten</em> Punkt aus dem <code>Punkt2D</code>-Array aus dem ersten Teil der Aufgabe, als <code>ende</code>-Punkt den <em>dritten</em> Punkt aus dem <code>Punkt2D</code>-Array aus dem ersten Teil, </li>
+<li>als <code>start</code>-Punkt der <em>dritten</em> Strecke, den <em>dritten</em> Punkt aus dem <code>Punkt2D</code>-Array aus dem ersten Teil der Aufgabe, als <code>ende</code>-Punkt den <em>ersten</em> Punkt aus dem <code>Punkt2D</code>-Array aus dem ersten Teil.<ul>
+<li>Wenden Sie für alle drei <code>Strecke</code>-Objekte die <code>print()</code>-Methode an. Es sollte folgende Ausgabe erzeugt werden (Beispielwerte):
+<div class="highlight"><pre><span></span><code>-------------------- Strecke -----------------------
+
+Strecke <span class="o">[</span><span class="nv">start</span><span class="o">=(</span><span class="m">7</span>,1<span class="o">)</span>, <span class="nv">ende</span><span class="o">=(</span><span class="m">6</span>,4<span class="o">)</span>, <span class="nv">Laenge</span><span class="o">=</span> <span class="m">3</span>,1623cm<span class="o">]</span>
+Strecke <span class="o">[</span><span class="nv">start</span><span class="o">=(</span><span class="m">6</span>,4<span class="o">)</span>, <span class="nv">ende</span><span class="o">=(</span><span class="m">4</span>,6<span class="o">)</span>, <span class="nv">Laenge</span><span class="o">=</span> <span class="m">2</span>,8284cm<span class="o">]</span>
+Strecke <span class="o">[</span><span class="nv">start</span><span class="o">=(</span><span class="m">4</span>,6<span class="o">)</span>, <span class="nv">ende</span><span class="o">=(</span><span class="m">7</span>,1<span class="o">)</span>, <span class="nv">Laenge</span><span class="o">=</span> <span class="m">5</span>,8310cm<span class="o">]</span>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Erstellen Sie im gleichen package eine Klasse <code>PunkteArray</code> mit </p>
+<ul>
+<li>der privaten Objektvariablen <code>punkte</code> vom Typ <code>Punkt2D[]</code>,</li>
+<li>dem parametrisierten Konstruktor <code>PunkteArray(int anzahl)</code>, dem die Anzahl der Punkte, also die Länge des <code>punkte</code>-Arrays übergeben wird. Erzeugen Sie unter Verwendung dieser <code>anzahl</code> das <code>punkte</code>-Array.</li>
+<li>Schreiben Sie eine Objektmethode <code>contains(Punkt2D p)</code>. Diese Methode gibt ein <code>true</code> zurück, wenn <code>p</code> im <code>punkte</code>-Array enthalten ist und <code>false</code> sonst. <strong>Tipp:</strong> Beachten Sie, dass es sein kann, dass nicht alle Elemente im <code>punkte</code>-Array tatsächlich ein Objekt enthalten. Es kann also sein, dass manche Referenzvariablen <code>this.punkte[index]</code> den Wert <code>null</code> haben. Mithilfe von <code>this.punkte[index] != null</code> können Sie prüfen, ob <code>this.punkte[index]</code> <strong>nicht</strong> auf <code>null</code> zeigt. </li>
+<li>
+<p>Schreiben Sie eine Objektmethode <code>fillArray()</code>. Diese Methode befüllt das <code>punkte</code>-Array vollständig mit <code>Punkte2D</code>-Objekten. Beachten Sie:</p>
+<ul>
+<li>die Werte für <code>x</code> und <code>y</code> aller Objekte sollen jeweils zufällig mithilfe von <code>Random</code> erzeugt werden. Der Wertebereich ist dabei jeweils <code>[0, ... ,9]</code> (also <code>0</code> und <code>9</code> inklusive, insgesamt <code>10</code> verschiedene Zufallszahlen),</li>
+<li><code>Punkt2D</code>-Objekte dürfen nicht doppelt im <code>punkte</code>-Array vorkommen, d.h. es gibt keine zwei Punkte <code>p1</code> und <code>p2</code> im <code>punkte</code>-Array für die <code>p1.equals(p2)</code> den Wert <code>true</code> hat. </li>
+</ul>
+</li>
+<li>
+<p>Überschreiben Sie die Methode <code>toString()</code>, so dass folgende textuelle Reräsentation des <code>PunkteArray</code> als <code>String</code> erzeugt wird (Beispielwerte):
+    <div class="highlight"><pre><span></span><code><span class="o">[</span> <span class="o">(</span><span class="m">6</span>,7<span class="o">)</span>, <span class="o">(</span><span class="m">3</span>,2<span class="o">)</span>, <span class="o">(</span><span class="m">1</span>,4<span class="o">)</span>, <span class="o">(</span><span class="m">5</span>,0<span class="o">)</span>, <span class="o">(</span><span class="m">4</span>,6<span class="o">)</span>, <span class="o">(</span><span class="m">9</span>,5<span class="o">)</span>, <span class="o">(</span><span class="m">1</span>,5<span class="o">)</span>, <span class="o">(</span><span class="m">0</span>,3<span class="o">)</span>, <span class="o">(</span><span class="m">4</span>,9<span class="o">)</span>, <span class="o">(</span><span class="m">6</span>,9<span class="o">)</span>, <span class="o">(</span><span class="m">5</span>,2<span class="o">)</span>, <span class="o">(</span><span class="m">1</span>,9<span class="o">)</span>, <span class="o">(</span><span class="m">7</span>,6<span class="o">)</span>, <span class="o">(</span><span class="m">2</span>,3<span class="o">)</span>, <span class="o">(</span><span class="m">4</span>,4<span class="o">)</span> <span class="o">]</span>
+</code></pre></div>
+    also alle Punkte in eckigen Klammern durch Komma getrennt.  </p>
+</li>
+<li>
+<p>Schreiben Sie eine Objektmethode <code>print()</code>, die den durch <code>toString()</code> erzeugten <code>String</code> auf die Konsole ausgibt.</p>
+</li>
+<li>
+<p><strong>Hinweis:</strong> (für die folgenden Methoden) Ein <em>Polygon</em> ist ein geschlossener Linienezug aus Strecken. Die folgende Abbildung zeigt ein Polygon, das aus den Strecken <code>(p1, p2)</code>, <code>(p2, p3)</code>, <code>(p3, p4)</code>, <code>(p4, p5)</code> und <code>(p5, p1)</code> besteht. Es gibt darin also <code>5</code> Punkte und <code>5</code>Strecken:
+    <img alt="strecke" src="../files/91_polygon.png" /></p>
+</li>
+<li>
+<p>Schreiben Sie eine Objektmethode <code>createPolygon()</code>, die ein <code>Strecke[]</code> zurückgibt. Das <code>Strecke[]</code> ist genau so lang wie das <code>punkte</code>-Array. Das <code>Strecke[]</code> wird mit Objekten vom Typ <code>Strecke</code> vollständig befüllt. Dabei sind die <code>start</code>- und <code>ende</code>-Punkte immer die Nachbarpunkte aus dem <code>punkte</code>-Array. Jeder Punkt aus dem <code>punkte</code>-Array wird also zwei Mal verwendet, einmal als <code>ende</code>-Punkt einer Strecke und einmal als <code>start</code>-Punkt der nächsten Strecke im <code>Strecke[]</code>. Beachten Sie, dass der <code>start</code>-Punkt der letzten Strecke im <code>Strecke[]</code> der letzte Punkte im <code>punkte</code>-Array und der <code>ende</code>-Punkt dieser Strecke der erste Punkt im <code>punkte</code>-Array ist - siehe Skizze:
+    <img alt="strecke" src="../files/90_punktearray.png" /></p>
+</li>
+<li>
+<p>Schreiben Sie eine Objektmethode <code>gesamtLaenge()</code>, die die Gesamtlänge aller Strecken im Polygon ermittelt und diese als <code>double</code> zurückgibt. <strong>Tipp:</strong> Sie müssen sich in der Methode erst mithilfe der <code>createPolygon()</code>-Methode das Polygon erzeugen. </p>
+</li>
+<li>Schreiben Sie eine Objektmethode <code>amWeitestenLinks()</code>, die den <code>Punkt2D</code> aus dem <code>punkte</code>-Array zurückgibt, der am weitesten links von allen ist (den kleinsten <code>x</code>-Wert von allen hat). Geben Sie diesen Punkt zurück.  </li>
+<li>Schreiben Sie eine Objektmethode <code>amWeitestenOben()</code>, die den <code>Punkt2D</code> aus dem <code>punkte</code>-Array zurückgibt, der am weitesten oben von allen ist (den kleinsten <code>y</code>-Wert von allen hat). Geben Sie diesen Punkt zurück. </li>
+<li>Schreiben Sie eine Objektmethode <code>laengsteStrecke()</code>, die die längste <code>Strecke</code> aller Strecken im Polygon ermittelt und diese zurückgibt. <strong>Tipp:</strong> Sie müssen sich in der Methode erst mithilfe der <code>createPolygon()</code>-Methode das Polygon erzeugen.  </li>
+<li>Schreiben Sie eine Objektmethode <code>printStrecken()</code>. Diese Methode gibt alle Strecken aus dem Polygon auf die Konsole aus. Außerdem wird die Gesamtlänge aller Strecken aus dem Polygon, der am weitesten links stehende Punkt aus dem <code>punkte</code>-Array und der am weitesten oben stehende Punkt aus dem <code>punkte</code>-Array ausgegeben. <strong>Tipp:</strong> Sie müssen sich in der Methode erst mithilfe der <code>createPolygon()</code>-Methode das Polygon erzeugen. Es sollte folgende Ausgabe erfolgen (Beispielwerte):
+    <div class="highlight"><pre><span></span><code>Strecke <span class="o">[</span><span class="nv">start</span><span class="o">=(</span><span class="m">0</span>,1<span class="o">)</span>, <span class="nv">ende</span><span class="o">=(</span><span class="m">2</span>,1<span class="o">)</span>, <span class="nv">Laenge</span><span class="o">=</span> <span class="m">2</span>,0000cm<span class="o">]</span>
+Strecke <span class="o">[</span><span class="nv">start</span><span class="o">=(</span><span class="m">2</span>,1<span class="o">)</span>, <span class="nv">ende</span><span class="o">=(</span><span class="m">5</span>,7<span class="o">)</span>, <span class="nv">Laenge</span><span class="o">=</span> <span class="m">6</span>,7082cm<span class="o">]</span>
+Strecke <span class="o">[</span><span class="nv">start</span><span class="o">=(</span><span class="m">5</span>,7<span class="o">)</span>, <span class="nv">ende</span><span class="o">=(</span><span class="m">8</span>,7<span class="o">)</span>, <span class="nv">Laenge</span><span class="o">=</span> <span class="m">3</span>,0000cm<span class="o">]</span>
+Strecke <span class="o">[</span><span class="nv">start</span><span class="o">=(</span><span class="m">8</span>,7<span class="o">)</span>, <span class="nv">ende</span><span class="o">=(</span><span class="m">7</span>,4<span class="o">)</span>, <span class="nv">Laenge</span><span class="o">=</span> <span class="m">3</span>,1623cm<span class="o">]</span>
+Strecke <span class="o">[</span><span class="nv">start</span><span class="o">=(</span><span class="m">7</span>,4<span class="o">)</span>, <span class="nv">ende</span><span class="o">=(</span><span class="m">8</span>,1<span class="o">)</span>, <span class="nv">Laenge</span><span class="o">=</span> <span class="m">3</span>,1623cm<span class="o">]</span>
+Strecke <span class="o">[</span><span class="nv">start</span><span class="o">=(</span><span class="m">8</span>,1<span class="o">)</span>, <span class="nv">ende</span><span class="o">=(</span><span class="m">1</span>,1<span class="o">)</span>, <span class="nv">Laenge</span><span class="o">=</span> <span class="m">7</span>,0000cm<span class="o">]</span>
+Strecke <span class="o">[</span><span class="nv">start</span><span class="o">=(</span><span class="m">1</span>,1<span class="o">)</span>, <span class="nv">ende</span><span class="o">=(</span><span class="m">4</span>,6<span class="o">)</span>, <span class="nv">Laenge</span><span class="o">=</span> <span class="m">5</span>,8310cm<span class="o">]</span>
+Strecke <span class="o">[</span><span class="nv">start</span><span class="o">=(</span><span class="m">4</span>,6<span class="o">)</span>, <span class="nv">ende</span><span class="o">=(</span><span class="m">2</span>,9<span class="o">)</span>, <span class="nv">Laenge</span><span class="o">=</span> <span class="m">3</span>,6056cm<span class="o">]</span>
+Strecke <span class="o">[</span><span class="nv">start</span><span class="o">=(</span><span class="m">2</span>,9<span class="o">)</span>, <span class="nv">ende</span><span class="o">=(</span><span class="m">9</span>,4<span class="o">)</span>, <span class="nv">Laenge</span><span class="o">=</span> <span class="m">8</span>,6023cm<span class="o">]</span>
+Strecke <span class="o">[</span><span class="nv">start</span><span class="o">=(</span><span class="m">9</span>,4<span class="o">)</span>, <span class="nv">ende</span><span class="o">=(</span><span class="m">6</span>,8<span class="o">)</span>, <span class="nv">Laenge</span><span class="o">=</span> <span class="m">5</span>,0000cm<span class="o">]</span>
+Strecke <span class="o">[</span><span class="nv">start</span><span class="o">=(</span><span class="m">6</span>,8<span class="o">)</span>, <span class="nv">ende</span><span class="o">=(</span><span class="m">9</span>,8<span class="o">)</span>, <span class="nv">Laenge</span><span class="o">=</span> <span class="m">3</span>,0000cm<span class="o">]</span>
+Strecke <span class="o">[</span><span class="nv">start</span><span class="o">=(</span><span class="m">9</span>,8<span class="o">)</span>, <span class="nv">ende</span><span class="o">=(</span><span class="m">5</span>,6<span class="o">)</span>, <span class="nv">Laenge</span><span class="o">=</span> <span class="m">4</span>,4721cm<span class="o">]</span>
+Strecke <span class="o">[</span><span class="nv">start</span><span class="o">=(</span><span class="m">5</span>,6<span class="o">)</span>, <span class="nv">ende</span><span class="o">=(</span><span class="m">8</span>,4<span class="o">)</span>, <span class="nv">Laenge</span><span class="o">=</span> <span class="m">3</span>,6056cm<span class="o">]</span>
+Strecke <span class="o">[</span><span class="nv">start</span><span class="o">=(</span><span class="m">8</span>,4<span class="o">)</span>, <span class="nv">ende</span><span class="o">=(</span><span class="m">6</span>,5<span class="o">)</span>, <span class="nv">Laenge</span><span class="o">=</span> <span class="m">2</span>,2361cm<span class="o">]</span>
+Strecke <span class="o">[</span><span class="nv">start</span><span class="o">=(</span><span class="m">6</span>,5<span class="o">)</span>, <span class="nv">ende</span><span class="o">=(</span><span class="m">0</span>,1<span class="o">)</span>, <span class="nv">Laenge</span><span class="o">=</span> <span class="m">7</span>,2111cm<span class="o">]</span>
+Gesamtlaenge der Strecken : <span class="m">68</span>,5964cm 
+am weitesten links        : <span class="o">(</span><span class="m">0</span>,1<span class="o">)</span> 
+am weitesten oben         : <span class="o">(</span><span class="m">0</span>,1<span class="o">)</span> 
+laengste                  : Strecke <span class="o">[</span><span class="nv">start</span><span class="o">=(</span><span class="m">2</span>,9<span class="o">)</span>, <span class="nv">ende</span><span class="o">=(</span><span class="m">9</span>,4<span class="o">)</span>, <span class="nv">Laenge</span><span class="o">=</span> <span class="m">8</span>,6023cm<span class="o">]</span> 
+</code></pre></div></li>
+</ul>
+</li>
+<li>
+<p>Testen Sie die Klasse <code>PunkteArray</code> in der <code>Testklasse</code> mit <code>main()</code>-Methode wie folgt:</p>
+<ul>
+<li>Erzeugen Sie ein Objekt der Klasse <code>PunkteArray</code> und übergeben Sie als Anzahl der <code>punkte</code> den Wert <code>15</code>.</li>
+<li>Rufen Sie für diese Objekt die Methoden <code>fillArray()</code>, <code>print()</code> und <code>printStrecken()</code> auf. </li>
+<li>Es sollten folgende Ausgaben erzeugt werden (Beispielwerte):
+    <div class="highlight"><pre><span></span><code>------------------ PunkteArray ---------------------
+
+<span class="o">[</span> <span class="o">(</span><span class="m">0</span>,1<span class="o">)</span>, <span class="o">(</span><span class="m">2</span>,1<span class="o">)</span>, <span class="o">(</span><span class="m">5</span>,7<span class="o">)</span>, <span class="o">(</span><span class="m">8</span>,7<span class="o">)</span>, <span class="o">(</span><span class="m">7</span>,4<span class="o">)</span>, <span class="o">(</span><span class="m">8</span>,1<span class="o">)</span>, <span class="o">(</span><span class="m">1</span>,1<span class="o">)</span>, <span class="o">(</span><span class="m">4</span>,6<span class="o">)</span>, <span class="o">(</span><span class="m">2</span>,9<span class="o">)</span>, <span class="o">(</span><span class="m">9</span>,4<span class="o">)</span>, <span class="o">(</span><span class="m">6</span>,8<span class="o">)</span>, <span class="o">(</span><span class="m">9</span>,8<span class="o">)</span>, <span class="o">(</span><span class="m">5</span>,6<span class="o">)</span>, <span class="o">(</span><span class="m">8</span>,4<span class="o">)</span>, <span class="o">(</span><span class="m">6</span>,5<span class="o">)</span> <span class="o">]</span>
+Strecke <span class="o">[</span><span class="nv">start</span><span class="o">=(</span><span class="m">0</span>,1<span class="o">)</span>, <span class="nv">ende</span><span class="o">=(</span><span class="m">2</span>,1<span class="o">)</span>, <span class="nv">Laenge</span><span class="o">=</span> <span class="m">2</span>,0000cm<span class="o">]</span>
+Strecke <span class="o">[</span><span class="nv">start</span><span class="o">=(</span><span class="m">2</span>,1<span class="o">)</span>, <span class="nv">ende</span><span class="o">=(</span><span class="m">5</span>,7<span class="o">)</span>, <span class="nv">Laenge</span><span class="o">=</span> <span class="m">6</span>,7082cm<span class="o">]</span>
+Strecke <span class="o">[</span><span class="nv">start</span><span class="o">=(</span><span class="m">5</span>,7<span class="o">)</span>, <span class="nv">ende</span><span class="o">=(</span><span class="m">8</span>,7<span class="o">)</span>, <span class="nv">Laenge</span><span class="o">=</span> <span class="m">3</span>,0000cm<span class="o">]</span>
+Strecke <span class="o">[</span><span class="nv">start</span><span class="o">=(</span><span class="m">8</span>,7<span class="o">)</span>, <span class="nv">ende</span><span class="o">=(</span><span class="m">7</span>,4<span class="o">)</span>, <span class="nv">Laenge</span><span class="o">=</span> <span class="m">3</span>,1623cm<span class="o">]</span>
+Strecke <span class="o">[</span><span class="nv">start</span><span class="o">=(</span><span class="m">7</span>,4<span class="o">)</span>, <span class="nv">ende</span><span class="o">=(</span><span class="m">8</span>,1<span class="o">)</span>, <span class="nv">Laenge</span><span class="o">=</span> <span class="m">3</span>,1623cm<span class="o">]</span>
+Strecke <span class="o">[</span><span class="nv">start</span><span class="o">=(</span><span class="m">8</span>,1<span class="o">)</span>, <span class="nv">ende</span><span class="o">=(</span><span class="m">1</span>,1<span class="o">)</span>, <span class="nv">Laenge</span><span class="o">=</span> <span class="m">7</span>,0000cm<span class="o">]</span>
+Strecke <span class="o">[</span><span class="nv">start</span><span class="o">=(</span><span class="m">1</span>,1<span class="o">)</span>, <span class="nv">ende</span><span class="o">=(</span><span class="m">4</span>,6<span class="o">)</span>, <span class="nv">Laenge</span><span class="o">=</span> <span class="m">5</span>,8310cm<span class="o">]</span>
+Strecke <span class="o">[</span><span class="nv">start</span><span class="o">=(</span><span class="m">4</span>,6<span class="o">)</span>, <span class="nv">ende</span><span class="o">=(</span><span class="m">2</span>,9<span class="o">)</span>, <span class="nv">Laenge</span><span class="o">=</span> <span class="m">3</span>,6056cm<span class="o">]</span>
+Strecke <span class="o">[</span><span class="nv">start</span><span class="o">=(</span><span class="m">2</span>,9<span class="o">)</span>, <span class="nv">ende</span><span class="o">=(</span><span class="m">9</span>,4<span class="o">)</span>, <span class="nv">Laenge</span><span class="o">=</span> <span class="m">8</span>,6023cm<span class="o">]</span>
+Strecke <span class="o">[</span><span class="nv">start</span><span class="o">=(</span><span class="m">9</span>,4<span class="o">)</span>, <span class="nv">ende</span><span class="o">=(</span><span class="m">6</span>,8<span class="o">)</span>, <span class="nv">Laenge</span><span class="o">=</span> <span class="m">5</span>,0000cm<span class="o">]</span>
+Strecke <span class="o">[</span><span class="nv">start</span><span class="o">=(</span><span class="m">6</span>,8<span class="o">)</span>, <span class="nv">ende</span><span class="o">=(</span><span class="m">9</span>,8<span class="o">)</span>, <span class="nv">Laenge</span><span class="o">=</span> <span class="m">3</span>,0000cm<span class="o">]</span>
+Strecke <span class="o">[</span><span class="nv">start</span><span class="o">=(</span><span class="m">9</span>,8<span class="o">)</span>, <span class="nv">ende</span><span class="o">=(</span><span class="m">5</span>,6<span class="o">)</span>, <span class="nv">Laenge</span><span class="o">=</span> <span class="m">4</span>,4721cm<span class="o">]</span>
+Strecke <span class="o">[</span><span class="nv">start</span><span class="o">=(</span><span class="m">5</span>,6<span class="o">)</span>, <span class="nv">ende</span><span class="o">=(</span><span class="m">8</span>,4<span class="o">)</span>, <span class="nv">Laenge</span><span class="o">=</span> <span class="m">3</span>,6056cm<span class="o">]</span>
+Strecke <span class="o">[</span><span class="nv">start</span><span class="o">=(</span><span class="m">8</span>,4<span class="o">)</span>, <span class="nv">ende</span><span class="o">=(</span><span class="m">6</span>,5<span class="o">)</span>, <span class="nv">Laenge</span><span class="o">=</span> <span class="m">2</span>,2361cm<span class="o">]</span>
+Strecke <span class="o">[</span><span class="nv">start</span><span class="o">=(</span><span class="m">6</span>,5<span class="o">)</span>, <span class="nv">ende</span><span class="o">=(</span><span class="m">0</span>,1<span class="o">)</span>, <span class="nv">Laenge</span><span class="o">=</span> <span class="m">7</span>,2111cm<span class="o">]</span>
+Gesamtlaenge der Strecken : <span class="m">68</span>,5964cm 
+am weitesten links        : <span class="o">(</span><span class="m">0</span>,1<span class="o">)</span> 
+am weitesten oben         : <span class="o">(</span><span class="m">0</span>,1<span class="o">)</span> 
+laengste                  : Strecke <span class="o">[</span><span class="nv">start</span><span class="o">=(</span><span class="m">2</span>,9<span class="o">)</span>, <span class="nv">ende</span><span class="o">=(</span><span class="m">9</span>,4<span class="o">)</span>, <span class="nv">Laenge</span><span class="o">=</span> <span class="m">8</span>,6023cm<span class="o">]</span> 
+</code></pre></div></li>
+</ul>
+</li>
+</ol>
+</details>
 <h2 id="weitere-ubungsaufgaben-selbstandiges-uben">Weitere Übungsaufgaben (selbständiges Üben)<a class="headerlink" href="#weitere-ubungsaufgaben-selbstandiges-uben" title="Permanent link">&para;</a></h2>
 <p>Hier werden lose und unregelmäßig Übungsaufgaben gesammelt. Am Ende des Semesters soll dann hier eine große Sammlung von Übungsaufgaben entstanden sein, die der eigenen Kontrolle dienen sollen. Die Übungen sind thematisch sortiert, allerdings überschneiden sich manche Themen in einigen Übungen. </p>
 <h3 id="probeklausuren">Probeklausuren<a class="headerlink" href="#probeklausuren" title="Permanent link">&para;</a></h3>
@@ -4047,7 +4555,7 @@ Index : -1
 </code></pre></div></li>
 </ul>
 </details>
-<details class="question"><summary>eine mögliche Lösung für Power</summary><div class="tabbed-set" data-tabs="7:4"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><label for="__tabbed_7_1">Power.java</label><div class="tabbed-content">
+<details class="question"><summary>eine mögliche Lösung für Power</summary><div class="tabbed-set" data-tabs="8:4"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><label for="__tabbed_8_1">Power.java</label><div class="tabbed-content">
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
@@ -4159,7 +4667,7 @@ Index : -1
 </td></tr></table>
 
 </div>
-<input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><label for="__tabbed_7_2">PowerOfTwo.java</label><div class="tabbed-content">
+<input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><label for="__tabbed_8_2">PowerOfTwo.java</label><div class="tabbed-content">
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
@@ -4211,7 +4719,7 @@ Index : -1
 </td></tr></table>
 
 </div>
-<input id="__tabbed_7_3" name="__tabbed_7" type="radio" /><label for="__tabbed_7_3">PowerArray.java</label><div class="tabbed-content">
+<input id="__tabbed_8_3" name="__tabbed_8" type="radio" /><label for="__tabbed_8_3">PowerArray.java</label><div class="tabbed-content">
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
@@ -4405,7 +4913,7 @@ Index : -1
 </td></tr></table>
 
 </div>
-<input id="__tabbed_7_4" name="__tabbed_7" type="radio" /><label for="__tabbed_7_4">PowerTest.java</label><div class="tabbed-content">
+<input id="__tabbed_8_4" name="__tabbed_8" type="radio" /><label for="__tabbed_8_4">PowerTest.java</label><div class="tabbed-content">
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
@@ -4643,7 +5151,7 @@ Dann würde bei Aufruf der Methode <code>getHersteller("apple")</code> das zurü
 </li>
 </ul>
 </details>
-<details class="question"><summary>eine mögliche Lösung für Computer</summary><div class="tabbed-set" data-tabs="8:4"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><label for="__tabbed_8_1">Computer.java</label><div class="tabbed-content">
+<details class="question"><summary>eine mögliche Lösung für Computer</summary><div class="tabbed-set" data-tabs="9:4"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><label for="__tabbed_9_1">Computer.java</label><div class="tabbed-content">
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
@@ -4753,7 +5261,7 @@ Dann würde bei Aufruf der Methode <code>getHersteller("apple")</code> das zurü
 </td></tr></table>
 
 </div>
-<input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><label for="__tabbed_8_2">Notebook.java</label><div class="tabbed-content">
+<input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><label for="__tabbed_9_2">Notebook.java</label><div class="tabbed-content">
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
@@ -4795,7 +5303,7 @@ Dann würde bei Aufruf der Methode <code>getHersteller("apple")</code> das zurü
 </td></tr></table>
 
 </div>
-<input id="__tabbed_8_3" name="__tabbed_8" type="radio" /><label for="__tabbed_8_3">NotebookArray.java</label><div class="tabbed-content">
+<input id="__tabbed_9_3" name="__tabbed_9" type="radio" /><label for="__tabbed_9_3">NotebookArray.java</label><div class="tabbed-content">
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
@@ -4991,7 +5499,7 @@ Dann würde bei Aufruf der Methode <code>getHersteller("apple")</code> das zurü
 </td></tr></table>
 
 </div>
-<input id="__tabbed_8_4" name="__tabbed_8" type="radio" /><label for="__tabbed_8_4">Testklasse.java</label><div class="tabbed-content">
+<input id="__tabbed_9_4" name="__tabbed_9" type="radio" /><label for="__tabbed_9_4">Testklasse.java</label><div class="tabbed-content">
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
@@ -5216,7 +5724,7 @@ kleinster Abstand : <span class="o">((</span><span class="m">01</span>:59:32<spa
 </li>
 </ul>
 </details>
-<details class="question"><summary>eine mögliche Lösung für Uhrzeit</summary><div class="tabbed-set" data-tabs="9:3"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><label for="__tabbed_9_1">Uhrzeit.java</label><div class="tabbed-content">
+<details class="question"><summary>eine mögliche Lösung für Uhrzeit</summary><div class="tabbed-set" data-tabs="10:3"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><label for="__tabbed_10_1">Uhrzeit.java</label><div class="tabbed-content">
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
@@ -5390,7 +5898,7 @@ kleinster Abstand : <span class="o">((</span><span class="m">01</span>:59:32<spa
 </td></tr></table>
 
 </div>
-<input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><label for="__tabbed_9_2">UhrzeitArray.java</label><div class="tabbed-content">
+<input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><label for="__tabbed_10_2">UhrzeitArray.java</label><div class="tabbed-content">
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>  1
   2
   3
@@ -5628,7 +6136,7 @@ kleinster Abstand : <span class="o">((</span><span class="m">01</span>:59:32<spa
 </td></tr></table>
 
 </div>
-<input id="__tabbed_9_3" name="__tabbed_9" type="radio" /><label for="__tabbed_9_3">Testklasse.java</label><div class="tabbed-content">
+<input id="__tabbed_10_3" name="__tabbed_10" type="radio" /><label for="__tabbed_10_3">Testklasse.java</label><div class="tabbed-content">
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3

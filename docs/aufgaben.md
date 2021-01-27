@@ -4403,3 +4403,239 @@ Die Aufgaben laden Sie in [Moodle](https://moodle.htw-berlin.de/course/view.php?
 			```
  
 	- Viel Spaß und viel Erfolg!
+
+
+
+??? question "Eine mögliche Lösung für Aufgabe 8"
+	=== "Mensch.java"
+		```java linenums="1"
+		package aufgaben.aufgabe8;
+
+		public class Mensch
+		{
+			private String name;
+			private int alter;
+			
+			public Mensch(String name, int alter)
+			{
+				this.name = name;
+				this.alter = alter;
+			}
+			
+			public String getName()
+			{
+				return this.name;
+			}
+			
+			public int getAlter()
+			{
+				return this.alter;
+			}
+			
+			public void geburtstag()
+			{
+				this.alter++;
+			}
+			
+			@Override
+			public String toString()
+			{
+				return this.name + " ist " + this.alter + " Jahre alt.";
+			}
+			
+			public void print()
+			{
+				System.out.println(this.toString());
+			}			
+		}
+		```
+
+	=== "Studentin.java"
+		```java linenums="1"
+		package aufgaben.aufgabe8;
+	
+		public class Studentin extends Mensch
+		{
+			private int semester;
+			private String studiengang;
+			
+			public Studentin(String name, int alter, String studiengang)
+			{
+				super(name, alter);
+				this.studiengang = studiengang;
+				this.semester = 1;
+			}
+			
+			@Override
+			public String toString()
+			{
+				return "(" + this.getName() + ", " + this.getAlter() + ", " 
+						+ this.studiengang + ", " + this.semester + ")";
+			}
+		}
+		```
+
+	=== "Studiengaenge.java"
+		```java linenums="1"
+		package aufgaben.aufgabe8;
+
+		import java.util.Random;
+
+		public class Studiengaenge
+		{
+			private Studentin[] fiw;
+			private Studentin[] ai;
+			
+			public Studiengaenge(int fiwAnzahl, int aiAnzahl)
+			{
+				this.fiw = new Studentin[fiwAnzahl];
+				this.ai = new Studentin[aiAnzahl];
+			}
+			
+			public void immatrikulieren(int anzahl)
+			{
+				Random r = new Random();
+				int indexFIW = 0;
+				int indexAI = 0;
+				for(int i=1; i<=anzahl; i++)
+				{
+					int sg = r.nextInt(3);
+					if(sg==0)
+					{
+						if(indexFIW<this.fiw.length)
+						{
+							this.fiw[indexFIW++] = new Studentin("S"+i, 20+i, "FIW");
+						}
+						else
+						{
+							System.out.println("FIW ist bereits voll.");
+						}
+					}
+					else
+					{
+						if(indexAI<this.ai.length)
+						{
+							this.ai[indexAI++] = new Studentin("S"+i, 20+i, "AI");
+						}
+						else
+						{
+							System.out.println("AI ist bereits voll.");
+						}
+					}
+				}
+			}
+			
+			public void printFIW()
+			{
+				System.out.print("FIW : [");
+				for (int index = 0; index < this.fiw.length; index++)
+				{
+					if(this.fiw[index]!=null)
+					{
+						System.out.print(this.fiw[index].toString() + " ");
+					}
+				}
+				System.out.println("]");
+			}
+			
+			public void printAI()
+			{
+				System.out.print("AI  : [");
+				for (int index = 0; index < this.ai.length; index++)
+				{
+					if(this.ai[index]!=null)
+					{
+						System.out.print(this.ai[index].toString() + " ");
+					}
+				}
+				System.out.println("]");
+			}
+			
+			public double durchschnittsalterFIW()
+			{
+				double summe = 0.0;
+				int anzahl = 0;
+				for (int index = 0; index < this.fiw.length; index++)
+				{
+					if(this.fiw[index]!=null)
+					{
+						summe += this.fiw[index].getAlter();
+						anzahl++;
+					}
+				}
+				return summe / anzahl;
+			}
+			
+			public double durchschnittsalterAI()
+			{
+				double summe = 0.0;
+				int anzahl = 0;
+				for (int index = 0; index < this.ai.length; index++)
+				{
+					if(this.ai[index]!=null)
+					{
+						summe += this.ai[index].getAlter();
+						anzahl++;
+					}
+				}
+				return summe / anzahl;
+			}
+			
+			public void printDurchschnittsalter()
+			{
+				System.out.println("Durchschnittsalter FIW : " + this.durchschnittsalterFIW());
+				System.out.println("Durchschnittsalter AI  : " + this.durchschnittsalterAI());
+				if(this.durchschnittsalterAI() < this.durchschnittsalterFIW())
+				{
+					System.out.println("AI ist im Durchschnitt jünger.");
+				}
+				else if(this.durchschnittsalterFIW() < this.durchschnittsalterAI())
+				{
+					System.out.println("FIW ist im Durchschnitt jünger.");
+				}
+				else
+				{
+					System.out.println("FIW- und AI-Studierende sind im Duchschnitt gleich alt.");
+				}
+				
+			}
+		}
+		```
+
+	=== "Testklasse.java"
+		```java linenums="1"
+		package aufgaben.aufgabe8;
+
+		public class Testklasse
+		{
+
+			public static void main(String[] args)
+			{
+				System.out.printf("%n%n--------------------- Test Mensch --------------------%n%n");
+				Mensch m1 = new Mensch("A", 20);
+				m1.print();
+				m1.geburtstag();
+				m1.print();
+				
+				Mensch m2 = new Mensch("B", 25);
+				m1.print();
+				
+				System.out.printf("%n%n------------------- Test Studentin -------------------%n%n");
+				Studentin s1 = new Studentin("C", 22, "FIW");
+				s1.print();
+				
+				Studentin s2 = new Studentin("D", 23, "FIW");
+				s1.print();
+				
+				System.out.printf("%n%n----------------- Test Studiengaenge -----------------%n%n");
+				Studiengaenge sg = new Studiengaenge(10,10);
+				sg.immatrikulieren(20);
+				sg.printFIW();
+				sg.printAI();
+				sg.printDurchschnittsalter();
+			}
+		}
+		```
+
+
+
