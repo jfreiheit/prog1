@@ -3712,6 +3712,346 @@
 			laengste                  : Strecke [start=(2,9), ende=(9,4), Laenge= 8,6023cm] 
 			```
 
+??? question "Eine mögliche Lösung für Übung 11"
+	=== "Punkt3D.java"
+		```java 
+		package uebungen.uebung11;
+
+		public class Punkt3D
+		{
+			private int x;
+			private int y;
+			private int z;
+			
+			public Punkt3D(int x, int y, int z)
+			{
+				this.x = x;
+				this.y = y;
+				this.z = z;
+			}
+
+			public int getX()
+			{
+				return this.x;
+			}
+
+			public int getY()
+			{
+				return this.y;
+			}
+			
+			public int getZ()
+			{
+				return this.z;
+			}
+			
+			@Override
+			public String toString()
+			{
+				return String.format("(%d,%d,%d)", this.x, this.y, this.z);
+			}
+			
+			public void print()
+			{
+				System.out.println(this.toString());
+			}
+			
+			@Override
+			public boolean equals(Object o)
+			{
+				if(o == null) return false;
+				if(this == o) return true;
+				if(this.getClass() != o.getClass()) return false;
+				
+				Punkt3D p = (Punkt3D)o;
+				return this.x == p.x && this.y == p.y && this.z == p.z;
+			}
+			
+			public boolean xIsSmaller(Punkt3D p)
+			{
+				return this.x < p.x;
+			}	
+			
+			public boolean yIsSmaller(Punkt3D p)
+			{
+				return this.y < p.y;
+			}
+			
+			public boolean zIsSmaller(Punkt3D p)
+			{
+				return this.z < p.z;
+			}
+		}
+		```
+
+	=== "Punkt2D.java"
+		```java linenums="1"
+		package uebungen.uebung11;
+
+		public class Punkt2D extends Punkt3D
+		{
+			public Punkt2D(int x, int y)
+			{
+				super(x,y,0);
+			}
+			
+			@Override
+			public String toString()
+			{
+				return String.format("(%d,%d)", this.getX(), this.getY());
+			}
+		}
+		```
+
+	=== "Strecke.java"
+		```java linenums="1" 
+		package uebungen.uebung11;
+
+		public class Strecke
+		{
+			private Punkt2D start;
+			private Punkt2D ende;
+			
+			public Strecke(Punkt2D start, Punkt2D ende)
+			{
+				this.start = start;
+				this.ende = ende;
+			}
+			
+			public Strecke(int x1, int y1, int x2, int y2)
+			{
+				this.start = new Punkt2D(x1, y1);
+				this.ende = new Punkt2D(x2, y2);
+			}
+			
+			public double laenge()
+			{
+				int diffX = Math.abs(start.getX() - ende.getX());
+				int diffY = Math.abs(start.getY() - ende.getY());
+				int diffX2 = diffX * diffX;
+				int diffY2 = diffY * diffY;
+				double laenge = Math.sqrt(diffX2 + diffY2);
+				return laenge;
+			}
+			
+			@Override
+			public String toString()
+			{
+				String s = String.format("Strecke [start=%s, ende=%s, Laenge=%7.4fcm]", start.toString(), ende.toString(), this.laenge());
+				return s;
+			}
+			
+			public void print()
+			{
+				System.out.println(this.toString());
+			}
+		}
+		```	
+
+	=== "PunkteArray.java"
+		```java linenums="1" 
+		package uebungen.uebung11;
+
+		import java.util.Random;
+
+		public class PunkteArray
+		{
+			private Punkt2D[] punkte;
+			
+			public PunkteArray(int anzahl)
+			{
+				this.punkte = new Punkt2D[anzahl];
+			}
+			
+			public boolean contains(Punkt2D p)
+			{
+				for (int index = 0; index < this.punkte.length; index++)
+				{
+					if(this.punkte[index] != null && this.punkte[index].equals(p)) 
+					{
+						return true;
+					}
+				}
+				return false;
+			}
+			
+			public void fillArray()
+			{
+				Random r = new Random();
+				for(int index=0; index < this.punkte.length; index++)
+				{
+					int x = r.nextInt(10);
+					int y = r.nextInt(10);
+					Punkt2D p = new Punkt2D(x,y);
+					while(this.contains(p))
+					{
+						x = r.nextInt(10);
+						y = r.nextInt(10);
+						p = new Punkt2D(x,y);
+					}
+					this.punkte[index] = p;
+				}
+			}
+			
+			@Override
+			public String toString()
+			{
+				String s = "[ ";
+				for(int index=0; index < this.punkte.length; index++)
+				{
+					if(index<this.punkte.length-1)
+					{
+						s += this.punkte[index].toString() + ", ";
+					}
+					else
+					{
+						s += this.punkte[index].toString();
+					}
+				}
+				s += " ]";
+				return s;
+			}
+			
+			public void print()
+			{
+				System.out.println(this.toString());
+			}
+			
+			public Strecke[] createPolygon()
+			{
+				Strecke[] polygon = new Strecke[this.punkte.length];
+				for(int index=0; index < this.punkte.length-1; index++)
+				{
+					polygon[index] = new Strecke(this.punkte[index], this.punkte[index+1]);
+				}
+				int index = this.punkte.length-1;
+				polygon[index] = new Strecke(this.punkte[index], this.punkte[0]);
+				return polygon;
+			}
+			
+			public void printStrecken()
+			{
+				Strecke[] polygon = this.createPolygon();
+				for(int index=0; index < polygon.length; index++)
+				{
+					polygon[index].print();
+				}
+				System.out.printf("Gesamtlaenge der Strecken : %7.4fcm %n", this.gesamtLaenge());
+				System.out.printf("am weitesten links        : %s %n", this.amWeitestenLinks().toString());
+				System.out.printf("am weitesten oben         : %s %n", this.amWeitestenOben().toString());
+				System.out.printf("laengste                  : %s %n", this.laengsteStrecke().toString());
+					
+			}
+			
+			public double gesamtLaenge()
+			{
+				Strecke[] polygon = this.createPolygon();
+				double gesamtLaenge = 0.0;
+				for(int index=0; index < polygon.length; index++)
+				{
+					gesamtLaenge += polygon[index].laenge();
+				}
+				return gesamtLaenge;
+			}
+			
+			public Punkt2D amWeitestenLinks()
+			{
+				int indexLinks = 0;
+				for(int index=0; index < this.punkte.length-1; index++)
+				{
+					if(this.punkte[index].xIsSmaller(this.punkte[indexLinks]))
+					{
+						indexLinks = index;
+					}
+				}
+				return this.punkte[indexLinks];
+			}
+			
+			public Punkt2D amWeitestenOben()
+			{
+				int indexOben = 0;
+				for(int index=0; index < this.punkte.length-1; index++)
+				{
+					if(this.punkte[index].yIsSmaller(this.punkte[indexOben]))
+					{
+						indexOben = index;
+					}
+				}
+				return this.punkte[indexOben];
+			}
+			
+			public Strecke laengsteStrecke()
+			{
+				Strecke[] polygon = this.createPolygon();
+				int indexLaengste = 0;
+				for(int index=0; index < polygon.length; index++)
+				{
+					if(polygon[index].laenge() > polygon[indexLaengste].laenge())
+					{
+						indexLaengste = index;
+					}
+				}
+				return polygon[indexLaengste];
+			}
+		}
+		```	
+
+	=== "Testklasse.java"
+		```java linenums="1" 
+		package uebungen.uebung11;
+
+		import java.util.Random;
+
+		public class Testklasse
+		{
+
+			public static void main(String[] args)
+			{
+				System.out.printf("%n%n---------------- Punkt2D und Punkt3D ---------------%n%n");
+				Random r = new Random();
+				Punkt2D[] pa = new Punkt2D[3];
+				int anz2D = 0;
+				while(anz2D < 3)
+				{
+					int x = r.nextInt(10);
+					int y = r.nextInt(10);
+					int z = r.nextInt(10);
+					Punkt3D p;
+					if(z==0)
+					{
+						pa[anz2D] = new Punkt2D(x,y);
+						pa[anz2D].print();
+						anz2D++;
+					}
+					else
+					{
+						p = new Punkt3D(x,y,z);
+						p.print();
+					}
+				}
+				
+				System.out.printf("%n%n-------------------- Strecke -----------------------%n%n");
+				Strecke s1 = new Strecke(pa[0], pa[1]);
+				Strecke s2 = new Strecke(pa[1], pa[2]);
+				Strecke s3 = new Strecke(pa[2], pa[0]);
+				s1.print();
+				s2.print();
+				s3.print();
+				
+				System.out.printf("%n%n------------------ PunkteArray ---------------------%n%n");
+				PunkteArray parr = new PunkteArray(15);
+				parr.fillArray();
+				parr.print();
+				parr.printStrecken();
+			}
+
+		}
+		```	
+
+
+??? question "Video zu Übung 11 (unvollständig)"
+	- <iframe src="https://mediathek.htw-berlin.de/media/embed?key=bc260423dc5289d4d4071d2817209ba1&width=720&height=389&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="389" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>
+
 
 
 
