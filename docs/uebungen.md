@@ -4050,6 +4050,153 @@
 
 
 ??? question "Video zu Übung 11 (unvollständig)"
+	- <iframe src="https://mediathek.htw-berlin.de/media/embed?key=c18f188924d0581e3c7e953751c6f2ed&width=720&height=378&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="378" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>
+
+---
+
+??? question "Quellcodes aus Klausurvorbereitung (05.02.2021)"
+	=== "Uhrzeit.java"
+		```java 
+		package klausurvorbereitung;
+
+		public class Uhrzeit
+		{
+			private int stunden;
+			private int minuten; 
+			private int sekunden;
+
+			public Uhrzeit(int sekunden)
+			{
+				final int STUNDE = 3600;
+				final int MINUTE = 60;
+				
+				this.stunden = sekunden / STUNDE;
+				this.stunden = this.stunden % 24;
+				int restSekunden = sekunden % STUNDE;
+				// int restSekunden = sekunden - (this.stunden * STUNDE);
+				this.minuten = restSekunden / MINUTE;
+				restSekunden = restSekunden % MINUTE;
+				this.sekunden = restSekunden;
+			}
+			
+			public void print()
+			{
+				System.out.println(this.stunden +" : " + this.minuten + " : " + this.sekunden);
+			}
+		}
+		```
+
+	=== "SortedArray.java"
+		```java linenums="1"
+		package klausurvorbereitung;
+
+		public class SortedArray
+		{
+			private int[] s;
+			
+			public SortedArray()
+			{
+				this.s = new int[0];
+			}
+			
+			
+			public SortedArray(int el)
+			{
+				this.s = new int[1];
+				this.s[0] = el;
+			}
+			
+			public boolean contains(int element)
+			{
+				for (int index = 0; index < this.s.length; index++)
+				{
+					if(this.s[index] == element)
+					{
+						return true;
+					}
+				}
+				return false;
+			}
+			
+			public boolean insert(int element)
+			{
+				if(this.contains(element))
+				{
+					return false;
+				}
+				else
+				{
+					int[] copy = new int[this.s.length + 1];
+					int indexCopy = 0;
+					int indexS = 0;
+					while (indexS < this.s.length && this.s[indexS] < element)
+					{
+						copy[indexCopy++] = this.s[indexS++];
+					}
+					
+					copy[indexCopy++] = element;
+					
+					// Rest einfuegen
+					// indexCopy ist 1 groesser als indexS
+					while (indexS < this.s.length)
+					{
+						copy[indexCopy++] = this.s[indexS++];
+					}
+					
+					this.s = copy;
+					return true;
+				}
+			}
+		}
+		```
+
+	=== "Testklasse.java"
+		```java linenums="1" 
+		package klausurvorbereitung;
+
+		public class Testklasse
+		{
+
+			public static void main(String[] args)
+			{
+				Uhrzeit u1 = new Uhrzeit(83);
+				u1.print();
+				Uhrzeit u2 = new Uhrzeit(3662);
+				u2.print();
+				Uhrzeit u3 = new Uhrzeit(86399);
+				u3.print();
+				Uhrzeit u4 = new Uhrzeit(172799);
+				u4.print();
+				
+				/*
+				Punkt3D(int x, int y, int z)
+				{
+					
+				}
+				
+				Punkt2D(int x, int y)
+				{
+					super(x, y, 0);
+				}
+				*/
+				
+				Uhrzeit[] ua = new Uhrzeit[4];
+				ua[0] = new Uhrzeit(83);
+				System.out.println(ua[0] == u1);
+				System.out.println(ua[0].equals(u1));
+				
+				String s1 = "Hallo";
+				String s2 = "hallo";
+				System.out.println(s1.equals(s2));
+				ua[0].print();
+				
+			}
+
+		}
+		```	
+
+
+??? question "Video zu Klausurvorbereitung (05.02.2021)"
 	- <iframe src="https://mediathek.htw-berlin.de/media/embed?key=bc260423dc5289d4d4071d2817209ba1&width=720&height=389&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="389" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>
 
 
