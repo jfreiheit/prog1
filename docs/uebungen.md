@@ -5247,9 +5247,408 @@ Hier werden lose und unregelmäßig Übungsaufgaben gesammelt. Am Ende des Semes
 		}
 		```
 
+??? note "Klausur 1.PZ"
+	- Hier ist die [Aufgabe als pdf](./files/2021-02-10_Klausur_ProgI_PZ1.pdf). 
 
 
+??? question "eine mögliche Lösung für Klausur 1.PZ"
+	=== "Land.java"
+		```java linenums="1"
+		package klausur;
 
+		import java.util.Random;
+
+		public class Land
+		{
+			private String name;
+			private int groesse;
+			private int einwohner;
+			
+			public String getName()
+			{
+				return this.name;
+			}
+
+			public int getGroesse()
+			{
+				return this.groesse;
+			}
+
+			public int getEinwohner()
+			{
+				return this.einwohner;
+			}
+			
+			public String erzeugeName()
+			{
+				Random r = new Random();
+				int ascii = r.nextInt(26) + 65;
+				char c = (char)ascii;
+				String s = "" + c;
+				
+				int nr = r.nextInt(10);
+				s += nr;
+				return s;
+			}
+			
+			public Land()
+			{
+				this.name = this.erzeugeName();
+				Random r = new Random();
+				this.groesse = r.nextInt(100) + 1;
+				this.einwohner = r.nextInt(1000) + 1;
+			}
+				
+			public double ewDichte()
+			{
+				double ewDichte = (double)this.einwohner / (double)this.groesse;
+				return ewDichte;
+			}
+			
+			@Override
+			public String toString()
+			{
+				String s = String.format("%s : %3d km2 : %4d ew : %8.4f", this.name, this.groesse, this.einwohner, this.ewDichte());
+				return s;
+			}
+			
+			public void print()
+			{
+				System.out.println(this.toString());
+			}
+			
+			public boolean istGroesser(Land l)
+			{
+				return this.groesse > l.groesse;
+			}
+			
+			public boolean hatMehrEinwohner(Land l)
+			{
+				return this.einwohner > l.einwohner;
+			}
+				
+			public boolean nameIstGroesser(Land l)
+			{
+				return this.name.compareTo(l.name) > 0;
+			}
+			
+			@Override
+			public boolean equals(Object o)
+			{
+				if(o == null) return false;
+				if(this == o) return true;
+				if(this.getClass() != o.getClass()) return false;
+				
+				Land lo = (Land)o;
+				return this.name.equals(lo.name);
+			}
+		}
+		```
+
+	=== "Kontinent.java"
+		```java linenums="1"
+		package klausur;
+
+		public class Kontinent
+		{
+			private Land[] laender;
+			private char kontinent;
+			
+			public Kontinent(char kontinent, int anzahlLaender)
+			{
+				this.kontinent = kontinent;
+				this.laender = new Land[anzahlLaender];
+				for (int index = 0; index < this.laender.length; index++)
+				{
+					this.laender[index] = new Land();
+				}
+			}
+			
+			public int getAnzLaender()
+			{
+				return this.laender.length;
+			}
+			
+			public Land[] getLaender()
+			{
+				return this.laender;
+			}
+			
+			public Land getLandAtIndex(int index)
+			{
+				if(index>=0 && index<this.getAnzLaender())
+				{
+					return this.laender[index];
+				}
+				else
+				{
+					return null;
+				}
+			}
+			
+			/*
+			public char getKontinent()
+			{
+				return this.kontinent;
+			}
+			*/
+			
+			public int[] getSummen()
+			{
+				int summeEw = 0;
+				int summeQm = 0;
+				for (int index = 0; index < this.laender.length; index++)
+				{
+					summeEw += this.laender[index].getEinwohner();
+					summeQm += this.laender[index].getGroesse();
+				}
+				int[] summen = {summeQm, summeEw};
+				return summen;
+			}
+
+			@Override
+			public String toString()
+			{
+				String s = String.format("Kontinent %c %n", this.kontinent);
+				s += String.format("--------------------------%n");
+				for (int index = 0; index < this.laender.length; index++)
+				{
+					s += String.format("%24s %n", this.laender[index]);
+				}
+				return s;
+			}
+			
+			public void print()
+			{
+				System.out.println(this.toString());
+			}
+			
+			public void sortiere(int nach)
+			{
+				for(int bubble=1; bubble<this.laender.length; bubble++)
+				{
+					for(int index=0; index<this.laender.length-bubble; index++)
+					{
+						if(nach==0 && this.laender[index].istGroesser(this.laender[index+1]) ||
+						   nach==1 && this.laender[index].hatMehrEinwohner(this.laender[index+1]) ||
+						   nach==2 && this.laender[index].ewDichte() > this.laender[index+1].ewDichte() ||
+						   nach!=0 && nach!=1 && nach!=2 && this.laender[index].nameIstGroesser(this.laender[index+1]))
+						{
+							Land tmp = this.laender[index];
+							this.laender[index] = this.laender[index+1];
+							this.laender[index+1] = tmp;
+						}
+					}
+				}
+			}
+		}
+		```
+
+	=== "Kontinent.java"
+		```java linenums="1"
+		package klausur;
+
+		public class Welt
+		{
+			private Kontinent[] kontinente;
+			
+			public Welt(Kontinent[] kontinente)
+			{
+				this.kontinente = kontinente;
+			}
+			
+			public int anzahlLaender()
+			{
+				int anzahl = 0;
+				for (int index = 0; index < this.kontinente.length; index++)
+				{
+					anzahl += this.kontinente[index].getAnzLaender();
+				}
+				return anzahl;
+			}
+			
+			public Land[] getAlleLaender()
+			{
+				Land[] alleLaender = new Land[this.anzahlLaender()];
+				int indexAlle = 0;
+				
+				for (int kontinent = 0; kontinent < this.kontinente.length; kontinent++)
+				{
+					for(int index = 0; index < this.kontinente[kontinent].getAnzLaender(); index++)
+					{
+						alleLaender[indexAlle++] = this.kontinente[kontinent].getLandAtIndex(index);
+					}
+				}
+				return alleLaender;
+			}
+			
+			/*
+			 * war nicht gefordert
+			 */
+			public Land[] sortiereAlleLaenderNachName()
+			{
+				Land[] alleLaender = this.getAlleLaender();
+				
+				for(int bubble=1; bubble<alleLaender.length; bubble++)
+				{
+					for(int index=0; index<alleLaender.length-bubble; index++)
+					{
+						if(alleLaender[index].nameIstGroesser(alleLaender[index+1]))
+						{
+							Land tmp = alleLaender[index];
+							alleLaender[index] = alleLaender[index+1];
+							alleLaender[index+1] = tmp;
+						}
+					}
+				}
+				return alleLaender;
+			}
+			
+			public void printAlleLaender(Land[] alleLaender)
+			{
+				for(int index=0; index<alleLaender.length; index++)
+				{
+					System.out.println(alleLaender[index]);
+				}
+			}
+			
+			public boolean enthaeltDoppel()
+			{
+				Land[] alleLaender = this.getAlleLaender();
+				for(int index1=0; index1<alleLaender.length-1; index1++)
+				{
+					for(int index2=index1+1; index2<alleLaender.length; index2++)
+					{
+						if(alleLaender[index1].equals(alleLaender[index2]))
+						{
+							return true;
+						}
+					}
+				}
+				return false;
+			}
+			
+			public Land[] alleLaenderGroesserAls(int groesse)
+			{
+				Land[] alleLaender = this.getAlleLaender();
+				int anzahl = 0;
+				for(int index=0; index<alleLaender.length; index++)
+				{
+					if(alleLaender[index].getGroesse() > groesse)
+					{
+						anzahl++;
+					}
+				}
+				
+				Land[] laender = new Land[anzahl];
+				int indexLaender = 0;
+				for(int index=0; index<alleLaender.length; index++)
+				{
+					if(alleLaender[index].getGroesse() > groesse)
+					{
+						laender[indexLaender++] = alleLaender[index];
+					}
+				}
+				return laender;
+			}
+			
+			public Land groesstesLand()
+			{
+				Land[] alleLaender = this.getAlleLaender();
+				int indexGroesstes = 0;
+				for(int index=1; index<alleLaender.length; index++)
+				{
+					if(alleLaender[index].istGroesser(alleLaender[indexGroesstes]))
+					{
+						indexGroesstes = index;
+					}
+				}
+				return alleLaender[indexGroesstes];
+			}
+		}
+		```
+
+	=== "Testklasse.java"
+		```java linenums="1"
+		package klausur;
+
+		public class Testklasse
+		{
+
+			public static void main(String[] args)
+			{
+				System.out.printf("%n%n------------------ Test Land ------------------%n%n");
+				for(int i=0; i<10; i++)
+				{
+					new Land().print();
+				}
+				
+				System.out.printf("%n%n----------------- Land equals -----------------%n%n");
+				Land l1 = new Land();
+				Land l2 = new Land();
+				int anz = 0;
+				while(!l1.equals(l2))
+				{
+					l2 = new Land();
+					anz++;
+				}
+				l1.print();
+				l2.print();
+				System.out.println(anz + " andere Laender erzeugt");
+				
+				System.out.printf("%n%n----------------- Land Vergleiche -----------------%n%n");
+				l1 = new Land();
+				l2 = new Land();
+				System.out.print("l1 : ");l1.print();
+				System.out.print("l2 : ");l2.print();
+				System.out.println();
+				System.out.println("l1 groesser als l2 ?                : " + l1.istGroesser(l2));
+				System.out.println("l1 mehr Einwohner als l2 ?          : " + l1.hatMehrEinwohner(l2));
+				System.out.println("l1 lexikografisch groesser als l2 ? : " + l1.nameIstGroesser(l2));
+				
+				System.out.printf("%n%n----------------- Kontinent ------------------%n%n");
+				final int ANZAHL_KONTINENTE = 5;
+				final int ASCII_KLEIN_A = 97;
+				
+				Kontinent[] ka = new Kontinent[ANZAHL_KONTINENTE];
+				for(int index=0; index < ANZAHL_KONTINENTE; index++)
+				{
+					char c = (char)(index+ASCII_KLEIN_A);
+					int anzahlLaender = index + 7;
+					ka[index] = new Kontinent(c, anzahlLaender);
+					ka[index].print();
+					int[] summen = ka[index].getSummen();
+					System.out.println("Summen : " + summen[0] + " : " + summen[1] );
+					System.out.println();
+				}
+				
+				System.out.printf("%n%n----------------- sortieren ------------------%n%n");
+				ka[0].print();
+				ka[0].sortiere(0);
+				ka[0].print();
+				ka[0].sortiere(1);
+				ka[0].print();
+				ka[0].sortiere(2);
+				ka[0].print();
+				ka[0].sortiere(3);
+				ka[0].print();
+				
+				System.out.printf("%n%n----------------- Welt ------------------%n%n");
+				Welt welt = new Welt(ka);
+				Land[] alleLaender = welt.getAlleLaender();
+				welt.printAlleLaender(alleLaender);
+				System.out.println();
+				System.out.println("Enthaelt Doppel? : " + welt.enthaeltDoppel());
+				Land groesstes = welt.groesstesLand();
+				System.out.println("groesstes Land   : " + groesstes.toString());
+				Land[] groesser = welt.alleLaenderGroesserAls(50);
+				System.out.println("Alle Laender groesser als 50 :");
+				welt.printAlleLaender(groesser);
+
+			}
+
+		}
+		```
 
 
 ### Ausdrücke
